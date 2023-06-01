@@ -1,0 +1,1 @@
+function create() FlxG.camera.bgColor = FlxColor.fromRGB(54, 34, 83);
