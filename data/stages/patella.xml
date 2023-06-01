@@ -6,7 +6,6 @@
 	<sprite name="snowStorm" x="0" y="0" sprite="Snow-Storm" antialising="true" scrollx="0" scrolly="0">
 		<anim name="idle" anim="tormenta" loop="true"/>
 	</sprite>
-	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
 	<opponent x="300" y="420" camxoffset="210" camyoffset="0"/>
 	<player x="1170" y="220" camxoffset="-170" camyoffset="-60"/>
 </stage>
