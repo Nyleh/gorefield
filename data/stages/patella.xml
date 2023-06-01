@@ -1,6 +1,11 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.55" name="patella" folder="stages/patella/">
-	<!-- SPRITES GO HERE -->
+	<sprite name="patellaBG1" x="0" y="0" sprite="sansfield_cave" antialising="true" scrollx="0.6" scrolly="0.6" scale="1.5"/>
+	<sprite name="ice" x="-900" y="400" sprite="sansfield_ice" antialising="true" scrollx="0.8" scrolly="1" scale="1.5"/>
+	<sprite name="patellaBG2" x="0" y="0" sprite="sansfield_bg" antialising="true" scrollx="1" scrolly="1" scale="1.5"/>
+	<sprite name="snowStorm" x="0" y="0" sprite="Snow-Storm" antialising="true" scrollx="0" scrolly="0">
+		<anim name="idle" anim="tormenta" loop="true"/>
+	</sprite>
 	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
 	<opponent x="300" y="420" camxoffset="210" camyoffset="0"/>
 	<player x="1170" y="220" camxoffset="-170" camyoffset="-60"/>
