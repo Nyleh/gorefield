@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.8" name="ultrasansfield" folder="stages/patella/">
+<stage zoom="0.8" name="ultrasansfield" folder="stages/patella/" noteSkin="sans" splashSkin="secret">
 	<opponent x="-72" y="-520" camxoffset="0" camyoffset="100"/>
 	<player x="370" y="-170" camxoffset="-50" camyoffset="-200"/>
 	<sprite name="sansFieldHUD" x="0" y="0" sprite="cuadro_ULTRA" antialising="true" scrollx="1" scrolly="1" scale="1"/>
