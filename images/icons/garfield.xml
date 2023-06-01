@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Garfield Icons.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Garfield 2 Icon0000" x="0" y="0" width="119" height="115"/>
+	<SubTexture name="Garfield 2 Icon0001" x="0" y="0" width="119" height="115"/>
+	<SubTexture name="Garfield 2 Icon0002" x="119" y="0" width="119" height="115"/>
+	<SubTexture name="Garfield 2 Icon0003" x="119" y="0" width="119" height="115"/>
+	<SubTexture name="Icon Garfield0000" x="0" y="115" width="103" height="111"/>
+	<SubTexture name="Icon Garfield0001" x="0" y="115" width="103" height="111"/>
+	<SubTexture name="Icon Garfield0002" x="103" y="115" width="103" height="110" frameX="0" frameY="-1" frameWidth="103" frameHeight="111"/>
+	<SubTexture name="Icon Garfield0003" x="103" y="115" width="103" height="110" frameX="0" frameY="-1" frameWidth="103" frameHeight="111"/>
+</TextureAtlas>

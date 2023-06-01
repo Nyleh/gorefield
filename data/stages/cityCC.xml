@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.7" name="cityCC" folder="stages/cityCC/">
+	<!-- SPRITES GO HERE -->
+	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
+	<opponent x="200" y="320" camxoffset="0" camyoffset="0"/>
+	<player x="1100" y="620" camxoffset="0" camyoffset="0"/>
+</stage>

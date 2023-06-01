@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="bfbox.png">
+<SubTexture name="Idle0000" x="0" y="0" width="608" height="166" frameX="0" frameY="0" frameWidth="608" frameHeight="166" />
+<SubTexture name="Down0000" x="0" y="166" width="608" height="166" frameX="0" frameY="0" frameWidth="608" frameHeight="166" />
+<SubTexture name="Up0000" x="0" y="332" width="608" height="166" frameX="0" frameY="0" frameWidth="608" frameHeight="166" />
+<SubTexture name="Right0000" x="608" y="0" width="608" height="166" frameX="0" frameY="0" frameWidth="608" frameHeight="166" />
+<SubTexture name="Left0000" x="608" y="166" width="608" height="166" frameX="0" frameY="0" frameWidth="608" frameHeight="166" />
+</TextureAtlas>

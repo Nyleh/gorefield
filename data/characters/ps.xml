@@ -1,0 +1,10 @@
+<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
+<character x="120" y="150" icon="icon-face" flipX="false" isPlayer="null" camx="0" camy="0" holdTime="6.1" scale="0.6" color="#A1A1A1">
+	<anim name="4 remove" anim="LIVE 3 loose" fps="24" loop="false" x="0" y="0"/>
+	<anim name="4" anim="LIVE 4 MAIN" fps="24" loop="true" x="0" y="0"/>
+	<anim name="3" anim="Live 3 main" fps="24" loop="true" x="0" y="0"/>
+	<anim name="3 remove" anim="LIVE 2 LOSE" fps="24" loop="false" x="0" y="0"/>
+	<anim name="2" anim="LIVE 2 MAIN" fps="24" loop="true" x="0" y="0"/>
+	<anim name="2 remove" anim="LIVE 1 LOSE" fps="24" loop="false" x="0" y="0"/>
+	<anim name="1" anim="LIVE 1 MAIN" fps="24" loop="true" x="0" y="0"/>
+</character>

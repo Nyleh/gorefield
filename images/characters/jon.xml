@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="JON.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="JON0000" x="0" y="0" width="452" height="608" frameX="0" frameY="-10" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0001" x="452" y="0" width="454" height="608" frameX="0" frameY="-10" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0002" x="906" y="0" width="449" height="610" frameX="-3" frameY="-8" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0003" x="1355" y="0" width="447" height="610" frameX="-3" frameY="-8" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0004" x="1802" y="0" width="449" height="613" frameX="-3" frameY="-5" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0005" x="2251" y="0" width="451" height="613" frameX="-3" frameY="-5" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0006" x="2702" y="0" width="449" height="616" frameX="-3" frameY="-2" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0007" x="3151" y="0" width="447" height="616" frameX="-3" frameY="-2" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0008" x="3598" y="0" width="451" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0009" x="0" y="618" width="447" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0010" x="447" y="618" width="447" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0011" x="894" y="618" width="451" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0012" x="1345" y="618" width="451" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0013" x="1796" y="618" width="447" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="JON0014" x="2243" y="618" width="449" height="618" frameX="-3" frameY="0" frameWidth="454" frameHeight="618"/>
+	<SubTexture name="BOMB JON0000" x="2692" y="618" width="464" height="606" frameX="-30" frameY="-18" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0001" x="2692" y="618" width="464" height="606" frameX="-30" frameY="-18" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0002" x="3156" y="618" width="467" height="602" frameX="-29" frameY="-22" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0003" x="3156" y="618" width="467" height="602" frameX="-29" frameY="-22" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0004" x="3623" y="618" width="466" height="606" frameX="-35" frameY="-18" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0005" x="3623" y="618" width="466" height="606" frameX="-35" frameY="-18" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0006" x="0" y="1236" width="501" height="613" frameX="-36" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0007" x="0" y="1236" width="501" height="613" frameX="-36" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0008" x="501" y="1236" width="502" height="614" frameX="-38" frameY="-10" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0009" x="501" y="1236" width="502" height="614" frameX="-38" frameY="-10" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0010" x="1003" y="1236" width="483" height="593" frameX="-3" frameY="-31" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0011" x="1003" y="1236" width="483" height="593" frameX="-3" frameY="-31" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0012" x="1486" y="1236" width="475" height="597" frameX="0" frameY="-33" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0013" x="1486" y="1236" width="475" height="597" frameX="0" frameY="-33" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0014" x="1961" y="1236" width="485" height="620" frameX="-5" frameY="-4" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0015" x="1961" y="1236" width="485" height="620" frameX="-5" frameY="-4" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0016" x="2446" y="1236" width="496" height="624" frameX="-17" frameY="0" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0017" x="2446" y="1236" width="496" height="624" frameX="-17" frameY="0" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0018" x="2942" y="1236" width="497" height="620" frameX="-18" frameY="-4" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0019" x="2942" y="1236" width="497" height="620" frameX="-18" frameY="-4" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0020" x="3439" y="1236" width="496" height="617" frameX="-17" frameY="-7" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0021" x="3439" y="1236" width="496" height="617" frameX="-17" frameY="-7" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0022" x="0" y="1860" width="496" height="616" frameX="-18" frameY="-8" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0023" x="0" y="1860" width="496" height="616" frameX="-18" frameY="-8" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0024" x="496" y="1860" width="496" height="608" frameX="-18" frameY="-16" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0025" x="496" y="1860" width="496" height="608" frameX="-18" frameY="-16" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0026" x="992" y="1860" width="496" height="614" frameX="-18" frameY="-10" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0027" x="992" y="1860" width="496" height="614" frameX="-18" frameY="-10" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0028" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0029" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0030" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0031" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0032" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0033" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0034" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0035" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+	<SubTexture name="BOMB JON0036" x="1488" y="1860" width="496" height="613" frameX="-18" frameY="-11" frameWidth="540" frameHeight="630"/>
+</TextureAtlas>

@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.8" name="ultrasansfield" folder="stages/ultrasansfield/">
+	<!-- SPRITES GO HERE -->
+	<gf x="100" y="140" camxoffset="200" camyoffset="-100"/>
+	<opponent x="-72" y="-520" camxoffset="0" camyoffset="100"/>
+	<player x="370" y="-170" camxoffset="-50" camyoffset="-200"/>
+</stage>

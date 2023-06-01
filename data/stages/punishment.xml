@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="1.35" name="punishment" folder="stages/punishment/">
+	<!-- SPRITES GO HERE -->
+	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
+	<opponent x="275" y="180" camxoffset="-120" camyoffset="40"/>
+	<player x="100" y="220" camxoffset="220" camyoffset="-80"/>
+</stage>

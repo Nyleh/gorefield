@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/">
+	<!-- SPRITES GO HERE -->
+	<gf x="5" y="345" camxoffset="-100" camyoffset="-400"/>
+	<opponent x="-490" y="373" camxoffset="300" camyoffset="-40"/>
+	<player x="240" y="-35" camxoffset="-260" camyoffset="-80"/>
+</stage>

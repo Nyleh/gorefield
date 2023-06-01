@@ -1,0 +1,9 @@
+<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
+<character x="50" y="-40" icon="icon-sansfield" flipX="false" isPlayer="null" camx="20" camy="10" holdTime="4.00000000000001" scale="1" color="#D3E1FF">
+	<anim name="idle" anim="JON0" fps="24" loop="false" x="0" y="0"/>
+	<anim name="singLEFT" anim="JON LEFT" fps="24" loop="false" x="62" y="-5"/>
+	<anim name="singDOWN" anim="JON DOWN" fps="24" loop="false" x="-11" y="-37"/>
+	<anim name="singUP" anim="JON UP" fps="24" loop="false" x="40" y="19"/>
+	<anim name="singRIGHT" anim="JON RIGHT" fps="24" loop="false" x="-20" y="-11"/>
+	<anim name="pipe" anim="JON PIPE" fps="24" loop="false" x="104" y="10"/>
+</character>

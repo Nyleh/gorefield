@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="JON BLACK.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="JON0000" x="5" y="5" width="216" height="430" frameX="-14" frameY="-9" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0001" x="5" y="5" width="216" height="430" frameX="-14" frameY="-9" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0002" x="226" y="5" width="216" height="437" frameX="-20" frameY="-3" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0003" x="226" y="5" width="216" height="437" frameX="-20" frameY="-3" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0004" x="447" y="5" width="215" height="441" frameX="-16" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0005" x="447" y="5" width="215" height="441" frameX="-16" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0006" x="667" y="5" width="217" height="441" frameX="-9" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0007" x="667" y="5" width="217" height="441" frameX="-9" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0008" x="889" y="5" width="217" height="441" frameX="-2" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0009" x="889" y="5" width="217" height="441" frameX="-2" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0010" x="1111" y="5" width="218" height="441" frameX="0" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0011" x="1111" y="5" width="218" height="441" frameX="0" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0012" x="1111" y="5" width="218" height="441" frameX="0" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0013" x="1111" y="5" width="218" height="441" frameX="0" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON0014" x="1111" y="5" width="218" height="441" frameX="0" frameY="0" frameWidth="236" frameHeight="441"/>
+	<SubTexture name="JON DOWN0000" x="1334" y="5" width="265" height="399" frameX="0" frameY="-3" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0001" x="1334" y="5" width="265" height="399" frameX="0" frameY="-3" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0002" x="1604" y="5" width="260" height="403" frameX="0" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0003" x="1604" y="5" width="260" height="403" frameX="0" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0004" x="1869" y="5" width="257" height="403" frameX="-1" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0005" x="1869" y="5" width="257" height="403" frameX="-1" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0006" x="1869" y="5" width="257" height="403" frameX="-1" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON DOWN0007" x="1869" y="5" width="257" height="403" frameX="-1" frameY="0" frameWidth="265" frameHeight="403"/>
+	<SubTexture name="JON LEFT0000" x="2131" y="5" width="298" height="432" frameX="-2" frameY="-3" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON LEFT0001" x="2131" y="5" width="298" height="432" frameX="-2" frameY="-3" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON LEFT0002" x="2434" y="5" width="294" height="435" frameX="0" frameY="0" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON LEFT0003" x="2434" y="5" width="294" height="435" frameX="0" frameY="0" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON LEFT0004" x="2733" y="5" width="291" height="435" frameX="-2" frameY="0" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON LEFT0005" x="2733" y="5" width="291" height="435" frameX="-2" frameY="0" frameWidth="300" frameHeight="435"/>
+	<SubTexture name="JON PIPE0000" x="3029" y="5" width="14" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0001" x="3029" y="5" width="14" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0002" x="3048" y="5" width="38" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0003" x="3048" y="5" width="38" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0004" x="3091" y="5" width="41" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0005" x="3091" y="5" width="41" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0006" x="3137" y="5" width="75" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0007" x="3137" y="5" width="75" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0008" x="3217" y="5" width="99" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0009" x="3217" y="5" width="99" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0010" x="3321" y="5" width="103" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0011" x="3321" y="5" width="103" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0012" x="3429" y="5" width="137" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0013" x="3429" y="5" width="137" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0014" x="3571" y="5" width="161" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0015" x="3571" y="5" width="161" height="443" frameX="0" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0016" x="3737" y="5" width="164" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0017" x="3737" y="5" width="164" height="435" frameX="0" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0018" x="5" y="453" width="199" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0019" x="5" y="453" width="199" height="422" frameX="0" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0020" x="209" y="453" width="214" height="443" frameX="-9" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0021" x="209" y="453" width="214" height="443" frameX="-9" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0022" x="428" y="453" width="218" height="435" frameX="-8" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0023" x="428" y="453" width="218" height="435" frameX="-8" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0024" x="651" y="453" width="215" height="422" frameX="-46" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0025" x="651" y="453" width="215" height="422" frameX="-46" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0026" x="209" y="453" width="214" height="443" frameX="-71" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0027" x="209" y="453" width="214" height="443" frameX="-71" frameY="-2" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0028" x="428" y="453" width="218" height="435" frameX="-70" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0029" x="428" y="453" width="218" height="435" frameX="-70" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0030" x="651" y="453" width="215" height="422" frameX="-107" frameY="-23" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0031" x="871" y="453" width="226" height="429" frameX="-105" frameY="-16" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0032" x="871" y="453" width="226" height="429" frameX="-105" frameY="-16" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0033" x="871" y="453" width="226" height="429" frameX="-105" frameY="-16" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0034" x="1102" y="453" width="218" height="434" frameX="-103" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0035" x="1102" y="453" width="218" height="434" frameX="-103" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0036" x="428" y="453" width="218" height="435" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0037" x="428" y="453" width="218" height="435" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0038" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0039" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0040" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0041" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0042" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0043" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0044" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0045" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0046" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0047" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0048" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0049" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0050" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0051" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0052" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0053" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0054" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0055" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0056" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0057" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0058" x="1548" y="453" width="348" height="442" frameX="-81" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0059" x="1548" y="453" width="348" height="442" frameX="-81" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0060" x="1901" y="453" width="361" height="439" frameX="-85" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0061" x="1901" y="453" width="361" height="439" frameX="-85" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0062" x="2267" y="453" width="368" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0063" x="2267" y="453" width="368" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0064" x="2640" y="453" width="373" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0065" x="2640" y="453" width="373" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0066" x="3018" y="453" width="373" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0067" x="3018" y="453" width="373" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0068" x="3396" y="453" width="220" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0069" x="3396" y="453" width="220" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0070" x="3396" y="453" width="220" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0071" x="3396" y="453" width="220" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0072" x="3396" y="453" width="220" height="439" frameX="-89" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0073" x="3621" y="453" width="232" height="438" frameX="-49" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0074" x="3621" y="453" width="232" height="438" frameX="-49" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0075" x="5" y="901" width="248" height="439" frameX="-35" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0076" x="5" y="901" width="248" height="439" frameX="-35" frameY="-13" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0077" x="258" y="901" width="263" height="438" frameX="-28" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0078" x="258" y="901" width="263" height="438" frameX="-28" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0079" x="526" y="901" width="268" height="438" frameX="-24" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0080" x="526" y="901" width="268" height="438" frameX="-24" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0081" x="799" y="901" width="271" height="438" frameX="-21" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0082" x="799" y="901" width="271" height="438" frameX="-21" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0083" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0084" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0085" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0086" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0087" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0088" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0089" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0090" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0091" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0092" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0093" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0094" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0095" x="1075" y="901" width="222" height="438" frameX="-70" frameY="-14" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0096" x="1302" y="901" width="294" height="454" frameX="-44" frameY="0" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0097" x="1302" y="901" width="294" height="454" frameX="-44" frameY="0" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0098" x="1601" y="901" width="309" height="450" frameX="-45" frameY="-4" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0099" x="1601" y="901" width="309" height="450" frameX="-45" frameY="-4" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0100" x="1915" y="901" width="320" height="448" frameX="-63" frameY="-6" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0101" x="1915" y="901" width="320" height="448" frameX="-63" frameY="-6" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0102" x="2240" y="901" width="318" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0103" x="2240" y="901" width="318" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0104" x="2563" y="901" width="319" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0105" x="2563" y="901" width="319" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0106" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0107" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0108" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0109" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0110" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0111" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0112" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0113" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0114" x="2887" y="901" width="223" height="447" frameX="-67" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0115" x="3115" y="901" width="408" height="441" frameX="-126" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0116" x="3115" y="901" width="408" height="441" frameX="-126" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0117" x="3528" y="901" width="409" height="445" frameX="-126" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0118" x="3528" y="901" width="409" height="445" frameX="-126" frameY="-7" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0119" x="5" y="1360" width="420" height="441" frameX="-117" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0120" x="5" y="1360" width="420" height="441" frameX="-117" frameY="-11" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0121" x="430" y="1360" width="435" height="442" frameX="-106" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0122" x="430" y="1360" width="435" height="442" frameX="-106" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0123" x="870" y="1360" width="441" height="442" frameX="-102" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0124" x="870" y="1360" width="441" height="442" frameX="-102" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0125" x="1316" y="1360" width="431" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0126" x="1316" y="1360" width="431" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0127" x="1752" y="1360" width="420" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0128" x="1752" y="1360" width="420" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0129" x="2177" y="1360" width="414" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0130" x="2177" y="1360" width="414" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0131" x="2596" y="1360" width="411" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0132" x="2596" y="1360" width="411" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0133" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0134" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0135" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0136" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0137" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0138" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0139" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0140" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0141" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0142" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON PIPE0143" x="1325" y="453" width="218" height="442" frameX="-101" frameY="-10" frameWidth="469" frameHeight="445"/>
+	<SubTexture name="JON RIGHT0000" x="3012" y="1360" width="278" height="427"/>
+	<SubTexture name="JON RIGHT0001" x="3012" y="1360" width="278" height="427"/>
+	<SubTexture name="JON RIGHT0002" x="3295" y="1360" width="267" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON RIGHT0003" x="3295" y="1360" width="267" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON RIGHT0004" x="3567" y="1360" width="264" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON RIGHT0005" x="3567" y="1360" width="264" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON RIGHT0006" x="3567" y="1360" width="264" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON RIGHT0007" x="3567" y="1360" width="264" height="425" frameX="-1" frameY="-2" frameWidth="278" frameHeight="427"/>
+	<SubTexture name="JON UP0000" x="5" y="1807" width="313" height="459" frameX="-2" frameY="0" frameWidth="317" frameHeight="459"/>
+	<SubTexture name="JON UP0001" x="5" y="1807" width="313" height="459" frameX="-2" frameY="0" frameWidth="317" frameHeight="459"/>
+	<SubTexture name="JON UP0002" x="323" y="1807" width="317" height="453" frameX="0" frameY="-5" frameWidth="317" frameHeight="459"/>
+	<SubTexture name="JON UP0003" x="323" y="1807" width="317" height="453" frameX="0" frameY="-5" frameWidth="317" frameHeight="459"/>
+	<SubTexture name="JON UP0004" x="645" y="1807" width="317" height="452" frameX="0" frameY="-6" frameWidth="317" frameHeight="459"/>
+	<SubTexture name="JON UP0005" x="645" y="1807" width="317" height="452" frameX="0" frameY="-6" frameWidth="317" frameHeight="459"/>
+</TextureAtlas>

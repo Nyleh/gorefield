@@ -1,0 +1,15 @@
+<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
+<character x="0" y="350" icon="icon-bf-pixel" flipX="true" isPlayer="null" camx="-260" camy="270" holdTime="4" scale="0.4" color="#346756">
+	<anim name="idle" anim="BF IDLE" fps="24" loop="false" x="-12.5" y="0"/>
+	<anim name="singLEFT" anim="BF LEFT" fps="24" loop="false" x="45" y="-7.5"/>
+	<anim name="singDOWN" anim="BF DOWN" fps="24" loop="false" x="-7.5" y="-122.5"/>
+	<anim name="singUP" anim="BF UP" fps="24" loop="false" x="-120" y="30"/>
+	<anim name="singRIGHT" anim="BF RIGHT" fps="24" loop="false" x="-95" y="-40"/>
+	<anim name="singLEFTmiss" anim="BF MISS LEFT" fps="24" loop="false" x="-95" y="-40"/>
+	<anim name="singDOWNmiss" anim="BF MISS DOWN" fps="24" loop="false" x="0" y="-120"/>
+	<anim name="singUPmiss" anim="BF MISS UP" fps="24" loop="false" x="-117.5" y="32.5"/>
+	<anim name="singRIGHTmiss" anim="BF MISS RIGHT" fps="24" loop="false" x="37.5" y="-10"/>
+	<anim name="firstDeath" anim="BF DEATH0" fps="24" loop="false" x="0" y="187.5"/>
+	<anim name="deathLoop" anim="BF DEATH LOOP" fps="24" loop="true" x="-32.5" y="57.5"/>
+	<anim name="deathConfirm" anim="BF RETRY CONFIRM" fps="24" loop="false" x="2.5" y="137.5" indices="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]"/>
+</character>

@@ -1,0 +1,7 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.9" name="ultra" folder="stages/ultra/">
+	<!-- SPRITES GO HERE -->
+	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
+	<opponent x="275" y="180" camxoffset="-130" camyoffset="70"/>
+	<player x="100" y="220" camxoffset="220" camyoffset="-180"/>
+</stage>

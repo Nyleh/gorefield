@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="BF Wb ICON.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="BF WB ICON0000" x="0" y="0" width="138" height="81" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="BF WB ICON0001" x="0" y="0" width="138" height="81" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="BF WB ICON0002" x="138" y="0" width="137" height="82" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="BF WB ICON0003" x="138" y="0" width="137" height="82" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="BF WB ICON0004" x="275" y="0" width="137" height="82" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="BF WB ICON0005" x="275" y="0" width="137" height="82" frameX="0" frameY="0" frameWidth="138" frameHeight="82"/>
+	<SubTexture name="ICON BF WB 20000" x="0" y="82" width="129" height="109"/>
+	<SubTexture name="ICON BF WB 20001" x="0" y="82" width="129" height="109"/>
+	<SubTexture name="ICON BF WB 20002" x="129" y="82" width="129" height="109"/>
+	<SubTexture name="ICON BF WB 20003" x="129" y="82" width="129" height="109"/>
+	<SubTexture name="ICON BF WB 20004" x="258" y="82" width="129" height="109"/>
+	<SubTexture name="ICON BF WB 20005" x="258" y="82" width="129" height="109"/>
+</TextureAtlas>
