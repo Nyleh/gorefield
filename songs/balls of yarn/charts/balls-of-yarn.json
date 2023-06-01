@@ -3579,16 +3579,6 @@
 			],
 			"position": "boyfriend",
 			"type": 1
-		},
-		{
-			"characters": [
-				"gf"
-			],
-			"strumLinePos": 0.5,
-			"notes": [],
-			"position": "girlfriend",
-			"visible": false,
-			"type": 2
 		}
 	],
 	"meta": {
