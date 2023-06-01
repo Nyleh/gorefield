@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/">
+<stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/" noteSkin="pixel_green">
 	<sprite name="BG2" x="-1800" y="-500" sprite="BG_2" antialising="false" scrollx="1" scrolly="1" scale="0.4"/>
 	<sprite name="BG1" x="-1800" y="-500" sprite="BG_1" antialising="false" scrollx="1" scrolly="1" scale="0.4"/>
 	<opponent x="-490" y="373" camxoffset="109.5" camyoffset="-196"/>
