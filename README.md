@@ -3,8 +3,11 @@
 ## Codename Port
 
 - [x] Port Song Charts
-- [ ] Port Stages 
+- [x] Port Stages 
+- [ ] Improve Stages
+- [ ] Port HUD
 - [x] Port Characters
+- [ ] Port Weeks
 - [ ] Port Menus
 - [ ] Port Events
 - [ ] Port Loading Screens
