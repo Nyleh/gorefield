@@ -8,6 +8,7 @@ function create() {
         if (stage.stageXML.exists(zoom)) strumLineZooms.set(zoomNames.indexOf(zoom), Std.parseFloat(stage.stageXML.get(zoom)));
 
     if (strumLineZooms.exists(curCameraTarget)) defaultCamZoom = strumLineZooms.get(curCameraTarget);
+    camZooming = true;
 }
 
 function onEvent(codenameEvent) {
