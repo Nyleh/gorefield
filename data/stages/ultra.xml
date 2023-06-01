@@ -1,7 +1,6 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.9" name="ultra" folder="stages/ultra/">
-	<!-- SPRITES GO HERE -->
-	<gf x="800" y="270" camxoffset="0" camyoffset="0"/>
-	<opponent x="275" y="180" camxoffset="-130" camyoffset="70"/>
-	<player x="100" y="220" camxoffset="220" camyoffset="-180"/>
+<stage zoom="0.9" name="ultra" folder="stages/ultra/" opponentZoom="0.7" playerZoom="0.9" gfZoom="0.9">
+	<sprite name="BG1" x="0" y="0" sprite="BG" antialising="true" scrollx="1" scrolly="1" scale="1.8"/>
+	<opponent x="275" y="180" camxoffset="226" camyoffset="286.25"/>
+	<player x="100" y="220" camxoffset="320" camyoffset="-180"/>
 </stage>
