@@ -59,7 +59,7 @@ function postCreate() {
 	timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, FlxBarFillDirection.LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), Conductor, 'songPosition', 0, songLength = inst.length);
 	timeBar.numDivisions = 800;
 	timeBar.createFilledBar(0xFF000000, dadColor);
-	timeBar.alpha = timeBar.percent = 0;
+	timeBar.alpha = 0;
 	timeBar.cameras = [camHUD];
 
 	add(timeBarBG);
@@ -71,6 +71,30 @@ function onSongStart() {
 	for(s in [timeTxt, timeBarBG, timeBar]) {
 		FlxTween.tween(s, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 	}
+}
+
+function onSongEnd() {
+	for(s in [timeTxt, timeBarBG, timeBar]) {
+		s.visible = false;
+	}
+}
+
+function onCountdown(countdownEvent) countdownEvent.scale = 1;
+
+function onPostCountdown(countdownEvent) {
+    if (countdownEvent.sprite != null) {
+        countdownEvent.sprite.cameras = [camHUD];
+
+        countdownEvent.spriteTween.cancel();
+        FlxTween.tween(countdownEvent.sprite, {alpha: 0}, Conductor.crochet / 1000, {
+            ease: FlxEase.cubeInOut,
+            onComplete: function(twn:FlxTween)
+            {
+                sprite.destroy();
+                remove(countdownEvent.sprite, true);
+            }
+        });
+    }
 }
 
 var lastRemainingSec:Int = 0;
