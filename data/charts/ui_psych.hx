@@ -141,10 +141,9 @@ function getRatingFC():String {
 }
 
 function updateScoreText() {
-	var ratingFC = getRatingFC();
 	psychScoreTxt.text = 'Score: ' + songScore
 	+ ' | Misses: ' + misses
 	+ ' | Rating: ' + (curRating.rating == "[N/A]" ? "?" : curRating.rating)
 	+ (curRating.rating == "[N/A]" ? "" : ' (' + Std.string(FlxMath.roundDecimal(get_accuracy() * 100, 2)) + '%)')
-	+ (ratingFC == '' ? '' : ' - [' + ratingFC + ']');
+	+ (curRating.rating == "[N/A]" ? '' : ' - [' + getRatingFC() + ']');
 }
