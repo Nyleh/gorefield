@@ -12,7 +12,6 @@ var gorefieldhealthBar:FlxSprite;
 function postCreate() {
     healthBar.visible = healthBarBG.visible = false;
     var gorefieldHealthBarColor = (stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange";
-    trace(gorefieldHealthBarColor);
 
     gorefieldhealthBarBG = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + gorefieldHealthBarColor));
     gorefieldhealthBarBG.cameras = [camHUD];
@@ -33,7 +32,8 @@ function postCreate() {
     for (icon in [iconP1, iconP2]) {
         if (icon == null) continue;
 
-        iconOffsets.push(switch (icon) {
+        var iconOffset:FlxPoint = null;
+        iconOffsets.push(iconOffset = switch (icon) {
             case iconP1: 
                 FlxPoint.get(
                     (boyfriend != null && boyfriend.xml != null && boyfriend.xml.exists("iconoffsetx")) ? Std.parseFloat(boyfriend.xml.get("iconoffsetx")) : 0,
@@ -45,6 +45,8 @@ function postCreate() {
                     (dad != null && dad.xml != null && dad.xml.exists("iconoffsety")) ? Std.parseFloat(dad.xml.get("iconoffsety")) : 0
                 );
         });
+
+        if (camHUD.downscroll) iconOffset.y *= -1;
 
         icon.loadGraphic(icon.graphic, true, icon.graphic.width/2, icon.graphic.height);
         icon.flipX = icon == iconP1;
