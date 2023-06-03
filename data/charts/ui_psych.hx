@@ -14,21 +14,33 @@ static var timeBar:FlxBar;
 
 static var songLength:Float = 0; // just incase we wanna do Uknown suffering v26
 
+var ratingStuff:Array<Dynamic> = [
+    ['You Suck!', 0.2], //From 0% to 19%
+    ['Shit', 0.4], //From 20% to 39%
+    ['Bad', 0.5], //From 40% to 49%
+    ['Bruh', 0.6], //From 50% to 59%
+    ['Meh', 0.69], //From 60% to 68%
+    ['Nice', 0.7], //69%
+    ['Good', 0.8], //From 70% to 79%
+    ['Great', 0.9], //From 80% to 89%
+    ['Sick!', 1], //From 90% to 99%
+    ['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+];
+
+function getRating(accuracy:Float):String { // Robbed from Yasher#1987 in codename server cause i am too lazy to port
+    if (accuracy < 0) {
+        return "?";
+    }
+    for (rating in ratingStuff) {
+        if (accuracy < rating[1]) {
+            return rating[0];
+        }
+    }
+    return ratingStuff[ratingStuff.length - 1][0];
+}
+
+
 function postCreate() {
-	comboRatings = [
-		new ComboRating(0.2, "You Suck!", 0xFFFF4444),
-		new ComboRating(0.4, "Shit", 0xFFFF8844),
-		new ComboRating(0.5, "Bad", 0xFFFFAA44),
-		new ComboRating(0.6, "Bruh", 0xFFFFFF44),
-		new ComboRating(0.7, "Meh", 0xFFAAFF44),
-		new ComboRating(0.8, "Good", 0xFF88FF44),
-		new ComboRating(0.9, "Great", 0xFF44FFFF),
-		new ComboRating(0.99, "Sick", 0xFF44FFFF),
-		new ComboRating(1, "Perfect", 0xFF44FFFF),
-	];
-
-	curRating = new ComboRating(0, "[N/A]", 0xFF888888);
-
 	scoreTxt.visible = missesTxt.visible = accuracyTxt.visible = false;
 
 	healthBarBG.y = FlxG.height * 0.89;
@@ -141,9 +153,11 @@ function getRatingFC():String {
 }
 
 function updateScoreText() {
+	var rating = getRating(get_accuracy());
+
 	psychScoreTxt.text = 'Score: ' + songScore
 	+ ' | Misses: ' + misses
-	+ ' | Rating: ' + (curRating.rating == "[N/A]" ? "?" : curRating.rating)
-	+ (curRating.rating == "[N/A]" ? "" : ' (' + Std.string(FlxMath.roundDecimal(get_accuracy() * 100, 2)) + '%)')
-	+ (curRating.rating == "[N/A]" ? '' : ' - [' + getRatingFC() + ']');
+	+ ' | Rating: ' + rating
+	+ (rating == "?" ? "" : ' (' + Std.string(FlxMath.roundDecimal(get_accuracy() * 100, 2)) + '%)')
+	+ (rating == "?" ? '' : ' - [' + getRatingFC() + ']');
 }
