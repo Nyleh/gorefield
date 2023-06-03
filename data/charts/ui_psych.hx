@@ -6,11 +6,11 @@ import flixel.ui.FlxBar;
 import funkin.game.ComboRating;
 import flixel.math.FlxMath;
 
-var psychScoreTxt:FunkinText;
+static var psychScoreTxt:FunkinText;
 var scoreTxtTween:FlxTween;
-var timeTxt:FunkinText;
-var timeBarBG:FlxSprite;
-var timeBar:FlxBar;
+static var timeTxt:FunkinText;
+static var timeBarBG:FlxSprite;
+static var timeBar:FlxBar;
 
 static var songLength:Float = 0; // just incase we wanna do Uknown suffering v26
 
@@ -38,7 +38,7 @@ function postCreate() {
 	psychScoreTxt.borderSize = 1.25;
 	psychScoreTxt.cameras = [camHUD];
 	psychScoreTxt.alignment = "center";
-	add(psychScoreTxt);
+	insert(members.length, psychScoreTxt);
 
 	updateScoreText();
 
@@ -90,7 +90,7 @@ function onPostCountdown(countdownEvent) {
             ease: FlxEase.cubeInOut,
             onComplete: function(twn:FlxTween)
             {
-                sprite.destroy();
+            	countdownEvent.sprite.destroy();
                 remove(countdownEvent.sprite, true);
             }
         });

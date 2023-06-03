@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/" noteSkin="pixel_green">
+<stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/" noteSkin="pixel_green" healthBarColor="pixel">
 	<countdown>
 		<three sound="lasagna/3-pixel"/>
 		<two sprite="game/ready" sound="lasagna/2-pixel"/>
