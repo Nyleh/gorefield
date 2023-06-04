@@ -22,3 +22,15 @@ function create() {
 
     insert(members.indexOf(dad), jonTrail);
 }
+
+function postCreate() {
+    for (strum in cpuStrums) strum.visible = false;
+}
+
+function update(elapsed:Float) {
+    var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
+    dad.y = 200 + (20 * Math.sin(_curBeat));
+    dad.x = 1460 + (50 * Math.sin(_curBeat/2));
+}
+
+function onPlayerHit(event) {event.showRating = false; songScore += event.score;}
