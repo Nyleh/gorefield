@@ -18,3 +18,5 @@ function onCameraMove(camMoveEvent) {
         }
     } else camMoveEvent.cancel();
 }
+
+function destroy() {camFollowChars = true; camMoveOffset = 15;}

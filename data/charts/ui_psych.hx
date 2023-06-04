@@ -12,6 +12,8 @@ static var timeTxt:FunkinText;
 static var timeBarBG:FlxSprite;
 static var timeBar:FlxBar;
 
+static var onHudCreated:Void->Void;
+
 static var songLength:Float = 0; // just incase we wanna do Uknown suffering v26
 
 var ratingStuff:Array<Dynamic> = [
@@ -77,6 +79,8 @@ function postCreate() {
 	add(timeBarBG);
 	add(timeBar);
 	add(timeTxt);
+
+	if (onHudCreated != null) onHudCreated();
 }
 
 function onSongStart() {
@@ -98,14 +102,7 @@ function onPostCountdown(countdownEvent) {
         countdownEvent.sprite.cameras = [camHUD];
 
         countdownEvent.spriteTween.cancel();
-        FlxTween.tween(countdownEvent.sprite, {alpha: 0}, Conductor.crochet / 1000, {
-            ease: FlxEase.cubeInOut,
-            onComplete: function(twn:FlxTween)
-            {
-            	countdownEvent.sprite.destroy();
-                remove(countdownEvent.sprite, true);
-            }
-        });
+        FlxTween.tween(countdownEvent.sprite, {alpha: 0}, Conductor.crochet / 1000, {ease: FlxEase.cubeInOut});
     }
 }
 
@@ -160,4 +157,9 @@ function updateScoreText() {
 	+ ' | Rating: ' + rating
 	+ (rating == "?" ? "" : ' (' + Std.string(FlxMath.roundDecimal(get_accuracy() * 100, 2)) + '%)')
 	+ (rating == "?" ? '' : ' - [' + getRatingFC() + ']');
+}
+
+function destroy() {
+	for(s in [timeTxt, timeBarBG, timeBar, psychScoreTxt]) s.destroy();
+	timeTxt = timeBarBG = timeBar = psychScoreTxt = songLength = onHudCreated = null;
 }
