@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="-240" y="-240" icon="icon-gorefield-phase-3" flipX="false" isPlayer="null" camx="-60" camy="10" holdTime="6.1" scale="1" color="#E3E3E3">
+<character x="-240" y="-240" icon="gorefield-phase-3" iconoffsetx="-30" iconoffsety="-17.5" animatedIcon="true" flipX="false" isPlayer="null" camx="-60" camy="10" holdTime="6.1" scale="1" color="#E3E3E3">
 	<anim name="idle" anim="PHASE 3 IDLE" fps="24" loop="false" x="0" y="0"/>
 	<anim name="singLEFT" anim="PHASE 3 L" fps="24" loop="false" x="71" y="19"/>
 	<anim name="singDOWN" anim="PHASE 3 DOWN" fps="24" loop="false" x="-1" y="-55"/>
