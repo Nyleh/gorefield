@@ -48,7 +48,6 @@ function postCreate() {
             icon.animation.addByPrefix("losing", "losing", 24, true);
             icon.animation.addByPrefix("idle", "idle", 24, true);
             icon.animation.play("idle");
-            trace(icon.animation.getNameList());
         } else {
             icon.loadGraphic(Paths.image(path)); // load once to get the width and stuff
             icon.loadGraphic(icon.graphic, true, icon.graphic.width/2, icon.graphic.height);
