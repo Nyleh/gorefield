@@ -15,7 +15,9 @@ var gorefieldiconP2:FlxSprite;
 
 function postCreate() {
     healthBar.visible = healthBarBG.visible = iconP1.visible = iconP2.visible = false;
+}
 
+function create() {
     gorefieldhealthBarBG = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + ((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange")));
     gorefieldhealthBarBG.cameras = [camHUD];
     add(gorefieldhealthBarBG);
@@ -80,10 +82,14 @@ function postCreate() {
 
         if (camHUD.downscroll) iconOffset.y *= -1;
     }
+    updateIcons();
 }
 
-function update(elapsed:Float) {
-    // Positions
+function update(elapsed:Float)
+    updateIcons();
+
+function updateIcons() {
+    // Positions 
     gorefieldiconP1.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0)) - 20);
     gorefieldiconP2.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0))) - (gorefieldiconP2.width - 20);
 
@@ -100,7 +106,7 @@ function update(elapsed:Float) {
 
         if (icon.animation.name == "non-animated") icon.animation.curAnim.curFrame = losing ? 1 : 0;
         else icon.animation.play(losing ? "losing" : "idle");
-    }    
+    }   
 }
 
 function destroy() {
