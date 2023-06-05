@@ -59,76 +59,10 @@ function update(elapsed:Float) {
     if (FlxG.keys.justPressed.ENTER && finishedLoading && !pressedEnter) {goToSong(); pressedEnter = true;}
 }
 
-function gatherAssetsToLoad():Array<String> {
-    var graphicsToLoad:Array<String> = [];
-
-    // Stage Sprites / HealthBar / Notes
-    var countDownInStage:Bool = false; // to preload normal countdown
-
-    if (PlayState.SONG.stage != null && StringTools.trim(PlayState.SONG.stage) != "") {
-        var stagePath = 'assets/data/stages/' + PlayState.SONG.stage + '.xml';
-
-        if (Assets.exists(stagePath)) {
-            var stageXML:Xml = Xml.parse(Assets.getText(stagePath)).firstElement();
-
-            var spriteFolder:String = stageXML.exists("folder") ? stageXML.get("folder") : "";
-            if (spriteFolder.charAt(spriteFolder.length-1) != "/") spriteFolder = spriteFolder + "/";
-
-            if (stageXML.exists("noteSkin")) graphicsToLoad.push("game/notes/" + stageXML.get("noteSkin"));
-            else graphicsToLoad.push("game/notes/default");
-
-            if (stageXML.exists("splashSkin")) graphicsToLoad.push("game/splashes/" + stageXML.get("splashSkin"));
-            else graphicsToLoad.push("game/splashes/default");
-
-            if (stageXML.exists("healthBarColor")) graphicsToLoad.push("game/healthbar/healthbar_" + stageXML.get("healthBarColor"));
-            else graphicsToLoad.push("game/healthbar/healthbar_orange");
-
-            for (healthBarSpr in ["filler_left", "filler_right"]) graphicsToLoad.push("game/healthbar/" + healthBarSpr);
-            
-            for (node in stageXML.elements()) {
-                switch (node.nodeName) {
-                    case "sprite": if (node.exists("sprite")) graphicsToLoad.push(spriteFolder + node.get("sprite"));
-                    case "countdown":
-                        countDownInStage = true;
-                        for (countDownNode in node.elements()) if (countDownNode.exists("sprite")) graphicsToLoad.push(countDownNode.get("sprite"));
-                }
-            }
-        }
-    }
-
-    if (!countDownInStage) for (sprite in ['game/ready', "game/set", "game/go"]) graphicsToLoad.push(sprite);
-
-    // Characters 
-    for (strumLine in PlayState.SONG.strumLines) {
-        for (char in strumLine.characters) {
-            var xmlPath = 'assets/data/characters/' + char + '.xml';
-            if (!Assets.exists(xmlPath)) xmlPath = 'assets/data/characters/bf.xml';
-
-            var charXML = Xml.parse(Assets.getText(xmlPath)).firstElement();
-
-            if (charXML.exists("sprite")) graphicsToLoad.push("characters/" + charXML.get("sprite"));
-            else graphicsToLoad.push("characters/" + char);
-
-            if (charXML.exists("icon")) graphicsToLoad.push("icons/" + charXML.get("icon"));
-        }  
-    }
-
-    // Note Types
-    for (noteType in PlayState.SONG.noteTypes)
-        graphicsToLoad.push("game/notes/" + noteType);
-
-    var fliteredGraphics:Array<String> = []; // Removing Duplicates
-
-    for (graphic in graphicsToLoad)
-        if (fliteredGraphics.indexOf(graphic) == -1) fliteredGraphics.push(graphic);
-
-    return fliteredGraphics;
-}
-
 function loadAssets() { // GET BAMBOOZLED LLLLL YOU THOUGHT IT WAS ACUTTALY LOADING
     var timeToLoadalldat = 0;
 
-    for (sprite in gatherAssetsToLoad()) {
+    for (sprite in 0...FlxG.random.int(8, 14)) {
         timeToLoadalldat += FlxG.random.float(0.1, 0.225);
     }
 
