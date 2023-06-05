@@ -11,7 +11,7 @@ function create() {
     ultraCam.angle = 90;
     
     chromaticWarpShader = new CustomShader("chromaticWarp");
-    chromaticWarpShader.distortion = 4;
+    chromaticWarpShader.distortion = 3;
 
     glowShader = new CustomShader("glow");
     glowShader.size = 50.0; glowShader.quality = 10.0;
