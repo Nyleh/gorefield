@@ -15,9 +15,7 @@ var gorefieldiconP2:FlxSprite;
 
 function postCreate() {
     healthBar.visible = healthBarBG.visible = iconP1.visible = iconP2.visible = false;
-}
 
-function create() {
     gorefieldhealthBarBG = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + ((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange")));
     gorefieldhealthBarBG.cameras = [camHUD];
     add(gorefieldhealthBarBG);
