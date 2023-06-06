@@ -2,5 +2,6 @@
     "loadingbg": "loadingbg1",
     "loadingimage": "rightloadingimage1",
     "loadinganim": "BF 1",
-    "loadingpos": [561.46, -42.08]
+    "loadingpos": [561.46, -42.08],
+    "bgOffset": [10, 0]
 }

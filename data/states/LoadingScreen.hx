@@ -21,6 +21,12 @@ function create() {
 
     if (Assets.exists(path)) loadingData = Json.parse(Assets.getText(path));
     else trace("LOADING SCREEN NOT FOUND!!!11 | PATH: " + path);
+
+    var colorbg:FlxSprite = new FlxSprite().makeGraphic(1,1, FlxColor.fromRGB(15, 35, 52));
+    colorbg.scale.set(FlxG.width, FlxG.height);
+    colorbg.updateHitbox();
+    colorbg.screenCenter();
+    add(colorbg);
     
     var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingscreens/' +loadingData.loadingbg));
     if (loadingData.loadingbg != 'loadingbg1' && loadingData.loadingbg != 'loadingbg2' && loadingData.loadingbg != 'loadingbg3')
@@ -28,6 +34,7 @@ function create() {
     bg.screenCenter();
     bg.antialiasing = true;
     add(bg);
+    if (loadingData.bgOffset != null) bg.offset.set(loadingData.bgOffset[0], loadingData.bgOffset[1]);
 
     var portrait:FlxSprite = new FlxSprite();
     portrait.frames = Paths.getSparrowAtlas('loadingscreens/' + loadingData.loadingimage);

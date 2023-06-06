@@ -2,5 +2,6 @@
     "loadingbg": "pantalla_azul_LASAGNA_06",
     "loadingimage": "LASAGNA_CARGA_01",
     "loadinganim": "LASAGNA",
-    "loadingpos": [820, -20]
+    "loadingpos": [770, -20],
+    "bgOffset": [-12.5, -10]
 }

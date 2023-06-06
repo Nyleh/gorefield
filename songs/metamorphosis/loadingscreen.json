@@ -2,5 +2,6 @@
     "loadingbg": "loadingbg2",
     "loadingimage": "rightloadingimage2",
     "loadinganim": "GOREFIELD",
-    "loadingpos": [600.46, -42.08]
+    "loadingpos": [590.46, -42.08], 
+    "bgOffset": [-5, 30]
 }
