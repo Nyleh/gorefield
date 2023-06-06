@@ -7,4 +7,6 @@ function postCreate() {
         onHudCreated = () -> {for (timeThing in [timeTxt, timeBarBG, timeBar]) timeThing.x -= 320;};
         
     }
+
+    PlayState.instance.scripts.remove(PlayState.instance.scripts.getByName("stage_middleScroll.hx"));
 }

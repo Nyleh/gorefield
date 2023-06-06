@@ -9,4 +9,6 @@ function create() {
             if (countDownNode.exists("sound")) introSounds[countDowns.indexOf(countDownNode.nodeName)] = countDownNode.get("sound");
         }
     }
+
+    PlayState.instance.scripts.remove(PlayState.instance.scripts.getByName("stage_countdown.hx"));
 }
