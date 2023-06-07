@@ -4,14 +4,15 @@
 
 - [x] Port Song Charts
 - [x] Port Stages 
-- [ ] Improve Stages
-- [ ] Port HUD
+- [x] Improve Stages
+- [x] Port HUD
 - [x] Port Characters
 - [ ] Port Weeks
 - [ ] Port Menus
 - [ ] Port Events
-- [ ] Port Loading Screens
+- [ ] Port Loading Screens (kinda)
 - [ ] Port Song Events
+- [ ] Port Polish
 
 ## Gorefield 
 - [ ] Stuff lol
