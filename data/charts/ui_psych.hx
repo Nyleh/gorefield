@@ -12,8 +12,6 @@ static var timeTxt:FunkinText;
 static var timeBarBG:FlxSprite;
 static var timeBar:FlxBar;
 
-static var onHudCreated:Void->Void;
-
 static var songLength:Float = 0; // just incase we wanna do Uknown suffering v26
 
 var ratingStuff:Array<Dynamic> = [
@@ -41,7 +39,6 @@ function getRating(accuracy:Float):String { // Robbed from Yasher#1987 in codena
     return ratingStuff[ratingStuff.length - 1][0];
 }
 
-
 function postCreate() {
 	scoreTxt.visible = missesTxt.visible = accuracyTxt.visible = false;
 
@@ -52,7 +49,7 @@ function postCreate() {
 	psychScoreTxt.borderSize = 1.25;
 	psychScoreTxt.cameras = [camHUD];
 	psychScoreTxt.alignment = "center";
-	insert(members.length, psychScoreTxt);
+	add(psychScoreTxt);
 
 	updateScoreText();
 
@@ -79,8 +76,6 @@ function postCreate() {
 	add(timeBarBG);
 	add(timeBar);
 	add(timeTxt);
-
-	if (onHudCreated != null) onHudCreated();
 }
 
 function onSongStart() {

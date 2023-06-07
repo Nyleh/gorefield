@@ -7,11 +7,11 @@ import flixel.math.FlxMath;
 
 var iconOffsets:Array<FlxPoint> = [];
 
-var gorefieldhealthBarBG:FlxSprite;
-var gorefieldhealthBar:FlxSprite;
+static var gorefieldhealthBarBG:FlxSprite;
+static var gorefieldhealthBar:FlxSprite;
 
-var gorefieldiconP1:FlxSprite;
-var gorefieldiconP2:FlxSprite;
+static var gorefieldiconP1:FlxSprite;
+static var gorefieldiconP2:FlxSprite;
 
 function postCreate() {
     healthBar.visible = healthBarBG.visible = iconP1.visible = iconP2.visible = false;
