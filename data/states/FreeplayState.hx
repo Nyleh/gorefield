@@ -5,5 +5,5 @@ function onSelect(event) {
     Options.freeplayLastDifficulty = songs[curSelected].difficulties[curDifficulty];
 
     PlayState.loadSong(event.song, event.difficulty, event.opponentMode, event.coopMode);
-    FlxG.switchState(new ModState("LoadingScreen"));
+    FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }

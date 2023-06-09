@@ -1,5 +1,4 @@
 //
-import StringTools;
 import Xml;
 
 var pizza:Character;
