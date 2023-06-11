@@ -2,6 +2,7 @@
 import funkin.options.OptionsMenu;
 import flixel.text.FlxTextBorderStyle;
 import funkin.menus.ModSwitchMenu;
+import funkin.editors.EditorPicker;
 
 var options:Array<String> = [
     'story_mode',
@@ -122,6 +123,12 @@ function update(elapsed:Float) {
     if (controls.DOWN_P) changeItem(1);
     if (controls.UP_P) changeItem(-1);
     if (controls.ACCEPT) goToItem();
+
+	if (FlxG.keys.justPressed.SEVEN) {
+		persistentUpdate = !(persistentDraw = true);
+		openSubState(new EditorPicker());
+	}
+
 
     if (controls.SWITCHMOD) {
         openSubState(new ModSwitchMenu());
