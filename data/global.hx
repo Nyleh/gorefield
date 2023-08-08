@@ -1,8 +1,9 @@
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",
     MainMenuState => "gorefield/MainMenuScreen",
-];
+    StoryMenuState => "gorefield/StoryMenuScreen"
 
+];
 function preStateSwitch() {
     for (redirectState in redirectStates.keys()) 
         if (Std.isOfType(FlxG.game._requestedState, redirectState)) 

@@ -1,4 +1,5 @@
 import flixel.text.FlxTextBorderStyle;
+trace("ddd");
 
 function create() {
     CoolUtil.playMenuSong(true);

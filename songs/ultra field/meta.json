@@ -1,5 +1,16 @@
 {
-	"name": "Ultra Field",
+	"opponentModeAllowed": false,
+	"coopAllowed": false,
+	"stepsPerBeat": 4,
+	"beatsPerMesure": 4,
+	"bpm": 145,
+	"difficulties": [
+		"ULTRA-FIELD"
+	],
 	"needsVoices": true,
-	"bpm": 145
+	"parsedColor": -12897699,
+	"displayName": "Ultra Field",
+	"icon": "face",
+	"name": "Ultra Field",
+	"color": "#3B325D"
 }
