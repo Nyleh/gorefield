@@ -2,13 +2,14 @@
 import Xml;
 
 var pizza:Character;
+var black:FlxSprite;
 
 var finishedLoading:Bool = false;
 var pressedEnter:Bool = false;
 
 function create() {
     if (FlxG.sound.music != null) FlxG.sound.music.stop();
-    FlxG.camera.alpha = 0;
+    //FlxG.camera.alpha = 0;
 
     var path:String = "assets/songs/" + PlayState.SONG.meta.name.toLowerCase() + "/loadingscreen.json";
     var loadingData:Dynamic = {
@@ -52,10 +53,13 @@ function create() {
     add(pizza);
     pizza.playAnim('idle');
 
+    black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+    add(black);
+
     FlxG.sound.play(Paths.sound("loadingsound"));
 
     new FlxTimer().start(1.5, (tmr:FlxTimer) -> {
-		FlxTween.tween(FlxG.camera, {alpha: 1}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
+		FlxTween.tween(black, {alpha: 0}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
 	});
 }
 
@@ -79,5 +83,5 @@ function loadAssets() { // GET BAMBOOZLED LLLLL YOU THOUGHT IT WAS ACUTTALY LOAD
 }
 
 function goToSong() {
-    FlxTween.tween(FlxG.camera, {alpha: 0}, 0.75, {onComplete: (tween:FlxTween) -> {FlxG.switchState(new PlayState());}});
+    FlxTween.tween(black, {alpha: 1}, 0.75, {onComplete: (tween:FlxTween) -> {FlxG.switchState(new PlayState());}});
 }
