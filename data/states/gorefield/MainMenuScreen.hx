@@ -108,6 +108,7 @@ function goToItem() {
         case "story_mode": FlxG.switchState(new StoryMenuState());
         case "freeplay": FlxG.switchState(new FreeplayState());
         case "options": FlxG.switchState(new OptionsMenu());
+        case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
         default: selectedSomthin = false;
     }
 }
