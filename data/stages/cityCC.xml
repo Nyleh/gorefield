@@ -1,7 +1,0 @@
-<!DOCTYPE codename-engine-stage>
-<stage zoom="0.7" name="cityCC" folder="stages/cityCC/" noteSkin="gorefield_green" healthBarColor="green">
-	<sprite name="BG1" x="0" y="0" sprite="bg_collab" antialising="true" scrollx="0.85" scrolly="0.85" scale="1"/>
-	<sprite name="BG2" x="0" y="0" sprite="bg_collab_2" antialising="true" scrollx="1" scrolly="1" scale="1"/>
-	<opponent x="200" y="320" camxoffset="0" camyoffset="0"/>
-	<player x="1100" y="620" camxoffset="0" camyoffset="0"/>
-</stage>
