@@ -6,11 +6,11 @@ var oldScripts:Array<Script> = PlayState.instance.scripts.scripts;
 PlayState.instance.scripts.scripts = [];
 
 var debug_Scripts:Array<Script> = [];
+var event_Scripts:Array<Script> = []; //
 var ui_Scripts:Array<Script> = []; 
 var stage_Scripts:Array<Script> = []; //
 var modchart_Scripts:Array<Script> = []; //
 var song_Scripts:Array<Script> = []; //
-var event_Scripts:Array<Script> = []; //
 var other_Scripts:Array<Script> = [];
 
 // ! SORTS SCRIPTS INTO DA ARRAYS ABOVE
@@ -35,7 +35,7 @@ for (script in oldScripts) {
 }
 
 var finalScripts:Array<Script> = [];
-for (scripts in [debug_Scripts, ui_Scripts, stage_Scripts, modchart_Scripts, song_Scripts, event_Scripts, other_Scripts])
+for (scripts in [debug_Scripts, event_Scripts, ui_Scripts, stage_Scripts, modchart_Scripts, song_Scripts, other_Scripts])
     for (script in scripts) finalScripts.push(script);
 PlayState.instance.scripts.scripts = finalScripts;
 

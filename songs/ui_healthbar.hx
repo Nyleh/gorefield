@@ -5,7 +5,7 @@ import flixel.ui.FlxBar;
 import funkin.game.PlayState;
 import flixel.math.FlxMath;
 
-var iconOffsets:Array<FlxPoint> = [];
+static var iconOffsets:Array<FlxPoint> = [];
 
 static var gorefieldhealthBarBG:FlxSprite;
 static var gorefieldhealthBar:FlxSprite;
@@ -32,53 +32,11 @@ function postCreate() {
     gorefieldhealthBar.y = (gorefieldhealthBarBG.y = FlxG.height * 0.83) + 34;
 
     for (newIcon in 0...2) {
-        var icon = new FlxSprite();
-
-        var path = 'icons/' + switch (newIcon) {
-            case 1: (boyfriend != null && boyfriend.xml != null && boyfriend.xml.exists("icon")) ? boyfriend.xml.get("icon") : "face";
-            case 0: (dad != null && dad.xml != null && dad.xml.exists("icon")) ? dad.xml.get("icon") : "face";
-        };
-		if (!Assets.exists(Paths.image(path))) path = 'icons/face';
-
-        if (switch (newIcon) {
-                case 1: (boyfriend != null && boyfriend.xml != null && boyfriend.xml.exists("animatedIcon")) ? (boyfriend.xml.get("animatedIcon") == "true") : false;
-                case 0: (dad != null && dad.xml != null && dad.xml.exists("animatedIcon")) ? (dad.xml.get("animatedIcon") == "true") : false;
-        }) {
-            icon.frames = Paths.getSparrowAtlas(path);
-            icon.animation.addByPrefix("losing", "losing", 24, true);
-            icon.animation.addByPrefix("idle", "idle", 24, true);
-            icon.animation.play("idle");
-        } else {
-            icon.loadGraphic(Paths.image(path)); // load once to get the width and stuff
-            icon.loadGraphic(icon.graphic, true, icon.graphic.width/2, icon.graphic.height);
-            icon.animation.add("non-animated", [0,1], 0, false);
-            icon.animation.play("non-animated");
-        }
-
-        icon.flipX = newIcon == 1; 
-        icon.updateHitbox();
-        icon.cameras = [camHUD]; icon.scrollFactor.set();
-
+        var icon = createIcon(newIcon == 1 ? boyfriend : dad);
         add(switch (newIcon) {
             case 1: gorefieldiconP1 = icon;
             case 0: gorefieldiconP2 = icon;
         });
-
-        var iconOffset:FlxPoint = null;
-        iconOffsets.push(iconOffset = switch (newIcon) {
-            case 1: 
-                FlxPoint.get(
-                    (boyfriend != null && boyfriend.xml != null && boyfriend.xml.exists("iconoffsetx")) ? Std.parseFloat(boyfriend.xml.get("iconoffsetx")) : 0,
-                    (boyfriend != null && boyfriend.xml != null && boyfriend.xml.exists("iconoffsety")) ? Std.parseFloat(boyfriend.xml.get("iconoffsety")) : 0
-                );
-            case 0:
-                FlxPoint.get(
-                    (dad != null && dad.xml != null && dad.xml.exists("iconoffsetx")) ? Std.parseFloat(dad.xml.get("iconoffsetx")) : 0,
-                    (dad != null && dad.xml != null && dad.xml.exists("iconoffsety")) ? Std.parseFloat(dad.xml.get("iconoffsety")) : 0
-                );
-        });
-
-        if (camHUD.downscroll) iconOffset.y *= -1;
     }
     updateIcons();
 }
@@ -93,13 +51,14 @@ function updateIcons() {
 
     // Offsets
     for (icon in [gorefieldiconP1, gorefieldiconP2]) {
-        icon.x += iconOffsets[icon == gorefieldiconP1 ? 1 : 0].x; 
-        icon.y = gorefieldhealthBar.y - (icon.height / 2) + iconOffsets[icon == gorefieldiconP1 ? 1 : 0].y;
+        icon.x += iconOffsets[icon.ID].x; 
+        icon.y = gorefieldhealthBar.y - (icon.height / 2) + (iconOffsets[icon.ID].y * (camHUD.downscroll ? -1 : 1));
 
         // Animations
         var losing:Bool = switch (icon) {
             case gorefieldiconP1: (gorefieldhealthBar.percent < 20);
             case gorefieldiconP2: (gorefieldhealthBar.percent > 80);
+            default: false;
         };
 
         if (icon.animation.name == "non-animated") icon.animation.curAnim.curFrame = losing ? 1 : 0;
@@ -109,4 +68,34 @@ function updateIcons() {
 
 function destroy() {
     for (point in iconOffsets) point.put();
+}
+
+static function createIcon(character:Character):FlxSprite {
+    var icon = new FlxSprite();
+    icon.ID = iconOffsets.length;
+
+    var path = 'icons/' + ((character != null) ? character.getIcon() : "icons/face");
+    if (!Assets.exists(Paths.image(path))) path = 'icons/face';
+
+    if ((character != null && character.xml != null && character.xml.exists("animatedIcon")) ? (character.xml.get("animatedIcon") == "true") : false) {
+        icon.frames = Paths.getSparrowAtlas(path);
+        icon.animation.addByPrefix("losing", "losing", 24, true);
+        icon.animation.addByPrefix("idle", "idle", 24, true);
+        icon.animation.play("idle");
+    } else {
+        icon.loadGraphic(Paths.image(path)); // load once to get the width and stuff
+        icon.loadGraphic(icon.graphic, true, icon.graphic.width/2, icon.graphic.height);
+        icon.animation.add("non-animated", [0,1], 0, false);
+        icon.animation.play("non-animated");
+    }
+
+    icon.flipX = character.isPlayer; icon.updateHitbox();
+    icon.cameras = [camHUD]; icon.scrollFactor.set();
+
+    iconOffsets.push(FlxPoint.get(
+        (character != null && character.xml != null && character.xml.exists("iconoffsetx")) ? Std.parseFloat(character.xml.get("iconoffsetx")) : 0,
+        (character != null && character.xml != null && character.xml.exists("iconoffsety")) ? Std.parseFloat(character.xml.get("iconoffsety")) : 0
+    ));
+
+    return icon;
 }
