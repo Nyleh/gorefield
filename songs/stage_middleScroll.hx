@@ -8,5 +8,6 @@ function postCreate() {
         
     }
 
-    PlayState.instance.scripts.remove(PlayState.instance.scripts.getByName("stage_middleScroll.hx"));
+    // destroy scripts
+    __script__.didLoad = __script__.active = false;
 }

@@ -10,5 +10,6 @@ function create() {
         }
     }
 
-    PlayState.instance.scripts.remove(PlayState.instance.scripts.getByName("stage_countdown.hx"));
+    // destroy scripts
+    __script__.didLoad = __script__.active = false;
 }
