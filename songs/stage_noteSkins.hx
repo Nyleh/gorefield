@@ -10,6 +10,6 @@ function create() {
 
 function onStrumCreation(strumEvent) strumEvent.sprite = "game/notes/" + noteSkin;
 function onNoteCreation(noteEvent) {
-    if (noteEvent.note.noteType == null) noteEvent.noteSprite = "game/notes/" + noteSkin;
+    if (noteEvent.noteType == null) noteEvent.noteSprite = "game/notes/" + noteSkin;
     noteEvent.note.splash = splashSkin;
 }
