@@ -91,7 +91,7 @@ function changeWeek(amount:Int) {
     if (curWeek < 0) curWeek = menuOptions.length - 1;
     FlxG.sound.play(Paths.sound('menu/scrollMenu'));
 
-    trace(FunkinSave.getWeekHighscore(weeks[curWeek].name, weeks[curWeek].difficulties[curDifficulty]).score);
+    //trace(FunkinSave.getWeekHighscore(weeks[curWeek].name, weeks[curWeek].difficulties[curDifficulty]).score);
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);}
