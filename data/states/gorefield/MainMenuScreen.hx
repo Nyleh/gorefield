@@ -19,12 +19,13 @@ var optionsTexts:Map<String, String> = [
 ];
 
 var menuItems:FlxTypedGroup<FlxSprite>;
-var curSelected:Int = 0;
+var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
 
 function create() {
+    trace(curMainMenuSelected);
     FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
     var gorefield = new FlxSprite();
@@ -140,4 +141,4 @@ function beatHit() {
     logoBl.animation.play('bump');
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);}
+function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}

@@ -9,7 +9,7 @@ var menuOptions:Array<FlxSprite> = [];
 var selector:FlxSprite;
 
 var weeks:Array<Dynamic> = [];
-var curWeek:Int = 0;
+var curWeek:Int = curStoryMenuSelected;
 
 function create() {
     CoolUtil.playMenuSong();
@@ -94,7 +94,7 @@ function changeWeek(amount:Int) {
     //trace(FunkinSave.getWeekHighscore(weeks[curWeek].name, weeks[curWeek].difficulties[curDifficulty]).score);
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);}
+function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek;}
 
 
 // BOILER PLATE
