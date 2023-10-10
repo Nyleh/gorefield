@@ -3,11 +3,13 @@ var curSpeed:Float = 1;
 function update() {
     if (startingSong || !canPause || paused || health <= 0) return;
     
-    if (FlxG.keys.pressed.TWO) curSpeed -= 0.01;
+    if (FlxG.keys.justPressed.TWO) curSpeed -= 0.1;
     if (FlxG.keys.justPressed.THREE) curSpeed = 1;
-    if (FlxG.keys.pressed.FOUR) curSpeed += 0.01;
-
-    updateSpeed(curSpeed);
+    if (FlxG.keys.justPressed.FOUR) curSpeed += 0.1;
+    curSpeed = FlxMath.bound(curSpeed, 0.5, 2);
+    
+    player.cpu = FlxG.keys.pressed.FIVE;
+    updateSpeed(FlxG.keys.pressed.FIVE ? 10 : curSpeed);
 }
 
 function updateSpeed(speed:Float)
