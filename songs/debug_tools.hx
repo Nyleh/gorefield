@@ -9,7 +9,7 @@ function update() {
     curSpeed = FlxMath.bound(curSpeed, 0.5, 2);
     
     player.cpu = FlxG.keys.pressed.FIVE;
-    updateSpeed(FlxG.keys.pressed.FIVE ? 10 : curSpeed);
+    updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 }
 
 function updateSpeed(speed:Float)

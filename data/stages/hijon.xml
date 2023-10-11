@@ -4,10 +4,10 @@
 	<sprite name="jonHouse2" x="-276" y="-228" sprite="bg_gorefield_2" antialising="true" scrollx="1" scrolly="1" scale="1.3"/>
 	<sprite name="jonHouse3" x="-276" y="-228" sprite="bg_gorefield_3" antialising="true" scrollx="1" scrolly="1" scale="1.3"/>
 	<sprite name="jonHouse4" x="-276" y="-228" sprite="bg_gorefield_4" antialising="true" scrollx="1" scrolly="1" scale="1.3"/>
-	<sprite name="bgFinal" x="-276" y="-228" sprite="BG_2" antialising="true" scrollx="1" scrolly="1" scale="1.3" >
-		<property name="alpha" type="float" value="0.0000001" />
+	<sprite name="bgFinal" x="-400" y="100" sprite="bg_gorefield_boom" antialising="true" scrollx="1" scrolly="1" scale="1.3" >
+		<property name="visible" type="bool" value="false" />
 	</sprite>
-	<gf x="800" y="270" camxoffset="0" camyoffset="0" scroll="1"/>
+	<gf x="755" y="285" camxoffset="210" camyoffset="100" scroll="1"/>
 	<opponent x="-300" y="320" camxoffset="210" camyoffset="0"/>
 	<player x="1170" y="220" camxoffset="-170" camyoffset="-60"/>
 </stage>
