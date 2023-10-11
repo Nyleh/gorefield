@@ -7,8 +7,11 @@ static var redirectStates:Map<FlxState, String> = [
     StoryMenuState => "gorefield/StoryMenuScreen"
 
 ];
+
 function preStateSwitch() {
     for (redirectState in redirectStates.keys()) 
         if (Std.isOfType(FlxG.game._requestedState, redirectState)) 
             FlxG.game._requestedState = new ModState(redirectStates.get(redirectState));
 }
+
+function destroy() FlxG.camera.bgColor = 0xFF000000;

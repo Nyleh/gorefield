@@ -25,7 +25,6 @@ var menuInfomation:FlxText;
 var logoBl:FlxSprite;
 
 function create() {
-    trace(curMainMenuSelected);
     FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
     var gorefield = new FlxSprite();
