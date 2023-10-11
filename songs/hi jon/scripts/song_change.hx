@@ -11,7 +11,5 @@ function stepHit(step:Int) {
             gf.visible = false;
             for (name => sprite in stage.stageSprites) 
                 sprite.active = sprite.visible = name == "bgFinal";
-            defaultCamZoom = FlxG.camera.zoom = 1.5;
-            strumLineZooms = [1.3,1.55,1.5];
     }
 }
