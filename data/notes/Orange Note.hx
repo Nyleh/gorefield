@@ -14,5 +14,8 @@ function onNoteCreation(event) {
     event.note.antialiasing = true;
 }
 
+function onPlayerHit(event)
+    if (event.noteType == "Orange Note") event.showSplash = false;
+
 function onPlayerMiss(event)
     if (event.noteType == "Orange Note") health -= 9999;

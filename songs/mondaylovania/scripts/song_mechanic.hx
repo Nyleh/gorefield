@@ -1,19 +1,18 @@
 
-/*
+
 var strumColors:Array<Int> = [];
+var strumColorMulti:Float = 2;
 
 function update(elapsed:Float) {
-    for (i in 0...4) {
-        var strumColor = 0xFFFFFFFF;
-        for (note in strumLines.members[1].notes.members) {
-            if (note.noteData != i && !(note.strumTime > Conductor.songPosition - (hitWindow * note.latePressWindow))) continue;
-            if (note.noteType == "Orange Note") {strumColor = 0xFFFF8400; break;}
-            if (note.noteType == "Blue Note") {strumColor = 0xFF00DDFF; break;}
-        }
-        strumColors[i] = strumColor;
-    }
+    strumColors = [0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF];
+        strumLines.members[1].notes.forEach(function (note) {
+            if (note.strumTime > (Conductor.songPosition - (hitWindow * note.latePressWindow * 0.2))
+				&& note.strumTime < (Conductor.songPosition + (hitWindow * note.earlyPressWindow * strumColorMulti))) {
+                if (note.noteType == "Orange Note" && strumColors[note.noteData] == 0xFFFFFFFF) strumColors[note.noteData] = 0xFFFF8400;
+                if (note.noteType == "Blue Note" && strumColors[note.noteData] == 0xFFFFFFFF) strumColors[note.noteData] = 0xFF00DDFF;
+            }
+        });
 
     for (i => strum in player.members)
         strum.color = FlxColor.interpolate(strum.color, strumColors[i], 1/14);
 }
-*/

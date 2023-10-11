@@ -18,4 +18,6 @@ function onPlayerMiss(event)
     if (event.noteType == "Blue Note") event.cancel(true);
 
 function onPlayerHit(event) 
-    if (event.noteType == "Blue Note") health -= 9999;
+    if (event.noteType == "Blue Note") {
+        health -= 9999; event.countAsCombo = event.showSplash = false;
+    }
