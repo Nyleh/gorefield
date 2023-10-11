@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="BLUE NOTES.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="blue note0000" x="5" y="5" width="133" height="162"/>
+	<SubTexture name="blue note0001" x="5" y="5" width="133" height="162"/>
+	<SubTexture name="blue note0002" x="143" y="5" width="132" height="162" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
+	<SubTexture name="blue note0003" x="143" y="5" width="132" height="162" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
+	<SubTexture name="blue note down0000" x="280" y="5" width="133" height="162"/>
+	<SubTexture name="blue note down0001" x="280" y="5" width="133" height="162"/>
+	<SubTexture name="blue note down0002" x="5" y="172" width="132" height="161" frameX="-1" frameY="0" frameWidth="133" frameHeight="162"/>
+	<SubTexture name="blue note down0003" x="5" y="172" width="132" height="161" frameX="-1" frameY="0" frameWidth="133" frameHeight="162"/>
+	<SubTexture name="blue note left0000" x="142" y="172" width="162" height="133"/>
+	<SubTexture name="blue note left0001" x="142" y="172" width="162" height="133"/>
+	<SubTexture name="blue note left0002" x="309" y="172" width="162" height="132" frameX="0" frameY="-1" frameWidth="162" frameHeight="133"/>
+	<SubTexture name="blue note left0003" x="309" y="172" width="162" height="132" frameX="0" frameY="-1" frameWidth="162" frameHeight="133"/>
+	<SubTexture name="blue note right0000" x="5" y="338" width="162" height="133"/>
+	<SubTexture name="blue note right0001" x="5" y="338" width="162" height="133"/>
+	<SubTexture name="blue note right0002" x="172" y="338" width="161" height="132" frameX="0" frameY="0" frameWidth="162" frameHeight="133"/>
+	<SubTexture name="blue note right0003" x="172" y="338" width="161" height="132" frameX="0" frameY="0" frameWidth="162" frameHeight="133"/>
+	<SubTexture name="blue note up0000" x="5" y="5" width="133" height="162"/>
+	<SubTexture name="blue note up0001" x="5" y="5" width="133" height="162"/>
+	<SubTexture name="blue note up0002" x="143" y="5" width="132" height="162" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
+	<SubTexture name="blue note up0003" x="143" y="5" width="132" height="162" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
+</TextureAtlas>
