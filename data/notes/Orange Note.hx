@@ -15,7 +15,7 @@ function onNoteCreation(event) {
 }
 
 function onPlayerHit(event)
-    if (event.noteType == "Orange Note") event.showSplash = false;
+    if (event.noteType == "Orange Note") {event.showSplash = false; event.strumGlowCancelled = true;}
 
 function onPlayerMiss(event)
-    if (event.noteType == "Orange Note") health -= 9999;
+    if (event.noteType == "Orange Note") {event.cancel(true); health -= 9999;}

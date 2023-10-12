@@ -21,5 +21,6 @@ function onPlayerMiss(event)
 
 function onPlayerHit(event) 
     if (event.noteType == "Blue Note") {
-        health -= 9999; event.countAsCombo = event.showSplash = false;
+        event.countAsCombo = event.showRating = event.showSplash = false;
+        event.strumGlowCancelled = true; health -= 9999;
     }
