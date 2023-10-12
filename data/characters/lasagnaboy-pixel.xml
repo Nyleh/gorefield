@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-lasagnaboy-pixel" flipX="false" isPlayer="null" camx="30" camy="240" holdTime="6.1" scale="0.4" color="#346756">
+<character x="0" y="0" icon="icon-lasagnaboy-pixel" flipX="false" iconoffsetx="-12" iconoffsety="-2" isPlayer="null" camx="30" camy="240" holdTime="6.1" scale="0.4" color="#346756">
 	<anim name="idle" anim="LASAGNA BOY IDLE" fps="24" loop="false" x="0" y="0"/>
 	<anim name="singLEFT" anim="LASAGNA BOY LEFT" fps="24" loop="false" x="117.5" y="-50"/>
 	<anim name="singDOWN" anim="LASAGNA BOY DOWN" fps="24" loop="false" x="-22.5" y="-282.5"/>

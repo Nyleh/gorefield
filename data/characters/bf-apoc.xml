@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="-80" y="540" icon="icon-bf-art" flipX="true" isPlayer="true" camx="230" camy="-280" holdTime="4" scale="1" color="#5A50D3">
+<character x="-80" y="540" icon="bf-art" animatedIcon="true" iconoffsetx="18" iconoffsety="-10" flipX="true" isPlayer="true" camx="230" camy="-280" holdTime="4" scale="1" color="#5A50D3">
 	<anim name="idle" anim="BF IDLE" fps="24" loop="false" x="-5" y="0"/>
 	<anim name="singLEFT" anim="BF LEFT" fps="24" loop="false" x="85" y="-26"/>
 	<anim name="singDOWN" anim="BF DOWN" fps="24" loop="false" x="-40" y="-41"/>

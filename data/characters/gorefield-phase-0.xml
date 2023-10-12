@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-gorefield-phase-0" flipX="false" isPlayer="null" camx="0" camy="0" holdTime="6.1" scale="1" color="#88C170">
+<character x="0" y="0" icon="icon-gorefield-phase-0" flipX="false" iconoffsetx="-10" iconoffsety="-15" isPlayer="null" camx="0" camy="0" holdTime="6.1" scale="1" color="#88C170">
 	<anim name="idle" anim="GOREFIELD IDLE" fps="24" loop="true" x="0" y="0"/>
 	<anim name="singLEFT" anim="GOREFIELD LEFT" fps="24" loop="false" x="0" y="20"/>
 	<anim name="singDOWN" anim="GOREFIELD DOWN" fps="24" loop="false" x="10" y="-60"/>
