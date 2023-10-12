@@ -10,7 +10,7 @@ function create() {
     ultraCam = new FlxCamera(0,FlxG.height/2 - FlxG.width/2, FlxG.width, FlxG.width);
     ultraCam.angle = 90; ultraCam.visible = false;
 
-    chromaticWarpShader = new CustomShader("chromaticWarp");
+    chromaticWarpShader = new CustomShader("warp");
     chromaticWarpShader.distortion = 3;
 
     glowShader = new CustomShader("glow");
