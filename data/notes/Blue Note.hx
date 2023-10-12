@@ -1,6 +1,6 @@
 function onNoteCreation(event) {
     if (event.noteType != "Blue Note") return;
-    event.cancel(true); // stop continued calls to other scripts
+    event.cancel(true); // stop continued calls to other script
 
     event.note.frames = Paths.getFrames(event.noteSprite);
     switch(event.strumID % 4) {
@@ -12,6 +12,8 @@ function onNoteCreation(event) {
 
     event.note.scale.set(event.noteScale, event.noteScale);
     event.note.antialiasing = true;
+
+    event.note.latePressWindow = 0.1;
 }
 
 function onPlayerMiss(event)

@@ -21,6 +21,9 @@ function postCreate() {
     add(psBar);
 }
 
+function onNoteCreation(event)
+    if (event.noteType == "PS Note") event.note.latePressWindow = 0.1;
+
 var fullTime:Float = 0;
 function update(elapsed:Float) {
     if (ps <= 2) {
@@ -31,13 +34,13 @@ function update(elapsed:Float) {
 
         psBarTrail.active = psBarTrail.visible = true;
         psBarTrail.alpha = lerp(psBarTrail.alpha, 0.4, 1/4);
-    }
+    } // latePressWindow
 }
 
 function onPlayerMiss(event)
     if (event.noteType == "PS Note") event.cancel(true);
 
-function onPlayerHit(event)  {
+function onPlayerHit(event)
     if (event.noteType == "PS Note") {
         event.countAsCombo = event.showRating = event.showSplash = false;
         event.strumGlowCancelled = true;
@@ -51,4 +54,3 @@ function onPlayerHit(event)  {
                 trail.animation.play(psBar.animation.name);
         } else health -= 9999;
     }
-}
