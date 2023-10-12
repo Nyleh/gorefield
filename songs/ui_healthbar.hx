@@ -18,11 +18,13 @@ function postCreate() {
 
     gorefieldhealthBarBG = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + ((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange")));
     gorefieldhealthBarBG.cameras = [camHUD];
+    gorefieldhealthBarBG.antialiasing = true;
     add(gorefieldhealthBarBG);
     gorefieldhealthBarBG.scale.set(0.995, 1.05);
 
     gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 804, 18, PlayState.instance, "health", 0, maxHealth);
     gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left"));
+    gorefieldhealthBar.antialiasing = true;
 
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar]) {
         spr.scrollFactor.set(); spr.updateHitbox(); spr.cameras = [camHUD]; add(spr); spr.screenCenter(0x01);
@@ -91,6 +93,7 @@ static function createIcon(character:Character):FlxSprite {
 
     icon.flipX = character.isPlayer; icon.updateHitbox();
     icon.cameras = [camHUD]; icon.scrollFactor.set();
+    icon.antialiasing = character.antialiasing;
 
     iconOffsets.push(FlxPoint.get(
         (character != null && character.xml != null && character.xml.exists("iconoffsetx")) ? Std.parseFloat(character.xml.get("iconoffsetx")) : 0,

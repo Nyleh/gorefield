@@ -1,0 +1,1 @@
+static var screamer:FlxSprite = null;
