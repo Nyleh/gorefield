@@ -19,7 +19,7 @@ function postCreate() {
 
     add(psBarTrail);
     add(psBar);
-}
+} //
 
 var fullTime:Float = 0;
 function update(elapsed:Float) {
