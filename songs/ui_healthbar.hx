@@ -16,11 +16,8 @@ static var gorefieldiconP2:FlxSprite;
 function postCreate() {
     healthBar.visible = healthBarBG.visible = iconP1.visible = iconP2.visible = false;
 
-    gorefieldhealthBarBG = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + ((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange")));
-    gorefieldhealthBarBG.cameras = [camHUD];
-    gorefieldhealthBarBG.antialiasing = true;
+    gorefieldhealthBarBG = createBGBar((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange");
     add(gorefieldhealthBarBG);
-    gorefieldhealthBarBG.scale.set(0.995, 1.05);
 
     gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 804, 18, PlayState.instance, "health", 0, maxHealth);
     gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left"));
@@ -46,7 +43,7 @@ function postCreate() {
 function update(elapsed:Float)
     updateIcons();
 
-function updateIcons() {
+static function updateIcons() {
     // Positions 
     gorefieldiconP1.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0)) - 20);
     gorefieldiconP2.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0))) - (gorefieldiconP2.width - 20);
@@ -101,4 +98,14 @@ static function createIcon(character:Character):FlxSprite {
     ));
 
     return icon;
+}
+
+static function createBGBar(name:String):FlxSprite {
+    var bgBar:FlxSprite = new FlxSprite().loadGraphic(Paths.image("game/healthbar/healthbar_" + name));
+    bgBar.cameras = [camHUD]; bgBar.antialiasing = true;
+    bgBar.scale.set(0.995, 1.05);
+    bgBar.updateHitbox(); bgBar.screenCenter(0x01);
+    bgBar.scrollFactor.set();
+
+    return bgBar;
 }

@@ -42,5 +42,8 @@ function onEvent(_) {
         remove(oldIcon);
         if (oldCharacter.isPlayer) gorefieldiconP1 = newIcon;
         else gorefieldiconP2 = newIcon;
+        updateIcons(); 
+
+        if (newCharacter == dad) timeBar.createFilledBar(0xFF000000, newCharacter.iconColor);
     }
 }

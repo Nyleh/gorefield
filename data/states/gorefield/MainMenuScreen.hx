@@ -25,6 +25,7 @@ var menuInfomation:FlxText;
 var logoBl:FlxSprite;
 
 function create() {
+    CoolUtil.playMenuSong();
     FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
     var gorefield = new FlxSprite();
@@ -54,7 +55,7 @@ function create() {
     menuItems = new FlxTypedGroup();
     add(menuItems);
 
-    for (option in options)
+    for (i=>option in options)
     {
         var menuItem:FlxSprite = new FlxSprite(0, 0);
         menuItem.frames = Paths.getSparrowAtlas('menus/mainmenu/menu_' + option);
@@ -63,8 +64,8 @@ function create() {
         menuItem.animation.play('idle');
         menuItem.updateHitbox();
 
-        menuItem.x = 520 - menuItem.width;
-        menuItem.y = 320 + ((menuItem.ID = options.indexOf(option)) * 92.5);
+        menuItem.x = 520 - menuItem.width - (100 + (i*50));
+        menuItem.y = 320 + ((menuItem.ID = i) * 92.5);
 
         menuItems.add(menuItem);
     }

@@ -1,0 +1,9 @@
+{
+    "params": [
+        {
+            "name": "New Bar",
+            "type": "String",
+            "defaultValue": "default"
+        }
+    ]
+}
