@@ -2,6 +2,11 @@ static var camMoveOffset:Float = 15;
 static var camFollowChars:Bool = true;
 
 function create() {camFollowChars = true; camMoveOffset = 15;}
+    
+function postCreate() {
+    var cameraStart:FlxPoint = strumLines.members[curCameraTarget].characters[0].getCameraPosition();
+    cameraStart.y -= 100; FlxG.camera.focusOn(cameraStart);
+}
 
 function onCameraMove(camMoveEvent) {
     if (camFollowChars) {
