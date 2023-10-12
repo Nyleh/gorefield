@@ -22,7 +22,7 @@ function postCreate() {
 }
 
 function onNoteCreation(event)
-    if (event.noteType == "PS Note") event.note.latePressWindow = 0.1;
+    if (event.noteType == "PS Note") event.note.latePressWindow = 0.25;
 
 var fullTime:Float = 0;
 function update(elapsed:Float) {

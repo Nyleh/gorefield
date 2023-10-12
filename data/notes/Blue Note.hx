@@ -13,7 +13,7 @@ function onNoteCreation(event) {
     event.note.scale.set(event.noteScale, event.noteScale);
     event.note.antialiasing = true;
 
-    event.note.latePressWindow = 0.1;
+    event.note.latePressWindow = 0.4; // slight decrease
 }
 
 function onPlayerMiss(event)
