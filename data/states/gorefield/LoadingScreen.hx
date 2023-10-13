@@ -65,7 +65,7 @@ function create() {
 function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.ESCAPE)
 		FlxG.switchState(new FreeplayState());
-	if (FlxG.keys.justPressed.ENTER && finishedLoading && !pressedEnter) {goToSong(); pressedEnter = true;}
+	if (FlxG.keys.justPressed.ENTER && !pressedEnter) {goToSong(); pressedEnter = true;}
 }
 
 function loadAssets() { // GET BAMBOOZLED LLLLL YOU THOUGHT IT WAS ACUTTALY LOADING
