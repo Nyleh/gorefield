@@ -4,19 +4,24 @@ import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
 var jonTrail:FlxTrail;
+var jonTrailCamera:FlxCamera;
 var trailBloom:CustomShader;
+
 
 function create() {
     jonTrail = new FlxTrail(dad, null, 4, 10, 0.4, 0.069);
     jonTrail.beforeCache = dad.beforeTrailCache;
     jonTrail.afterCache = () -> {
 		dad.afterTrailCache();
+        jonTrail.members[0].x += FlxG.random.float(-1, 4);
+		jonTrail.members[0].y += FlxG.random.float(-1, 4);
 	}
     jonTrail.color = 0xFFF200FF;
 
-    trailBloom = new CustomShader("glow");
+    trailBloom = new CustomShader("jonTrail");
     trailBloom.size = 18.0;// trailBloom.quality = 8.0;
     trailBloom.dim = 0.8;// trailBloom.directions = 16.0;
+    trailBloom.sat = 1;
 
     for (trailSpr in jonTrail.members) {
         trailSpr.shader = trailBloom;
@@ -34,8 +39,10 @@ function update(elapsed:Float) {
     dad.y = 200 + (20 * Math.sin(_curBeat));
     dad.x = 1460 + (50 * Math.sin(_curBeat/2));
 
-    for (trail in jonTrail.members) {
-        trail.scale = 1 + (.4 * Math.sin(_curBeat));
+    trailBloom.sat = 1.2 + (.2 * Math.sin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));
+    for (i=>trail in jonTrail.members) {
+        var scale = FlxMath.bound(1 + (.11 * Math.sin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
+        trail.scale.set(scale, scale);
     }
 }
 
