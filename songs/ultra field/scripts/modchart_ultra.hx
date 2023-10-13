@@ -14,7 +14,7 @@ function create() {
     chromaticWarpShader.distortion = 3;
 
     glowShader = new CustomShader("glow");
-    glowShader.size = 50.0;
+    glowShader.size = 20.0;
     glowShader.dim = 0.6;
 
     ultraCam.addShader(chromaticWarpShader);
@@ -57,15 +57,15 @@ function measureHit() {
 
     for (tween in [dimTween, sizeTween, distortTween]) if (tween != null) tween.cancel();
 
-    dimTween = FlxTween.num(0.2, 0.6, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {
+    dimTween = FlxTween.num(0.2, 0.7, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut}, (val:Float) -> {
         glowShader.dim = val;
     });
 
-    sizeTween = FlxTween.num(80.0, 50.0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {
+    sizeTween = FlxTween.num(40.0, 20.0, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.quadOut}, (val:Float) -> {
         glowShader.size = val;
     });
 
-    distortTween = FlxTween.num(4.0, 3.0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {
+    distortTween = FlxTween.num(4.5, 3.0, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut}, (val:Float) -> {
         chromaticWarpShader.distortion = val;
     });
 }

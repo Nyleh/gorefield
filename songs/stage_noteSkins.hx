@@ -1,5 +1,5 @@
 var noteSkin:String = "gorefield";
-var splashSkin:String = "default";
+var splashSkin:String = "gorefield";
 
 function create() {
     if (stage != null && stage.stageXML != null) {

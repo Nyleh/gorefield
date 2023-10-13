@@ -1,3 +1,5 @@
+//
+
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
@@ -9,8 +11,6 @@ function create() {
     jonTrail.beforeCache = dad.beforeTrailCache;
     jonTrail.afterCache = () -> {
 		dad.afterTrailCache();
-		//jonTrail.members[0].x += FlxG.random.float(-5, 5);
-		//jonTrail.members[0].y += FlxG.random.float(-5, 5);
 	}
     jonTrail.color = 0xFFF200FF;
 
@@ -20,10 +20,6 @@ function create() {
 
     for (trailSpr in jonTrail.members) {
         trailSpr.shader = trailBloom;
-        //trailSpr.animation.callback = (name:String, frameNumber:Int, frameIndex:Int) -> {
-        //    if (dad != null && dad.animOffsets.exists(trailSpr.animation.name))
-        //        trailSpr.offset.set(dad.animOffsets[trailSpr.animation.name].x, dad.animOffsets[trailSpr.animation.name].y);
-        //};
     }
 
     insert(members.indexOf(dad), jonTrail);
@@ -37,6 +33,10 @@ function update(elapsed:Float) {
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
     dad.y = 200 + (20 * Math.sin(_curBeat));
     dad.x = 1460 + (50 * Math.sin(_curBeat/2));
+
+    for (trail in jonTrail.members) {
+        trail.scale = 1 + (.4 * Math.sin(_curBeat));
+    }
 }
 
 function onPlayerHit(event) {event.showRating = false; songScore += event.score;}
