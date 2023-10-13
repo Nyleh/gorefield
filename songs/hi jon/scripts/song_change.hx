@@ -6,8 +6,8 @@ function create() {
 function stepHit(step:Int) {
     switch (step) {
         case 1136: // ! Fade Infront Stuff
-            for (sprite in [boyfriend, dad])
-                FlxTween.tween(sprite, {alpha: 0.1}, (Conductor.stepCrochet / 1000) * 4);
+            for (sprite in [dad])
+                FlxTween.tween(sprite, {alpha: 0.7}, (Conductor.stepCrochet / 1000) * 8);
         case 1140: // ! Zoom
             FlxTween.tween(FlxG.camera, {zoom: 1.2}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}});
         case 1152: // ! Stage Change

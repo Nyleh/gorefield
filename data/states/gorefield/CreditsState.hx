@@ -7,6 +7,7 @@ var credits:Array<Array<String>> = [
 	// Don't judge me, Zero told me to put these texts
 	["ZERO", "Dirzector, artista, animador, escritor, artista de fondos, artista de menu, artista de creditos, pixel artist, ayudante musical, resurector del mod, explicador de canciones"],
 	["JLOOR", "Co director, coder, el jloor favorito, voy a matar a Zero"],
+	["BITFOXORIGINAL", "Musico principal y diseñador de sonido y co director"],
 	["LUNAR CLEINT", "Coder"],
 	["NEXUS MOON", "Musico"],
 	["ALEXR", "Musico"],
@@ -17,7 +18,6 @@ var credits:Array<Array<String>> = [
 	["DEADSHOT", "Charter"],
 	["TOK", "Charter"],
 	["ESTOYABURRIDOW", "Ayudante musical, coder"],
-	["BITFOXORIGINAL", "Musico principal y diseñador de sonido y co director"]
 ];
 
 var camFollow:FlxObject;
@@ -26,7 +26,7 @@ var camFollowPos:FlxObject;
 function create() 
 {
 	var background:FlxSprite = new FlxSprite();
-	background.loadGraphic(Paths.image("credits/BG_0"));
+	background.loadGraphic(Paths.image("menus/credits/BG_0"));
 	background.setGraphicSize(FlxG.width, FlxG.height);
 	background.updateHitbox();
 	background.scrollFactor.set();
@@ -43,7 +43,7 @@ function create()
 	for (i in 0...credits.length) 
 	{
 		var icon:FlxSprite = new FlxSprite(i % 2 * 370 + 20, Std.int(i / 2) * 420);
-		icon.loadGraphic(Paths.image('credits/' + credits[i][0]));
+		icon.loadGraphic(Paths.image('menus/credits/' + credits[i][0]));
 		icon.setGraphicSize(332);
 		icon.ID = i;
 		icon.alpha = 0.5;
