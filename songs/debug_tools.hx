@@ -8,7 +8,7 @@ function update() {
     if (FlxG.keys.justPressed.FOUR) curSpeed += 0.1;
     curSpeed = FlxMath.bound(curSpeed, 0.1, 2);
     
-    player.cpu = FlxG.keys.pressed.FIVE;
+    player.cpu = FlxG.keys.pressed.FIVE || FlxG.keys.pressed.SIX;
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 }
 

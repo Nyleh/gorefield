@@ -40,7 +40,7 @@ function create()
 	iconGroup = new FlxTypedGroup();
 	add(iconGroup);
 
-	for (i in 0...credits.length) 
+	for (i in 0...credits.length)
 	{
 		var icon:FlxSprite = new FlxSprite(i % 2 * 370 + 20, Std.int(i / 2) * 420);
 		icon.loadGraphic(Paths.image('menus/credits/' + credits[i][0]));
@@ -58,12 +58,12 @@ function create()
 
 var quitting:Bool = false;
 
-function update(elapsed:Float) 
+function update(elapsed:Float)
 {
 	var lerpVal:Float = Math.max(0, Math.min(1, elapsed * 7.5));
 	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-	if (!quitting) 
+	if (!quitting)
 	{
 		if (controls.LEFT_P)
 			changeSelection(-1);
@@ -74,7 +74,7 @@ function update(elapsed:Float)
 		if (controls.DOWN_P)
 			changeSelection(2);
 
-		if (controls.BACK) 
+		if (controls.BACK)
 		{
 			FlxG.sound.play(Paths.sound("menu/cancelMenu"));
 			FlxG.switchState(new MainMenuState());
@@ -82,18 +82,13 @@ function update(elapsed:Float)
 	}
 }
 
-function changeSelection(change:Int) 
+function changeSelection(change:Int)
 {
 	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
 	iconGroup.members[curSelected].alpha = 0.5;
 
-	curSelected += change;
-
-    if (curSelected >= credits.length)
-        curSelected = 0;
-    if (curSelected < 0)
-        curSelected = credits.length - 1;
+	curSelected = FlxMath.wrap(curSelected + change, 0, credits.length-1);
 
 	iconGroup.members[curSelected].alpha = 1;
 	camFollow.setPosition(640, iconGroup.members[curSelected].getGraphicMidpoint().y + 130);
