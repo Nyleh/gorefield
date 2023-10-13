@@ -14,8 +14,8 @@ function create() {
     chromaticWarpShader.distortion = 3;
 
     glowShader = new CustomShader("glow");
-    glowShader.size = 50.0; glowShader.quality = 10.0;
-    glowShader.dim = 0.6; glowShader.directions = 16.0;
+    glowShader.size = 50.0;
+    glowShader.dim = 0.6;
 
     ultraCam.addShader(chromaticWarpShader);
     ultraCam.addShader(glowShader);
