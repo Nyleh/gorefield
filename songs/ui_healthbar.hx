@@ -51,7 +51,7 @@ static function updateIcons() {
     // Offsets
     for (icon in [gorefieldiconP1, gorefieldiconP2]) {
         icon.x += iconOffsets[icon.ID].x; 
-        icon.y = gorefieldhealthBar.y - (icon.height / 2) + (iconOffsets[icon.ID].y * (camHUD.downscroll ? -1 : 1));
+        icon.y = gorefieldhealthBar.y - (icon.height / 2) + iconOffsets[icon.ID].y;
 
         // Animations
         var losing:Bool = switch (icon) {
