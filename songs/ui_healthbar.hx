@@ -5,7 +5,7 @@ import flixel.ui.FlxBar;
 import funkin.game.PlayState;
 import flixel.math.FlxMath;
 
-static var iconOffsets:Array<FlxPoint> = [];
+var iconOffsets:Array<Array<Float>> = [];
 
 static var gorefieldhealthBarBG:FlxSprite;
 static var gorefieldhealthBar:FlxSprite;
@@ -50,8 +50,10 @@ static function updateIcons() {
 
     // Offsets
     for (icon in [gorefieldiconP1, gorefieldiconP2]) {
-        icon.x += iconOffsets[icon.ID].x; 
-        icon.y = gorefieldhealthBar.y - (icon.height / 2) + iconOffsets[icon.ID].y;
+		var offset = iconOffsets[icon.ID];
+        icon.x += offset[0];
+		icon.y = gorefieldhealthBar.y - (icon.height / 2) + (offset[1] * (camHUD.downscroll ? -1 : 1));
+        //icon.y = gorefieldhealthBar.y - (icon.height / 2) + offset[1];
 
         // Animations
         var losing:Bool = switch (icon) {
@@ -62,11 +64,11 @@ static function updateIcons() {
 
         if (icon.animation.name == "non-animated") icon.animation.curAnim.curFrame = losing ? 1 : 0;
         else icon.animation.play(losing ? "losing" : "idle");
-    }   
+    }
 }
 
 function destroy() {
-    for (point in iconOffsets) point.put();
+    //for (point in iconOffsets) point.put();
 }
 
 static function createIcon(character:Character):FlxSprite {
@@ -92,10 +94,10 @@ static function createIcon(character:Character):FlxSprite {
     icon.cameras = [camHUD]; icon.scrollFactor.set();
     icon.antialiasing = character.antialiasing;
 
-    iconOffsets.push(FlxPoint.get(
+    iconOffsets.push([
         (character != null && character.xml != null && character.xml.exists("iconoffsetx")) ? Std.parseFloat(character.xml.get("iconoffsetx")) : 0,
         (character != null && character.xml != null && character.xml.exists("iconoffsety")) ? Std.parseFloat(character.xml.get("iconoffsety")) : 0
-    ));
+	]);
 
     return icon;
 }

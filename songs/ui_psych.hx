@@ -61,14 +61,16 @@ function postCreate() {
 
 	timeBarBG = new FlxSprite().makeSolid(400, 20, 0xFF000000);
 	timeBarBG.x = (FlxG.width - timeBarBG.width) / 2;
-	timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+	// * (camHUD.downscroll ? -1 : 1)
+	timeBarBG.y = timeTxt.y + (camHUD.downscroll ? 5.5 : timeTxt.height / 4);
 	timeBarBG.alpha = 0;
 	timeBarBG.cameras = [camHUD];
 
 	var dadColor = (dad != null && dad.xml != null && dad.xml.exists("color")) ? CoolUtil.getColorFromDynamic(dad.xml.get("color")) : 0xFFFFFFFF;
 
 	timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, FlxBarFillDirection.LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), Conductor, 'songPosition', 0, songLength = inst.length);
-	timeBar.numDivisions = 800;
+	//timeBar.numDivisions = 800;
+	timeBar.unbounded = true;
 	timeBar.createFilledBar(0xFF000000, dadColor);
 	timeBar.alpha = 0;
 	timeBar.cameras = [camHUD];
