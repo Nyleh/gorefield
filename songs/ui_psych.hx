@@ -59,7 +59,7 @@ function postCreate() {
 	timeTxt.alpha = 0;
 	timeTxt.borderSize = 2;
 
-	timeBarBG = new FlxSprite().loadGraphic(Paths.image('psych/timeBar'));
+	timeBarBG = new FlxSprite().makeSolid(400, 20, 0xFF000000);
 	timeBarBG.x = (FlxG.width - timeBarBG.width) / 2;
 	timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
 	timeBarBG.alpha = 0;
