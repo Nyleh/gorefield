@@ -1,5 +1,8 @@
 function create() {
     stage.stageSprites["snowStorm"].cameras = [camHUD];
+
+	gameOverSong = "gameOvers/sansfield/gameover_sansfield_loop";
+	retrySFX = "gameOvers/sansfield/gameover_sansfield_end";
 }
 
 var iceTween:FlxTween;
