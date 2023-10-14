@@ -1,9 +1,10 @@
-<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="50" y="-40" icon="icon-sansfield" flipX="false" isPlayer="null" camx="20" camy="10" holdTime="4.00000000000001" scale="1" color="#D3E1FF">
-	<anim name="idle" anim="JON0" fps="24" loop="false" x="0" y="0"/>
-	<anim name="singLEFT" anim="JON LEFT" fps="24" loop="false" x="62" y="-5"/>
-	<anim name="singDOWN" anim="JON DOWN" fps="24" loop="false" x="-11" y="-37"/>
-	<anim name="singUP" anim="JON UP" fps="24" loop="false" x="40" y="19"/>
-	<anim name="singRIGHT" anim="JON RIGHT" fps="24" loop="false" x="-20" y="-11"/>
-	<anim name="pipe" anim="JON PIPE" fps="24" loop="false" x="104" y="10"/>
+<!DOCTYPE codename-engine-character>
+<character x="50" icon="icon-sansfield" camx="20" y="-40" isGF="false" camy="10" color="#D3E1FF" isPlayer="false" holdTime="4.00000000000001" sprite="jon-black">
+	<anim x="0" loop="false" y="0" fps="24" anim="JON0" name="idle"/>
+	<anim x="62" loop="false" y="-5" fps="24" anim="JON LEFT" name="singLEFT"/>
+	<anim x="-11" loop="false" y="-37" fps="24" anim="JON DOWN" name="singDOWN"/>
+	<anim x="40" loop="false" y="19" fps="24" anim="JON UP" name="singUP"/>
+	<anim x="-20" loop="false" y="-11" fps="24" anim="JON RIGHT" name="singRIGHT"/>
+	<anim x="104" loop="false" y="10" fps="24" anim="JON PIPE" name="pipe"/>
+	<anim x="190" loop="false" y="88" fps="24" anim="JON DEATH SANSFIELD" name="death"/>
 </character>

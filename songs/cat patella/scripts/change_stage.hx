@@ -6,22 +6,32 @@ function create()
     gf.active = gf.visible = false;
 }
 
+function onCameraMove(event)
+{
+    playerStrums.cpu = true;
+}
+
 function stepHit(step:Int) 
 {
+    // No heart flicker? :sob:
     switch (step) 
     {
-        case 1198: // * Black screen
-            boyfriend.visible = false;
-            dad.visible = false;
-
+        case 637 | 638 | 639 | 640 | 641: // * Black screen flickering
+            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = !stage.stageSprites["black"].visible;
+        case 643: // * Stage Change
             for (name => sprite in stage.stageSprites) 
-                sprite.active = sprite.visible = false;
-        // * Heart flicking?
-        case 1200: // * Stage Change
-            stage.stageSprites["sansFieldHUD"].active = stage.stageSprites["sansFieldHUD"].visible = true;
-            stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = true;
+                sprite.active = sprite.visible = name == "sansFieldHUD" || name == "sansFieldBones";
 
             boyfriend.setPosition(830, -130);
             dad.setPosition(440, -520);
+
+            camFollow.setPosition(802, 295);
+            camGame.snapToTarget();
+        case 655:
+            dad.cameraOffset.x = -250;
+        case 694:
+            gf.active = gf.visible = true;
+        case 965:
+            gf.active = gf.visible = false;
     }
 }

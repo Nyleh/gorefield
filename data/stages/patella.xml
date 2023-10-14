@@ -11,6 +11,7 @@
 	<sprite name="patellaBG2" x="0" y="0" sprite="sansfield_bg" antialising="true" scrollx="1" scrolly="1" scale="1.5"/>
 	<opponent x="300" y="420" camxoffset="210" camyoffset="0"/>
 	<player x="1170" y="220" camxoffset="-170" camyoffset="-60"/>
+	<girlfriend x="100" y="140" camxoffset="0" camyoffset="0" scroll="1"/>
 	<sprite name="snowStorm" x="0" y="0" sprite="Snow-Storm" antialising="true" scrollx="0" scrolly="0">
 		<anim name="idle" anim="tormenta" loop="true"/>
 	</sprite>
@@ -22,8 +23,14 @@
 		<property name="active" type="bool" value="false" />
 		<property name="visible" type="bool" value="false" />
 	</sprite>
-	<sprite name="heart" x="0" y="0" sprite="heart" antialising="true" scrollx="1" scrolly="1">
+	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
+		<property name="scrollFactor.x" type="float" value="0"/>
+		<property name="scrollFactor.y" type="float" value="0"/>
 		<property name="active" type="bool" value="false" />
 		<property name="visible" type="bool" value="false" />
-	</sprite>
+	</solid>
+	<!-- <sprite name="heart" x="0" y="0" sprite="heart" antialising="true" scrollx="1" scrolly="1">
+		<property name="active" type="bool" value="false" />
+		<property name="visible" type="bool" value="false" />
+	</sprite> -->
 </stage>
