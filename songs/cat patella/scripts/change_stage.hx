@@ -6,11 +6,6 @@ function create()
     gf.active = gf.visible = false;
 }
 
-function onCameraMove(event)
-{
-    playerStrums.cpu = true;
-}
-
 function stepHit(step:Int) 
 {
     // No heart flicker? :sob:
