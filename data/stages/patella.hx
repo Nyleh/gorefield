@@ -3,6 +3,9 @@ function create() {
 
 	gameOverSong = "gameOvers/sansfield/gameover_sansfield_loop";
 	retrySFX = "gameOvers/sansfield/gameover_sansfield_end";
+
+    comboGroup.x += 250;
+    comboGroup.y += 250;
 }
 
 var iceTween:FlxTween;

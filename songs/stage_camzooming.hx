@@ -28,7 +28,7 @@ function update(elapsed:Bool) {
 }
 
 function beatHit(beat:Int) {
-    if (camZoomingInterval < 1) camZoomingInterval = 1;
+    // if (camZoomingInterval < 1) camZoomingInterval = 1;
     if (Options.camZoomOnBeat && lerpCam && FlxG.camera.zoom < maxCamZoom && beat % camZoomingInterval == 0)
     {
         FlxG.camera.zoom += 0.015 * camZoomingStrength;

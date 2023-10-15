@@ -8,6 +8,14 @@ static var redirectStates:Map<FlxState, String> = [
 
 ];
 
+function new() {
+    if (FlxG.save.data.mechanics == null) FlxG.save.data.mechanics = true;
+    if (FlxG.save.data.shaders == null) FlxG.save.data.shaders = true;
+    if (FlxG.save.data.trails == null) FlxG.save.data.trails = true;
+    if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
+    if (FlxG.save.data.dev == null) FlxG.save.data.dev = false;
+}
+
 function preStateSwitch() {
     FlxG.camera.bgColor = 0xFF000000;
     for (redirectState in redirectStates.keys()) 

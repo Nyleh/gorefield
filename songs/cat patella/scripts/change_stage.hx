@@ -1,13 +1,26 @@
+var saturationShader:CustomShader = null;
+var saturation:Float = 0;
+var newSaturation:Float = 0;
+
 function create()
 {
     stage.stageSprites["sansFieldHUD"].drawComplex(FlxG.camera);
     stage.stageSprites["sansFieldBones"].drawComplex(FlxG.camera);
  
     gf.active = gf.visible = false;
+
+    saturationShader = new CustomShader("saturation");
+    saturationShader.sat = saturation = newSaturation = 1;
+    camGame.addShader(saturationShader);
 }
 
-var shakeAmount:Float = 1;
+function update(elapsed:Float)
+    saturationShader.sat = saturation = lerp(saturation, newSaturation, 1/30);
 
+function set_sat(sat:String)
+    newSaturation = Std.parseFloat(sat);
+
+var shakeAmount:Float = 1;
 function stepHit(step:Int) 
 {
     // No heart flicker? :sob:
@@ -17,6 +30,7 @@ function stepHit(step:Int)
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = !stage.stageSprites["black"].visible;
 
             if (step != 640) return; // * Stage Change
+
             for (name => sprite in stage.stageSprites) 
                 sprite.active = sprite.visible = name == "sansFieldHUD" || name == "sansFieldBones";
 
@@ -25,6 +39,9 @@ function stepHit(step:Int)
 
             camFollow.setPosition(802, 295);
             camGame.snapToTarget();
+
+            comboGroup.x -= 330;
+            comboGroup.y -= 275;
         case 655: dad.cameraOffset.x = -250;
         case 694 | 696 | 698 | 700 | 702 | 704:
             vocals.volume = 1; // ! UH OH!!!!
@@ -34,13 +51,18 @@ function stepHit(step:Int)
 
             if (step == 694) {
                 gf.active = gf.visible = true;
-                FlxTween.tween(camHUD, {alpha: 0}, (Conductor.crochet) / 1000);
+                FlxTween.tween(camHUD, {alpha: 0}, (Conductor.crochet/2) / 1000);
             }
                 
         case 733: FlxG.camera.zoom += 0.13; camZoomingStrength = 0;
         case 748: FlxG.camera.zoom += 0.04;
         case 760: FlxG.camera.zoom += 0.02;
         case 768: FlxTween.tween(camHUD, {alpha: 1}, (Conductor.crochet * 2) / 1000);
+        case 960: FlxG.camera.shake(0.05, ((Conductor.crochet / 4) / 1000));
         case 965: gf.active = gf.visible = false; camZoomingStrength = 1;
+        case 1152: 
+            stage.stageSprites["black"].alpha = 0;
+            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.crochet * 4) / 1000);
     }
 }

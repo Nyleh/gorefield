@@ -33,4 +33,7 @@
 		<property name="active" type="bool" value="false" />
 		<property name="visible" type="bool" value="false" />
 	</sprite> -->
+	<sprite name="overlay" x="0" y="0" sprite="v" antialising="true" scrollx="0" scrolly="0" scale="1">
+		<property name="zoomFactor" type="float" value="0"/>
+	</sprite>
 </stage>
