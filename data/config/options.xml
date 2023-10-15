@@ -1,0 +1,20 @@
+<!DOCTYPE codename-mod-options>
+<menu name="Gorefield Options" desc="Modify mod options here">
+	<menu name="Mechanics" desc="Configure gameplay mechanics.">
+		<checkbox id="mechanics" name="Mechanics" desc="Enable/Disable Mechanics. (for pussys)" />
+		<menu name="Hard Mode" desc="Add extra difficulty to mechanics. (FOR CHADS!)">
+			<!-- Add stuff here -->
+		</menu>
+	</menu>
+	<menu name="Graphics" desc="Configure visual effects.">
+		<checkbox id="shaders" name="Cool Shaders" desc="Enable/Disable Shaders. (for toasters)" />
+		<checkbox id="trails" name="Sprite Trails" desc="Enable/Disable Trails On Sprites. (for even bigger toasters)" />
+		<checkbox id="flashing" name="Camera Flashing" desc="Disable Camera Flashing." />
+	</menu>
+	<checkbox id="dev" name="Developer Mode" desc="Enables debug_tools.hx, allows for speeding up/slowing down the game.
+	PRESS 2 - Slows Game By 10% (Min Speed: 10%)
+	PRESS 3 - Resets Game Speed To 100%
+	PRESS 4 - Speeds Game By 10% (Max Speed: 200%)
+	PRESS 5 - Hold To Speed Game By 2000%, Uses BOTPLAY
+	PRESS 6 - Hold For Botplay On Player Strums" />
+</menu>
