@@ -44,6 +44,6 @@ function onEvent(_) {
         else gorefieldiconP2 = newIcon;
         updateIcons(); 
 
-        if (newCharacter == dad) timeBar.createFilledBar(0xFF000000, newCharacter.iconColor);
+        //if (newCharacter == dad) timeBar.createFilledBar(0xFF000000, newCharacter.iconColor);
     }
 }

@@ -1,4 +1,4 @@
-//
+
 import funkin.game.HealthIcon;
 import flixel.ui.FlxBarFillDirection;
 import flixel.ui.FlxBar;
