@@ -31,6 +31,7 @@ for (script in oldScripts) {
         case "songs":
             if (startsWith(script.fileName, "debug_")) debug_Scripts.push(script);
             else if (startsWith(script.fileName, "ui_")) ui_Scripts.push(script);
+            else if (startsWith(script.fileName, "stage_")) stage_Scripts.push(script);
             else other_Scripts.push(script);
         default: other_Scripts.push(script);
     }
@@ -39,6 +40,7 @@ for (script in oldScripts) {
 var finalScripts:Array<Script> = [];
 for (scripts in [debug_Scripts, event_Scripts, ui_Scripts, stage_Scripts, modchart_Scripts, note_Scripts, song_Scripts, other_Scripts])
     for (script in scripts) finalScripts.push(script);
+// for (script in finalScripts) trace(script.fileName);
 PlayState.instance.scripts.scripts = finalScripts;
 
 // destroy scripts
