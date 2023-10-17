@@ -10,6 +10,7 @@ var event_Scripts:Array<Script> = []; //
 var ui_Scripts:Array<Script> = []; 
 var stage_Scripts:Array<Script> = []; //
 var modchart_Scripts:Array<Script> = []; //
+var note_Scripts:Array<Script> = [];
 var song_Scripts:Array<Script> = []; //
 var other_Scripts:Array<Script> = [];
 
@@ -23,6 +24,7 @@ for (script in oldScripts) {
     switch (Path.directory(script.path)) {
         case "assets/data/stages": stage_Scripts.push(script);
         case "assets/data/events": event_Scripts.push(script);
+        case "assets/data/notes": note_Scripts.push(script);
         case "songs/" + PlayState.SONG.meta.name + "/scripts":
             if (startsWith(script.fileName, "modchart_")) modchart_Scripts.push(script);
             else song_Scripts.push(script);
@@ -35,7 +37,7 @@ for (script in oldScripts) {
 }
 
 var finalScripts:Array<Script> = [];
-for (scripts in [debug_Scripts, event_Scripts, ui_Scripts, stage_Scripts, modchart_Scripts, song_Scripts, other_Scripts])
+for (scripts in [debug_Scripts, event_Scripts, ui_Scripts, stage_Scripts, modchart_Scripts, note_Scripts, song_Scripts, other_Scripts])
     for (script in scripts) finalScripts.push(script);
 PlayState.instance.scripts.scripts = finalScripts;
 

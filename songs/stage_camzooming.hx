@@ -14,6 +14,7 @@ function create() {
 }
 
 function update(elapsed:Bool) {
+    camZooming = false;
     if (lerpCam) {
         var stageZoom:Float = switch (curCameraTarget) {
             case 0: strumLineDadZoom;
