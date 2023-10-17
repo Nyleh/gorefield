@@ -74,7 +74,7 @@ function stepHit(step:Int) {
             FlxTween.tween(FlxG.camera, {zoom: 0.825}, (Conductor.stepCrochet / 1000) * 128);
             FlxG.camera.shake(0.003, 999999);
 
-            FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.1}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
+            FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.25}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
         case 124:
             lerpCam = true;
             for (strum in cpu)
@@ -164,10 +164,10 @@ function stepHit(step:Int) {
                 FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
 
             FlxG.sound.play(Paths.sound('explosionsound'), 3);
-            FlxG.camera.shake(0.006, 4);
-            camHUD.shake(0.002, 4); // sorry
+            FlxG.camera.shake(0.006, 3.6);
+            camHUD.shake(0.002, 3.6); // sorry
 
-            (new FlxTimer()).start(4, function () {
+            (new FlxTimer()).start(3.6, function () {
                 FlxG.camera.shake(0.0015, 999999);
             });
         case 1664:
@@ -182,7 +182,7 @@ function stepHit(step:Int) {
 
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 32);
         case 1712:
-            camHUD.visible = false;
+            camHUD.visible = FlxG.camera.visible = false;
     }
 }
 
