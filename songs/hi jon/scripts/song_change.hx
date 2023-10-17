@@ -27,10 +27,6 @@ function create() {
 
     stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = true;
     stage.stageSprites["red_overlay"].alpha = 0;
-
-    comboGroup.x += 300;
-    comboGroup.y += 300;
-
 }
 
 function postCreate() {
