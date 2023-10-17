@@ -4,6 +4,8 @@ var gfTrail:FlxTrail = null;
 var bloom:CustomShader = null;
 
 function create() {
+    FlxG.sound.play(Paths.sound('explosionsound'), 0); // Preload sound
+
     stage.stageSprites["bgFinal"].active = stage.stageSprites["bgFinal"].visible = false;
     stage.stageSprites["bgFinal"].drawComplex(FlxG.camera); // Push to GPU
 
@@ -15,7 +17,6 @@ function create() {
     gfTrail.afterCache = () -> {gf.afterTrailCache();}
     gfTrail.visible = gfTrail.active = false;
     insert(members.indexOf(gf), gfTrail);
-
     gf.colorTransform.color = 0xFFFF0000;
 
     bloom = new CustomShader("glow");
@@ -26,6 +27,10 @@ function create() {
 
     stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = true;
     stage.stageSprites["red_overlay"].alpha = 0;
+
+    comboGroup.x += 300;
+    comboGroup.y += 300;
+
 }
 
 function postCreate() {
@@ -33,9 +38,6 @@ function postCreate() {
         spr.alpha = 0;
     for (strumLine in strumLines)
         for (strum in strumLine.members) strum.alpha = 0;
-
-    boyfriend.colorTransform.color = 0xFF5B50D3;
-    dad.colorTransform.color = 0xFFD44D29;
 }
 
 function update(elapsed:Float) {
@@ -43,8 +45,8 @@ function update(elapsed:Float) {
 
     for (i=>trail in gfTrail.members) {
         if (!gfTrail.active) break;
-        var scale = FlxMath.bound(1 + (.3 * Math.sin(_curBeat/2 + (i * (Conductor.stepCrochet / 1000)))), 1, 999);
-        trail.colorTransform.color = 0xFF7E0000;
+        var scale = FlxMath.bound(1 + ((curStep < 384 ? .3 : .15) * Math.sin(_curBeat/2 + (i * (Conductor.stepCrochet / 1000)))), 1, 999);
+        trail.colorTransform.color = curStep < 384 ? 0xFF7E0000 : 0xFFFF0000;
 
         trail.x = gf.x + ((20 * Math.sin(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
         trail.y = gf.y + ((20 * Math.cos(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
@@ -52,6 +54,7 @@ function update(elapsed:Float) {
         trail.scale.set(scale, scale);
     }
     if (curStep > 120 && curStep < 384) {
+        gf.colorTransform.color = 0xFFFF0000;
         boyfriend.colorTransform.color = 0xFF5B50D3;
         dad.colorTransform.color = 0xFFD44D29;
     }
@@ -69,7 +72,7 @@ function stepHit(step:Int) {
             camGame.snapToTarget();
 
             FlxTween.tween(FlxG.camera, {zoom: 0.825}, (Conductor.stepCrochet / 1000) * 128);
-            FlxG.camera.shake(0.005, (Conductor.stepCrochet / 1000) * 128);
+            FlxG.camera.shake(0.003, 999999);
 
             FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.1}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
         case 124:
@@ -77,6 +80,8 @@ function stepHit(step:Int) {
             for (strum in cpu)
                 FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
         case 128:
+            FlxG.camera.stopFX();
+
             stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = false;
             FlxTween.cancelTweensOf(stage.stageSprites["red_overlay"]);
 
@@ -103,18 +108,83 @@ function stepHit(step:Int) {
                 FlxTween.tween(spr, {alpha: 1}, 1.5);
 
             camGame.removeShader(bloom);
-
+        case 1024:
+            gfTrail.active = gfTrail.visible = true;
+            gfTrail.color = 0xFFFF0000;
+            
+            stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = true;
+            FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.7}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
         case 1136: // ! Fade Infront Stuff
             for (sprite in [dad, boyfriend])
-                FlxTween.tween(sprite, {alpha: 0.4}, (Conductor.stepCrochet / 1000) * 8);
+                FlxTween.tween(sprite, {alpha: 0.3}, (Conductor.stepCrochet / 1000) * 4);
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
+                FlxTween.tween(spr, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+
+            devControlBotplay = !(player.cpu = true);
+            for (strumLine in strumLines) {
+                for (strum in strumLine.members)
+                    FlxTween.tween(strum, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+                strumLine.notes.forEach(function (n) {
+                    FlxTween.tween(n, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+                });
+            }
         case 1140: // ! Zoom
             FlxTween.tween(FlxG.camera, {zoom: 1.2}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}});
         case 1152: // ! Stage Change
-            gf.visible = false;
+            FlxG.camera.bgColor = 0xFFFFFFFF;
+            maxCamZoom = 9999999; // woah
+
+            (new FlxTimer()).start((Conductor.stepCrochet / 1000) * 2, function () {
+                devControlBotplay = !(player.cpu = false);
+            });
+            player.cpu = true;
+            for (strumLine in strumLines) {
+                for (strum in strumLine.members)
+                    FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 2);
+                strumLine.notes.forEach(function (n) {
+                    FlxTween.tween(n, {alpha: 1}, (Conductor.stepCrochet / 1000) * 2);
+                });
+            }
+
+            stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = false;
+            FlxTween.cancelTweensOf(stage.stageSprites["red_overlay"]);
+
+            gf.visible = gf.active = gfTrail.active = gfTrail.visible = false;
+
+            stage.stageSprites["black_overlay"].active = stage.stageSprites["black_overlay"].visible = true;
+            stage.stageSprites["black_overlay"].alpha = 1;
+            remove(stage.stageSprites["black_overlay"]);
+            add(stage.stageSprites["black_overlay"]);
+
             for (name => sprite in stage.stageSprites) 
                 sprite.active = sprite.visible = name == "bgFinal";
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
+                FlxTween.tween(spr, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
+            for (strum in cpu)
+                FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
+
+            FlxG.sound.play(Paths.sound('explosionsound'), 3);
+            FlxG.camera.shake(0.006, 4);
+            camHUD.shake(0.002, 4); // sorry
+
+            (new FlxTimer()).start(4, function () {
+                FlxG.camera.shake(0.0015, 999999);
+            });
+        case 1664:
+            FlxG.camera.stopFX();
+
+            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
+            stage.stageSprites["black"].cameras = [camHUD];
+            stage.stageSprites["black"].alpha = 0;
+
+            remove(stage.stageSprites["black"]);
+            insert(0, stage.stageSprites["black"]);
+
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 32);
+        case 1712:
+            camHUD.visible = false;
     }
 }
 
 function onStrumCreation(_) _.__doAnimation = false;
-function onPlayerHit(event) if (event.noteType == null) event.showRating = !(curStep > 120 && curStep < 384);
+function onPlayerHit(event) if (event.noteType == null) event.showRating = !(curStep > 120 && curStep < 384) && curStep < 1136;

@@ -1,4 +1,5 @@
 var curSpeed:Float = 1;
+static var devControlBotplay:Bool = true;
 
 function update() {
     if (startingSong || !canPause || paused || health <= 0) return;
@@ -8,7 +9,7 @@ function update() {
     if (FlxG.keys.justPressed.FOUR) curSpeed += 0.1;
     curSpeed = FlxMath.bound(curSpeed, 0.1, 2);
     
-    player.cpu = FlxG.keys.pressed.FIVE || FlxG.keys.pressed.SIX;
+    if (devControlBotplay) player.cpu = FlxG.keys.pressed.FIVE || FlxG.keys.pressed.SIX;
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 }
 
