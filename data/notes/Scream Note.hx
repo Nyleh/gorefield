@@ -65,6 +65,9 @@ function scream() {
     FlxG.sound.play(Paths.sound('mechanics/scream'), 1);
 }
 
+function onNoteCreation(event)
+    if (event.noteType == "Scream Note") event.note.latePressWindow = 0.25;
+
 function onPlayerMiss(event)
     if (event.noteType == "Scream Note") event.cancel(true);
 
