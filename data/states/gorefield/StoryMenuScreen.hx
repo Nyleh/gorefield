@@ -186,9 +186,10 @@ function update(elapsed:Float) {
 }
 
 function changeWeek(change:Int) {
-	curWeek = FlxMath.wrap(curWeek + change, 0, menuOptions.length-1);
+	var oldWeek:Float = curWeek;
+	curWeek = FlxMath.bound(curWeek + change, 0, menuOptions.length-1);
 
-	FlxG.sound.play(Paths.sound('menu/scrollMenu'));
+	if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
 
 	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
 	textBG.updateHitbox();
@@ -201,24 +202,3 @@ function changeWeek(change:Int) {
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek;}
-
-
-// BOILER PLATE
-
-public function getWeeksFromSource(weeks:Array<String>, source:AssetSource) {
-	var path:String = Paths.txt('freeplaySonglist');
-	var weeksFound:Array<String> = [];
-	if (Paths.assetsTree.existsSpecific(path, "TEXT", source)) {
-		var trim = "";
-		weeksFound = CoolUtil.coolTextFile(Paths.txt('weeks/weeks'));
-	} else {
-		weeksFound = [for(c in Paths.getFolderContent('data/weeks/weeks/', false, source)) if (Path.extension(c).toLowerCase() == "xml") Path.withoutExtension(c)];
-	}
-	
-	if (weeksFound.length > 0) {
-		for(s in weeksFound)
-			weeks.push(s);
-		return false;
-	}
-	return true;
-}
