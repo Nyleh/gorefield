@@ -6,6 +6,7 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.text.FlxTextBorderStyle;
 import flixel.text.FlxTextFormat;
 import flixel.text.FlxTextFormatMarkerPair;
+import funkin.backend.system.framerate.Framerate;
 
 var canMove:Bool = true;
 
@@ -29,8 +30,24 @@ var textBG:FlxSprite;
 var scoreText:FlxText;
 var textInfoBG:FlxSprite;
 
-var weeks:Array = [];
+var weeks:Array = [
+	{name: "Principal Week...", songs: ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]},
+	{name: "Lasagna Boy Week...", songs: ["Fast Delivery", "Health Inspection"]},
+	{name: "Sansfield Week...", songs: ["Cat Patella", "Mondaylovania", "ULTRA FIELD"]},
+	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
+	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
+	{name: "FINALE Week...", songs: ["CATaclysm"]},
+];
+
 var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
+var weekDescs:Array<String> = [
+	"Lasagna smells delicious...",
+	"Midnight meal???\n(yum)",
+	"Purring Determination...",
+	"A Big Little Problem.",
+	"He Just Wants To Go Home...",
+	"Layers on layers,\nHe will always be there..."
+];
 
 function create() {
 	FlxG.cameras.remove(FlxG.camera, false);
@@ -99,7 +116,7 @@ function create() {
 	weekText.scrollFactor.set();
 	weekText.cameras = [camText];
 
-	flavourText = new FunkinText(weekText.x, weekText.y + weekText.height + 10, FlxG.width, "Current Story Menu Description", 18, true);
+	flavourText = new FunkinText(weekText.x, weekText.y + weekText.height + 10, FlxG.width, "Current Story Menu Description\nAnd Larger...", 18, true);
 	flavourText.setFormat("fonts/pixelart.ttf", 18, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	flavourText.borderSize = 2;
 	flavourText.scrollFactor.set();
@@ -132,7 +149,7 @@ function create() {
 	textInfoBG.scrollFactor.set();
 	add(textInfoBG);
 	add(scoreText);
-	
+
 	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
 	vigentte.cameras = [camText];
 	vigentte.alpha = 0.5;
@@ -182,7 +199,6 @@ function update(elapsed:Float) {
 		changeWeek(1);
 	else if (controls.UP_P)
 		changeWeek(-1);
-
 }
 
 function changeWeek(change:Int) {
@@ -191,8 +207,19 @@ function changeWeek(change:Int) {
 
 	if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
 
+	weekText.text = weeks[curWeek].name;
+	flavourText.text = weekDescs[curWeek];
+
 	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
 	textBG.updateHitbox();
+
+	Framerate.offset.y = textBG.height;
+
+	var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "normal").score;
+	scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + weeks[curWeek].songs.length + " SONGS,    #" + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
+		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
+		new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
+	]);
 
 	textInfoBG.scale.set(FlxG.width, scoreText.height + 38);
 	textInfoBG.updateHitbox();
@@ -201,4 +228,4 @@ function changeWeek(change:Int) {
 	scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek;}
+function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0;}
