@@ -11,10 +11,24 @@ static var redirectStates:Map<FlxState, String> = [
 ];
 
 function new() {
-    if (FlxG.save.data.mechanics == null) FlxG.save.data.mechanics = true;
-    if (FlxG.save.data.shaders == null) FlxG.save.data.shaders = true;
+    // MECHANICS
+    if (FlxG.save.data.baby == null) FlxG.save.data.baby = false;
+    if (FlxG.save.data.ps_hard == null) FlxG.save.data.ps_hard = false;
+    if (FlxG.save.data.scare_hard == null) FlxG.save.data.scare_hard = false;
+    if (FlxG.save.data.blue_hard == null) FlxG.save.data.blue_hard = false;
+    if (FlxG.save.data.orange_hard == null) FlxG.save.data.orange_hard = false;
+
+    // VISUALS
+    if (FlxG.save.data.bloom == null) FlxG.save.data.bloom = true;
+    if (FlxG.save.data.glitch == null) FlxG.save.data.glitch = true;
+    if (FlxG.save.data.warp == null) FlxG.save.data.warp = true;
+    if (FlxG.save.data.saturation == null) FlxG.save.data.saturation = true;
+
     if (FlxG.save.data.trails == null) FlxG.save.data.trails = true;
     if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
+
+    // OTHER
+    if (FlxG.save.data.spanish == null) FlxG.save.data.spanish = false;
     if (FlxG.save.data.dev == null) FlxG.save.data.dev = false;
 }
 

@@ -1,3 +1,4 @@
+import funkin.backend.system.framerate.Framerate;
 
 function postCreate() {
     var bg:FlxSprite = new FlxSprite().makeSolid(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
@@ -14,7 +15,12 @@ function postCreate() {
 	logoBl.antialiasing = true;
 	add(logoBl);
 
+
 	for (option in main.members)
 		if (option.desc == "Modify mod options here")
 			main.members.remove(option);
+}
+
+function update(elapsed:Float) {
+	Framerate.offset.y = pathBG.height;
 }
