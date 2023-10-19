@@ -28,7 +28,15 @@ function postCreate() {
 }
 
 function onNoteCreation(event)
-    if (event.noteType == "PS Note") event.note.latePressWindow = 0.25;
+    if (event.noteType == "PS Note") {
+        if (FlxG.save.data.baby) {
+            event.note.strumTime -= 999999;
+            event.note.exists = event.note.active = event.note.visible = false;
+            return;
+        }
+        
+        event.note.latePressWindow = 0.25;
+    }
 
 var fullTime:Float = 0;
 function update(elapsed:Float) {
