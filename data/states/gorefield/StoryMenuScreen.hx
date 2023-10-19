@@ -183,13 +183,13 @@ function update(elapsed:Float) {
 		menuOption.y = __firstFrame ? y : CoolUtil.fpsLerp(menuOption.y, y, 0.25);
 		menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
 		if (__firstFrame) menuOption.x += 600 + (i *200);
-		menuOption.color = FlxColor.interpolate(menuOption.color, weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, 1/150);
+		menuOption.color = FlxColor.interpolate(menuOption.color, weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, elapsed*(120*(1/100)));
 		menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
 		menuLocks[i].visible = !weeksUnlocked[i];
 		menuLocks[i].x = (menuOption.x + (menuOption.width/2)) - (menuLocks[i].width/2) + Math.floor(4 * Math.sin(__totalTime));
 		menuLocks[i].y = (menuOption.y + (menuOption.height/2)) - (menuLocks[i].height/2) + Math.floor(2 * Math.cos(__totalTime));
-		menuLocks[i].color = FlxColor.interpolate(menuLocks[i].color,  0xFF92A2FF , 1/150);
+		menuLocks[i].color = FlxColor.interpolate(menuLocks[i].color,  0xFF92A2FF , elapsed*(120*(1/150)));
 	}
 	__firstFrame = false;
 
