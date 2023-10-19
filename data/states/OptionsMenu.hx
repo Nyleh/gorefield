@@ -13,4 +13,8 @@ function postCreate() {
 	logoBl.updateHitbox();
 	logoBl.antialiasing = true;
 	add(logoBl);
+
+	for (option in main.members)
+		if (option.desc == "Modify mod options here")
+			main.members.remove(option);
 }

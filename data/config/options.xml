@@ -1,5 +1,5 @@
 <!DOCTYPE codename-mod-options>
-<menu name="Gorefield Options" desc="Modify mod options here">
+<menu name="Gorefield Options" desc="Modify gorefield mod options here">
 	<menu name="Mechanics" desc="Configure gameplay mechanics.">
 		<checkbox id="mechanics" name="Mechanics" desc="Enable/Disable Mechanics. (for pussys)" />
 		<menu name="Hard Mode" desc="Add extra difficulty to mechanics. (FOR CHADS!)">
