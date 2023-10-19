@@ -1,23 +1,31 @@
 import flixel.FlxObject;
+import flixel.text.FlxTextBorderStyle;
+import flixel.text.FlxTextFormat;
+import flixel.text.FlxTextFormatMarkerPair;
 
 var curSelected:Int = 0;
 var iconGroup:FlxTypedGroup<FlxSprite>;
 
+var descText:FlxText;
+
 var credits:Array<Array<String>> = [
-	// Don't judge me, Zero told me to put these texts
-	["ZERO", "Dirzector, artista, animador, escritor, artista de fondos, artista de menu, artista de creditos, pixel artist, ayudante musical, resurector del mod, explicador de canciones"],
-	["JLOOR", "Co director, coder, el jloor favorito, voy a matar a Zero"],
-	["BITFOXORIGINAL", "Musico principal y diseñador de sonido y co director"],
-	["LUNAR CLEINT", "Coder"],
-	["NEXUS MOON", "Musico"],
-	["ALEXR", "Musico"],
-	["LEAN", "Coder"],
-	["AWE", "Musico"],
-	["DATHREE_O", "Artista"],
-	["JOA DASH", "Extra pixel artist"],
-	["DEADSHOT", "Charter"],
-	["TOK", "Charter"],
-	["ESTOYABURRIDOW", "Ayudante musical, coder"],
+	// Name's - Rol - Random Description
+	["Zero Artist", "Director, Artist, Animator", "ElTilinaso999"],
+	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
+	["BitfoxOriginal", "Main Musician, Sound Effects and Co-director", "El Chamaco Indio (Lo pusieron de Co-director)"],
+	["Lunar Cleint", "Main Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
+	["Nenus Moon", "Musician", "El Undertale"],
+	["AlexR", "Musician", "El que se Murio (Nunca regreso y no se que hace aqui)"],
+	["LeanDapper", "Coder", "Lean..."],
+	["Awe", "Musician", "Otra que se murio"],
+	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
+	["JoaDash", "Extra Pixel Artist", "Matate oe, no trabaja"],
+	["Deadshot", "Charter", "Otra vez, viva Peru!"],
+	["Tok", "Charter", "Se murio, no charteo"],
+	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
+	/*["Ani-Manny", "Artist", "El de los chistes bien chistosos"],
+	["Ne_Eo", "Coder", "Si"],
+	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"]*/
 ];
 
 var camFollow:FlxObject;
@@ -52,6 +60,11 @@ function create()
 	}
 
 	FlxG.camera.follow(camFollowPos, null, 1);
+
+	descText = new FlxText(32, 0, FlxG.width, "", 19, true);
+	descText.setFormat("fonts/pixelart.ttf", 18, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	descText.scrollFactor.set();
+	//add(descText);
 
 	changeSelection(0);
 }
@@ -93,5 +106,5 @@ function changeSelection(change:Int)
 	iconGroup.members[curSelected].alpha = 1;
 	camFollow.setPosition(640, iconGroup.members[curSelected].getGraphicMidpoint().y + 130);
 
-	// descText.text = credits[curSelected][1];
+	//descText.text = credits[curSelected][1];
 }
