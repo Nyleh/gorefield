@@ -1,7 +1,7 @@
 function onNoteCreation(event) {
     if (event.noteType != "Orange Note") return;
     event.cancel(true); // stop continued calls to other scripts
-    
+
     if (FlxG.save.data.baby) {
         event.note.strumTime -= 999999;
         event.note.exists = event.note.active = event.note.visible = false;
@@ -18,6 +18,11 @@ function onNoteCreation(event) {
 
     event.note.scale.set(event.noteScale, event.noteScale);
     event.note.antialiasing = true;
+
+    if (FlxG.save.data.orange_hard) {
+        event.note.alpha = 0.5;
+        event.note.latePressWindow *= 0.95; event.note.earlyPressWindow *= 0.8;
+    }
 }
 
 function onPlayerHit(event)

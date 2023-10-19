@@ -60,7 +60,7 @@ function update(elapsed) {
 
 function scream() {
     screamer.visible = screamer.active = true; screamer.alpha = 1;
-    glitchAmount = 20; fadeTimer = 1.1; shakeAmount = 3;
+    glitchAmount = 20; fadeTimer = 1.1 * (FlxG.save.data.scare_hard ? 3 : 1); shakeAmount = 3;
 
     FlxG.sound.play(Paths.sound('mechanics/scream'), 1);
 }
@@ -68,6 +68,8 @@ function scream() {
 function onNoteCreation(event)
     if (event.noteType == "Scream Note") {
         event.note.latePressWindow = 0.25;
+        if (FlxG.save.data.scare_hard) event.note.alpha = 0.5;
+        
         if (FlxG.save.data.baby) {
             event.note.strumTime -= 999999;
             event.note.exists = event.note.active = event.note.visible = false;

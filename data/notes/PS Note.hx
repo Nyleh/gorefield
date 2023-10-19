@@ -6,7 +6,7 @@ static var psBarTrail:FlxTrail = null;
 static var ps:Int = 4;
 
 function postCreate() {
-    ps = 4; FlxG.sound.play(Paths.sound('mechanics/ps'), 0); // Preload sound
+    ps = FlxG.save.data.ps_hard ? 2 : 4; FlxG.sound.play(Paths.sound('mechanics/ps'), 0); // Preload sound
 
     psBar = new FlxSprite(230, 560);
     psBar.frames = Paths.getFrames('mechanics/ps');
@@ -34,7 +34,8 @@ function onNoteCreation(event)
             event.note.exists = event.note.active = event.note.visible = false;
             return;
         }
-        
+
+        if (FlxG.save.data.ps_hard) event.note.alpha = 0.5;
         event.note.latePressWindow = 0.25;
     }
 
@@ -46,7 +47,7 @@ function update(elapsed:Float) {
         psBar.y = lerp(psBar.y, 560 + (4*Math.cos(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
         psBar.color = FlxColor.interpolate(psBar.color, ps == 1 ?0x6CFF6A6A : 0xFFFFC8C8, 1/14);
 
-        psBarTrail.active = psBarTrail.visible = true;
+        psBarTrail.active = psBarTrail.visible = psBar.alpha > 0.01;
         psBarTrail.alpha = lerp(psBarTrail.alpha, 0.4, 1/4);
     }
 }

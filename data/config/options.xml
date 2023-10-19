@@ -4,7 +4,7 @@
 		<checkbox id="baby" name="Baby Mode" desc="Enable/Disable Mechanics. (for pussys/BABYS!BABYS!BABYS)" />
 		<menu name="Hard Mode" desc="Add extra difficulty to mechanics. (FOR CHADS!)">
 			<checkbox id="ps_hard" name="PS HARD MODE!!!" desc="Start with only 2 PS instead of 4. All PS notes will be half transperency!" />
-			<checkbox id="scare_hard" name="SCREAMER HARD MODE!!!" desc="Jump scares last 4x longer. All SCREAMER notes will be half transperency!" />
+			<checkbox id="scare_hard" name="SCREAMER HARD MODE!!!" desc="Jump scares last 3x longer. All SCREAMER notes will be half transperency!" />
 			<checkbox id="blue_hard" name="BLUE NOTE HARD MODE!!!" desc="Bigger early hit window. All BLUE notes will be half transperency!" />
 			<checkbox id="orange_hard" name="ORANGE NOTE HARD MODE!!!" desc="Smaller hit windows. All ORANGE notes will be half transperency!" />
 		</menu>

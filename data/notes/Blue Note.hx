@@ -20,6 +20,11 @@ function onNoteCreation(event) {
     event.note.antialiasing = true;
 
     event.note.latePressWindow = 0.4; // slight decrease
+
+    if (FlxG.save.data.blue_hard) {
+        event.note.alpha = 0.5;
+        event.note.latePressWindow *= 1.2; event.note.earlyPressWindow *= 1.3;
+    }
 }
 
 function onPlayerMiss(event)
