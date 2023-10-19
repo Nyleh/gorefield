@@ -11,7 +11,7 @@ var descText:FlxText;
 var credits:Array<Array<String>> = [
 	// Name's - Rol - Random Description
 	["Zero Artist", "Director, Artist, Animator", "ElTilinaso999"],
-	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco)"],
+	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
 	["BitfoxOriginal", "Main Musician, Sound Effects and Co-director", "El Chamaco Indio (Lo pusieron de Co-director)"],
 	["Lunar Cleint", "Main Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
 	["Nenus Moon", "Musician", "El Undertale"],
@@ -23,6 +23,9 @@ var credits:Array<Array<String>> = [
 	["Deadshot", "Charter", "Otra vez, viva Peru!"],
 	["Tok", "Charter", "Se murio, no charteo"],
 	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
+	/*["Ani-Manny", "Artist", "El de los chistes bien chistosos"],
+	["Ne_Eo", "Coder", "Si"],
+	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"]*/
 ];
 
 var camFollow:FlxObject;
