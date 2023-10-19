@@ -5,7 +5,7 @@ function create()
     if (PlayState.SONG.meta.name.toLowerCase() == "curious cat")
     {
         black = new FlxSprite();
-        black.makeSolid(FlxG.width, FlxG.height, 0xFF110521);
+        black.makeSolid(FlxG.width, FlxG.height, 0xFF000000);
         black.cameras = [camHUD];
         insert(0, black);
     }
@@ -20,5 +20,7 @@ function stepHit(step:Int)
         case 140:
             black.active = black.visible = false;
             __script__.didLoad = __script__.active = false;
+
+			maxCamZoom = 0;
     }
 }

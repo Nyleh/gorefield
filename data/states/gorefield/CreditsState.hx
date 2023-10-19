@@ -14,18 +14,18 @@ var credits:Array<Array<String>> = [
 	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
 	["BitfoxOriginal", "Main Musician, Sound Effects and Co-director", "El Chamaco Indio (Lo pusieron de Co-director)"],
 	["Lunar Cleint", "Main Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
-	["Nenus Moon", "Musician", "El Undertale"],
+	["Nexus Moon", "Musician", "El Undertale"],
 	["AlexR", "Musician", "El que se Murio (Nunca regreso y no se que hace aqui)"],
-	["LeanDapper", "Coder", "Lean..."],
+	["Lean", "Coder", "Lean..."],
 	["Awe", "Musician", "Otra que se murio"],
 	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
 	["JoaDash", "Extra Pixel Artist", "Matate oe, no trabaja"],
 	["Deadshot", "Charter", "Otra vez, viva Peru!"],
 	["Tok", "Charter", "Se murio, no charteo"],
 	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
-	/*["Ani-Manny", "Artist", "El de los chistes bien chistosos"],
+	["Ani-Manny", "Artist", "El de los chistes bien chistosos"],
 	["Ne_Eo", "Coder", "Si"],
-	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"]*/
+	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"]
 ];
 
 var camFollow:FlxObject;
