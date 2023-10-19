@@ -1,3 +1,5 @@
+import funkin.game.GameOverSubstate;
+
 static var curMainMenuSelected:Int = 0;
 static var curStoryMenuSelected:Int = 0;
 
@@ -19,8 +21,9 @@ function new() {
 function preStateSwitch() {
     FlxG.camera.bgColor = 0xFF000000;
 
-    if (Std.isOfType(FlxG.state, PlayState) && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode)
-        {FlxG.switchState(new ModState("gorefield/LoadingScreen")); return;} // LOADING SCREENS IN STORY MODE - lunar
+    if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate)) // ! CHECK IN GAME/NOT IN GAME OVER
+        && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode) // ! CHECK STORY MODE/ GOING TO OTHER SONG
+        {FlxG.switchState(new ModState("gorefield/LoadingScreen")); return;} // LOADING SCREEN
 
     for (redirectState in redirectStates.keys()) 
         if (Std.isOfType(FlxG.game._requestedState, redirectState)) 
