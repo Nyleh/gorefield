@@ -34,8 +34,8 @@ var weeks:Array = [
 	{name: "Principal Week...", songs: ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]},
 	{name: "Lasagna Boy Week...", songs: ["Fast Delivery", "Health Inspection"]},
 	{name: "Sansfield Week...", songs: ["Cat Patella", "Mondaylovania", "ULTRA FIELD"]},
-	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
 	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
+	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
 	{name: "FINALE Week...", songs: ["CATaclysm"]},
 ];
 
