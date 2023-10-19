@@ -2,6 +2,12 @@ function onNoteCreation(event) {
     if (event.noteType != "Blue Note") return;
     event.cancel(true); // stop continued calls to other script
 
+    if (FlxG.save.data.baby) {
+        event.note.strumTime -= 999999;
+        event.note.exists = event.note.active = event.note.visible = false;
+        return;
+    }
+
     event.note.frames = Paths.getFrames(event.noteSprite);
     switch(event.strumID % 4) {
         case 0: event.note.animation.addByPrefix('scroll', 'blue note left');

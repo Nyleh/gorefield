@@ -66,7 +66,14 @@ function scream() {
 }
 
 function onNoteCreation(event)
-    if (event.noteType == "Scream Note") event.note.latePressWindow = 0.25;
+    if (event.noteType == "Scream Note") {
+        event.note.latePressWindow = 0.25;
+        if (FlxG.save.data.baby) {
+            event.note.strumTime -= 999999;
+            event.note.exists = event.note.active = event.note.visible = false;
+            return;
+        }
+    }
 
 function onPlayerMiss(event)
     if (event.noteType == "Scream Note") event.cancel(true);
