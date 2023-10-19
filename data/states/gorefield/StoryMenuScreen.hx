@@ -40,6 +40,7 @@ var weeks:Array = [
 ];
 
 var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
+var weeksFinished:Array<Bool> = [true, false, false, false, false, false];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
 	"Midnight meal???\n(yum)",
@@ -182,12 +183,13 @@ function update(elapsed:Float) {
 		menuOption.y = __firstFrame ? y : CoolUtil.fpsLerp(menuOption.y, y, 0.25);
 		menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
 		if (__firstFrame) menuOption.x += 600 + (i *200);
-		menuOption.color = weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF;
+		menuOption.color = FlxColor.interpolate(menuOption.color, weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, 1/150);
 		menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
 		menuLocks[i].visible = !weeksUnlocked[i];
 		menuLocks[i].x = (menuOption.x + (menuOption.width/2)) - (menuLocks[i].width/2) + Math.floor(4 * Math.sin(__totalTime));
 		menuLocks[i].y = (menuOption.y + (menuOption.height/2)) - (menuLocks[i].height/2) + Math.floor(2 * Math.cos(__totalTime));
+		menuLocks[i].color = FlxColor.interpolate(menuLocks[i].color,  0xFF92A2FF , 1/150);
 	}
 	__firstFrame = false;
 
@@ -199,6 +201,8 @@ function update(elapsed:Float) {
 		changeWeek(1);
 	else if (controls.UP_P)
 		changeWeek(-1);
+	else if (controls.ACCEPT)
+		selectWeek();
 }
 
 function changeWeek(change:Int) {
@@ -226,6 +230,20 @@ function changeWeek(change:Int) {
 	textInfoBG.y = FlxG.height - textInfoBG.height;
 
 	scoreText.y = FlxG.height - scoreText.height - 22;
+}
+
+function selectWeek() {
+	if (!weeksUnlocked[curWeek]) {
+		FlxG.camera.stopFX();
+		FlxG.camera.shake(0.005, .5);
+		menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
+
+		FlxG.sound.play(Paths.sound("menu/story/locked"));
+		return;
+	}
+	if (!weeksFinished[curWeek]) return; // OPEN MENU TO PLAY WEEK OR GO TO FREEPLAY
+
+	// SELECT WEEK
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0;}
