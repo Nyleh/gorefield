@@ -219,7 +219,7 @@ function changeWeek(change:Int) {
 
 	Framerate.offset.y = textBG.height;
 
-	var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "normal").score;
+	var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "hard").score;
 	scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + weeks[curWeek].songs.length + " SONGS,    #" + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
 		new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
@@ -244,6 +244,24 @@ function selectWeek() {
 	if (!weeksFinished[curWeek]) return; // OPEN MENU TO PLAY WEEK OR GO TO FREEPLAY
 
 	// SELECT WEEK
+	// PLAY ANIM HERE NORMALLY RN ITS JUST A PLACE HOLDER
+	playWeek();
+}
+
+function playWeek() {
+	PlayState.loadWeek(__gen_week(), "hard");
+	FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+}
+
+function __gen_week() { // for cne so i dont have to ctrl c and v alot of code
+	return {
+		name: weeks[curWeek].name,
+		id: weeks[curWeek].name,
+		sprite: null,
+		chars: [null, null, null],
+		songs: [for (song in weeks[curWeek].songs) {name: song, hide: false}],
+		difficulties: ['hard']
+	};
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0;}

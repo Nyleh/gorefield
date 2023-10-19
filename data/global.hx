@@ -18,6 +18,10 @@ function new() {
 
 function preStateSwitch() {
     FlxG.camera.bgColor = 0xFF000000;
+
+    if (Std.isOfType(FlxG.state, PlayState) && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode)
+        {FlxG.switchState(new ModState("gorefield/LoadingScreen")); return;} // LOADING SCREENS IN STORY MODE - lunar
+
     for (redirectState in redirectStates.keys()) 
         if (Std.isOfType(FlxG.game._requestedState, redirectState)) 
             FlxG.game._requestedState = new ModState(redirectStates.get(redirectState));
