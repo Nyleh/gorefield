@@ -1,6 +1,8 @@
 function create()
 {
 	stage.stageSprites["lasagnaCat"].color = 0xFF000000;
+	stage.stageSprites["lasagnaCat"].drawComplex(FlxG.camera);
+	
 	stage.stageSprites["black"].cameras = [camHUD];
 }
 
@@ -11,10 +13,21 @@ function stepHit(step:Int)
         case 0:
 			maxCamZoom = 0;
 		case 1024:
+			function fadeShit(alpha:Float) {
+				for (strumLine in strumLines)
+					for (strum in strumLine.members)
+						FlxTween.tween(strum, {alpha: alpha}, (Conductor.stepCrochet / 1000) * 4);
+				for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+					FlxTween.tween(spr, {alpha: alpha}, (Conductor.stepCrochet / 1000) * 4);
+			}
+			stage.stageSprites["lasagnaCat"].animation.play('run', true);
 			stage.stageSprites["lasagnaCat"].visible = true;
-			stage.stageSprites["lasagnaCat"].animation.play('run');
-		case 1056:
-			stage.stageSprites["lasagnaCat"].visible = false;
+			
+			stage.stageSprites["lasagnaCat"].animation.finishCallback = function () {
+				stage.stageSprites["lasagnaCat"].visible = false;
+				fadeShit(1);
+			};
+			fadeShit(0);
 		case 1104 | 1112 | 1168 | 1176 | 1232 | 1240 | 1296 | 1304:
 			camHUD.angle -= 10;
 			camGame.angle -= 3.5;
