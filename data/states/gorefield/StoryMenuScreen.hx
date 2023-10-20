@@ -40,8 +40,8 @@ var weeks:Array = [
 	{name: "FINALE Week...", songs: ["CATaclysm"]},
 ];
 
-var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
-var weeksFinished:Array<Bool> = [true, false, false, false, false, false];
+var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true];
+var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
 	"Midnight meal???\n(yum)",
