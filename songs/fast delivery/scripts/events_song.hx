@@ -46,6 +46,6 @@ function stepHit(step:Int)
 			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
 			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
 		case 1568:
-			FlxTween.tween(camHUD, {alpha: 1}, 1);
+			FlxTween.tween(black, {alpha: 1}, 1);
     }
 }
