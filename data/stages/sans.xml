@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.6" name="sans" folder="stages/patella/" opponentZoom="0.6" playerZoom="0.65" gfZoom="1" noteSkin="sans" splashSkin="default" healthBarColor="gray">
+<stage zoom="0.6" name="sans" folder="stages/patella/" opponentZoom="0.6" playerZoom="0.65" gfZoom="1.1" noteSkin="sans" splashSkin="default" healthBarColor="gray">
 	<countdown>
 		<three sound="sansfield/3"/>
 		<two sprite="game/ready" sound="sansfield/2"/>

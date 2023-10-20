@@ -5,7 +5,11 @@ function create() {
 }
 
 function stepHit(step:Int) {
-    switch (step) {
-        case 1360:  gf.visible = gf.active = true;
+    switch (step){
+        case 1360:
+        {
+            gf.visible = gf.active = true;
+            FlxTween.tween(camHUD,{alpha: 0},2);
+        }
     }
 }
