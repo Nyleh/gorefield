@@ -9,9 +9,15 @@ var pressedEnter:Bool = false;
 
 function create() {
 	if (FlxG.sound.music != null) FlxG.sound.music.stop();
-	//FlxG.camera.alpha = 0;
-
+	
+	var easterEggs:Array<String> = [
+		"assets/data/loadingscreens/thuggin.json",
+		"assets/data/loadingscreens/WAZAJON.json"
+	];
 	var path:String = "assets/songs/" + PlayState.SONG.meta.name.toLowerCase() + "/loadingscreen.json";
+	if (FlxG.save.data.baby) path = "assets/data/loadingscreens/noob.json";
+
+	if (FlxG.random.bool(1)) path = easterEggs[FlxG.random.int(0, easterEggs.length-1)];
 	var loadingData:Dynamic = {
 		loadingbg: "loadingbg1",
 		loadingimage: "rightloadingimage1",

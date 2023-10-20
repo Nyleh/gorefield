@@ -3,7 +3,7 @@ import flixel.math.FlxBasePoint;
 static var camMoveOffset:Float = 15;
 static var camFollowChars:Bool = true;
 
-var pp = new FlxBasePoint();
+var movement = new FlxBasePoint();
 
 function create() {camFollowChars = true; camMoveOffset = 15;}
 
@@ -16,14 +16,14 @@ function onCameraMove(camMoveEvent) {
     if (camFollowChars) {
         if (camMoveEvent.strumLine != null && camMoveEvent.strumLine?.characters[0] != null) {
             switch (camMoveEvent.strumLine.characters[0].animation.name) {
-                case "singLEFT": pp.set(-camMoveOffset, 0);
-                case "singDOWN": pp.set(0, camMoveOffset);
-                case "singUP": pp.set(0, -camMoveOffset);
-                case "singRIGHT": pp.set(camMoveOffset, 0);
-                default: pp.set(0,0);
+                case "singLEFT": movement.set(-camMoveOffset, 0);
+                case "singDOWN": movement.set(0, camMoveOffset);
+                case "singUP": movement.set(0, -camMoveOffset);
+                case "singRIGHT": movement.set(camMoveOffset, 0);
+                default: movement.set(0,0);
             };
-            camMoveEvent.position.x += pp.x;
-			camMoveEvent.position.y += pp.y;
+            camMoveEvent.position.x += movement.x;
+			camMoveEvent.position.y += movement.y;
         }
     } else camMoveEvent.cancel();
 }
