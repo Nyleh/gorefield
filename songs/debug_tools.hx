@@ -1,5 +1,5 @@
 var curSpeed:Float = 1;
-var curBotplay:Bool = false;
+static var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
 
 function update() {
