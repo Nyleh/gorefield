@@ -231,85 +231,85 @@ function update(elapsed:Float) {
 }
 
 function changeWeek(change:Int) {
-	if(!selectingWeek){
-		var oldWeek:Float = curWeek;
-		curWeek = FlxMath.bound(curWeek + change, 0, menuOptions.length-1);
-	
-		if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
-	
-		weekText.text = weeks[curWeek].name;
-	
-		if (FlxG.save.data.spanish) {
-			flavourText.text = weekDescsSPANISH[curWeek];
-		} else {
-			flavourText.text = weekDescs[curWeek];
-		}
-	
-		textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
-		textBG.updateHitbox();
-	
-		Framerate.offset.y = textBG.height;
-	
-		var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "hard").score;
-		scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + weeks[curWeek].songs.length + " SONGS,    #" + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
-			new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
-			new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
-		]);
-	
-		textInfoBG.scale.set(FlxG.width, scoreText.height + 38);
-		textInfoBG.updateHitbox();
-		textInfoBG.y = FlxG.height - textInfoBG.height;
-	
-		scoreText.y = FlxG.height - scoreText.height - 22;
+	if(selectingWeek) return;
+
+	var oldWeek:Float = curWeek;
+	curWeek = FlxMath.bound(curWeek + change, 0, menuOptions.length-1);
+
+	if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
+
+	weekText.text = weeks[curWeek].name;
+
+	if (FlxG.save.data.spanish) {
+		flavourText.text = weekDescsSPANISH[curWeek];
+	} else {
+		flavourText.text = weekDescs[curWeek];
 	}
+
+	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
+	textBG.updateHitbox();
+
+	Framerate.offset.y = textBG.height;
+
+	var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "hard").score;
+	scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + weeks[curWeek].songs.length + " SONGS,    #" + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
+		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
+		new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
+	]);
+
+	textInfoBG.scale.set(FlxG.width, scoreText.height + 38);
+	textInfoBG.updateHitbox();
+	textInfoBG.y = FlxG.height - textInfoBG.height;
+
+	scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
 function selectWeek() {
-	if(!selectingWeek){
-		if (!weeksUnlocked[curWeek]) {
-			FlxG.camera.stopFX();
-			FlxG.camera.shake(0.005, .5);
-			lerpColors[curWeek * 2 + 0].color = 0xFFFF0000;
-			lerpColors[curWeek * 2 + 1].color = 0xFFFF0000;
-			menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
-	
-			FlxG.sound.play(Paths.sound("menu/story/locked"));
-			return;
-		}
-		if (!weeksFinished[curWeek]) return; // OPEN MENU TO PLAY WEEK OR GO TO FREEPLAY
-	
-		// SELECT WEEK
-		// PLAY ANIM HERE NORMALLY RN ITS JUST A PLACE HOLDER
-		playWeek();
+	if(selectingWeek) return;
+
+	if (!weeksUnlocked[curWeek]) {
+		FlxG.camera.stopFX();
+		FlxG.camera.shake(0.005, .5);
+		lerpColors[curWeek * 2 + 0].color = 0xFFFF0000;
+		lerpColors[curWeek * 2 + 1].color = 0xFFFF0000;
+		menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
+
+		FlxG.sound.play(Paths.sound("menu/story/locked"));
+		return;
 	}
+	if (!weeksFinished[curWeek]) return; // OPEN MENU TO PLAY WEEK OR GO TO FREEPLAY
+
+	// SELECT WEEK
+	// PLAY ANIM HERE NORMALLY RN ITS JUST A PLACE HOLDER
+	playWeek();
 }
 
 function playWeek() {
-	if(!selectingWeek){
-		selectingWeek = true;
-		PlayState.loadWeek(__gen_week(), "hard");
-		FlxG.sound.music.volume = 0;
-		FlxG.sound.play(Paths.sound("menu/story/weekenter"));
-		switch(curWeek){
-			case 0: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
-			case 1: FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
-			case 2: FlxG.sound.play(Paths.sound("menu/story/sansfieldenter"));
-			case 3: FlxG.sound.play(Paths.sound("menu/story/ultragorefieldenter"));
-			case 4: FlxG.sound.play(Paths.sound("menu/story/cryfieldenter"));
-			case 5: FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
-			default: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
-		}
-		for (i=>menuOption in menuOptions) {
-			if(menuOption.ID != curWeek){
-				FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
-				FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
-			}
-		}
-		FlxTween.tween(camText, {alpha: 0}, 0.5);
-		new FlxTimer().start(3, (tmr:FlxTimer) -> {
-			FlxG.switchState(new ModState("gorefield/LoadingScreen"));
-		});
+	if(selectingWeek) return;
+	
+	selectingWeek = true;
+	PlayState.loadWeek(__gen_week(), "hard");
+	FlxG.sound.music.volume = 0;
+	FlxG.sound.play(Paths.sound("menu/story/weekenter"));
+	switch(curWeek){
+		case 0: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+		case 1: FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
+		case 2: FlxG.sound.play(Paths.sound("menu/story/sansfieldenter"));
+		case 3: FlxG.sound.play(Paths.sound("menu/story/ultragorefieldenter"));
+		case 4: FlxG.sound.play(Paths.sound("menu/story/cryfieldenter"));
+		case 5: FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
+		default: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 	}
+	for (i=>menuOption in menuOptions) {
+		if(menuOption.ID != curWeek){
+			FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+			FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+		}
+	}
+	FlxTween.tween(camText, {alpha: 0}, 0.5);
+	new FlxTimer().start(3, (tmr:FlxTimer) -> {
+		FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+	});
 }
 
 function __gen_week() { // for cne so i dont have to ctrl c and v alot of code
