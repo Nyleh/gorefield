@@ -27,7 +27,7 @@ function create() {
         trailSpr.shader = trailBloom;
     }
 
-    insert(members.indexOf(dad), jonTrail);
+    if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
 }
 
 function postCreate() {

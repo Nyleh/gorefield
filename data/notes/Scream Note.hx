@@ -26,11 +26,11 @@ function postCreate() {
 
     distortionShader = new CustomShader("chromaticWarp");
     distortionShader.distortion = 1;
-    screamerCam.addShader(distortionShader);
+    if (FlxG.save.data.warp) screamerCam.addShader(distortionShader);
 
     glitchShader = new CustomShader("glitch");
     glitchShader.glitchAmount = glitchAmount = 1;
-    screamer.shader = glitchShader;
+    if (FlxG.save.data.glitch) screamer.shader = glitchShader;
 
     //scream();
 }

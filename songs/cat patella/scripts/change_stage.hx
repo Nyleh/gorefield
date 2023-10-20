@@ -11,7 +11,7 @@ function create()
 
     saturationShader = new CustomShader("saturation");
     saturationShader.sat = saturation = newSaturation = 1;
-    camGame.addShader(saturationShader);
+    if (FlxG.save.data.saturation) camGame.addShader(saturationShader);
 }
 
 function update(elapsed:Float)

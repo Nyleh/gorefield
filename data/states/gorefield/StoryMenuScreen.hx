@@ -71,12 +71,12 @@ function create() {
 
 	warpShader = new CustomShader("warp");
 	warpShader.distortion = 2;
-	camBG.addShader(warpShader);
+	if (FlxG.save.data.warp) camBG.addShader(warpShader);
 
 	bloomShader = new CustomShader("glow");
 	bloomShader.size = 18.0;// trailBloom.quality = 8.0;
     bloomShader.dim = 0.8;// trailBloom.directions = 16.0;
-	bgSprite.shader = bloomShader;
+	if (FlxG.save.data.bloom) bgSprite.shader = bloomShader;
 
 	for (i in 0...6) {
 		var sprite:FlxSprite = new FlxSprite();

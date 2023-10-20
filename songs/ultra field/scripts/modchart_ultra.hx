@@ -17,8 +17,8 @@ function create() {
     glowShader.size = 20.0;
     glowShader.dim = 0.6;
 
-    ultraCam.addShader(chromaticWarpShader);
-    ultraCam.addShader(glowShader);
+    if (FlxG.save.data.warp) ultraCam.addShader(chromaticWarpShader);
+    if (FlxG.save.data.bloom) ultraCam.addShader(glowShader);
     
     FlxG.cameras.add(ultraCam, false);
     for (cam in [camGame, camHUD]) {cam.bgColor = 0x00000000; FlxG.cameras.add(cam, cam == camGame);}

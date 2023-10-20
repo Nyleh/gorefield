@@ -23,7 +23,7 @@ function postCreate() {
     psBarTrail.color = 0xFFFF0000; psBarTrail.alpha = 0;
     psBarTrail.active = psBarTrail.visible = false;
 
-    add(psBarTrail);
+    if (FlxG.save.data.trails) add(psBarTrail);
     add(psBar);
 }
 

@@ -16,7 +16,7 @@ function create() {
     gfTrail.beforeCache = gf.beforeTrailCache;
     gfTrail.afterCache = () -> {gf.afterTrailCache();}
     gfTrail.visible = gfTrail.active = false;
-    insert(members.indexOf(gf), gfTrail);
+    if (FlxG.save.data.trails) insert(members.indexOf(gf), gfTrail);
     gf.colorTransform.color = 0xFFFF0000;
 
     bloom = new CustomShader("glow");
@@ -61,7 +61,7 @@ function stepHit(step:Int) {
         case 0:
             lerpCam = false; FlxG.camera.zoom = 0.45;
 
-            camGame.addShader(bloom);
+            if (FlxG.save.data.bloom) camGame.addShader(bloom);
             gf.visible = gf.active = gfTrail.visible = gfTrail.active = true;
 
             gf.cameraOffset.x -= 140;
@@ -103,7 +103,7 @@ function stepHit(step:Int) {
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
                 FlxTween.tween(spr, {alpha: 1}, 1.5);
 
-            camGame.removeShader(bloom);
+            if (FlxG.save.data.bloom) camGame.removeShader(bloom);
         case 1024:
             gfTrail.active = gfTrail.visible = true;
             gfTrail.color = 0xFFFF0000;
