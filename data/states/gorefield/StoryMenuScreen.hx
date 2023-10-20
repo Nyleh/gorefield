@@ -286,20 +286,13 @@ function playWeek() {
 	FlxG.sound.music.volume = 0;
 	FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 	switch(curWeek){
-		case 0:
-			FlxG.sound.play(Paths.sound("menu/story/principalenter"));
-		case 1:
-			FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
-		case 2:
-			FlxG.sound.play(Paths.sound("menu/story/sansfieldenter"));
-		case 3:
-			FlxG.sound.play(Paths.sound("menu/story/ultragorefieldenter"));
-		case 4:
-			FlxG.sound.play(Paths.sound("menu/story/cryfieldenter"));
-		case 5:
-			FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
-		default:
-			FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+		case 0: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+		case 1: FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
+		case 2: FlxG.sound.play(Paths.sound("menu/story/sansfieldenter"));
+		case 3: FlxG.sound.play(Paths.sound("menu/story/ultragorefieldenter"));
+		case 4: FlxG.sound.play(Paths.sound("menu/story/cryfieldenter"));
+		case 5: FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
+		default: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 	}
 	for (i=>menuOption in menuOptions) {
 		if(menuOption.ID != curWeek){

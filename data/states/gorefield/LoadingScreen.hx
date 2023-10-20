@@ -64,7 +64,7 @@ function create() {
 
 function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.ESCAPE)
-		FlxG.switchState(new FreeplayState());
+		FlxG.switchState(PlayState.isStoryMode ? new StoryMenuState() : new FreeplayState());
 	if (FlxG.keys.justPressed.ENTER && !pressedEnter) {goToSong(); pressedEnter = true;}
 }
 
