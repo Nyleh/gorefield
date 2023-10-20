@@ -37,6 +37,7 @@ function postCreate() {
             case 0: gorefieldiconP2 = icon;
         });
     }
+    for (txt in [scoreTxt, missesTxt, accuracyTxt]) {members.remove(txt); add(txt);}
     updateIcons();
 }
 
