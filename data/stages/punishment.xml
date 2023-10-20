@@ -2,5 +2,6 @@
 <stage zoom="1.35" name="punishment" folder="stages/punishment/" opponentZoom="1" playerZoom="1.35" noteSkin="gorefield_green" splashSkin="gorefield_green" healthBarColor="green" middleScroll="true">
 	<sprite name="BG1" x="0" y="0" sprite="BG_PHASE_0" antialising="true" scrollx="1" scrolly="1" scale="1"/>
 	<opponent x="275" y="180" camxoffset="-120" camyoffset="40"/>
+	<sprite name="TV" x="200" y="350" sprite="tv" antialising="true" scrollx="1" scrolly="1" scale="1"/>
 	<player x="100" y="220" camxoffset="220" camyoffset="-80"/>
 </stage>
