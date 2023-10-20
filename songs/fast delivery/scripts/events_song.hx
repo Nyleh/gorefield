@@ -1,4 +1,5 @@
 var lasagnaCat:FlxSprite;
+var black:FlxSprite;
 
 function create()
 {
@@ -11,6 +12,11 @@ function create()
 		lasagnaCat.flipX = true;
 		lasagnaCat.color = 0xFF000000;
 		add(lasagnaCat);
+
+		black = new FlxSprite();
+        black.makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+        black.cameras = [camHUD];
+        insert(0, black);
 	}
 	else
 		__script__.didLoad = __script__.active = false;
@@ -39,5 +45,7 @@ function stepHit(step:Int)
 			camHUD.y -= 5;
 			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
 			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
+		case 1568:
+			FlxTween.tween(camHUD, {alpha: 1}, 1);
     }
 }
