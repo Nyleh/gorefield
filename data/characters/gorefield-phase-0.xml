@@ -1,9 +1,9 @@
-<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-gorefield-phase-0" flipX="false" iconoffsetx="-10" iconoffsety="-15" isPlayer="null" camx="0" camy="0" holdTime="6.1" scale="1" color="#88C170">
-	<anim name="idle" anim="GOREFIELD IDLE" fps="24" loop="true" x="0" y="0"/>
-	<anim name="singLEFT" anim="GOREFIELD LEFT" fps="24" loop="false" x="0" y="20"/>
-	<anim name="singDOWN" anim="GOREFIELD DOWN" fps="24" loop="false" x="10" y="-60"/>
-	<anim name="singUP" anim="GOREFIELD UP" fps="24" loop="false" x="-20" y="60"/>
-	<anim name="singRIGHT" anim="GOREFIELD RIGHT" fps="24" loop="false" x="-10" y="0"/>
-	<anim name="damage" anim="GOREFIELD DAMAGE" fps="24" loop="false" x="-6" y="25"/>
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="gorefield-phase-0" y="0" isGF="false" color="#88C170" isPlayer="false" holdTime="6.1" sprite="gorefield-phase-0">
+	<anim x="0" loop="true" y="0" fps="24" anim="GOREFIELD IDLE" name="idle"/>
+	<anim x="0" loop="false" y="20" fps="24" anim="GOREFIELD LEFT" name="singLEFT"/>
+	<anim x="10" loop="false" y="-60" fps="24" anim="GOREFIELD DOWN" name="singDOWN"/>
+	<anim x="-20" loop="false" y="60" fps="24" anim="GOREFIELD UP" name="singUP"/>
+	<anim x="-10" loop="false" y="0" fps="24" anim="GOREFIELD RIGHT" name="singRIGHT"/>
+	<anim x="-6" loop="false" y="25" fps="24" anim="GOREFIELD DAMAGE" name="damage"/>
 </character>
