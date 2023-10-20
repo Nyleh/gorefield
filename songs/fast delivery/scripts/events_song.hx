@@ -20,7 +20,7 @@ function stepHit(step:Int)
 {
     switch (step) 
     {
-        case 512:
+        case 1:
 			maxCamZoom = 0;
 		case 1024:
 			lasagnaCat.visible = true;
