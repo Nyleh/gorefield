@@ -1,11 +1,13 @@
-var black:FlxSprite; // It's not completely black, but weell... -EstoyAburridow
-
 function create()
 {
-    black = new FlxSprite();
-    black.makeSolid(FlxG.width, FlxG.height, 0xFF000000);
-    black.cameras = [camHUD];
-    insert(0, black);
+    stage.stageSprites["black"].cameras = [camHUD];
+}
+
+function beatHit(beat:Int) 
+{
+	if (beat % 4 == 0)  { // Why don't work.... 😭 - Jloor
+		FlxTween.tween(stage.stageSprites["BIGOTESBG"], {alpha: 0.75}, 1, {ease: FlxEase.cubeOut, startDelay: 0.2});
+	}
 }
 
 function stepHit(step:Int) 
@@ -13,7 +15,8 @@ function stepHit(step:Int)
     switch (step) 
     {
         case 1:
-            FlxTween.tween(black, {alpha: 0},4);
-
+            stage.stageSprites["black"].alpha = 0;
+            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, 1);
     }
 }

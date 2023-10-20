@@ -1,12 +1,9 @@
-//
-
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
 var jonTrail:FlxTrail;
 var jonTrailCamera:FlxCamera;
 var trailBloom:CustomShader;
-
 
 function create() {
     jonTrail = new FlxTrail(dad, null, 4, 10, 0.4, 0.069);
