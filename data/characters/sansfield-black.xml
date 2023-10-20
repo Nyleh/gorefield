@@ -1,15 +1,15 @@
-<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-sansfield" flipX="false" iconoffsetx="-12" iconoffsety="-15" isPlayer="null" camx="-440" camy="-80" holdTime="5" scale="1" color="#D3E1FF">
-	<anim name="singLEFT" anim="SANSFIELD LEFT" fps="24" loop="false" x="108" y="27"/>
-	<anim name="singDOWN" anim="SANSFIELD DOWN" fps="24" loop="false" x="99" y="-47"/>
-	<anim name="singUP" anim="SANSFIELD UP" fps="24" loop="false" x="90" y="40"/>
-	<anim name="singRIGHT" anim="SANSFIELD RIGHT" fps="24" loop="false" x="-50" y="34"/>
-	<anim name="idle" anim="SANS IDLE" fps="24" loop="false" x="0" y="0"/>
-	<anim name="idle-alt" anim="SANSFIELD GUITAR IDLE" fps="24" loop="false" x="-6" y="36"/>
-	<anim name="singLEFT-alt" anim="SANSFIELD GUITAR LEFT" fps="24" loop="false" x="60" y="11"/>
-	<anim name="singDOWN-alt" anim="SANSFIELD GUITAR DOWN" fps="24" loop="false" x="130" y="-80"/>
-	<anim name="singUP-alt" anim="SANSFIELD GUITAR UP" fps="24" loop="false" x="220" y="80"/>
-	<anim name="singRIGHT-alt" anim="SANSFIELD GUITAR RIGHT" fps="24" loop="false" x="0" y="120"/>
-	<anim name="zzz" anim="SANSFIELD ZZZ" fps="24" loop="true" x="60" y="-250"/>
-	<anim name="guitar" anim="SANS GUITAR AP" fps="24" loop="false" x="99" y="168"/>
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="icon-sansfield" camx="-440" y="0" isGF="false" iconoffsetx="-12" iconoffsety="-15"  camy="-80" color="#D3E1FF" isPlayer="false" holdTime="5" sprite="sansfield-black">
+	<anim x="108" loop="false" y="27" fps="24" anim="SANSFIELD LEFT" name="singLEFT"/>
+	<anim x="99" loop="false" y="-47" fps="24" anim="SANSFIELD DOWN" name="singDOWN"/>
+	<anim x="90" loop="false" y="40" fps="24" anim="SANSFIELD UP" name="singUP"/>
+	<anim x="-50" loop="false" y="34" fps="24" anim="SANSFIELD RIGHT" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="SANS IDLE" name="idle"/>
+	<anim x="-6" loop="false" y="38" fps="24" anim="SANSFIELD GUITAR IDLE" name="idle-alt"/>
+	<anim x="60" loop="false" y="11" fps="24" anim="SANSFIELD GUITAR LEFT" name="singLEFT-alt"/>
+	<anim x="130" loop="false" y="-80" fps="24" anim="SANSFIELD GUITAR DOWN" name="singDOWN-alt"/>
+	<anim x="220" loop="false" y="80" fps="24" anim="SANSFIELD GUITAR UP" name="singUP-alt"/>
+	<anim x="0" loop="false" y="120" fps="24" anim="SANSFIELD GUITAR RIGHT" name="singRIGHT-alt"/>
+	<anim x="60" loop="true" y="-250" fps="24" anim="SANSFIELD ZZZ" name="zzz"/>
+	<anim x="99" loop="false" y="164" fps="24" anim="SANS GUITAR AP" name="guitar"/>
 </character>
