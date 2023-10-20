@@ -174,6 +174,7 @@ function create() {
 var __firstFrame = true;
 var __totalTime:Float = 0;
 
+var selectingWeek:Bool = false;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 	
@@ -194,13 +195,14 @@ function update(elapsed:Float) {
 		menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
 		if (__firstFrame) menuOption.x += 600 + (i *200);
 		menuOption.color = FlxColor.interpolate(menuOption.color, weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, elapsed*(120*(1/100)));
-		menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
+		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
 		menuLocks[i].visible = !weeksUnlocked[i];
 		menuLocks[i].x = (menuOption.x + (menuOption.width/2)) - (menuLocks[i].width/2) + Math.floor(4 * Math.sin(__totalTime));
 		menuLocks[i].y = (menuOption.y + (menuOption.height/2)) - (menuLocks[i].height/2) + Math.floor(2 * Math.cos(__totalTime));
-		menuLocks[i].color = FlxColor.interpolate(menuLocks[i].color,  0xFF92A2FF , elapsed*(120*(1/150)));
+		if(!selectingWeek) menuLocks[i].color = FlxColor.interpolate(menuLocks[i].color,  0xFF92A2FF , elapsed*(120*(1/150)));
 	}
+
 	__firstFrame = false;
 
 	selector.setPosition((menuOptions[curWeek].x - selector.width - 36), menuOptions[curWeek].y + ((menuOptions[curWeek].height/2) - (selector.height/2)));
@@ -264,8 +266,36 @@ function selectWeek() {
 }
 
 function playWeek() {
+	selectingWeek = true;
 	PlayState.loadWeek(__gen_week(), "hard");
-	FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+	FlxG.sound.music.volume = 0;
+	FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+	switch(curWeek){
+		case 0:
+			FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+		case 1:
+			FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
+		case 2:
+			FlxG.sound.play(Paths.sound("menu/story/sansfieldenter"));
+		case 3:
+			FlxG.sound.play(Paths.sound("menu/story/ultragorefieldenter"));
+		case 4:
+			FlxG.sound.play(Paths.sound("menu/story/cryfieldenter"));
+		case 5:
+			FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
+		default:
+			FlxG.sound.play(Paths.sound("menu/story/principalenter"));
+	}
+	for (i=>menuOption in menuOptions) {
+		if(menuOption.ID != curWeek){
+			FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+			FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+		}
+	}
+	FlxTween.tween(camText, {alpha: 0}, 0.5);
+	new FlxTimer().start(3, (tmr:FlxTimer) -> {
+		FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+	});
 }
 
 function __gen_week() { // for cne so i dont have to ctrl c and v alot of code

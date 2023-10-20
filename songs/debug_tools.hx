@@ -1,4 +1,5 @@
 var curSpeed:Float = 1;
+var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
 
 function update() {
@@ -9,7 +10,8 @@ function update() {
     if (FlxG.keys.justPressed.FOUR) curSpeed += 0.1;
     curSpeed = FlxMath.bound(curSpeed, 0.1, 2);
     
-    if (devControlBotplay) player.cpu = FlxG.keys.pressed.FIVE || FlxG.keys.pressed.SIX;
+    if (FlxG.keys.justPressed.SIX) curBotplay = !curBotplay;
+    if (devControlBotplay) player.cpu = FlxG.keys.pressed.FIVE || curBotplay;
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 }
 
