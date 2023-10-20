@@ -50,6 +50,16 @@ var weekDescs:Array<String> = [
 	"Layers on layers,\nHe will always be there..."
 ];
 
+// SPANISH - Jloor
+var weekDescsSPANISH:Array<String> = [
+	"La Lasaña huele deliciosa...",
+	"Comida de medianoche???\n(yum)",
+	"Un ronroneo de determinacion...",
+	"Un pequeno gran problema.",
+	"El solo quiere volver a casa...",
+	"Capas tras capas,\nEl siempre estara ahi..."
+];
+
 function create() {
 	FlxG.cameras.remove(FlxG.camera, false);
 
@@ -212,7 +222,12 @@ function changeWeek(change:Int) {
 	if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
 
 	weekText.text = weeks[curWeek].name;
-	flavourText.text = weekDescs[curWeek];
+
+	if (FlxG.save.data.spanish) {
+		flavourText.text = weekDescsSPANISH[curWeek];
+	} else {
+		flavourText.text = weekDescs[curWeek];
+	}
 
 	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
 	textBG.updateHitbox();

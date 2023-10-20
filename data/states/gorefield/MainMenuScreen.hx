@@ -18,6 +18,14 @@ var optionsTexts:Map<String, String> = [
 	'credits' => "Credits to those who helped!",
 ];
 
+// SPANISH - Jloor
+var optionsTextsSPANISH:Map<String, String> = [
+	'story_mode' => "Ten mucho cuidado, se cauteloso!!",
+	'freeplay' => "Canta junto a Gorefield...",
+	'options' => "Opciones..., Que esperabas?",
+	'credits' => "Quienes trabajaron en el Mod!",
+];
+
 var menuItems:FlxTypedGroup<FlxSprite>;
 var curSelected:Int = curMainMenuSelected;
 
@@ -91,7 +99,11 @@ function changeItem(change:Int = 0) {
 			FlxTween.tween(item, {x: 520 - item.width}, (Conductor.stepCrochet / 1000) * 1.5, {ease: FlxEase.circOut});
 	});
 
-	menuInfomation.text = optionsTexts.get(options[curSelected]);
+	if (FlxG.save.data.spanish) {
+		menuInfomation.text = optionsTextsSPANISH.get(options[curSelected]);
+	} else {
+		menuInfomation.text = optionsTexts.get(options[curSelected]);
+	}
 }
 
 function goToItem() {
