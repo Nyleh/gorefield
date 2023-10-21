@@ -1,5 +1,12 @@
+var dodgeCat:Character;
+
 function create()
 {
+	dodgeCat = new Character(300, -180, "dodge-lasagna-cat");
+	dodgeCat.visible = false;
+	dodgeCat.playAnim('idle', true);
+	add(dodgeCat);
+
 	stage.stageSprites["lasagnaCat"].color = 0xFF000000;
 	stage.stageSprites["lasagnaCat"].drawComplex(FlxG.camera);
 	
@@ -28,18 +35,27 @@ function stepHit(step:Int)
 				fadeShit(1);
 			};
 			fadeShit(0);
+		case 1056:
+			dodgeCat.visible = true;
 		case 1104 | 1112 | 1168 | 1176 | 1232 | 1240 | 1296 | 1304:
 			camHUD.angle -= 10;
 			camGame.angle -= 3.5;
 			camHUD.y += 5;
 			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
 			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
+
+			dodgeCat.playAnim('attack', true);
 		case 1108 | 1116 | 1172 | 1180 | 1236 | 1244 | 1300 | 1308:
 			camHUD.angle += 10;
 			camGame.angle += 3.5;
 			camHUD.y -= 5;
 			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
 			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
+
+			dodgeCat.playAnim('attack', true);
+		case 1312:
+			dodgeCat.playAnim('scape', true);
+			dodgeCat.animation.finishCallback = (name:String) -> {if (name == 'scape') dodgeCat.visible = false;};
 		case 1568:
 			stage.stageSprites["black"].alpha = 0;
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;

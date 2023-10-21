@@ -1,0 +1,6 @@
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="icon-face" y="0" isGF="false" scale="0.5" color="#A1A1A1" flipX="true" isPlayer="false" antialiasing="false" holdTime="6.1" sprite="dodge-lasagna-cat">
+	<anim x="0" loop="false" y="0" fps="24" anim="LASAGNA CAT 0 IDLE0" name="idle"/>
+	<anim x="503" loop="false" y="-10" fps="24" anim="LASAGNA CAT ATACK0" name="attack"/>
+	<anim x="-100" loop="false" y="-63" fps="24" anim="LASAGNA CAT SCAPE0" name="scape"/>
+</character>
