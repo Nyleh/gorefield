@@ -19,6 +19,7 @@ var weeks:Array<Dynamic> = [];
 var curWeek:Int = curStoryMenuSelected;
 
 var camBG:FlxCamera = null;
+var bgSprite:FlxBackdrop;
 var camText:FlxCamera = null;
 
 var bloomShader:CustomShader = null;
@@ -51,7 +52,8 @@ var weekDescs:Array<String> = [
 	"Layers on layers,\nHe will always be there..."
 ];
 
-// SPANISH - Jloor
+// SPANISH - Jloor 
+// hi jloor -lunar
 var weekDescsSPANISH:Array<String> = [
 	"La Lasaña huele deliciosa...",
 	"Comida de medianoche???\n(yum)",
@@ -63,19 +65,28 @@ var weekDescsSPANISH:Array<String> = [
 
 var lerpColors = [];
 
+var subMenuOpen:Bool = false;
+var curSubMenuSelected:Int = 0;
+var subOptions:Array<FlxText> = [];
+var subOptionsData:Array<Dynamic> = [];
+var subMenuSelector:FlxSprite;
+var selectorBloom:CustomShader;
+var selectorCam:FlxCamera = null;
+
 function create() {
 	FlxG.cameras.remove(FlxG.camera, false);
 
 	camBG = new FlxCamera(0, 0);
+	selectorCam = new FlxCamera(0,0);
 	camText = new FlxCamera(0, 0);
 
-	for (cam in [camBG, FlxG.camera, camText])
+	for (cam in [camBG, FlxG.camera, selectorCam, camText])
 		{FlxG.cameras.add(cam, cam == FlxG.camera); cam.bgColor = 0x00000000; cam.antialiasing = true;}
 
 	CoolUtil.playMenuSong();
 	camBG.bgColor = FlxColor.fromRGB(17,5,33);
 
-	var bgSprite:FlxBackdrop = new FlxBackdrop(Paths.image("menus/storymenu/WEA_ATRAS"), 0x11, 0, 0);
+	bgSprite = new FlxBackdrop(Paths.image("menus/storymenu/WEA_ATRAS"), 0x11, 0, 0);
 	bgSprite.cameras = [camBG];
 	bgSprite.velocity.set(100, 100);
 	add(bgSprite);
@@ -88,7 +99,7 @@ function create() {
 
 	bloomShader = new CustomShader("glow");
 	bloomShader.size = 18.0;// trailBloom.quality = 8.0;
-    bloomShader.dim = 0.8;// trailBloom.directions = 16.0;
+    bloomShader.dim = 1;// trailBloom.directions = 16.0;
 	if (FlxG.save.data.bloom) bgSprite.shader = bloomShader;
 
 	for (i in 0...6) {
@@ -121,6 +132,11 @@ function create() {
 	selector.frames = Paths.getSparrowAtlas("menus/storymenu/STORY_MENU_ASSETS");
 	selector.animation.addByPrefix("_", "SELECT");
 	selector.animation.play("_");
+
+	subMenuSelector = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/sub_selector"));
+	subMenuSelector.visible = subMenuSelector.active = false;
+	subMenuSelector.antialiasing = true;
+	subMenuSelector.cameras = [selectorCam];
 
 	selector.updateHitbox();
 
@@ -172,7 +188,7 @@ function create() {
 	vigentte.cameras = [camText];
 	vigentte.alpha = 0.5;
 	add(vigentte);
-
+	
 	FlxTween.tween(selector, {angle: -90, alpha: 1}, 0.2, {ease: FlxEase.circInOut});
 
 	changeWeek(0);
@@ -181,18 +197,37 @@ function create() {
 var __firstFrame = true;
 var __totalTime:Float = 0;
 
+var colorLerpSpeed:Float = 1;
 var selectingWeek:Bool = false;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
-	if (controls.BACK) {
-		canMove = false;
+	if (controls.BACK && !selectingWeek) {
+		if (subMenuOpen) 
+			closeSubMenu();
+		else {canMove = false; FlxG.switchState(new MainMenuState());}
 		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
-		FlxG.switchState(new MainMenuState());
 	}
 
-	bloomShader.dim = .8 + (.3 * Math.sin(__totalTime));
-	bloomShader.size = 18 + (8 * Math.sin(__totalTime));
+	if (canMove) {
+		if (subMenuOpen) {
+			var oldSubSelected:Int = curSubMenuSelected;
+
+			var change = controls.DOWN_P ? 1 : controls.UP_P ? -1 : 0;
+			curSubMenuSelected = FlxMath.bound(curSubMenuSelected + change, 0, subOptions.length-1);
+
+			if (oldSubSelected != curSubMenuSelected) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
+			if (controls.ACCEPT) subOptionsData[curSubMenuSelected].callback();
+		} else {
+			if (controls.DOWN_P)
+				changeWeek(1);
+			else if (controls.UP_P)
+				changeWeek(-1);
+			else if (controls.ACCEPT)
+				selectWeek();
+		}
+
+	}
 
 	for (i=>menuOption in menuOptions) {
 		var y:Float = ((FlxG.height - menuOption.height) / 2) + ((menuOption.ID - curWeek) * menuOption.height);
@@ -204,30 +239,38 @@ function update(elapsed:Float) {
 		menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
 		if (__firstFrame) menuOption.x += 600 + (i *200);
 
-		lerpColors[i * 2 + 0].fpsLerpTo(weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, 1/75);
+		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, (1/75) * colorLerpSpeed);
 		menuOption.color = lerpColors[i * 2 + 0].color;
 		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
-		lerpColors[i * 2 + 1].fpsLerpTo(0xFF92A2FF, 1/75);
+		lerpColors[i * 2 + 1].fpsLerpTo(subMenuOpen ? 0xFF343434 : 0xFF92A2FF, (1/75) * colorLerpSpeed);
 
 		lock.visible = !weeksUnlocked[i];
 		lock.x = (menuOption.x + (menuOption.width/2)) - (lock.width/2) + Math.floor(4 * Math.sin(__totalTime));
 		lock.y = (menuOption.y + (menuOption.height/2)) - (lock.height/2) + Math.floor(2 * Math.cos(__totalTime));
 		if(!selectingWeek) lock.color = lerpColors[i * 2 + 1].color;
 	}
-
 	__firstFrame = false;
 
+	if (subMenuOpen && subOptions.length > 0) {
+		for (i=>option in subOptions) {
+			option.x = ((menuOptions[curWeek].x + (menuOptions[curWeek].width/2)) - option.width/2) + Math.floor(4 * Math.sin(__totalTime + (12*i)));
+			option.y = (menuOptions[curWeek].y + (menuOptions[curWeek].height/2) - (((option.height + 16) * subOptions.length)/2)) + ((option.height + 16) * i) + Math.floor(2 * Math.cos(__totalTime));
+			option.alpha = option.ID == 0 ? i == curSubMenuSelected ? 1 : 0.2 : option.alpha;
+
+			option.y += 10; // offset cause sprite epmty space (ZERO WHY!!@!@)
+		}
+		subMenuSelector.setPosition(subOptions[curSubMenuSelected].x - subMenuSelector.width - (10 + (2 * Math.floor(Math.sin(__totalTime*2)))), subOptions[curSubMenuSelected].y+4);
+	}
+			
+	selector.color = menuOptions[curWeek].color;
 	selector.setPosition((menuOptions[curWeek].x - selector.width - 36), menuOptions[curWeek].y + ((menuOptions[curWeek].height/2) - (selector.height/2)));
 
-	if (!canMove) return;
+	bloomShader.dim = .8 + (.3 * Math.sin(__totalTime));
+	bloomShader.size = 18 + (8 * Math.sin(__totalTime));
 
-	if (controls.DOWN_P)
-		changeWeek(1);
-	else if (controls.UP_P)
-		changeWeek(-1);
-	else if (controls.ACCEPT)
-		selectWeek();
+	selectorCam.visible = subMenuSelector.visible;
+	//selectorBloom.size = 4 + (1 * Math.sin(__totalTime));
 }
 
 function changeWeek(change:Int) {
@@ -265,9 +308,9 @@ function changeWeek(change:Int) {
 }
 
 function selectWeek() {
-	if(selectingWeek) return;
+	if(selectingWeek) return; // ! selecting anim
 
-	if (!weeksUnlocked[curWeek]) {
+	if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
 		FlxG.camera.shake(0.005, .5);
 		lerpColors[curWeek * 2 + 0].color = 0xFFFF0000;
@@ -277,16 +320,73 @@ function selectWeek() {
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
 	}
-	if (!weeksFinished[curWeek]) return; // OPEN MENU TO PLAY WEEK OR GO TO FREEPLAY
+	if (!weeksFinished[curWeek]) {playWeek(); return;} // ! play week for first time
 
-	// SELECT WEEK
-	// PLAY ANIM HERE NORMALLY RN ITS JUST A PLACE HOLDER
-	playWeek();
+	if (subMenuOpen) return;
+	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+	openSubMenu(
+		{name:"STORY MODE", callback: function () {
+			selectingWeek = true; 
+			closeSubMenu(); FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+			(new FlxTimer()).start(0.4, function () {playWeek();});
+		}},
+		{name:"FREEPLAY", callback: function () {closeSubMenu(); FlxG.sound.play(Paths.sound("menu/confirmMenu"));}}
+	);
+	//playWeek();
+}
+
+function openSubMenu(option1:{name:String, callback:Void->Void}, option2:{name:String, callback:Void->Void}) {
+	subOptionsData = [option1, option2];
+	subMenuOpen = true; curSubMenuSelected = 0;
+	colorLerpSpeed = 8; if (cannedTuna != null) cannedTuna.cancel();
+
+	for (option in subOptionsData) {
+		var option:FlxText = new FunkinText(0, 0, 0, option.name, 42, true);
+		option.setFormat("fonts/pixelart.ttf", 54, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		option.cameras = [FlxG.camera];
+		option.borderSize = 4;
+		option.alpha = option.ID = 0;
+		option.cameras = [selectorCam];
+		subOptions.push(add(option));
+	}
+
+	if (subMenuSelector.active) {FlxTween.cancelTweensOf(subMenuSelector); remove(subMenuSelector);}
+
+	add(subMenuSelector);
+	subMenuSelector.alpha = 0;
+	subMenuSelector.visible = subMenuSelector.active = true;
+
+	FlxTween.cancelTweensOf(bgSprite);
+	FlxTween.tween(bgSprite, {alpha: 0.5}, 0.2);
+
+	FlxTween.tween(subMenuSelector, {alpha: 1}, 0.2);
+}
+
+var cannedTuna:FlxTimer = null;
+function closeSubMenu() {
+	if (!subMenuOpen) return;
+
+	subMenuOpen = false; subOptionsData = [];
+	for (sub in subOptions) {
+		FlxTween.cancelTweensOf(sub);
+		sub.ID = -1;
+		FlxTween.tween(sub, {alpha: 0}, 0.1, {onComplete: function (t) {
+			subOptions.remove(sub); sub.destroy(); remove(sub);
+		}});
+	}
+
+	FlxTween.cancelTweensOf(subMenuSelector);
+	FlxTween.tween(subMenuSelector, {alpha: 0}, 0.1, {onComplete: function (t) {
+		remove(subMenuSelector); subMenuSelector.visible = subMenuSelector.active = false;
+	}});
+
+	FlxTween.cancelTweensOf(bgSprite);
+	FlxTween.tween(bgSprite, {alpha: 1}, 0.1);
+
+	cannedTuna = (new FlxTimer()).start(0.8, function (t) {colorLerpSpeed = 1;});
 }
 
 function playWeek() {
-	if(selectingWeek) return;
-	
 	selectingWeek = true;
 	PlayState.loadWeek(__gen_week(), "hard");
 	FlxG.sound.music.volume = 0;
