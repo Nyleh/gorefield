@@ -8,7 +8,7 @@ import flixel.math.FlxMath;
 var iconOffsets:Array<Array<Float>> = [];
 
 static var gorefieldhealthBarBG:FlxSprite;
-static var gorefieldhealthBar:FlxSprite;
+static var gorefieldhealthBar:FlxBar;
 
 static var gorefieldiconP1:FlxSprite;
 static var gorefieldiconP2:FlxSprite;

@@ -2,6 +2,7 @@ import flixel.addons.effects.FlxTrail;
 
 var gfTrail:FlxTrail = null;
 var bloom:CustomShader = null;
+var blackandwhite:CustomShader = null;
 
 function create() {
     FlxG.sound.play(Paths.sound('explosionsound'), 0); // Preload sound
@@ -21,6 +22,8 @@ function create() {
 
     bloom = new CustomShader("glow");
     bloom.size = 20.0; bloom.dim = 0.9;
+
+    blackandwhite = new CustomShader("bw");
 
     stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
     stage.stageSprites["black_overlay"].active = stage.stageSprites["black_overlay"].visible = true;
@@ -125,20 +128,24 @@ function stepHit(step:Int) {
                 });
             }
         case 1140: // ! Zoom
-            FlxTween.tween(FlxG.camera, {zoom: 1.2}, 0.5, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}});
+            lerpCam = false;
+            FlxTween.tween(FlxG.camera, {zoom: 1.2}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}});
         case 1152: // ! Stage Change
+            lerpCam = true;
             FlxG.camera.bgColor = 0xFFFFFFFF;
+            for (spr in [psBar, gorefieldhealthBar])
+                spr.shader = blackandwhite;
             maxCamZoom = 9999999; // woah
 
-            (new FlxTimer()).start((Conductor.stepCrochet / 1000) * 2, function () {
+            (new FlxTimer()).start((Conductor.stepCrochet / 1000) * 8, function () {
                 devControlBotplay = !(player.cpu = false);
             });
             player.cpu = true;
             for (strumLine in strumLines) {
                 for (strum in strumLine.members)
-                    FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 2);
+                    FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
                 strumLine.notes.forEach(function (n) {
-                    FlxTween.tween(n, {alpha: 1}, (Conductor.stepCrochet / 1000) * 2);
+                    FlxTween.tween(n, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
                 });
             }
 
@@ -161,13 +168,18 @@ function stepHit(step:Int) {
 
             FlxG.sound.play(Paths.sound('explosionsound'), 3);
             FlxG.camera.shake(0.006, 3.6);
-            camHUD.shake(0.002, 3.6); // sorry
+            camHUD.shake(0.009, 3.6); // sorry (not sorry -lunar)
+            FlxG.camera.zoom += 2;
 
             (new FlxTimer()).start(3.6, function () {
                 FlxG.camera.shake(0.0015, 999999);
+                camHUD.shake(0.002, 999999);
             });
+
+            camGame.snapToTarget();
         case 1664:
             FlxG.camera.stopFX();
+            camHUD.stopFX();
 
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
             stage.stageSprites["black"].cameras = [camHUD];
@@ -183,4 +195,5 @@ function stepHit(step:Int) {
 }
 
 function onStrumCreation(_) _.__doAnimation = false;
-function onPlayerHit(event) if (event.noteType == null) event.showRating = !(curStep > 120 && curStep < 384) && curStep < 1136;
+function onPlayerHit(event) if (event.noteType == null) event.showRating = !(curStep > 120 && curStep < 384) && curStep < 1024;
+function onDadHit(event) if (curStep > 1170) FlxG.camera.shake(0.003, 0.1);
