@@ -2,8 +2,9 @@ import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
 var jonTrail:FlxTrail;
-var jonTrailCamera:FlxCamera;
+
 var trailBloom:CustomShader;
+public var particleShader:CustomShader; // yes it is a shader
 
 public var isLymanFlying:Bool = true;
 
@@ -35,6 +36,11 @@ function create() {
     }
 
     if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
+
+    particleShader = new CustomShader("bigotes_particles");
+    particleShader.time = 0; particleShader.v = 0.0;
+	particleShader.res = [FlxG.width, FlxG.height];
+    FlxG.camera.addShader(particleShader);
 }
 
 var bgTween:FlxTween;
@@ -49,8 +55,10 @@ function postCreate() {
 }
 
 function update(elapsed:Float) {
-    if(!isLymanFlying) return;
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
+    particleShader.time = _curBeat;
+
+    if(!isLymanFlying) return;
     dad.y = 200 + (20 * Math.sin(_curBeat));
     dad.x = 1460 + (50 * Math.sin(_curBeat/2));
 

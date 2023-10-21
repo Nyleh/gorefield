@@ -31,7 +31,7 @@ var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
-
+var particleShader;
 function create() {
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
@@ -121,7 +121,7 @@ function goToItem() {
 }
 
 var selectedSomthin:Bool = false;
-
+var t:Float = 0;
 function update(elapsed:Float) {
 	if (selectedSomthin) return;
 
