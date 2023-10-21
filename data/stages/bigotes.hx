@@ -7,12 +7,12 @@ var trailBloom:CustomShader;
 
 public var isLymanFlying:Bool = true;
 
-public static function addTrail(){
-    add(jonTrail);
+public function addTrail(){
+    jonTrail.visible = jonTrail.active = true;
 }
 
-public static function removeTrail(){
-    remove(jonTrail);
+public function removeTrail(){
+    jonTrail.visible = jonTrail.active = false;
 }
 
 function create() {
