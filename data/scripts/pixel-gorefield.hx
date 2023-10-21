@@ -64,16 +64,17 @@ function onStrumCreation(event) {
 function onPlayerHit(event:NoteHitEvent) {
 	if (!enablePixelUI) return;
 	event.ratingPrefix = "game/pixel/";
-	event.ratingScale = daPixelZoom * 0.7;
+	event.ratingScale = event.numScale = daPixelZoom * 0.7 * 0.8;
+	event.numScale *= 1.1;
 	event.ratingAntialiasing = false;
 
-	event.numScale = daPixelZoom;
 	event.numAntialiasing = false;
 }
 
 function postCreate() {
-	iconP1.antialiasing = false;
-	iconP2.antialiasing = false;
+	for (spr in [gorefieldhealthBarBG, gorefieldiconP1, gorefieldiconP2])
+		spr.antialiasing = false;
+	gorefieldhealthBarBG.y -= 2;
 
 	if (enablePixelGameOver) {
 		gameOverSong = "gameOvers/lasagna/Gorefield_Gameover_Pixel";

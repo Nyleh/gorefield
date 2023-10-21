@@ -3,7 +3,8 @@ var dodgeCat:Character;
 function create()
 {
 	dodgeCat = new Character(-335, -200, "dodge-lasagna-cat");
-	dodgeCat.visible = false;
+	dodgeCat.visible = dodgeCat.active = false;
+	dodgeCat.danceOnBeat = true; dodgeCat.danceInterval = 0;
 	dodgeCat.playAnim('idle', true);
 	add(dodgeCat);
 
@@ -27,6 +28,7 @@ function stepHit(step:Int)
 				for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
 					FlxTween.tween(spr, {alpha: alpha}, (Conductor.stepCrochet / 1000) * 4);
 			}
+
 			stage.stageSprites["lasagnaCat"].animation.play('run', true);
 			stage.stageSprites["lasagnaCat"].visible = true;
 			
@@ -36,7 +38,8 @@ function stepHit(step:Int)
 			};
 			fadeShit(0);
 		case 1056:
-			dodgeCat.visible = true;
+			dodgeCat.visible = dodgeCat.active = true;
+			dodgeCat.playAnim("enter", true);
 		case 1104 | 1112 | 1168 | 1176 | 1232 | 1240 | 1296 | 1304:
 			camHUD.angle -= 10;
 			camGame.angle -= 3.5;

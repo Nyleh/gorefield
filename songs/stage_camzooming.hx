@@ -5,7 +5,7 @@ static var strumLineGfZoom:Float = 0;
 static var lerpCam:Bool = true;
 
 function create() {
-    camZooming = false;
+    camZooming = false; lerpCam = true;
     if (stage == null || stage.stageXML == null) return;
 
     strumLineDadZoom = stage.stageXML.exists("opponentZoom") ? Std.parseFloat(stage.stageXML.get("opponentZoom")) : -1;

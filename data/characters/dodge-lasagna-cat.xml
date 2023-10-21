@@ -3,4 +3,5 @@
 	<anim x="0" loop="false" y="0" fps="24" anim="LASAGNA CAT 0 IDLE0" name="idle"/>
 	<anim x="22" loop="false" y="-1" fps="24" anim="LASAGNA CAT ATACK0" name="attack"/>
 	<anim x="14" loop="false" y="-63" fps="24" anim="LASAGNA CAT SCAPE0" name="scape"/>
+	<anim x="14" loop="false" y="-63" fps="24" anim="LASAGNA CAT SCAPE0" name="enter" indices="10,9,8,7,6,5,4,3,2,1,1,0"/>
 </character>
