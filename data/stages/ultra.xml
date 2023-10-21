@@ -1,6 +1,6 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.9" name="ultra" folder="stages/ultra/" opponentZoom="0.7" playerZoom="0.9" gfZoom="0.9" noteSkin="gorefield_bw" splashSkin="gorefield_bw" healthBarColor="gray" middleScroll="true">
-	<sprite name="BG1" x="0" y="0" sprite="BG" antialising="true" scrollx="1" scrolly="1" scale="1.8"/>
+	<sprite name="BG1" x="0" y="0" sprite="BG" antialiasing="true" scrollx="1" scrolly="1" scale="1.8"/>
 	<opponent x="275" y="180" camxoffset="226" camyoffset="286.25"/>
 	<player x="100" y="220" camxoffset="320" camyoffset="-180"/>
 </stage>

@@ -6,8 +6,8 @@
 		<one sprite="game/set" sound="lasagna/1-pixel"/>
 		<go sprite="game/go" sound="lasagna/Jon-pixel"/>
 	</countdown>
-	<sprite name="BG2" x="-1800" y="-500" sprite="BG_2" antialising="false" scrollx="1" scrolly="1" scale="0.4"/>
-	<sprite name="BG1" x="-1800" y="-500" sprite="BG_1" antialising="false" scrollx="1" scrolly="1" scale="0.4"/>
+	<sprite name="BG2" x="-1800" y="-500" sprite="BG_2" antialiasing="false" scrollx="1" scrolly="1" scale="0.4"/>
+	<sprite name="BG1" x="-1800" y="-500" sprite="BG_1" antialiasing="false" scrollx="1" scrolly="1" scale="0.4"/>
 	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="scrollFactor.y" type="float" value="0"/>
@@ -16,7 +16,7 @@
 	</solid>
 	<opponent x="-490" y="373" camxoffset="109.5" camyoffset="-196"/>
 	<player x="240" y="-35" camxoffset="68.5" camyoffset="-343.951"/>
-	<sprite name="lasagnaCat" x="-1600" y="60" sprite="LASAGNA_CAT_BG" antialising="false">
+	<sprite name="lasagnaCat" x="-1600" y="60" sprite="LASAGNA_CAT_BG" antialiasing="false">
 		<anim name="run" anim="LASAGNA CAT RUN BG" loop="false" fps="12"/>
 		<property name="visible" type="bool" value="false" />
 		<property name="flipX" type="bool" value="true" />

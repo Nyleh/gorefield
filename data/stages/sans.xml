@@ -9,8 +9,8 @@
 	<opponent x="440" y="-520" camxoffset="210" camyoffset="0"/>
 	<player x="830" y="-130" camxoffset="-70" camyoffset="-60"/>
 	<gf x="100" y="140" camxoffset="200" camyoffset="-100" scroll="1"/>
-	<sprite name="sansFieldHUD" x="0" y="0" sprite="marco_UNDERTALE_1" antialising="true" scrollx="1" scrolly="1" scale="1"/>
-	<sprite name="sansFieldBones" x="50" y="-900" sprite="bones" antialising="true" scrollx="1" scrolly="1">
+	<sprite name="sansFieldHUD" x="0" y="0" sprite="marco_UNDERTALE_1" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
+	<sprite name="sansFieldBones" x="50" y="-900" sprite="bones" antialiasing="true" scrollx="1" scrolly="1">
 		<anim name="idle" anim="bones" loop="true"/>
 	</sprite>
 </stage>
