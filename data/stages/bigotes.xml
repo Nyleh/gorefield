@@ -1,6 +1,7 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.65" name="bigotes" folder="stages/bigotes/" opponentZoom="0.72" playerZoom="0.65">
 	<sprite name="BIGOTESBG" x="0" y="-400" sprite="BG_0" antialiasing="true" scrollx="0.7" scrolly="0.7"/>
+		<property name="alpha" type="float" value="0.7"/>
     <sprite name="tornado" x="1100" y="0" sprite="BG_TORNADO" antialiasing="true" scrollx="0.85" scrolly="0.85">
 		<anim name="idle" anim="BG TORNADO" loop="true"/>
 	</sprite>
