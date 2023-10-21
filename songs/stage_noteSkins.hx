@@ -1,4 +1,4 @@
-var noteSkin:String = "gorefield";
+var noteSkin:String = "default";
 var splashSkin:String = "gorefield";
 
 function create() {
