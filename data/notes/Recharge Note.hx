@@ -21,7 +21,14 @@ function onNoteCreation(event) {
 }
 
 function onPlayerHit(event)
-    if (event.noteType == "Recharge Note") {event.showSplash = false; event.strumGlowCancelled = true;}
+    if (event.noteType == "Recharge Note") 
+    {
+        event.showSplash = false; 
+        event.strumGlowCancelled = true;
+    
+        boyfriend.playAnim("recharge", true);
+        event.preventAnim();
+    }
 
 function onPlayerMiss(event)
     if (event.noteType == "Recharge Note") {health -= 9999; event.cancel(true);}

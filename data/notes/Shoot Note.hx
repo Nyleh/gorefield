@@ -21,7 +21,14 @@ function onNoteCreation(event) {
 }
 
 function onPlayerHit(event)
-    if (event.noteType == "Shoot Note") {event.showSplash = false; event.strumGlowCancelled = true;}
+    if (event.noteType == "Shoot Note") 
+    {
+        event.showSplash = false; 
+        event.strumGlowCancelled = true;
+    
+        boyfriend.playAnim("shoot", true);
+        event.preventAnim();
+    }
 
 function onPlayerMiss(event)
     if (event.noteType == "Shoot Note") {health -= 9999; event.cancel(true);}
