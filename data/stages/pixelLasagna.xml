@@ -15,10 +15,9 @@
 		<property name="visible" type="bool" value="false" />
 	</solid>
 	<opponent x="-490" y="373" camxoffset="109.5" camyoffset="-196"/>
-	<player x="140" y="-35" camxoffset="180" camyoffset="-343.951"/>
+	<player x="240" y="-35" camxoffset="68.5" camyoffset="-343.951"/>
 	<sprite name="lasagnaCat" x="-1600" y="60" sprite="LASAGNA_CAT_BG" antialiasing="false">
 		<anim name="run" anim="LASAGNA CAT RUN BG" loop="false" fps="12"/>
 		<property name="visible" type="bool" value="false" />
-		<property name="flipX" type="bool" value="true" />
 	</sprite>
 </stage>

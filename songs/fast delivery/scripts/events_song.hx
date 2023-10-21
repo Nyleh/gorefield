@@ -2,7 +2,7 @@ var dodgeCat:Character;
 
 function create()
 {
-	dodgeCat = new Character(300, -180, "dodge-lasagna-cat");
+	dodgeCat = new Character(-335, -200, "dodge-lasagna-cat");
 	dodgeCat.visible = false;
 	dodgeCat.playAnim('idle', true);
 	add(dodgeCat);
