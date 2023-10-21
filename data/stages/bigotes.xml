@@ -1,17 +1,20 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.65" name="bigotes" folder="stages/bigotes/" opponentZoom="0.72" playerZoom="0.65">
-	<sprite name="BIGOTESBG" x="0" y="-400" sprite="BG_0" antialising="true" scrollx="0.7" scrolly="0.7"/>
-    <sprite name="tornado" x="1100" y="0" sprite="BG_TORNADO" antialising="true" scrollx="0.85" scrolly="0.85">
+	<sprite name="BIGOTESBG" x="0" y="-400" sprite="BG_0" antialiasing="true" scrollx="0.7" scrolly="0.7"/>
+    <sprite name="tornado" x="1100" y="0" sprite="BG_TORNADO" antialiasing="true" scrollx="0.85" scrolly="0.85">
 		<anim name="idle" anim="BG TORNADO" loop="true"/>
 	</sprite>
-    <sprite name="BG1" x="0" y="0" sprite="BG_01" antialising="true" scrollx="0.8" scrolly="0.8"/>
-	<sprite name="BG2" x="200" y="1200" sprite="BG_AGUA" antialising="true" scrollx="1" scrolly="1"/>
+    <sprite name="BG1" x="0" y="0" sprite="BG_01" antialiasing="true" scrollx="0.8" scrolly="0.8"/>
+	<sprite name="BG2" x="200" y="1200" sprite="BG_AGUA" antialiasing="true" scrollx="1" scrolly="1"/>
+	<solid name="pixelblack" x="-640" y="-360" width="2560" height="1440" color="0x382454">
+		<property name="scrollFactor.x" type="float" value="0"/>
+		<property name="visible" type="bool" value="false"/>
+		<property name="scrollFactor.y" type="float" value="0"/>
+	</solid>
 	<opponent x="1440" y="200" camxoffset="-185" camyoffset="90"/>
 	<player x="1100" y="400" camxoffset="0" camyoffset="-35" scrolly="0.9"/>
 	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="scrollFactor.y" type="float" value="0"/>
-		<property name="active" type="bool" value="false" />
-		<property name="visible" type="bool" value="false" />
 	</solid>
 </stage>

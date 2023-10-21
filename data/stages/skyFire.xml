@@ -1,6 +1,6 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.9" name="skyFire" folder="stages/skyFire/" opponentZoom="0.9" playerZoom="1.05">
-	<sprite name="fireSky" x="169" y="0" sprite="fire_f4" antialising="true" scrollx="1" scrolly="1">
+	<sprite name="fireSky" x="169" y="0" sprite="fire_f4" antialiasing="true" scrollx="1" scrolly="1">
 		<anim name="idle" anim="FIRE" loop="true"/>
 	</sprite>
 	<opponent x="325" y="-470" camxoffset="5.5" camyoffset="128.734"/>

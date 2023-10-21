@@ -8,5 +8,5 @@
 	</countdown>
 	<opponent x="-72" y="-520" camxoffset="0" camyoffset="100"/>
 	<player x="370" y="-170" camxoffset="-50" camyoffset="-200"/>
-	<sprite name="sansFieldHUD" x="0" y="0" sprite="cuadro_ULTRA" antialising="true" scrollx="1" scrolly="1" scale="1"/>
+	<sprite name="sansFieldHUD" x="0" y="0" sprite="cuadro_ULTRA" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
 </stage>

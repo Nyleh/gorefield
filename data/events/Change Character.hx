@@ -37,6 +37,7 @@ function onEvent(_) {
         var oldIcon = oldCharacter.isPlayer ? gorefieldiconP1 : gorefieldiconP2; // ! GOREFIELD ONLY
         var newIcon = preloadedIcons.get(newCharacter.getIcon());
 
+        if (oldIcon == newIcon) return;
         insert(members.indexOf(oldIcon), newIcon);
         newIcon.active = newIcon.visible = true;
         remove(oldIcon);

@@ -5,6 +5,16 @@ var jonTrail:FlxTrail;
 var jonTrailCamera:FlxCamera;
 var trailBloom:CustomShader;
 
+public var isLymanFlying:Bool = true;
+
+public function addTrail(){
+    jonTrail.visible = jonTrail.active = true;
+}
+
+public function removeTrail(){
+    jonTrail.visible = jonTrail.active = false;
+}
+
 function create() {
     jonTrail = new FlxTrail(dad, null, 4, 10, 0.4, 0.069);
     jonTrail.beforeCache = dad.beforeTrailCache;
@@ -27,11 +37,19 @@ function create() {
     if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
 }
 
+var bgTween:FlxTween;
+
+function measureHit(curMeasure:Int){
+    stage.stageSprites["BIGOTESBG"].alpha = 1;
+    bgTween = FlxTween.tween(stage.stageSprites["BIGOTESBG"],{alpha: 0.7},Conductor.stepCrochet/100);
+}
+
 function postCreate() {
     for (strum in cpuStrums) strum.visible = false;
 }
 
 function update(elapsed:Float) {
+    if(!isLymanFlying) return;
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
     dad.y = 200 + (20 * Math.sin(_curBeat));
     dad.x = 1460 + (50 * Math.sin(_curBeat/2));
