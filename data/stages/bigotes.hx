@@ -40,7 +40,7 @@ function create() {
     particleShader = new CustomShader("bigotes_particles");
     particleShader.time = 0; particleShader.v = 0.0;
 	particleShader.res = [FlxG.width, FlxG.height];
-    FlxG.camera.addShader(particleShader);
+    if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
 }
 
 var bgTween:FlxTween;

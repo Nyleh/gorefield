@@ -14,8 +14,9 @@
 			<checkbox id="bloom" name="Glow Shaders" desc="Enable/Disable Glow Shaders. (very intensive)" />
 			<checkbox id="glitch" name="Glitch Shaders" desc="Enable/Disable Glitch Shaders. (meduim intensive)" />
 			<checkbox id="warp" name="Warp Shaders" desc="Enable/Disable Warp Shaders. (meduim intensive)" />
-			<checkbox id="saturation" name="Saturation Shaders" desc="Enable/Disable Saturation Shaders. (no/low intensive)" />
+			<checkbox id="saturation" name="Saturation Shaders" desc="Enable/Disable Saturation Shaders. (low/no intensive)" />
 		</menu>
+		<checkbox id="particles" name="Particle Effects" desc="Enable/Disable Particles (ok i acuttaly get why you want to disbale this one its very intensive)"/>
 		<checkbox id="trails" name="Sprite Trails" desc="Enable/Disable Trails On Sprites. (for even bigger toasters)" />
 		<checkbox id="flashing" name="Camera Flashing" desc="Disable Camera Flashing." />
 	</menu>

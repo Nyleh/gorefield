@@ -25,6 +25,7 @@ function new() {
     if (FlxG.save.data.saturation == null) FlxG.save.data.saturation = true;
 
     if (FlxG.save.data.trails == null) FlxG.save.data.trails = true;
+    if (FlxG.save.data.particles == null) FlxG.save.data.particles = true;
     if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
 
     // OTHER
