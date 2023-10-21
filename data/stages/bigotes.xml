@@ -13,7 +13,7 @@
 		<property name="scrollFactor.y" type="float" value="0"/>
 	</solid>
 	<opponent x="1440" y="200" camxoffset="-185" camyoffset="90"/>
-	<player x="1100" y="400" camxoffset="0" camyoffset="-35" scrolly="0.9"/>
+	<player x="1100" y="400" camxoffset="0" camyoffset="-95"/>
 	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="scrollFactor.y" type="float" value="0"/>

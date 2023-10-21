@@ -9,7 +9,24 @@ function create() {
             newCharacter.active = newCharacter.visible = false;
             newCharacter.drawComplex(FlxG.camera); // Push to GPU
             preloadedCharacters.set(event.params[1], newCharacter);
-
+            
+            //Adjust Camera Offset to Accomedate Stage Offsets
+            if(newCharacter.isGF){
+                trace('Is GF ' + newCharacter.curCharacter);
+                newCharacter.cameraOffset.x += stage.characterPoses["gf"].camxoffset;
+                newCharacter.cameraOffset.y += stage.characterPoses["gf"].camyoffset;
+            }
+            else if(newCharacter.playerOffsets){
+                trace('Is BF ' + newCharacter.curCharacter);
+                newCharacter.cameraOffset.x += stage.characterPoses["boyfriend"].camxoffset;
+                newCharacter.cameraOffset.y += stage.characterPoses["boyfriend"].camyoffset;
+            }
+            else{
+                trace('Is DAD ' + newCharacter.curCharacter);
+                newCharacter.cameraOffset.x += stage.characterPoses["dad"].camxoffset;
+                newCharacter.cameraOffset.y += stage.characterPoses["dad"].camyoffset;
+            }
+            
             if (preloadedIcons.exists(newCharacter.getIcon())) continue;
             var newIcon = createIcon(newCharacter); // ! GOREFIELD ONLY
             newIcon.active = newIcon.visible = false;

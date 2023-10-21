@@ -25,11 +25,9 @@ function stepHit(step:Int)
         case 1452 | 1580: 
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, 0.1);
             FlxTween.tween(FlxG.camera, {zoom: 1.5}, (Conductor.stepCrochet / 1000) * 3);
-            FlxTween.tween(camHUD,{alpha: 0},0.3); 
             FlxTween.num(.4, 0.0, .3, {}, (val:Float) -> {particleShader.v = val;});
 
         case 1456:
-            camHUD.alpha = 1;
             stage.stageSprites["black"].alpha = 0;
             particleShader.v = 0;
             camGame.flash(0xFFFFFFFF, 1);
@@ -41,7 +39,6 @@ function stepHit(step:Int)
             isLymanFlying = false;
             removeTrail();
         case 1584:
-            camHUD.alpha = 1;
             stage.stageSprites["black"].alpha = 0;
             FlxTween.num(.0, .7, 1.4, {}, (val:Float) -> {particleShader.v = val;});
             camGame.flash(0xFFFFFFFF, 1);
