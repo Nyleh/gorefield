@@ -1,17 +1,17 @@
-<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="350" icon="icon-jon-player" iconoffsety="-10" flipX="true" gameOverChar="jon-player" isPlayer="true" camx="0" camy="0" holdTime="4" scale="1" color="#346756">
-	<anim name="idle" anim="JON IDLE" fps="24" loop="false" x="-5" y="0"/>
-	<anim name="singLEFT" anim="JON LEFT" fps="24" loop="false" x="35" y="-12"/>
-	<anim name="singDOWN" anim="JON DOWN" fps="24" loop="false" x="20" y="-41"/>
-	<anim name="singUP" anim="JON UP" fps="24" loop="false" x="-1" y="5"/>
-	<anim name="singRIGHT" anim="JON RIGHT" fps="24" loop="false" x="-8" y="-14"/>
-	<anim name="singLEFTmiss" anim="JON MISS LEFT" fps="24" loop="false" x="34" y="-10"/>
-	<anim name="singDOWNmiss" anim="JON MISS DOWN" fps="24" loop="false" x="39" y="-49"/>
-	<anim name="singUPmiss" anim="JON MISS UP" fps="24" loop="false" x="-2" y="22"/>
-	<anim name="singRIGHTmiss" anim="JON MISS RIGHT" fps="24" loop="false" x="-40" y="-16"/>
-	<anim name="shoot" anim="JON DISPARO" fps="24" loop="false" x="-8" y="214"/>
-	<anim name="recharge" anim="JON RECARGA" fps="24" loop="false" x="6" y="-15"/>
-	<anim name="firstDeath" anim="JON DEATH" fps="24" loop="false" x="43" y="101"/>
-	<anim name="deathLoop" anim="JON RETRY LOOP" fps="24" loop="true" x="-36" y="54"/>
-	<anim name="deathConfirm" anim="JON RETRY CONFIRM" fps="24" loop="false" x="89" y="72"/>
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="jon-player" y="350" isGF="false" animatedIcon="true" iconoffsetx="14" color="#346756" flipX="true" isPlayer="true" gameOverChar="jon-player" sprite="jon-player">
+	<anim x="-5" loop="false" y="0" fps="24" anim="JON IDLE" name="idle"/>
+	<anim x="-8" loop="false" y="-14" fps="24" anim="JON LEFT" name="singLEFT"/>
+	<anim x="20" loop="false" y="-41" fps="24" anim="JON DOWN" name="singDOWN"/>
+	<anim x="-1" loop="false" y="5" fps="24" anim="JON UP" name="singUP"/>
+	<anim x="35" loop="false" y="-12" fps="24" anim="JON RIGHT" name="singRIGHT"/>
+	<anim x="-40" loop="false" y="-16" fps="24" anim="JON MISS LEFT" name="singLEFTmiss"/>
+	<anim x="39" loop="false" y="-49" fps="24" anim="JON MISS DOWN" name="singDOWNmiss"/>
+	<anim x="-2" loop="false" y="22" fps="24" anim="JON MISS UP" name="singUPmiss"/>
+	<anim x="34" loop="false" y="-10" fps="24" anim="JON MISS RIGHT" name="singRIGHTmiss"/>
+	<anim x="-8" loop="false" y="214" fps="24" anim="JON DISPARO" name="shoot"/>
+	<anim x="6" loop="false" y="-15" fps="24" anim="JON RECARGA" name="recharge"/>
+	<anim x="43" loop="false" y="101" fps="24" anim="JON DEATH" name="firstDeath"/>
+	<anim x="-36" loop="true" y="54" fps="24" anim="JON RETRY LOOP" name="deathLoop"/>
+	<anim x="89" loop="false" y="72" fps="24" anim="JON RETRY CONFIRM" name="deathConfirm"/>
 </character>
