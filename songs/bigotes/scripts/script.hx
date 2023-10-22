@@ -20,16 +20,16 @@ function stepHit(step:Int)
             FlxTween.tween(FlxG.camera, {zoom: 0.72}, (Conductor.stepCrochet / 1000) * 30, {onComplete: function (tween:FlxTween) {defaultCamZoom = 0.72; lerpCam = true;}});
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
             FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, 3);
-            FlxTween.num(0, 0.4, 3, {}, (val:Float) -> {particleShader.v = val;});
+            FlxTween.num(0, 0.4, 3, {}, (val:Float) -> {particleShader.particlealpha = val;});
         case 32: FlxTween.tween(camHUD,{alpha: 1},0.5);
         case 1452 | 1580: 
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, 0.1);
             FlxTween.tween(FlxG.camera, {zoom: 1.5}, (Conductor.stepCrochet / 1000) * 3);
-            FlxTween.num(.4, 0.0, .3, {}, (val:Float) -> {particleShader.v = val;});
+            FlxTween.num(.4, 0.0, .3, {}, (val:Float) -> {particleShader.particlealpha = val;});
 
         case 1456:
             stage.stageSprites["black"].alpha = 0;
-            particleShader.v = 0;
+            particleShader.particlealpha = 0;
             camGame.flash(0xFFFFFFFF, 1);
 
             for (name => sprite in stage.stageSprites)
@@ -40,7 +40,7 @@ function stepHit(step:Int)
             removeTrail();
         case 1584:
             stage.stageSprites["black"].alpha = 0;
-            FlxTween.num(.0, .7, 1.4, {}, (val:Float) -> {particleShader.v = val;});
+            FlxTween.num(.0, .7, 1.4, {}, (val:Float) -> {particleShader.particlealpha = val;});
             camGame.flash(0xFFFFFFFF, 1);
 
             for (name => sprite in stage.stageSprites)

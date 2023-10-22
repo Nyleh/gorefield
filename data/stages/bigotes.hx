@@ -1,7 +1,9 @@
+//
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
 var jonTrail:FlxTrail;
+var tornado:FlxSprite;
 
 var trailBloom:CustomShader;
 public var particleShader:CustomShader; // yes it is a shader
@@ -37,10 +39,15 @@ function create() {
 
     if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
 
-    particleShader = new CustomShader("bigotes_particles");
-    particleShader.time = 0; particleShader.v = 0.0;
+    particleShader = new CustomShader("particles");
+    particleShader.time = 0; particleShader.particlealpha = 0.0;
 	particleShader.res = [FlxG.width, FlxG.height];
+    particleShader.particleXY = [0, 0];
+    particleShader.particleZoom = 1;
     if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
+
+    tornado = stage.stageSprites["tornado"];
+    tornado.skew.y = 40;
 }
 
 var bgTween:FlxTween;
@@ -56,7 +63,13 @@ function postCreate() {
 
 function update(elapsed:Float) {
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
+    tornado.skew.x = tornado.skew.y = 3 * Math.sin(_curBeat/4);
+    tornado.offset.x = 10 * Math.sin(_curBeat/2);
+    tornado.offset.y = 10 * Math.cos(_curBeat/2);
+    
     particleShader.time = _curBeat;
+    particleShader.particleXY = [(camFollow.x - 1664) * 2, (camFollow.y - 900) * -1.5];
+    particleShader.particleZoom = FlxG.camera.zoom*.9;
 
     if(!isLymanFlying) return;
     dad.y = 200 + (20 * Math.sin(_curBeat));

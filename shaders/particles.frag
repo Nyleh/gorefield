@@ -2,7 +2,9 @@
 
 uniform float time;
 uniform vec2 res;
-uniform float v;
+uniform vec2 particleXY;
+uniform float particleZoom;
+uniform float particlealpha;
 
 #define PI 3.1415927
 #define TWO_PI 6.283185
@@ -19,10 +21,9 @@ uniform float v;
 #define SPARK_COLOR (vec3(0.616,0.149,0.733) * 1.5)
 #define SMOKE_COLOR (vec3(0.31,0.031,0.612) * 0.8)
 
-#define SIZE_MOD 1.05
+#define SIZE_MOD 1.2
 #define ALPHA_MOD 0.9
 #define LAYERS_COUNT 10
-
 
 float hash1_2(in vec2 x)
 {
@@ -130,7 +131,7 @@ vec2 randomAround2_2(in vec2 point, in vec2 range, in vec2 uv)
 }
 
 
-vec3 fireParticles(in vec2 uv, in vec2 originalUV)
+vec3 fireParticles(in vec2 uv, in vec2 originalUV, in vec2 scrolledUV)
 {
     vec3 particles = vec3(0.0);
     vec2 rootUV = floor(uv);
@@ -151,12 +152,12 @@ vec3 fireParticles(in vec2 uv, in vec2 originalUV)
 
     //Upper disappear curve randomization
     float border = (hash1_2(rootUV) - 0.5) * 2.0;
- 	float disappear = 1.0 - smoothstep(border, border + 0.5, originalUV.y);
+ 	float disappear = 1.0 - smoothstep(border, border + 0.5, scrolledUV.y);
 	
     //Lower appear curve randomization
     border = (hash1_2(rootUV + 0.214) - 1.8) * 0.7;
-    float appear = smoothstep(border, border + 0.4, originalUV.y);
-    
+    float appear = smoothstep(border, border + 0.4, scrolledUV.y);
+
     return particles * disappear * appear;
 }
 
@@ -170,6 +171,8 @@ vec3 layeredParticles(in vec2 uv, in float sizeMod, in float alphaMod, in int la
     vec2 offset = vec2(0.0);
     vec2 noiseOffset;
     vec2 bokehUV;
+    vec2 scrolledUV = uv + vec2(particleXY.x/res.x, particleXY.y/res.y);
+    vec2 scaledUV = uv * (1.0/particleZoom);
     
     for (int i = 0; i < layers; i++)
     {
@@ -177,10 +180,10 @@ vec3 layeredParticles(in vec2 uv, in float sizeMod, in float alphaMod, in int la
         noiseOffset = (noise2_2(uv * size * 2.0 + 0.5) - 0.5) * 0.15;
         
         //UV with applied movement
-        bokehUV = (uv * size + time * MOVEMENT_DIRECTION * MOVEMENT_SPEED) + offset + noiseOffset; 
-        
+        bokehUV = (scaledUV * size + time * MOVEMENT_DIRECTION * MOVEMENT_SPEED) + offset + noiseOffset; 
+
         //Adding particles								if there is more smoke, remove smaller particles
-		particles += fireParticles(bokehUV, uv) * alpha;
+		particles += fireParticles(bokehUV, scaledUV, scrolledUV) * alpha;
         
         //Moving uv origin to avoid generating the same particles
         offset += hash2_2(vec2(alpha, alpha)) * 10.0;
@@ -196,12 +199,14 @@ void main()
 {
     vec2 uv = openfl_TextureCoordv;
     vec2 uvv = vec2(uv.x, 1-uv.y);
+
     vec2 particleUv = (2.0 * (uvv * openfl_TextureSize) - res) / res.x;
     
     vec4 tex = flixel_texture2D(bitmap, uv).rgba;
     vec3 screen = tex.rgb;
+
     vec3 particles = layeredParticles(particleUv*1.8, SIZE_MOD, ALPHA_MOD, LAYERS_COUNT);
-    particles.rgb *= v;
+    particles.rgb *= particlealpha;
     
     vec3 col = particles + screen + SMOKE_COLOR * 0.02;
     col = smoothstep(-0.08, 1.0, col);
