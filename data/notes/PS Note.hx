@@ -53,7 +53,7 @@ function update(elapsed:Float) {
 }
 
 function onPlayerMiss(event)
-    if (event.noteType == "PS Note") event.cancel(true);
+    if (event.noteType == "PS Note") {event.cancel(true); event.note.strumLine.deleteNote(event.note);}
 
 function onPlayerHit(event)
     if (event.noteType == "PS Note") {

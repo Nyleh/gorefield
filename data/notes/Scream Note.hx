@@ -78,7 +78,7 @@ function onNoteCreation(event)
     }
 
 function onPlayerMiss(event)
-    if (event.noteType == "Scream Note") event.cancel(true);
+    if (event.noteType == "Scream Note") {event.cancel(true); event.note.strumLine.deleteNote(event.note);}
 
 function onPlayerHit(event)
     if (event.noteType == "Scream Note") {
