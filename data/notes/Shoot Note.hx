@@ -27,6 +27,7 @@ function onPlayerHit(event)
         event.strumGlowCancelled = true;
     
         boyfriend.playAnim("shoot", true);
+		dad.playAnim("damage", true);
         event.preventAnim();
     }
 
