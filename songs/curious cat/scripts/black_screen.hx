@@ -52,11 +52,10 @@ function stepHit(step:Int)
         case 656:
             tweenHUD(false,1);
             lerpCam = false;
-            FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.4},1.7,{ease: FlxEase.backInOut, onComplete: (tmr:FlxTween) -> {
-                FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.7},13.5);
-            }});
-            dad.cameraOffset.x = dadXOffset - 260;
+            FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.7},15);
+            FlxTween.tween(dad.cameraOffset, {x: dadXOffset - 260}, 8);
             FlxTween.tween(stage.stageSprites["BlackVignette"], {alpha: 1},16);
+            camGame.shake(0.0013, 15);
         case 780:
             tweenHUD(true,0.3);
             FlxTween.tween(stage.stageSprites["BlackVignette"], {alpha: 0},1);
