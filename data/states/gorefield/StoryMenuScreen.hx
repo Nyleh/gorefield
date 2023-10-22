@@ -205,7 +205,7 @@ function update(elapsed:Float) {
 	if (controls.BACK && !selectingWeek) {
 		if (subMenuOpen) 
 			closeSubMenu();
-		else {canMove = false; FlxG.switchState(new MainMenuState());}
+		else {canMove = false; 	new FlxTimer().start(0.45, (_) -> 	FlxG.switchState(new MainMenuState()));}
 		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
 	}
 

@@ -47,7 +47,7 @@ function create() {
 
 	logoBl = new FlxSprite();
 	logoBl.frames = Paths.getSparrowAtlas('menus/logoMod');
-	logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+	logoBl.animation.addByPrefix('bump', 'logo bumpin', 24,false);
 	logoBl.animation.play('bump');
 	logoBl.scale.set(0.6, 0.6);
 	logoBl.updateHitbox();
@@ -110,24 +110,27 @@ function goToItem() {
 	selectedSomthin = true;
 
 	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
-
+	new FlxTimer().start(0.35, (_) -> 	
 	switch (options[curSelected]) {
 		case "story_mode": FlxG.switchState(new StoryMenuState());
 		case "freeplay": FlxG.switchState(new FreeplayState());
 		case "options": FlxG.switchState(new OptionsMenu());
 		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
 		default: selectedSomthin = false;
-	}
+	});
 }
 
 var selectedSomthin:Bool = false;
 var t:Float = 0;
 function update(elapsed:Float) {
+	if (FlxG.sound.music != null)
+		Conductor.songPosition = FlxG.sound.music.time;
+
 	if (selectedSomthin) return;
 
 	if (controls.BACK) {
 		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
-		FlxG.switchState(new TitleState());
+		new FlxTimer().start(0.45, (_) -> 	FlxG.switchState(new TitleState()));
 	}
 	if (controls.DOWN_P) changeItem(1);
 	if (controls.UP_P) changeItem(-1);
@@ -146,7 +149,7 @@ function update(elapsed:Float) {
 }
 
 function beatHit() {
-	logoBl.animation.play('bump');
+	logoBl.animation.play('bump',true);
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}
