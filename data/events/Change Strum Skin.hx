@@ -1,20 +1,24 @@
 var preloadedFrames:Map<String, Dynamic> = [];
 
 function create()
-    for (event in PlayState.SONG.events)
-        if (event.name == "Change Strum Skin" && !preloadedFrames.exists(event.params[0]))
-            preloadedFrames.set(event.params[0], Paths.getFrames("game/notes/" + event.params[0]));
+    for (event in PlayState.SONG.events) {
+        var skin = event.params[0] == "gorefield" ? "default" : event.params[0];
+        if (event.name == "Change Strum Skin" && !preloadedFrames.exists(skin))
+            preloadedFrames.set(skin, Paths.getFrames("game/notes/" + skin));
+    }
+
 
 var strumAnimPrefix = ["left", "down", "up", "right"];
 function onEvent(eventEvent)
-    if (eventEvent.event.name == "Change Strum Skin")
+    if (eventEvent.event.name == "Change Strum Skin") {
+        var skin:String = eventEvent.event.params[0] == "gorefield" ? "default" : eventEvent.event.params[0];
         for (strumLine in strumLines)
             for (i => strum in strumLine.members) {
                 var oldAnimName:String = strum.animation.name;
                 var oldAnimFrame:Int = strum.animation?.curAnim?.curFrame;
                 if (oldAnimFrame == null) oldAnimFrame = 0;
 
-                strum.frames = preloadedFrames[eventEvent.event.params[0]];
+                strum.frames = preloadedFrames[skin];
                 strum.animation.destroyAnimations();
 
                 strum.animation.addByPrefix('static', 'arrow' + strumAnimPrefix[i % strumAnimPrefix.length].toUpperCase());
@@ -25,3 +29,4 @@ function onEvent(eventEvent)
                 strum.playAnim(oldAnimName, true);
                 strum.animation?.curAnim?.curFrame = oldAnimFrame;
             }
+    }
