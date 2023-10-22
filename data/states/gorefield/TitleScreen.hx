@@ -73,17 +73,21 @@ public function createCoolText(textArray:Array<String>)
 		for (i=>text in textArray)
 		{
 			if (text == "" || text == null) continue;
-			var money:Alphabet = new Alphabet(0, (i * 60) + 200, text, true, false);
-			money.screenCenter(FlxAxes.X);
-			textGroup.add(money);
+			var textShit = new FlxText(0, (i * 90) + 200, FlxG.width, text, 19, true);
+			textShit.setFormat("fonts/pixelart.ttf", 60, FlxColor.WHITE, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			textShit.scrollFactor.set();
+			textShit.screenCenter(FlxAxes.X);
+			textGroup.add(textShit);
 		}
 	}
 
 public function addMoreText(text:String)
 	{
-		var coolText:Alphabet = new Alphabet(0, (textGroup.length * 60) + 200, text, true, false);
-		coolText.screenCenter(FlxAxes.X);
-		textGroup.add(coolText);
+		var moretextShit = new FlxText(0, (textGroup.length * 90) + 200, FlxG.width, text, 19, true);
+		moretextShit.setFormat("fonts/pixelart.ttf", 60, FlxColor.WHITE, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		moretextShit.scrollFactor.set();
+		moretextShit.screenCenter(FlxAxes.X);
+		textGroup.add(moretextShit);
 	}
 
 public function deleteCoolText()
@@ -120,43 +124,43 @@ function beatHit(curBeat:Int)
 			case 10:
 				createCoolText(["Dathree estuvo aqui"]);
 			case 12:
-				addMoreText("-Dathree");
+				addMoreText("'Dathree'");
 			case 13:
 				deleteCoolText();
 			case 14:
 				createCoolText(["I don't speak spanish"]);
 			case 15:
-				addMoreText("-Lean");
+				addMoreText("'Lean'");
 			case 16:
 				deleteCoolText();
 			case 17:
 				createCoolText(["Gorefield para ti BB"]);
 			case 18:
-				addMoreText("-Nexus");
+				addMoreText("'Nexus'");
 			case 19:
 				deleteCoolText();
 			case 20:
 				createCoolText(["Jon requiero enchiladas"]);
 			case 21:
-				addMoreText("-Bitfox");
+				addMoreText("'Bitfox'");
 			case 22:
 				deleteCoolText();
 			case 23:
 				createCoolText(["Fifa 24"]);
 			case 24:
-				addMoreText("-Jloor");
+				addMoreText("'Jloor'");
 			case 25:
 				deleteCoolText();
 			case 26:
 				createCoolText(["JLoorcito fiu fiu"]);
 			case 27:
-				addMoreText("-Zero");
+				addMoreText("'Zero'");
 			case 28:
 				deleteCoolText();
 			case 29:
 				createCoolText(["el peor mod de fnf"]);
 			case 30:
-				addMoreText("-Keneth");
+				addMoreText("'Keneth'");
 			case 31:
 				deleteCoolText();
 			case 32:
