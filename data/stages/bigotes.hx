@@ -19,7 +19,7 @@ public function removeTrail(){
 }
 
 function create() {
-    jonTrail = new FlxTrail(dad, null, 4, 10, 0.4, 0.069);
+    jonTrail = new FlxTrail(dad, null, 4, 10, 0.3, 0.069);
     jonTrail.beforeCache = dad.beforeTrailCache;
     jonTrail.afterCache = () -> {
 		dad.afterTrailCache();
