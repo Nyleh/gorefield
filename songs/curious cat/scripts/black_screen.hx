@@ -74,6 +74,7 @@ function stepHit(step:Int)
                 staticShader.strength = val;
             });
         case 783:
+            FlxTween.cancelTweensOf(dad.cameraOffset);
             dad.cameraOffset.x = dadXOffset;
             lerpCam = true;
     }
