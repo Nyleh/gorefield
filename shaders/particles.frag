@@ -23,7 +23,7 @@ uniform float particlealpha;
 
 #define SIZE_MOD 1.2
 #define ALPHA_MOD 0.9
-#define LAYERS_COUNT 10
+#define LAYERS_COUNT 8
 
 float hash1_2(in vec2 x)
 {
