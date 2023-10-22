@@ -9,23 +9,27 @@ var iconGroup:FlxTypedGroup<FlxSprite>;
 var descText:FlxText;
 
 var credits:Array<Array<String>> = [
-	// Name's - Rol - Random Description
-	["Zero Artist", "Director, Artist, Animator", "ElTilinaso999"],
+	// Name's - Role - Random Description
+	["Zero Artist", "Director, Artist, and Pixel Artist", "ElTilinaso999"],
 	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
-	["BitfoxOriginal", "Main Musician, Sound Effects and Co-director", "El Chamaco Indio (Lo pusieron de Co-director)"],
-	["Lunar Cleint", "Main Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
+	["BitfoxOriginal", "Co Director, Musician, Pixel Artist and Charter", "El Chamaco Indio (Lo pusieron de Co director)"],
+	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
+	["JoaDash", "Pixel Artist", "Matate oe, no trabaja"],
+	["Ani Manny", "Artist", "El de los chistes bien chistosos"],
+	["Lunar Cleint", "Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
+	["Lean", "Coder", "Lean..."],
+	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
+	["Ne_Eo", "Coder", "Si"],
 	["Nexus Moon", "Musician", "El Undertale"],
 	["AlexR", "Musician", "El que se Murio (Nunca regreso y no se que hace aqui)"],
-	["Lean", "Coder", "Lean..."],
 	["Awe", "Musician", "Otra que se murio"],
-	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
-	["JoaDash", "Extra Pixel Artist", "Matate oe, no trabaja"],
 	["Deadshot", "Charter", "Otra vez, viva Peru!"],
 	["Tok", "Charter", "Se murio, no charteo"],
-	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
-	["Ani-Manny", "Artist", "El de los chistes bien chistosos"],
-	["Ne_Eo", "Coder", "Si"],
-	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"]
+	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"],
+	["Lumpy Touch", "Gorefield Animation Creator", "El lobo de animal crossing!!!"],
+	["Jars Drawings", "Ultra Gorefield Design", "El lobo de animal crossing!!!"],
+	["Omega Black Art", "Ultra Gorefield Design", "El lobo de animal crossing!!!"],
+	["Aytanner", "Original Mondaylovania Musician", "El lobo de animal crossing!!!"]
 ];
 
 var camFollow:FlxObject;
@@ -48,23 +52,32 @@ function create()
 	iconGroup = new FlxTypedGroup();
 	add(iconGroup);
 
+	var sizeArray:Array<String> = 
+	["Lumpy Touch", "Jars Drawings", "Omega Black Art", "Aytanner"]; //need to size these portraits to match the others
 	for (i in 0...credits.length)
 	{
-		var icon:FlxSprite = new FlxSprite(i % 2 * 370 + 20, Std.int(i / 2) * 420);
+		var icon:FlxSprite = new FlxSprite(i % 3 * 370 + 80, Std.int(i / 3) * 420);
 		icon.loadGraphic(Paths.image('menus/credits/' + credits[i][0]));
 		icon.setGraphicSize(332);
 		icon.ID = i;
 		icon.alpha = 0.5;
+		for(z in 0...sizeArray.length){
+			if(credits[i][0] == sizeArray[z]){
+				icon.setGraphicSize(332 + 15);
+				icon.y += 7;
+			}
+		}
 		icon.updateHitbox();
 		iconGroup.add(icon);
 	}
 
 	FlxG.camera.follow(camFollowPos, null, 1);
 
-	descText = new FlxText(32, 0, FlxG.width, "", 19, true);
-	descText.setFormat("fonts/pixelart.ttf", 18, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	descText = new FlxText(32, 10, FlxG.width, "", 19, true);
+	descText.setFormat("fonts/pixelart.ttf", 30, FlxColor.WHITE, "center");
+	descText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 6, 100);
 	descText.scrollFactor.set();
-	//add(descText);
+	add(descText);
 
 	changeSelection(0);
 }
@@ -83,9 +96,9 @@ function update(elapsed:Float)
 		if (controls.RIGHT_P)
 			changeSelection(1);
 		if (controls.UP_P)
-			changeSelection(-2);
+			changeSelection(-3);
 		if (controls.DOWN_P)
-			changeSelection(2);
+			changeSelection(3);
 
 		if (controls.BACK)
 		{
@@ -103,8 +116,11 @@ function changeSelection(change:Int)
 
 	curSelected = FlxMath.wrap(curSelected + change, 0, credits.length-1);
 
+	var previousY = iconGroup.members[curSelected].y;
 	iconGroup.members[curSelected].alpha = 1;
-	camFollow.setPosition(640, iconGroup.members[curSelected].getGraphicMidpoint().y + 130);
+	camFollow.setPosition(640, Std.int(curSelected / 3) * 420 + 270);
+	iconGroup.members[curSelected].y = previousY + 20;
+	FlxTween.tween(iconGroup.members[curSelected],{y: previousY},0.3, {ease: FlxEase.backOut});
 
-	//descText.text = credits[curSelected][1];
+	descText.text = credits[curSelected][1];
 }
