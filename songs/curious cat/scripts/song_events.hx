@@ -2,6 +2,8 @@ var black_overlay:FlxSprite;
 var staticShader:CustomShader;
 var saturationShader:CustomShader = null;
 
+var wrathShaders:Map<Character, CustomShader> = [];
+
 function create()
 {
 	stage.stageSprites["black_overlay"].visible = stage.stageSprites["black_overlay"].active = true;
@@ -23,20 +25,25 @@ function create()
 	camHUD.visible = false; maxCamZoom = 0;
 	dad.cameraOffset.x -= 260;
 
-	/*bfShader = new CustomShader("wrath");
-	bfShader.uDirection = 0.;
-	bfShader.uOverlayOpacity = 0.5;
-	bfShader.uDistance = 21.;
-	bfShader.uChoke = 10.;
-	bfShader.uPower = 1.0;
-
-	bfShader.uShadeColor = [237 / 255, 238 / 255, 255 / 255];
-	bfShader.uOverlayColor = [21 / 255, 19 / 255, 63 / 255];
-
-	boyfriend.shader = bfShader;*/
-
 	for (strum in strumLines)
-		for (char in strum.characters) {char.color = 0xFF3C3C3C; char.danceOnBeat = false;}
+		for (char in strum.characters) {
+			var newShader = new CustomShader("wrath");
+			newShader.uDirection = 0.;
+			newShader.uOverlayOpacity = 0.7;
+			newShader.uDistance = 21.;
+			newShader.uChoke = 10.;
+			newShader.uPower = 1.0;
+		
+			newShader.uShadeColor = [237 / 255, 238 / 255, 255 / 255];
+			newShader.uOverlayColor = [21 / 255, 19 / 255, 63 / 255];
+		
+			var uv = char.frame.uv;
+			newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
+
+			char.danceOnBeat = !(char.forceIsOnScreen = true);
+			char.shader = newShader;
+		}
+	
 	for (name => sprite in stage.stageSprites)
 		if (name != "black_overlay") sprite.color = 0xFF2B2B2B;
 }
@@ -47,12 +54,15 @@ function update(elapsed:Float) {
 	staticShader.time = totalTime;
 }
 
-/*function draw(e) {
-	//if(FlxG.keys.pressed.SPACE)
-	//	e.cancel();
-	var uv = boyfriend.frame.uv;
-	bfShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
-}*/
+function draw(e) {
+	for (strum in strumLines)
+		for (char in strum.characters) {
+			if (char.shader == null) continue;
+
+			var uv = char.frame.uv;
+			char.shader.applyRect = [uv.x, uv.y, uv.width, uv.height];
+		}
+}
 
 function stepHit(step:Int) 
 {
@@ -72,7 +82,10 @@ function stepHit(step:Int)
 			staticShader.strength = stage.stageSprites["black_overlay"].alpha = 0;
 			camHUD.visible = lerpCam = true; FlxG.camera.stopFX();
 			for (strum in strumLines)
-				for (char in strum.characters) {char.color = 0xFFFFFFFF; char.danceOnBeat = true;}
+				for (char in strum.characters) {
+					char.danceOnBeat = !(char.forceIsOnScreen = false);
+					char.shader = null;
+				}
 			for (name => sprite in stage.stageSprites)
 				sprite.color = 0xFFFFFFFF;
 		case 656:
