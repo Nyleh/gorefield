@@ -1,25 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="ORANGE NOTES.png">
+<TextureAtlas imagePath="ORANGE ARROWS.png">
 	<!-- Created with Adobe Animate version 21.0.7.42652 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="orage note0000" x="5" y="5" width="133" height="162"/>
-	<SubTexture name="orage note0001" x="5" y="5" width="133" height="162"/>
-	<SubTexture name="orage note0002" x="143" y="5" width="133" height="162"/>
-	<SubTexture name="orage note0003" x="143" y="5" width="133" height="162"/>
-	<SubTexture name="orange note down0000" x="281" y="5" width="133" height="162"/>
-	<SubTexture name="orange note down0001" x="281" y="5" width="133" height="162"/>
-	<SubTexture name="orange note down0002" x="5" y="172" width="133" height="161" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
-	<SubTexture name="orange note down0003" x="5" y="172" width="133" height="161" frameX="0" frameY="0" frameWidth="133" frameHeight="162"/>
-	<SubTexture name="orange note left0000" x="143" y="172" width="162" height="133"/>
-	<SubTexture name="orange note left0001" x="143" y="172" width="162" height="133"/>
-	<SubTexture name="orange note left0002" x="310" y="172" width="162" height="133"/>
-	<SubTexture name="orange note left0003" x="310" y="172" width="162" height="133"/>
-	<SubTexture name="orange note right0000" x="5" y="338" width="162" height="133"/>
-	<SubTexture name="orange note right0001" x="5" y="338" width="162" height="133"/>
-	<SubTexture name="orange note right0002" x="172" y="338" width="161" height="133" frameX="0" frameY="0" frameWidth="162" frameHeight="133"/>
-	<SubTexture name="orange note right0003" x="172" y="338" width="161" height="133" frameX="0" frameY="0" frameWidth="162" frameHeight="133"/>
-	<SubTexture name="orange note up0000" x="5" y="5" width="133" height="162"/>
-	<SubTexture name="orange note up0001" x="5" y="5" width="133" height="162"/>
-	<SubTexture name="orange note up0002" x="143" y="5" width="133" height="162"/>
-	<SubTexture name="orange note up0003" x="143" y="5" width="133" height="162"/>
+	<SubTexture name="orange arrow DOWN0000" x="0" y="0" width="169" height="159"/>
+	<SubTexture name="orange arrow left0000" x="169" y="0" width="159" height="169"/>
+	<SubTexture name="orange arrow right0000" x="328" y="0" width="159" height="169"/>
+	<SubTexture name="orange arrow up0000" x="0" y="169" width="169" height="159"/>
 </TextureAtlas>

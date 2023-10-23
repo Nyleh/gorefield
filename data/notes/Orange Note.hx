@@ -10,10 +10,10 @@ function onNoteCreation(event) {
 
     event.note.frames = Paths.getFrames(event.noteSprite);
     switch(event.strumID % 4) {
-        case 0: event.note.animation.addByPrefix('scroll', 'orange note left');
-        case 1: event.note.animation.addByPrefix('scroll', 'orange note down');
-        case 2: event.note.animation.addByPrefix('scroll', 'orange note up');
-        case 3: event.note.animation.addByPrefix('scroll', 'orange note right');
+        case 0: event.note.animation.addByPrefix('scroll', 'orange arrow left');
+        case 1: event.note.animation.addByPrefix('scroll', 'orange arrow DOWN');
+        case 2: event.note.animation.addByPrefix('scroll', 'orange arrow up');
+        case 3: event.note.animation.addByPrefix('scroll', 'orange arrow right');
     }
 
     event.note.scale.set(event.noteScale, event.noteScale);
