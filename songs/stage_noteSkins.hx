@@ -20,7 +20,7 @@ function postCreate() {
 		return;
 
 	var amt = 1;
-	if(e.noteSprite == "game/notes/sans") amt = 2;
+	if(noteSkin == "sans") amt = 2;
 
 	for(s in strumLines.members) for(n in s.notes.members) {
 		if(n.isSustainNote && n.animation.name == "holdend") {
