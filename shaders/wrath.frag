@@ -11,6 +11,8 @@ uniform float uPower;
 uniform float uDirection;
 uniform float uOverlayOpacity;
 
+uniform vec4 applyRect;
+
 float blendLinearBurn(float base, float blend) {
 	return max(base+blend-1.0,0.0);
 }
@@ -56,7 +58,11 @@ vec3 blendMultiply(vec3 base, vec3 blend, float opacity) {
 }
 
 float texture2DAlphaCheck(vec2 uv) {
-	return texture2D(bitmap, uv).a;
+	if(uv.x >= applyRect.x && uv.y >= applyRect.y && uv.x <= applyRect.z && uv.y <= applyRect.w) {
+		return texture2D(bitmap, uv).a;
+	} else {
+		return 0.0;
+	}
 }
 
 vec4 flixel_texture2DShaded(sampler2D bitmap, vec2 uv) {
@@ -64,38 +70,42 @@ vec4 flixel_texture2DShaded(sampler2D bitmap, vec2 uv) {
 
 	if(color.a == 0.0){return vec4(0.0, 0.0, 0.0, 0.0);}
 
-	float fshading = 0.0;
-	float acu = 0.0;
+	if(uv.x >= applyRect.x && uv.y >= applyRect.y && uv.x <= applyRect.z && uv.y <= applyRect.w) {
+		float fshading = 0.0;
+		float acu = 0.0;
 
-	float direction = radians(mod(uDirection + 90.0, 360.0));
-	vec2 diro = uChoke * vec2(cos(direction), sin(direction));
+		float direction = radians(mod(uDirection + 90.0, 360.0));
+		vec2 diro = uChoke * vec2(cos(direction), sin(direction));
 
-	for(float i = 0.0; i <= 360.0; i += ANGLE) {
-		vec2 offo = uDistance * vec2(cos(radians(i)), sin(radians(i)));
+		for(float i = 0.0; i <= 360.0; i += ANGLE) {
+			vec2 offo = uDistance * vec2(cos(radians(i)), sin(radians(i)));
 
-		//for(float power = 0.15; power <= 1.0; power += 0.15) {
-		float power = 0.5;
-			vec2 off = power * offo + diro;
+			//for(float power = 0.15; power <= 1.0; power += 0.15) {
+			float power = 0.5;
+				vec2 off = power * offo + diro;
 
-			float alpha = texture2DAlphaCheck(uv - off/openfl_TextureSize.xy);
-			fshading += power * (1.0 - alpha);
-			acu += power;
-		//}
+				float alpha = texture2DAlphaCheck(uv - off/openfl_TextureSize.xy);
+				fshading += power * (1.0 - alpha);
+				acu += power;
+			//}
+		}
+
+		fshading /= acu;
+
+		//fshading *= color.a; // Fix the overly green on transparent // BUG: Broken edges
+
+		vec3 shading = (fshading) * uShadeColor;
+
+		vec3 finalColor = blendMultiply(
+			color.rgb +
+				uPower * blendLinearLight(shading.rgb, color.rgb, (1.0 - color.a)),
+			uOverlayColor, uOverlayOpacity
+		);
+
+		color = vec4(finalColor, color.a);
+	} else {
+		color = color;
 	}
-
-	fshading /= acu;
-
-	//fshading *= color.a; // Fix the overly green on transparent // BUG: Broken edges
-
-	vec3 shading = (fshading) * uShadeColor;
-
-	vec3 finalColor = blendMultiply(
-		color.rgb +
-			uPower * blendLinearLight(shading.rgb, color.rgb, (1.0 - color.a)),
-		uOverlayColor, uOverlayOpacity
-	);
-
-	color = vec4(finalColor, color.a);
 
 	if(!hasTransform){return color;}
 
