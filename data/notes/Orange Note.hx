@@ -19,14 +19,15 @@ function onNoteCreation(event) {
     event.note.scale.set(event.noteScale, event.noteScale);
     event.note.antialiasing = true;
 
-    if (FlxG.save.data.orange_hard) {
+    if (FlxG.save.data.orange_hard)
         event.note.alpha = 0.5;
-        event.note.latePressWindow *= 0.95; event.note.earlyPressWindow *= 0.8;
-    }
+
+    event.note.latePressWindow *= FlxG.save.data.orange_hard ? 0.3 : 0.5; 
+    event.note.earlyPressWindow *= FlxG.save.data.orange_hard ? 0.3 : 0.5;
 }
 
 function onPlayerHit(event)
     if (event.noteType == "Orange Note") {event.showSplash = false; event.strumGlowCancelled = true;}
 
 function onPlayerMiss(event)
-    if (event.noteType == "Orange Note") {health -= 9999; event.cancel(true);}
+    if (event.noteType == "Orange Note") {health -= FlxG.save.data.orange_hard ? 99999 : 2/3 ; event.cancel(true);}

@@ -23,7 +23,7 @@ function onNoteCreation(event) {
 
     if (FlxG.save.data.blue_hard) {
         event.note.alpha = 0.5;
-        event.note.latePressWindow *= 1.2; event.note.earlyPressWindow *= 1.3;
+        event.note.latePressWindow *= 2; event.note.earlyPressWindow *= 2;
     }
 }
 
@@ -32,6 +32,6 @@ function onPlayerMiss(event)
 
 function onPlayerHit(event) 
     if (event.noteType == "Blue Note") {
-        event.countAsCombo = event.showRating = event.showSplash = false;
-        event.strumGlowCancelled = true; health -= 9999;
+        event.countAsCombo = event.showRating = event.showSplash = false; 
+        event.strumGlowCancelled = true; health -= FlxG.save.data.blue_hard ? 99999 : 2/3;
     }

@@ -1,6 +1,8 @@
 var blackVignette:FlxSprite;
 var staticShader:CustomShader;
 
+var bfShader:CustomShader;
+
 function create()
 {
     stage.stageSprites["BlackVignette"].visible = stage.stageSprites["BlackVignette"].active = true;
@@ -13,6 +15,18 @@ function create()
     staticShader.time = 0; staticShader.strength = 0;
     staticShader.speed = 20;
     FlxG.camera.addShader(staticShader);
+
+    bfShader = new CustomShader("wrath");
+    bfShader.uDirection = 0.;
+    bfShader.uOverlayOpacity = 0.5;
+    bfShader.uDistance = 21.;
+    bfShader.uChoke = 10.;
+    bfShader.uPower = 1.0;
+
+    bfShader.shadeColor = FlxColor.fromRGB(237, 238, 255);
+    bfShader.overlayColor = FlxColor.fromRGB(21, 19, 63);
+
+    boyfriend.shader = bfShader;
 }
 
 var totalTime:Float = 0;
@@ -48,6 +62,7 @@ function stepHit(step:Int)
                 staticShader.strength = val;
             });
 
-            dad.cameraOffset.x += 260; lerpCam = true;
+            FlxTween.cancelTweensOf(dad.cameraOffset); dad.cameraOffset.x += 260; 
+            lerpCam = true;
     }
 }

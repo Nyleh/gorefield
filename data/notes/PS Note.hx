@@ -60,6 +60,7 @@ function onPlayerHit(event)
         event.countAsCombo = event.showRating = event.showSplash = false;
         event.strumGlowCancelled = true;
         FlxG.sound.play(Paths.sound('mechanics/ps'));
+        health -= FlxG.save.data.ps_hard ? 2/1.5 : 2/6;
 
         if (ps >= 2) {
             psBar.animation.play(Std.string(ps) + " remove", true);
