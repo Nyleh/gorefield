@@ -43,6 +43,7 @@ function create() {
 	gorefield.animation.play('idle');
 	gorefield.updateHitbox();
 	gorefield.x = 586; gorefield.y = 40;
+	gorefield.antialiasing = true;
 	add(gorefield);
 
 	logoBl = new FlxSprite();
@@ -71,6 +72,7 @@ function create() {
 		menuItem.animation.addByPrefix('selected', option + " white", 24);
 		menuItem.animation.play('idle');
 		menuItem.updateHitbox();
+		menuItem.antialiasing = true;
 
 		menuItem.x = 520 - menuItem.width - (100 + (i*50));
 		menuItem.y = 320 + ((menuItem.ID = i) * 92.5);
