@@ -23,7 +23,7 @@ function create()
 	camHUD.visible = false; maxCamZoom = 0;
 	dad.cameraOffset.x -= 260;
 
-	bfShader = new CustomShader("wrath");
+	/*bfShader = new CustomShader("wrath");
 	bfShader.uDirection = 0.;
 	bfShader.uOverlayOpacity = 0.5;
 	bfShader.uDistance = 21.;
@@ -33,7 +33,7 @@ function create()
 	bfShader.uShadeColor = [237 / 255, 238 / 255, 255 / 255];
 	bfShader.uOverlayColor = [21 / 255, 19 / 255, 63 / 255];
 
-	boyfriend.shader = bfShader;
+	boyfriend.shader = bfShader;*/
 
 	for (strum in strumLines)
 		for (char in strum.characters) {char.color = 0xFF3C3C3C; char.danceOnBeat = false;}
@@ -47,12 +47,12 @@ function update(elapsed:Float) {
 	staticShader.time = totalTime;
 }
 
-function draw(e) {
+/*function draw(e) {
 	//if(FlxG.keys.pressed.SPACE)
 	//	e.cancel();
 	var uv = boyfriend.frame.uv;
 	bfShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
-}
+}*/
 
 function stepHit(step:Int) 
 {
