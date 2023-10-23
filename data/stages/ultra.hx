@@ -2,7 +2,12 @@ public var controlHealthAlpha:Bool = true;
 public var curHealthAlpha:Float = 1;
 
 function create() {
-    controlHealthAlpha = true; boyfriend.zoomFactor = .85;
+    controlHealthAlpha = boyfriend.forceIsOnScreen = true; boyfriend.zoomFactor = .8;
+    FlxG.camera.bgColor = 0xFFF6F6F6;
+}
+
+function onMeasureHit() {
+    camMoveOffset = curCameraTarget == 1 ? 30 : 150;
 }
 
 function update(elapsed:Float) {
