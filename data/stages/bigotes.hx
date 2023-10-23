@@ -2,9 +2,16 @@
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
-var jonTrail:FlxTrail;
+public var jonTrail:FlxTrail;
 var tornado:FlxSprite;
 var overlay:FlxSprite;
+
+public var scaleTrail:Bool = false;
+public var bgFlashes:Bool = false;
+public var sineSat:Bool = false;
+
+public var controlHealthAlpha:Bool = true;
+public var curHealthAlpha:Float = 1;
 
 public var trailBloom:CustomShader;
 public var particleShader:CustomShader; // yes it is a shader
@@ -16,15 +23,9 @@ public var isLymanFlying:Bool = true;
 public var camCharacters:FlxCamera;
 public var camJonTrail:FlxCamera;
 
-public function addTrail(){
-    jonTrail.visible = jonTrail.active = true;
-}
-
-public function removeTrail(){
-    jonTrail.visible = jonTrail.active = false;
-}
-
 function create() {
+    dad.zoomFactor = 0.9; 
+    scaleTrail = bgFlashes = sineSat = !(controlHealthAlpha = isLymanFlying = true);
     for (cam in [camGame, camHUD]) FlxG.cameras.remove(cam, false);
 
     camCharacters = new FlxCamera(0, 0);
@@ -70,11 +71,14 @@ function create() {
 
     tornado = stage.stageSprites["tornado"];
     tornado.skew.y = 40;
+
+    stage.stageSprites["BIGOTESBG"].alpha = 0.7;
 }
 
 var bgTween:FlxTween;
 
-function measureHit(curMeasure:Int){
+function measureHit(curMeasure:Int) {
+    if (!bgFlashes) return;
     stage.stageSprites["BIGOTESBG"].alpha = 1;
     bgTween = FlxTween.tween(stage.stageSprites["BIGOTESBG"],{alpha: 0.7},Conductor.stepCrochet/100);
 }
@@ -84,9 +88,16 @@ function postCreate() {
 }
 
 function update(elapsed:Float) {
+    camJonTrail.visible = jonTrail.visible;
     for (cam in [camJonTrail, camCharacters]) {
         cam.scroll = FlxG.camera.scroll;
         cam.zoom = FlxG.camera.zoom;
+    }
+
+    if (controlHealthAlpha) {
+        curHealthAlpha = lerp(curHealthAlpha, curCameraTarget == 1 ? 0.25 : 1, 1/20);
+        for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+            spr.alpha = curHealthAlpha;
     }
 
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
@@ -100,11 +111,13 @@ function update(elapsed:Float) {
 
     drunkShader.time = _curBeat;
 
-    if(!isLymanFlying) return;
-    dad.y = 200 + (20 * Math.sin(_curBeat));
-    dad.x = 1460 + (50 * Math.sin(_curBeat/2));
+    if(isLymanFlying) {
+        dad.y = 200 + (20 * Math.sin(_curBeat));
+        dad.x = 1460 + (50 * Math.sin(_curBeat/2));
+    }
 
-    trailBloom.sat = 1.2 + (.2 * Math.sin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));
+    if (sineSat) trailBloom.sat = 1.2 + (.2 * Math.sin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));
+    if (!scaleTrail) return;
     for (i=>trail in jonTrail.members) {
         var scale = FlxMath.bound(1 + (.11 * Math.sin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
         trail.scale.set(scale, scale);

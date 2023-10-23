@@ -7,7 +7,7 @@
 	</sprite>
     <sprite name="BG1" x="0" y="0" sprite="BG_01" antialiasing="true" scrollx="0.8" scrolly="0.8"/>
 	<sprite name="BG2" x="200" y="1200" sprite="BG_AGUA" antialiasing="true" scrollx="1" scrolly="1"/>
-	<solid name="pixelblack" x="-640" y="-360" width="2560" height="1440" color="0x382454">
+	<solid name="pixelblack" x="-640" y="-360" width="2560" height="1440" color="0x331e50">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="visible" type="bool" value="false"/>
 		<property name="scrollFactor.y" type="float" value="0"/>
