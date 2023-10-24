@@ -7,9 +7,9 @@
 	<sprite name="lightFinal" x="-700" y="10" sprite="light" antialiasing="true" scrollx="1" scrolly="1" scale="1.1" >
 		<property name="visible" type="bool" value="false" />
 	</sprite>
-	<sprite name="cloudsFinal" x="-700" y="10" sprite="clouds" antialiasing="true" scrollx="1" scrolly="1" scale="1.1" >
+	<solid name="cloudsFinal" x="-700" y="10" width="1" height="1" color="0x000000" >
 		<property name="visible" type="bool" value="false" />
-	</sprite>
+	</solid>
 	<sprite name="frontFinal" x="-700" y="10" sprite="front" antialiasing="true" scrollx="1.1" scrolly="0.9" scale="1.1" >
 		<property name="visible" type="bool" value="false" />
 	</sprite>
