@@ -182,7 +182,7 @@ function stepHit(step:Int) {
                 camHUD.shake(0.002, 999999);
             });
 
-            camGame.snapToTarget();
+            snapCam();
         case 1664:
             FlxG.camera.stopFX();
             camHUD.stopFX();
