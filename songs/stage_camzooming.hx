@@ -4,6 +4,10 @@ static var strumLineGfZoom:Float = 0;
 
 static var lerpCam:Bool = true;
 
+public var strumLineDadMult:Float = 1;
+public var strumLineGfMult:Float = 1;
+public var strumLineBfMult:Float = 1; //i love being lazy (for change stage zoom specifically)
+
 function create() {
     camZooming = false; lerpCam = true;
     if (stage == null || stage.stageXML == null) return;

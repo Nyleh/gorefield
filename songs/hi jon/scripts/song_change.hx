@@ -7,8 +7,11 @@ var blackandwhite:CustomShader = null;
 function create() {
     FlxG.sound.play(Paths.sound('explosionsound'), 0); // Preload sound
 
-    stage.stageSprites["bgFinal"].active = stage.stageSprites["bgFinal"].visible = false;
-    stage.stageSprites["bgFinal"].drawComplex(FlxG.camera); // Push to GPU
+    for (sprite in [stage.stageSprites["bgFinal"], stage.stageSprites["lightFinal"], stage.stageSprites["cloudsFinal"], stage.stageSprites["frontFinal"]])
+    {
+        sprite.active = sprite.visible = false;
+        sprite.drawComplex(FlxG.camera); // Push to GPU
+    }
 
     for (char in [gf, boyfriend, dad]) char.visible = char.active = false;
     for (char in [boyfriend, dad]) char.alpha = 0;
@@ -154,13 +157,16 @@ function stepHit(step:Int) {
 
             gf.visible = gf.active = gfTrail.active = gfTrail.visible = false;
 
+            strumLineDadMult = 1.1;
+            strumLineBfMult = 1.8;
+
             stage.stageSprites["black_overlay"].active = stage.stageSprites["black_overlay"].visible = true;
             stage.stageSprites["black_overlay"].alpha = 1;
             remove(stage.stageSprites["black_overlay"]);
             add(stage.stageSprites["black_overlay"]);
 
             for (name => sprite in stage.stageSprites) 
-                sprite.active = sprite.visible = name == "bgFinal";
+                sprite.active = sprite.visible = (name == "bgFinal" || name ==  "lightFinal" || name == "cloudsFinal" || name ==  "frontFinal");
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
                 FlxTween.tween(spr, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
             for (strum in cpu)
