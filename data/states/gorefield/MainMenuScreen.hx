@@ -32,6 +32,17 @@ var curSelected:Int = curMainMenuSelected;
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
 var particleShader;
+
+var keyCombos:Map<String, Void->Void> = [
+	"PENKARU" => function () {
+		trace("aru");
+	},
+	"PENK" => function () {
+		trace("penk");
+	}
+];
+var keyComboProgress:Map<String, Int> = [];
+
 function create() {
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
@@ -123,12 +134,26 @@ function goToItem() {
 }
 
 var selectedSomthin:Bool = false;
-var t:Float = 0;
 function update(elapsed:Float) {
 	if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;
 
 	if (selectedSomthin) return;
+
+	var lastPressed = FlxG.keys.firstJustPressed();
+	if (lastPressed != -1) {
+		for (fullPhrase => func in keyCombos) {
+			if (!keyComboProgress.exists(fullPhrase)) keyComboProgress.set(fullPhrase, 0);
+			if (lastPressed == fullPhrase.charCodeAt(keyComboProgress.get(fullPhrase))) {
+				var progress = keyComboProgress.get(fullPhrase) == null ? 0 : keyComboProgress.get(fullPhrase);
+				keyComboProgress.set(fullPhrase, progress+1);
+				if (fullPhrase.length == keyComboProgress.get(fullPhrase)) {
+					keyComboProgress.set(fullPhrase, 0);
+					if (func != null) func();
+				}
+			}
+		}
+	}
 
 	if (controls.BACK) {
 		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
@@ -142,7 +167,6 @@ function update(elapsed:Float) {
 		persistentUpdate = !(persistentDraw = true);
 		openSubState(new EditorPicker());
 	}
-
 
 	if (controls.SWITCHMOD) {
 		openSubState(new ModSwitchMenu());
