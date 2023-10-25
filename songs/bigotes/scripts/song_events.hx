@@ -24,7 +24,7 @@ function stepHit(step:Int) {
             FlxTween.tween(FlxG.camera, {_fxShakeIntensity: 0.004}, (Conductor.stepCrochet / 1000) * 32);
 
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
-            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * (34+16));
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * (32));
 
             FlxTween.num(0, 0.2, (Conductor.stepCrochet / 1000) * (34+16), {}, (val:Float) -> {particleShader.particlealpha = val;});
             FlxTween.num(1, 1.3, (Conductor.stepCrochet / 1000) * (36+16), {ease: FlxEase.qaudOut}, (val:Float) -> {warpShader.distortion = val;});
