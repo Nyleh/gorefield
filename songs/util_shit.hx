@@ -26,8 +26,8 @@ static function snapCam() {
 }
 
 function postUpdate(elapsed:Float) {
-    if (frameCount++ >= 2) {
+    if (turnOffLerpNextFrame && frameCount++ >= 2) {
         FlxG.camera.followLerp = oldLerp;
-        turnOffLerpNextFrame = oldLerp;
+        turnOffLerpNextFrame = false;
     }
 }
