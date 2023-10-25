@@ -7,6 +7,8 @@ var textGroup:FlxGroup;
 var ngSpr:FlxSprite;
 var titleText:FlxSprite;
 
+var wiggleGorefield:FlxSprite;
+
 function create() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 	FlxG.mouse.visible = false;
@@ -48,8 +50,15 @@ function create() {
 	if(skippedIntro) return;
 	blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
 	add(blackScreen);
-
 	add(textGroup);
+
+	wiggleGorefield = new FlxSprite(0, 224 - 240).loadGraphic(Paths.image("menus/mainmenu/garfie"), true, 498, 280);
+	wiggleGorefield.animation.add("_",  [for (_ in 0...34) _], 24, true);
+	wiggleGorefield.animation.play("_");
+	wiggleGorefield.visible = false;
+	wiggleGorefield.screenCenter();
+	add(wiggleGorefield);
+
 	trace("Start Mod");
 
 	FlxG.sound.playMusic(Paths.music('gorefield-menuINTRO'),0.7,false);
@@ -172,6 +181,10 @@ function beatHit(curBeat:Int)
 				addMoreText('Vs Gorefield');
 			case 34:
 				addMoreText('Part II');
+			case 35:
+				if(!FlxG.random.bool(15)) return;
+				deleteCoolText();
+				wiggleGorefield.visible = true;
 			case 36:
 				skipIntro();
 		}
@@ -187,6 +200,7 @@ function skipIntro():Void
 			remove(textGroup);
 			remove(blackScreen);
 			FlxG.camera.flash(FlxColor.WHITE, 2);
+			wiggleGorefield.visible = false;
 			skippedIntro = true;
 			FlxG.sound.playMusic(Paths.music('gorefield-menuLOOP'));
 		}
