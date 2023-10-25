@@ -3,6 +3,7 @@ import funkin.options.OptionsMenu;
 import flixel.text.FlxTextBorderStyle;
 import funkin.menus.ModSwitchMenu;
 import funkin.editors.EditorPicker;
+import funkin.backend.MusicBeatState;
 
 var options:Array<String> = [
 	'story_mode',
@@ -34,14 +35,13 @@ var logoBl:FlxSprite;
 var particleShader;
 
 var keyCombos:Map<String, Void->Void> = [
-	"PENKARU" => function () {
-		trace("aru");
-	},
-	"PENK" => function () {
-		trace("penk");
-	}
+	"PENK" => function () penk(),
+	"PENKA" => function () penk(),
+	"PENKR" => function () penk(),
+	"PENKARU" => function () penk()
 ];
 var keyComboProgress:Map<String, Int> = [];
+var canUseKeyCombos:Bool = true;
 
 function create() {
 	CoolUtil.playMenuSong();
@@ -141,7 +141,7 @@ function update(elapsed:Float) {
 	if (selectedSomthin) return;
 
 	var lastPressed = FlxG.keys.firstJustPressed();
-	if (lastPressed != -1) {
+	if (lastPressed != -1 && canUseKeyCombos)
 		for (fullPhrase => func in keyCombos) {
 			if (!keyComboProgress.exists(fullPhrase)) keyComboProgress.set(fullPhrase, 0);
 			if (lastPressed == fullPhrase.charCodeAt(keyComboProgress.get(fullPhrase))) {
@@ -153,7 +153,6 @@ function update(elapsed:Float) {
 				}
 			}
 		}
-	}
 
 	if (controls.BACK) {
 		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
@@ -179,3 +178,39 @@ function beatHit() {
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}
+
+// easter eggs
+var penkOrder:Array<Int> = [1, 2, 3, 4];
+var penkProgress:Int = 0;
+function penk() {
+	if (penkProgress == 0)
+		for (i in 0...penkOrder.length-1) {
+			var j = FlxG.random.int(i, penkOrder.length-1); var tmp = penkOrder[i];
+			penkOrder[i] = penkOrder[j]; penkOrder[j] = tmp;
+		}
+
+	keyCombos.remove(switch (penkProgress) {
+		case 1:	"PENK";
+		case 2:	"PENKA";
+		case 3:	"PENKR";
+		case 4:	"PENKARU";
+	});
+
+	FlxG.sound.play(Paths.sound("vineboom"));
+	FlxG.sound.music.volume -= 0.25;
+
+	var newSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/wow i love easter what about you/penkarue (" + Std.string(penkOrder[penkProgress++]) + ")"));
+	newSprite.updateHitbox(); newSprite.antialiasing = true; newSprite.alpha = 0; newSprite.angle = FlxG.random.float(-900, 900);
+	newSprite.setPosition(FlxG.random.float(0, FlxG.width-newSprite.width), FlxG.random.float(0, FlxG.height-newSprite.height));
+	add(newSprite); newSprite.scale.set(1.2, 1.2); canUseKeyCombos = false;
+
+	FlxG.camera.shake(0.002, 0.3);
+	FlxTween.tween(newSprite, {"scale.x": 1, "scale.y": 1, alpha: 1, angle: 0}, 0.3, {ease: FlxEase.qaudInOut, onComplete: function () {if (penkProgress != 4) canUseKeyCombos = true;}});
+	if (penkProgress != 4) return;
+	(new FlxTimer()).start(.3, function (_) {
+		FlxTween.tween(FlxG.camera, {zoom: 3, alpha:0, angle: -800}, 2, {ease: FlxEase.circInOut, onComplete: function () {
+			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
+			FlxG.switchState(new ModState("gorefield/easteregg/Penkaru"));
+		}});
+	});
+}
