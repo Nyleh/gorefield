@@ -182,7 +182,7 @@ function beatHit(curBeat:Int)
 			case 34:
 				addMoreText('Part II');
 			case 35:
-				if(!FlxG.random.bool(15)) return;
+				if(!FlxG.random.bool(10)) return;
 				deleteCoolText();
 				wiggleGorefield.visible = true;
 			case 36:
