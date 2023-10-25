@@ -29,6 +29,9 @@ function new() {
     if (FlxG.save.data.particles == null) FlxG.save.data.particles = true;
     if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
 
+    // EASTER EGG
+    if (FlxG.save.data.canVisitArlene == null) FlxG.save.data.canVisitArlene = false;
+
     // OTHER
     if (FlxG.save.data.spanish == null) FlxG.save.data.spanish = false;
     if (FlxG.save.data.dev == null) FlxG.save.data.dev = false;

@@ -11,6 +11,9 @@ function create() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 	FlxG.mouse.visible = false;
 
+	if (FlxG.sound.music != null && FlxG.sound.music.volume == 0)
+		FlxG.sound.music.fadeIn(0.5, 0, 0.7);
+
 	textGroup = new FlxGroup();
 
 	house = new FlxSprite(560, 45).loadGraphic(Paths.image('menus/mainmenu/house'));
@@ -191,17 +194,22 @@ function skipIntro():Void
 
 var transitioning:Bool = false;
 
-function update(elapsed:Float) {
+function update(elapsed:Float) 
+{
 	var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
 
 	if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;
 
-	if (pressedEnter && !skippedIntro){
-		skipIntro();
-	}
-	else if (pressedEnter && !transitioning && skippedIntro){
-		pressEnter();
+	if (FlxG.keys.justPressed.SHIFT)
+		FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
+
+	if (pressedEnter)
+	{
+		if (!skippedIntro)
+			skipIntro();
+		else if (!transitioning)
+			pressEnter();
 	}
 }
 
