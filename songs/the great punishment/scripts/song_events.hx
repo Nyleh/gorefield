@@ -32,7 +32,7 @@ function create(){
 	staticShader.speed = 20;
 	FlxG.camera.addShader(staticShader);
 
-    bg.color = 0xFF0F1012;
+    bg.color = 0xFF0C0D0F;
 
     for (spr in [boyfriend, stage.stageSprites["TV"], dad]) {
         var newShader = new CustomShader("wrath");
@@ -98,8 +98,8 @@ function update(elapsed:Float) {
     }
 
     bulletsText.setPosition(
-        finalPos[0] + 460 + FlxG.random.float(-4, 4), 
-        finalPos[1] + 450 + FlxG.random.float(-4, 4)
+        finalPos[0] + 380 + FlxG.random.float(-3, 3), 
+        finalPos[1] + 470 + FlxG.random.float(-3, 3)
     );
     redOverlay.alpha = lerp(redOverlay.alpha, 0, 1/40);
 
@@ -111,7 +111,6 @@ function update(elapsed:Float) {
 }
 
 function stepHit(step:Int) {
-    trace(step);
     switch (step) {
         case 0:
             lerpCam = false; FlxG.camera.zoom = 1.7;
@@ -121,7 +120,7 @@ function stepHit(step:Int) {
             FlxG.camera.shake(0.0015, 999999);
         case 64: lerpGorefield = true; tottalTime = 0;
         case 78: 
-            FlxTween.color(dad, (Conductor.stepCrochet / 1000) * 48, 0xFF20251F, 0xFF8E988C);
+            FlxTween.color(dad, (Conductor.stepCrochet / 1000) * 48, 0xFF20251F, 0xFF92B8A3);
         case 98:
             for (spr in wrathSprites) {
                 if (spr.shader == null) continue;
@@ -150,6 +149,7 @@ function stepHit(step:Int) {
 
             bulletsText.text = "BULLETS"; doHealthLerp = false;
             tweenHUD(0, (Conductor.stepCrochet / 1000) * 4); 
+            FlxTween.tween(stage.stageSprites["black_overlay"], {alpha: 0.95}, (Conductor.stepCrochet / 1000) * 4);
         case 1144: 
             bulletsText.text = "BULLETS DON'T"; 
         case 1148: 
@@ -158,6 +158,7 @@ function stepHit(step:Int) {
         case 1152: 
             bulletsText.text = "BULLETS DON'T WORK, JON..."; 
             FlxTween.tween(bulletsText, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+            FlxTween.tween(stage.stageSprites["black_overlay"], {alpha: 0.75}, (Conductor.stepCrochet / 1000) * 4);
             FlxTween.tween(bulletsText.offset, {y: -30}, (Conductor.stepCrochet / 1000) * 8);
         case 1288: FlxG.camera.visible = camHUD.visible = false;
     }
