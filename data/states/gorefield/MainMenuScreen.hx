@@ -32,7 +32,6 @@ var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
-var particleShader;
 
 var keyCombos:Map<String, Void->Void> = [
 	"PENK" => function () penk(),
