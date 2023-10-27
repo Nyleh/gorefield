@@ -22,11 +22,13 @@ function create()
     bars.screenCenter(FlxAxes.X);
 
     FlxG.save.data.canVisitArlene = true; //This should be set to true when the credits video is shown -EstoyAburridow
+	FlxG.sound.music.fadeOut(0.5);
+
+	FlxG.sound.play(Paths.sound('easteregg/menu_clown'), 1, true);
 
     if (!FlxG.save.data.canVisitArlene)
     {
         add(bars);
-        FlxG.sound.music.fadeOut(0.5);
         FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 1, true);
 
         return;
@@ -49,13 +51,12 @@ function create()
     /*
     var box:FlxSprite = new FlxSprite(0, 370);
     box.makeGraphic(960, 250, FlxColor.WHITE);
-    box.pixels.colorTransform(new Rectangle(5, 5, 950, 240),
-        new ColorTransform(0, 0, 0, 1));
+    box.pixels.colorTransform(new Rectangle(5, 5, 950, 240), new ColorTransform(0, 0, 0, 1));
     box.screenCenter(FlxAxes.X);
     box.alpha = 0;
     add(box);
 
-    text = new FlxText(0, box.y + 40, 930, "Aenean et egestas lorem. Nulla facilisi. Duis sodales erat semper erat elementum, ut iaculis libero iaculis. Aliquam sagittis sem quis nisi tempor molestie. Proin dignissim, odio congue placerat semper, diam.");
+    text = new FlxText(0, box.y + 40, 930, "Test Text.");
     text.setFormat("fonts/pixelart.ttf", 30, 0xFFFFFFFF, "lefter");
     text.screenCenter(FlxAxes.X);
     text.alpha = 0;
