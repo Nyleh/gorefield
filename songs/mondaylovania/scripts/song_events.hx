@@ -2,6 +2,7 @@
 function create() {
     gf.visible = gf.active = false;
     gf.drawComplex(FlxG.camera); // Gpu bla bla
+    dad.forceIsOnScreen = true;
 }
 
 function stepHit(step:Int) {
@@ -15,6 +16,7 @@ function stepHit(step:Int) {
             gf.visible = gf.active = true;
             tweenHUD(0, (Conductor.stepCrochet / 1000) * 14);
         }
+        case 1422: stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = false;
         case 1488: camGame.alpha = camHUD.alpha = 0;
     }
 }
