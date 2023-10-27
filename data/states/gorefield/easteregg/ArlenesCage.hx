@@ -1,15 +1,20 @@
 import flixel.util.FlxAxes;
 import openfl.geom.ColorTransform;
 import openfl.geom.Rectangle;
+import flixel.addons.text.FlxTypeText;
 
 var canPress:Bool = false;
 var wind:FlxSound;
 
+var eyes:FlxSprite;
+
+var text:FlxText;
+
 function create()
 {
-    var bars:FlxSprite = new FlxSprite(0, 120);
+    var bars:FlxSprite = new FlxSprite(0, 100);
     bars.loadGraphic(Paths.image("easteregg/Arlene_Box"));
-    bars.scale.set(4, 4);
+    bars.scale.set(6, 6);
     bars.updateHitbox();
     bars.screenCenter(FlxAxes.X);
 
@@ -24,23 +29,41 @@ function create()
         return;
     }
 
-    var eyes:FlxSprite = new FlxSprite(0, bars.y + 12);
+    eyes = new FlxSprite();
     eyes.loadGraphic(Paths.image("easteregg/Arlene_Eyes"), true, 80, 34);
     eyes.animation.add("eyes", [0, 1, 2, 3], 0, false);
     eyes.animation.play("eyes");
     eyes.scale.set(3.5, 3.5);
     eyes.updateHitbox();
     eyes.screenCenter(FlxAxes.X);
+    eyes.y = bars.y + (bars.height - eyes.height) / 2;
     eyes.alpha = 0;
+    eyes.antialiasing = false;
     add(eyes);
 
-    FlxTween.tween(eyes, {alpha: 1}, 1.4, {
+    FlxTween.tween(eyes, {alpha: 1}, 2.8, {
         onComplete: function(_) 
         {
             canPress = true;
         },
-        startDelay: 0.4,
+        startDelay: 0.8,
         ease: FlxEase.quadOut
+    });
+
+    // vertical eyes movement
+    FlxTween.tween(eyes, {y: bars.y + 35}, 2, {
+        onComplete: function(_) 
+        {
+            FlxTween.tween(eyes, {y: bars.y + bars.height - 35 - eyes.height}, 3, {
+                onComplete: function(_) 
+                {
+                    FlxTween.tween(eyes, {y: bars.y + 35}, 3);
+                },
+                loopDelay: 3,
+                type: FlxTween.LOOPING
+            });
+        },
+        startDelay: 3.6,
     });
 
     add(bars);
@@ -53,7 +76,14 @@ function create()
     box.alpha = 0;
     add(box);
 
-    FlxTween.tween(box, {alpha: 1}, 1, {startDelay: 1});
+    text = new FlxText(0, box.y + 40, 930, "Aenean et egestas lorem. Nulla facilisi. Duis sodales erat semper erat elementum, ut iaculis libero iaculis. Aliquam sagittis sem quis nisi tempor molestie. Proin dignissim, odio congue placerat semper, diam.");
+    text.setFormat("fonts/pixelart.ttf", 30, 0xFFFFFFFF, "lefter");
+    text.screenCenter(FlxAxes.X);
+    text.alpha = 0;
+    add(text);
+
+    FlxTween.tween(box, {alpha: 1}, 2, {startDelay: 2});
+    FlxTween.tween(text, {alpha: 1}, 2, {startDelay: 2});
 }
 
 function update(elapsed)
@@ -65,4 +95,5 @@ function update(elapsed)
         return;
 
     // Arlene's dialogues
+    
 }
