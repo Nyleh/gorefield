@@ -91,7 +91,7 @@ function create()
     fastFirstFade = FlxG.save.data.arlenePhase >= 1;
     introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
     (new FlxTimer()).start((FlxG.save.data.arlenePhase >= 1 ? 2 : 4)/8, function () introSound.play(), 8);
-    if (FlxG.save.data.arlenePhase == -1) return;
+    if (FlxG.save.data.arlenePhase == -1 && FlxG.save.data.canVisitArlene) return;
     (new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 4.2 : 6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.2));
     (new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 6 : 8, progressDialogue);
 }
@@ -212,11 +212,11 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
             if (char == 0) {eyes.animation.play("smug", true);}
     },
     {
-        message: "Hey,&&& since your down here alreadly...&&&&\nCan you get a hold of nermal or garfield for me?", 
+        message: "Hey,&&& since your down here already...&&&&\nCan you get a hold of nermal or garfield for me?", 
         typingSpeed: 0.05, startDelay: 0,
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("normal", true);}
-            if (isCharPhrase(char, "Hey,&&& since your alreadly down here...&&&&\n")) eyes.animation.play("confused", true);
+            if (isCharPhrase(char, "Hey,&&& since your already down here...&&&&\n")) eyes.animation.play("confused", true);
         }
     },
     {
@@ -229,11 +229,11 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "What?&&&& You dont feel like answering my questionn or something???&&&&&\nYou know it's rude to ignore someone...&", 
+        message: "What?&&&& You dont feel like answering my question or something???&&&&&\nYou know it's rude to ignore someone...&", 
         typingSpeed: 0.035, startDelay: 1,
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("confused", true);}
-            if (isCharPhrase(char, "What?&&&& You dont feel like answering my questionn or something???&&&&&\n")) eyes.animation.play("smug", true);
+            if (isCharPhrase(char, "What?&&&& You dont feel like answering my question or something???&&&&&\n")) eyes.animation.play("smug", true);
         }
     },
     {
