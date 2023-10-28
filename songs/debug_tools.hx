@@ -1,4 +1,4 @@
-var curSpeed:Float = 1;
+public var curSpeed:Float = 1;
 static var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
 

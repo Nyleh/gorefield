@@ -3,7 +3,7 @@ public var curHealthAlpha:Float = 1;
 
 function create() {
     controlHealthAlpha = boyfriend.forceIsOnScreen = true; boyfriend.zoomFactor = .8;
-    FlxG.camera.bgColor = 0xFFF6F6F6;
+    FlxG.camera.bgColor = 0xFFADABAB;
 }
 
 function onMeasureHit() {

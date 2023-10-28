@@ -48,6 +48,7 @@ function create()
      * 7 third note after found
      */
     FlxG.save.data.arlenePhase = 0;
+    FlxG.save.data.canVisitArlene = true;
 
     switch (FlxG.save.data.arlenePhase) {
         case 0: dialogueList = firstVisitDialogue; endingCallback = firstVisitEndCallback;
@@ -96,7 +97,7 @@ function create()
     fastFirstFade = FlxG.save.data.arlenePhase >= 1;
     introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
     (new FlxTimer()).start((FlxG.save.data.arlenePhase >= 1 ? 2 : 4)/8, function () introSound.play(), 8);
-    if (FlxG.save.data.arlenePhase == -1) return;
+    if (FlxG.save.data.arlenePhase == -1 && FlxG.save.data.canVisitArlene) return;
     (new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 4.2 : 6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.2));
     (new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 6 : 8, progressDialogue);
 }
@@ -235,7 +236,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "Hey,&&& since your down here alreadly...&&&&\nCan you get a hold of nermal or garefield for me?", 
+        message: "Hey,&&& since your down here already...&&&&\nCan you get a hold of nermal or garfield for me?", 
         typingSpeed: 0.05, startDelay: 0,
         onEnd: function () {},
         event: function (char:Int) {
@@ -245,7 +246,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "I've been trying to reaach them for the longest time...&&&&\nBut they never seem to notice for some reason.&", 
+        message: "I've been trying to reach them for the longest time...&&&&\nBut they never seem to notice for some reason.&", 
         typingSpeed: 0.05, startDelay: 0,
         onEnd: function () {
             eyes.animation.play("normal", true); __canAccept = false;
@@ -275,7 +276,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "Being down here for a long time has made me very,...&&&& \nuh,& ]nobservant...", 
+        message: "Being down here for a long time has made me very,...&&&& \nuh,& observant...", 
         typingSpeed: 0.06, startDelay: 0,
         onEnd: function () {},
         event: function (char:Int) {
