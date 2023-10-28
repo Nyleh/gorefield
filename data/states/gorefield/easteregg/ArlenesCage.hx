@@ -58,16 +58,19 @@ function create()
 
     add(bars);
 
-    box = new FlxSprite(0, 370);
-    box.makeGraphic(960, 250, FlxColor.WHITE);
-    box.pixels.colorTransform(new Rectangle(5, 5, 950, 240), new ColorTransform(0, 0, 0, 1));
+    box = new FlxSprite(0, 340);
+    box.loadGraphic(Paths.image("easteregg/Arlene_Text"));
+    box.scale.set(3.7,3.7);
+    box.updateHitbox();
     box.screenCenter(FlxAxes.X);
+    box.antialiasing = false;
     box.alpha = 0;
     add(box);
 
-    dialoguetext = new FlxTypeText(0, box.y + 40, 930, "Test Text.");
+    dialoguetext = new FlxTypeText(0, box.y + 55, 930, "Test Text.");
     dialoguetext.setFormat("fonts/pixelart.ttf", 30, 0xFFFFFFFF, "lefter");
     dialoguetext.screenCenter(FlxAxes.X);
+    dialoguetext.antialiasing = false;
     dialoguetext.alpha = 0;
     dialoguetext.sounds = [FlxG.sound.load(Paths.sound('snd_text'), 0.6)];
     add(dialoguetext);
@@ -155,7 +158,7 @@ var tottalTime:Float = 0;
 
 var finishFadeIn:Bool = false;
 function update(elapsed) {
-    tottalTime += elapsed;
+    tottalTime += elapsed * 10;
 
     eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(6 * Math.sin(tottalTime));
     black.alpha = FlxMath.bound(1 - (Math.floor((tottalTime/4) * 8) / 8), 0, 1);
