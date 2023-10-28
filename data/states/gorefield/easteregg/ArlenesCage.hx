@@ -220,20 +220,20 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "I've been trying to reaach them for the longest time...&&&&\nBut they never seem to notice for some reason.&", 
+        message: "I've been trying to reach them for the longest time...&&&&\nBut they never seem to notice for some reason.&", 
         typingSpeed: 0.05, startDelay: 0,
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("normal", true);}
-            if (isCharPhrase(char, "I've been trying to reaach them for the longest time...&&&&\n")) eyes.animation.play("left", true);
-            if (isCharPhrase(char, "I've been trying to reaach them for the longest time...&&&&\nBut they never seem to notice for some reason.&")) eyes.animation.play("normal", true);
+            if (isCharPhrase(char, "I've been trying to reach them for the longest time...&&&&\n")) eyes.animation.play("left", true);
+            if (isCharPhrase(char, "I've been trying to reach them for the longest time...&&&&\nBut they never seem to notice for some reason.&")) eyes.animation.play("normal", true);
         }
     },
     {
-        message: "What?&&&& You dont feel like answering my question or something???&&&&&\nYou know it's rude to ignore someone...&", 
+        message: "What?&&&& You don't feel like answering my question or something???&&&&&\nYou know it's rude to ignore someone...&", 
         typingSpeed: 0.035, startDelay: 1,
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("confused", true);}
-            if (isCharPhrase(char, "What?&&&& You dont feel like answering my question or something???&&&&&\n")) eyes.animation.play("smug", true);
+            if (isCharPhrase(char, "What?&&&& You don't feel like answering my question or something???&&&&&\n")) eyes.animation.play("smug", true);
         }
     },
     {
@@ -245,7 +245,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "I haven't had social interactions in a really long time...&&&&&\nIt's made me alot more observant to my sourrondings.", 
+        message: "I haven't had social interactions in a really long time...&&&&&\nIt's made me alot more observant to my surroundings.", 
         typingSpeed: 0.046, startDelay: 0,
         event: function (char:Int)
             if (char == 0) {eyes.animation.play("normal", true);}
