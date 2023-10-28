@@ -1,5 +1,6 @@
 {
 	"name": "Cryfield",
 	"needsVoices": true,
-	"bpm": 98
+	"bpm": 98,
+	"color": "#54200f"
 }

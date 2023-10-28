@@ -1,5 +1,7 @@
 {
 	"name": "Bigotes",
 	"needsVoices": true,
-	"bpm": 132
+	"bpm": 132,
+	"color": "#a1389c",
+	"icon": "bigotes"
 }

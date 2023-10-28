@@ -1,5 +1,7 @@
 {
 	"name": "Mondaylovania",
 	"needsVoices": true,
-	"bpm": 129
+	"bpm": 129,
+	"color": "#6967e6",
+	"icon": "icon-sansfield"
 }
