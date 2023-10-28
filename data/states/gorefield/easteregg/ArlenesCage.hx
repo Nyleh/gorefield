@@ -26,20 +26,23 @@ function create()
     bars.updateHitbox();
     bars.screenCenter(FlxAxes.X);
 
-    FlxG.save.data.canVisitArlene = true; //This should be set to true when the credits video is shown -EstoyAburridow
-	FlxG.sound.music.fadeOut(0.5);
+    black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
 
-	menuMusic = new FlxSound().loadEmbedded(Paths.sound('easteregg/menu_clown'),true,true);
-    menuMusic.play();
-    FlxG.sound.list.add(menuMusic);
+   // FlxG.save.data.canVisitArlene = true; //This should be set to true when the credits video is shown -EstoyAburridow
+	FlxG.sound.music.fadeOut(0.5);
 
     if (!FlxG.save.data.canVisitArlene)
     {
         add(bars);
+        add(black);
         FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 1, true);
 
         return;
     }
+
+	menuMusic = new FlxSound().loadEmbedded(Paths.sound('easteregg/menu_clown'),true,true);
+    menuMusic.play();
+    FlxG.sound.list.add(menuMusic);
 
     eyes = new FlxSprite();
     eyes.loadGraphic(Paths.image("easteregg/Arlene_Eyes"), true, 80, 34);
@@ -75,7 +78,6 @@ function create()
     dialoguetext.sounds = [FlxG.sound.load(Paths.sound('snd_text'), 0.6)];
     add(dialoguetext);
 
-    black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
     add(black);
 
 
@@ -160,13 +162,14 @@ var finishFadeIn:Bool = false;
 function update(elapsed) {
     tottalTime += elapsed;
 
-    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(6 * Math.sin(tottalTime));
     black.alpha = FlxMath.bound(1 - (Math.floor((tottalTime/4) * 8) / 8), 0, 1);
-
-    if (tottalTime >= 4) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-4)/2) * 8) / 8), 0, 1);
 
     if (controls.BACK)
         FlxG.switchState(new TitleState());
+
+    if (!FlxG.save.data.canVisitArlene) return;
+    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(6 * Math.sin(tottalTime));
+    if (tottalTime >= 4) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-4)/2) * 8) / 8), 0, 1);
 
 
     // Arlene's dialogues
