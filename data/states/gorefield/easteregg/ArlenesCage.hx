@@ -206,7 +206,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
             if (char == 0) {eyes.animation.play("normal", true); menuMusic.play();}
     },
     {
-        message: "Guess being alone down here so long has made me a bit itterable...&&&&&", 
+        message: "Guess being alone down here so long has made me a bit miserable...&&&&&", 
         typingSpeed: 0.05, startDelay: 0,
         event: function (char:Int)
             if (char == 0) {eyes.animation.play("smug", true);}
