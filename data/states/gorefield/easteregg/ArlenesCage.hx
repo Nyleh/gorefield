@@ -221,7 +221,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
     },
     {
         message: "I'm sorry...,&&&  I'm Sorry. &&&\nI didn't mean it that way.", 
-        typingSpeed: 0.06, startDelay: 0,
+        typingSpeed: 0.055, startDelay: 0,
         onEnd: function () {},
         event: function (char:Int)
             if (char == 0) {eyes.animation.play("normal", true); wind.stop(); menuMusic.play();}
@@ -258,12 +258,12 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
         }
     },
     {
-        message: "What?&&&& You dont feel like answering my questionn or something???&&&&&\nYou know it's rude to ignore someone...&", 
+        message: "What?&&&& You don't feel like answering my questionn or something???&&&&&\nYou know it's rude to ignore someone...&", 
         typingSpeed: 0.045, startDelay: 1.75,
         onEnd: function () {},
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("confused", true); __canAccept = true;}
-            if (isCharPhrase(char, "What?&&&& You dont feel like answering my questionn or something???&&&&&\n")) eyes.animation.play("smug", true);
+            if (isCharPhrase(char, "What?&&&& You don't feel like answering my questionn or something???&&&&&\n")) eyes.animation.play("smug", true);
         }
     },
     {
