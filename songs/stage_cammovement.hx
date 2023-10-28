@@ -1,4 +1,5 @@
 import flixel.math.FlxBasePoint;
+import openfl.Lib;
 
 static var camMoveOffset:Float = 15;
 static var camFollowChars:Bool = true;
@@ -10,6 +11,7 @@ function create() {camFollowChars = true; camMoveOffset = 15;}
 function postCreate() {
     var cameraStart = strumLines.members[curCameraTarget].characters[0].getCameraPosition();
     cameraStart.y -= 100; FlxG.camera.focusOn(cameraStart);
+    Lib.application.window.title = "Friday Night Funkin' - Vs Gorefield - " + PlayState.instance.SONG.meta.name;
 }
 
 function onCameraMove(camMoveEvent) {
