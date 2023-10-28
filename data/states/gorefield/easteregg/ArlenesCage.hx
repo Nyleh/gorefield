@@ -47,6 +47,7 @@ function create()
      * 7 third note after found
      */
     FlxG.save.data.arlenePhase = 0;
+    //FlxG.save.data.canVisitArlene = true;
 
     switch (FlxG.save.data.arlenePhase) {
         case 0: dialogueList = firstVisitDialogue;
@@ -211,7 +212,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
             if (char == 0) {eyes.animation.play("smug", true);}
     },
     {
-        message: "Hey,&&& since your down here alreadly...&&&&\nCan you get a hold of nermal or garefield for me?", 
+        message: "Hey,&&& since your down here alreadly...&&&&\nCan you get a hold of nermal or garfield for me?", 
         typingSpeed: 0.05, startDelay: 0,
         event: function (char:Int) {
             if (char == 0) {eyes.animation.play("normal", true);}
