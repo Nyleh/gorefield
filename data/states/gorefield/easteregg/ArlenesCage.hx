@@ -21,7 +21,7 @@ var __randSounds:Array<String> = ["easteregg/snd_text", "easteregg/snd_text_2"];
 var dialogueList:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [];
 var endingCallback:Void->Void = function () {
     dialoguetext.alpha = 1;
-    dialoguetext.text = "END DIALOGUE PHASE 0\n(ESC to go back to title)";
+    dialoguetext.text = "UNRAVEL THE REST IN THE FULL BUILD\n(ESC to go back to title)";
 };
 var curDialogue:Int = -1;
 
@@ -47,7 +47,7 @@ function create()
      * 7 third note after found
      */
     FlxG.save.data.arlenePhase = 0;
-    //FlxG.save.data.canVisitArlene = true;
+    FlxG.save.data.canVisitArlene = true;
 
     switch (FlxG.save.data.arlenePhase) {
         case 0: dialogueList = firstVisitDialogue;
