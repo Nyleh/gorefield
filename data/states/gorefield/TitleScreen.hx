@@ -13,8 +13,10 @@ function create() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 	FlxG.mouse.visible = false;
 
-	if (FlxG.sound.music != null && FlxG.sound.music.volume == 0)
+	if (FlxG.sound.music != null && FlxG.sound.music.volume == 0) {
 		FlxG.sound.music.fadeIn(0.5, 0, 0.7);
+		FlxG.sound.music.play();
+	}
 
 	textGroup = new FlxGroup();
 

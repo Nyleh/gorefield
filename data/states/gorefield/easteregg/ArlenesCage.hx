@@ -1,213 +1,157 @@
+//
 import flixel.util.FlxAxes;
 import openfl.geom.ColorTransform;
 import openfl.geom.Rectangle;
-import flixel.addons.text.FlxTypeText;
 import flixel.sound.FlxSound;
+import funkin.backend.system.framerate.Framerate;
+import flixel.text.FlxTextBorderStyle;
 
-var wind:FlxSound;
-
-var eyes:FlxSprite;
-
-var dialoguetext:FlxTypeText;
 var box:FlxSprite;
 var bars:FlxSprite;
-
+var eyes:FlxSprite;
 var black:FlxSprite;
 
-var dialogueList:Array<Dynamic> = [];
+var dialoguetext:FlxText;
+var __curTxTIndx:Int = -1;
+var __finishedMessage:String = "";
+var __skippedText:Bool = false;
+var __canAccept:Bool = false;
+
+var __randSounds:Array<String> = ["easteregg/snd_text", "easteregg/snd_text_2"];
+var dialogueList:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [
+    {
+        message: "Hi guys welcome to the test dialogue...&&&&&&&&&&&&&ikr its really cool......", 
+        typingSpeed: 0.04, startDelay: 2,
+        event: function (char:Int) {
+            if (char == 0) {wind.stop(); menuMusic.play();}
+            if (char == ("Hi guys welcome to the test dialogue...&&&&&&&&&&&&&").length-1)
+                eyes.animation.play("smug", true);
+        }
+    },
+    {
+        message: "This is tottaly not too insipired off deltarune...&&&&&&&&&&&&&&&&&&&&&&&&&&&&&Thanks for asking.....",
+        typingSpeed: 0.04, startDelay: 0.0,
+        event: function (char:Int) {
+            if (char == 0) eyes.animation.play("normal", true);
+            if (char == ("This is tottaly not too insipired off deltarune...&&&&&&&&&&&&&&&&&&&&&&&&&&&&&").length-1)
+                eyes.animation.play("left", true);
+        }
+    },
+    {
+        message: "Ok ill send you to a cool song now,&&&&&&&&&&&&&&& \nsee you later?\n&&&&&&&&&&&&&&&&&I guess.",
+        typingSpeed: 0.04, startDelay: 0.0,
+        event: function (char:Int) {
+            if (char == 0) eyes.animation.play("normal", true);
+            if (char == ("Ok ill send you to a cool song now,&&&&&&&&&&&&&&& ").length-1) eyes.animation.play("confused", true);
+            if (char == ("Ok ill send you to a cool song now,&&&&&&&&&&&&&&& \nsee you later?\n&&&&&&&&&&&&&&&&&").length-1) eyes.animation.play("smug", true);
+        }
+    }
+];
+var endingCallback:Void->Void = function () {
+    dialoguetext.alpha = 1;
+    dialoguetext.text = "pretend she sent you to a cool song...\n(ESC to go back to title)";
+};
+var curDialogue:Int = -1;
 
 var menuMusic:FlxSound;
+var wind:FlxSound;
+var introSound:FlxSound;
 
 function create()
 {
-    bars = new FlxSprite(0, 100);
-    bars.loadGraphic(Paths.image("easteregg/Arlene_Box"));
-    bars.scale.set(6, 6);
-    bars.updateHitbox();
-    bars.screenCenter(FlxAxes.X);
+    Framerate.instance.visible = false;
 
-    black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+	FlxG.sound.music.volume = 0;
+    FlxG.save.data.canVisitArlene = true; //This should be set to true when the credits video is shown -EstoyAburridow
 
-   // FlxG.save.data.canVisitArlene = true; //This should be set to true when the credits video is shown -EstoyAburridow
-	FlxG.sound.music.fadeOut(0.5);
-
-    if (!FlxG.save.data.canVisitArlene)
-    {
-        add(bars);
-        add(black);
-        FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 1, true);
-
-        return;
-    }
-
-	menuMusic = new FlxSound().loadEmbedded(Paths.sound('easteregg/menu_clown'),true,true);
-    menuMusic.play();
-    FlxG.sound.list.add(menuMusic);
-
-    eyes = new FlxSprite();
-    eyes.loadGraphic(Paths.image("easteregg/Arlene_Eyes"), true, 80, 34);
-    eyes.animation.add("normal", [0], 0);
-    eyes.animation.add("left", [1], 0);
-    eyes.animation.add("smug", [2], 0);
-    eyes.animation.add("confused", [3], 0);
+    bars = new FlxSprite(0, FlxG.height/6).loadGraphic(Paths.image("easteregg/Arlene_Box"));
+    bars.scale.set(6, 6); bars.updateHitbox(); bars.screenCenter(FlxAxes.X);
+    
+    if (FlxG.save.data.canVisitArlene)
+        menuMusic = FlxG.sound.load(Paths.sound('easteregg/menu_clown'), 1.0, true);
+        
+    wind = FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 0, true);
+    FlxTween.tween(wind, {volume: 1}, 6);
+        
+    eyes = new FlxSprite().loadGraphic(Paths.image("easteregg/Arlene_Eyes"), true, 80, 34);
+    eyes.animation.add("normal", [0], 0); eyes.animation.add("left", [1], 0);
+    eyes.animation.add("smug", [2], 0); eyes.animation.add("confused", [3], 0);
     eyes.animation.play("normal");
-    eyes.scale.set(3.5, 3.5);
-    eyes.updateHitbox();
-    eyes.screenCenter(FlxAxes.X);
-    eyes.y = bars.y + (bars.height - eyes.height) / 2;
-    eyes.alpha = 0;
-    eyes.antialiasing = false;
-    add(eyes);
+    eyes.alpha = 0; eyes.scale.set(3.5, 3.5); 
+    eyes.updateHitbox(); eyes.screenCenter(FlxAxes.X);
+    add(eyes); add(bars);
 
-    add(bars);
-
-    box = new FlxSprite(0, 340);
-    box.loadGraphic(Paths.image("easteregg/Arlene_Text"));
-    box.scale.set(3.7,3.7);
-    box.updateHitbox();
-    box.screenCenter(FlxAxes.X);
-    box.antialiasing = false;
-    box.alpha = 0;
+    box = new FlxSprite(0, (FlxG.height/6)*3).loadGraphic(Paths.image("easteregg/Arlene_Text"));
+    box.scale.set(3.7,3.7); box.alpha = 0;
+    box.updateHitbox(); box.screenCenter(FlxAxes.X);
     add(box);
 
-    dialoguetext = new FlxTypeText(0, box.y + 55, 930, "Test Text.");
-    dialoguetext.setFormat("fonts/pixelart.ttf", 30, 0xFFFFFFFF, "lefter");
-    dialoguetext.screenCenter(FlxAxes.X);
-    dialoguetext.antialiasing = false;
-    dialoguetext.alpha = 0;
-    dialoguetext.sounds = [FlxG.sound.load(Paths.sound('snd_text'), 0.6)];
-    add(dialoguetext);
+    dialoguetext = new FlxText(box.x + 80, box.y + 70, box.width - 160, "", 24);
+	dialoguetext.setFormat("fonts/pixelart.ttf", 48, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
+	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
+	add(dialoguetext);
 
     add(black);
 
-
-    dialogueList = [
-        {message: "knock knock", expression: "normal", speed: 0.05},
-        {message: "i am in your walls", expression: "left", speed: 0.05, delay: 1.5},
-        {message: "good luck", expression: "smug", speed: 0.05, delay: 2.5}
-    ];
-}
-
-var dialogueStarted:Bool = false;
-var dialogueEnded:Bool = false;
-var isEnding:Bool = false;
-
-var currentText:String = '';
-var currentTime:Float = 0;
-var currentEmotion:String = '';
-var isSkippable:Bool = true;
-var currentDelay:Float = 0;
-
-function arleneDial(text:String,time:Float,emotion:String){ //show the cosmetic stuff
-    dialogueEnded = false;
-    dialoguetext.resetText(text);
-    dialoguetext.alpha = 1;
-    box.alpha = 1;
-    dialoguetext.start(time);
-    eyes.animation.play(emotion);
-
-    checkforEvents(text);
-}
-
-function nextDialogue(shift:Bool){ //get the next dialogue from the list
-    if(shift) dialogueList.shift();
-
-    for (dialogueArray in dialogueList){
-        var text = dialogueArray.message != null ? dialogueArray.message : 'add text you dingus';
-        var time = dialogueArray.speed != null ? dialogueArray.speed : 0;
-        var emotion = dialogueArray.expression != null ? dialogueArray.expression : 'normal';
-        var skippable = dialogueArray.delay != null ? false : true;
-        var delay = dialogueArray.delay != null ? dialogueArray.delay : null;
-
-        currentText = text;
-        currentTime = time;
-        currentEmotion = emotion;
-        currentDelay = delay;
-        isSkippable = skippable;
-
-        break;
+    for (member in members) {
+        member.antialiasing = false;
+        member.visible = member == bars || member == black ? true : FlxG.save.data.canVisitArlene;
     }
-}
 
-function startDialogue(){  //actually show the dialogue
-    arleneDial(currentText,currentTime,currentEmotion);
-
-    if(!isSkippable){
-        dialoguetext.completeCallback = function(){
-            new FlxTimer().start(currentDelay, (_) -> 	{
-                nextDialogue(true);
-                if (dialogueList[0] == null)
-                    {
-                        if (!isEnding)
-                        {
-                            endConversation();
-                        }
-                    }
-                    else{
-                        startDialogue();
-                    }
-            });
-        }
-    }
-    else{
-        dialoguetext.completeCallback = function(){
-            dialogueEnded = true;
-        }
-    }
+    introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
+    (new FlxTimer()).start(4/8, function () introSound.play(), 8);
+    (new FlxTimer()).start(6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.2));
+    (new FlxTimer()).start(8, progressDialogue);
 }
 
 var tottalTime:Float = 0;
-
-var finishFadeIn:Bool = false;
 function update(elapsed) {
     tottalTime += elapsed;
 
+    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(5 * Math.sin(tottalTime + (Math.PI/2)));
     black.alpha = FlxMath.bound(1 - (Math.floor((tottalTime/4) * 8) / 8), 0, 1);
 
-    if (controls.BACK)
-        FlxG.switchState(new TitleState());
+    if (tottalTime >= 4) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-6)/2) * 8) / 8), 0, 1);
 
-    if (!FlxG.save.data.canVisitArlene) return;
-    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(6 * Math.sin(tottalTime));
-    if (tottalTime >= 4) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-4)/2) * 8) / 8), 0, 1);
+    if (controls.ACCEPT && __canAccept)
+        progressDialogue();
 
+    if (controls.BACK) FlxG.switchState(new TitleState());
+}
 
-    // Arlene's dialogues
+function progressDialogue() {
+    if (__curTxTIndx != __finishedMessage.length-1) {__skippedText = true; return;}
 
-    if(!finishFadeIn && eyes.alpha == 1){
-        finishFadeIn = true;
-        nextDialogue(false);
-        startDialogue();
-        dialogueStarted = true;
-    }
+    if (curDialogue++ >= dialogueList.length-1) {box.alpha = dialoguetext.alpha = 0; endingCallback(); __canAccept = false; return;}
+    var dialogueData = dialogueList[curDialogue];
 
-    if (FlxG.keys.justPressed.ANY && !controls.BACK && dialogueEnded && !isEnding)
-        {
-            nextDialogue(true);
-            if (dialogueList[0] == null)
-            {
-                if (!isEnding)
-                {
-                    endConversation();
-                }
+    __curTxTIndx = 0; __canAccept = true;
+    dialoguetext.text = __finishedMessage = "";
+
+    (new FlxTimer()).start(dialogueData.startDelay == null ? 0 : dialogueData.startDelay, function () {
+        __finishedMessage = dialogueData.message;
+        __typeDialogue(dialogueData.typingSpeed);
+    });
+}
+
+function __typeDialogue(time:Float = 0) {
+    box.alpha = 1;
+    (new FlxTimer()).start(Math.max(0, time + FlxG.random.float(-0.005, 0.015)), function () {
+        if (__skippedText) {
+            __skippedText = false; dialoguetext.text = __finishedMessage;
+            while (__curTxTIndx < __finishedMessage.length) {
+                __curTxTIndx++; if (dialogueList[curDialogue].event != null) dialogueList[curDialogue].event(__curTxTIndx);
             }
-            else
-            {
-                startDialogue();
-            }
+            __curTxTIndx--; return;
         }
-        else if (FlxG.keys.justPressed.ANY && !controls.BACK && dialogueStarted && !isEnding && isSkippable)
-            dialoguetext.skip();
+
+        if (__finishedMessage.charAt(__curTxTIndx) != "&") {
+            FlxG.sound.play(Paths.sound(__randSounds[FlxG.random.int(0, __randSounds.length-1)]), 0.4 + FlxG.random.float(-0.1, 0.1));
+        }
+        dialoguetext.text += __finishedMessage.charAt(__curTxTIndx);
+        if (dialogueList[curDialogue].event != null) dialogueList[curDialogue].event(__curTxTIndx);
+        __curTxTIndx++; if (__curTxTIndx < __finishedMessage.length) __typeDialogue(time); else __curTxTIndx--;
+    });
 }
 
-function checkforEvents(message){
-    switch(message){
-        case 'i am in your walls':
-            menuMusic.stop();
-    }
-}
-
-function endConversation(){
-    isEnding = true;
-    FlxG.switchState(new TitleState());
-}
+function onDestroy() Framerate.instance.visible = true;
