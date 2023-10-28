@@ -155,7 +155,7 @@ var tottalTime:Float = 0;
 
 var finishFadeIn:Bool = false;
 function update(elapsed) {
-    tottalTime += elapsed * 10;
+    tottalTime += elapsed;
 
     eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(6 * Math.sin(tottalTime));
     black.alpha = FlxMath.bound(1 - (Math.floor((tottalTime/4) * 8) / 8), 0, 1);
