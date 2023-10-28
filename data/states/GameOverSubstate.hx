@@ -1,3 +1,5 @@
+import openfl.Lib;
+
 var fakeCamFollow:FlxSprite;
 var replaceCamera:Bool = false;
 var characterDummy:Character;
@@ -51,6 +53,8 @@ function create(){
     fakeCamFollow.visible = false;
     add(fakeCamFollow);
     replaceCamera = true;
+
+    Lib.application.window.title = "Friday Night Funkin' - Vs Gorefield - " + PlayState.instance.SONG.meta.name + " - GAME OVER";
 }
 
 function update(elapsed:Float){
