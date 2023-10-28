@@ -205,8 +205,11 @@ function update(elapsed:Float) {
 	if (controls.BACK && !selectingWeek) {
 		if (subMenuOpen) 
 			closeSubMenu();
-		else {canMove = false; 	new FlxTimer().start(0.45, (_) -> 	FlxG.switchState(new MainMenuState()));}
-		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
+		else {
+			canMove = false; 
+			var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
+			FlxG.switchState(new MainMenuState());
+		}
 	}
 
 	if (canMove) {

@@ -7,6 +7,8 @@ var black:FlxSprite;
 var finishedLoading:Bool = false;
 var pressedEnter:Bool = false;
 
+var skipLoadingAllowed:Bool = false; //turn this off on release
+
 function create() {
 	if (FlxG.sound.music != null) FlxG.sound.music.stop();
 	
@@ -71,7 +73,12 @@ function create() {
 function update(elapsed:Float) {
 	if (FlxG.keys.justPressed.ESCAPE)
 		FlxG.switchState(PlayState.isStoryMode ? new StoryMenuState() : new FreeplayState());
-	if (FlxG.keys.justPressed.ENTER && !pressedEnter) {goToSong(); pressedEnter = true;}
+	if(skipLoadingAllowed){
+		if (FlxG.keys.justPressed.ENTER && !pressedEnter) {goToSong(); pressedEnter = true;}
+	}
+	else{
+		if (FlxG.keys.justPressed.ENTER && !pressedEnter && finishedLoading) {goToSong(); pressedEnter = true;}
+	}
 }
 
 function loadAssets() { // GET BAMBOOZLED LLLLL YOU THOUGHT IT WAS ACUTTALY LOADING

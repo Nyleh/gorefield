@@ -121,15 +121,14 @@ function changeItem(change:Int = 0) {
 function goToItem() {
 	selectedSomthin = true;
 
-	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
-	new FlxTimer().start(0.35, (_) -> 	
+	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
 	switch (options[curSelected]) {
 		case "story_mode": FlxG.switchState(new StoryMenuState());
 		case "freeplay": FlxG.switchState(new FreeplayState());
 		case "options": FlxG.switchState(new OptionsMenu());
 		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
 		default: selectedSomthin = false;
-	});
+	}
 }
 
 var selectedSomthin:Bool = false;
@@ -154,8 +153,8 @@ function update(elapsed:Float) {
 		}
 
 	if (controls.BACK) {
-		FlxG.sound.play(Paths.sound("menu/cancelMenu"));
-		new FlxTimer().start(0.45, (_) -> 	FlxG.switchState(new TitleState()));
+		var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
+		FlxG.switchState(new TitleState());
 	}
 	if (controls.DOWN_P) changeItem(1);
 	if (controls.UP_P) changeItem(-1);
