@@ -124,7 +124,7 @@ function changeItem(change:Int = 0) {
 function goToItem() {
 	selectedSomthin = true;
 
-	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
 	switch (options[curSelected]) {
 		//case "story_mode": 
 		case "freeplay": FlxG.switchState(new StoryMenuState());
