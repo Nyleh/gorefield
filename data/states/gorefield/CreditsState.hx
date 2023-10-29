@@ -149,9 +149,8 @@ function changeSelection(change:Int)
 	camFollow.setPosition(640, Std.int(curSelected / 3) * 420 + 230);
 	if(!intro)
 	{
-		var previousY = iconGroup.members[curSelected].y;
-		iconGroup.members[curSelected].y = previousY + 20;
-		FlxTween.tween(iconGroup.members[curSelected],{y: previousY},0.3, {ease: FlxEase.backOut});
+		iconGroup.members[curSelected].y = iconYArray[curSelected] + 20;
+		FlxTween.tween(iconGroup.members[curSelected],{y: iconYArray[curSelected]},0.3, {ease: FlxEase.backOut});
 	}
 
 	var creditName:String = credits[curSelected][0];
