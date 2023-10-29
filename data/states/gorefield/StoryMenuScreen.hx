@@ -31,6 +31,8 @@ var textBG:FlxSprite;
 
 var scoreText:FlxText;
 var textInfoBG:FlxSprite;
+var black:FlxSprite;
+var bgShader:CustomShader;
 
 var weeks:Array = [
 	{name: "Principal Week...", songs: ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]},
@@ -86,6 +88,10 @@ function create() {
 	CoolUtil.playMenuSong();
 	camBG.bgColor = FlxColor.fromRGB(17,5,33);
 
+	warpShader = new CustomShader("warp");
+	warpShader.distortion = 0;
+	if (FlxG.save.data.warp) FlxG.camera.addShader(warpShader);
+
 	bgSprite = new FlxBackdrop(Paths.image("menus/storymenu/WEA_ATRAS"), 0x11, 0, 0);
 	bgSprite.cameras = [camBG];
 	bgSprite.velocity.set(100, 100);
@@ -93,9 +99,9 @@ function create() {
 
 	FlxTween.color(bgSprite, 5.4, 0xFFFFFFFF, 0xFFF07A31, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
 
-	warpShader = new CustomShader("warp");
-	warpShader.distortion = 2;
-	if (FlxG.save.data.warp) camBG.addShader(warpShader);
+	bgShader = new CustomShader("warp");
+	bgShader.distortion = 2;
+	if (FlxG.save.data.warp) camBG.addShader(bgShader);
 
 	bloomShader = new CustomShader("glow");
 	bloomShader.size = 18.0;// trailBloom.quality = 8.0;
@@ -184,6 +190,9 @@ function create() {
 	add(textInfoBG);
 	add(scoreText);
 
+	black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+    add(black); black.alpha = 0;
+
 	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
 	vigentte.cameras = [camText];
 	vigentte.alpha = 0.5;
@@ -238,9 +247,15 @@ function update(elapsed:Float) {
 
 		var lock = menuLocks[i];
 
-		menuOption.y = __firstFrame ? y : CoolUtil.fpsLerp(menuOption.y, y, 0.25);
-		menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
-		if (__firstFrame) menuOption.x += 600 + (i *200);
+		if (i == curWeek && selectingWeek) {
+			menuOption.y = CoolUtil.fpsLerp(menuOption.y, (FlxG.height/2) - (menuOption.height/2), 0.075);
+			menuOption.x = CoolUtil.fpsLerp(menuOption.x, (FlxG.width/2) - (menuOption.width/2), 0.075);
+		} else {
+			menuOption.y = __firstFrame ? y : CoolUtil.fpsLerp(menuOption.y, y, 0.25);
+			menuOption.x = __firstFrame ? x : CoolUtil.fpsLerp(menuOption.x, FlxG.width - menuOption.width + 50 + x, 0.25);
+			if (__firstFrame) menuOption.x += 1200 + (i *200);
+		}
+
 
 		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, (1/75) * colorLerpSpeed);
 		menuOption.color = lerpColors[i * 2 + 0].color;
@@ -274,6 +289,8 @@ function update(elapsed:Float) {
 
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * Math.sin(__totalTime));
+
+	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
 }
 
 function changeWeek(change:Int) {
@@ -311,7 +328,7 @@ function changeWeek(change:Int) {
 }
 
 function selectWeek() {
-	if(selectingWeek) return; // ! selecting anim
+	if(selectingWeek) return; 
 
 	if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
@@ -335,7 +352,6 @@ function selectWeek() {
 		}},
 		{name:"FREEPLAY", callback: function () {closeSubMenu(); FlxG.sound.play(Paths.sound("menu/confirmMenu"));}}
 	);
-	//playWeek();
 }
 
 function openSubMenu(option1:{name:String, callback:Void->Void}, option2:{name:String, callback:Void->Void}) {
@@ -389,11 +405,11 @@ function closeSubMenu() {
 	cannedTuna = (new FlxTimer()).start(0.8, function (t) {colorLerpSpeed = 1;});
 }
 
-function playWeek() {
+function playWeek() { // animation
 	selectingWeek = true;
-	PlayState.loadWeek(__gen_week(), "hard");
-	FlxG.sound.music.volume = 0;
-	FlxG.sound.play(Paths.sound("menu/story/weekenter"));
+	FlxG.sound.music.fadeOut(0.25);
+
+	FlxG.sound.play(Paths.sound("menu/story/weekenter")); // Sound
 	switch(curWeek){
 		case 0: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 		case 1: FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
@@ -403,14 +419,25 @@ function playWeek() {
 		case 5: FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
 		default: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 	}
-	for (i=>menuOption in menuOptions) {
+
+	for (i=>menuOption in menuOptions) { // Fade Out rest...
 		if(menuOption.ID != curWeek){
 			FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 			FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 		}
 	}
-	FlxTween.tween(camText, {alpha: 0}, 0.5);
+	FlxTween.tween(selector, {angle: 45, alpha: 0}, .8, {ease: FlxEase.circOut});
+	FlxTween.tween(camText, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+	FlxTween.tween(textInfoBG, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+	FlxTween.tween(textBG, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+
+	FlxTween.tween(black, {alpha: 1}, 1, {ease: FlxEase.qaudOut, startDelay: .5});
+	for (cam in [FlxG.camera, camBG])
+		FlxTween.tween(cam, {zoom: 2.3}, 3, {ease: FlxEase.circInOut});
+	FlxTween.num(0, 7, 3, {ease: FlxEase.circInOut}, (val:Float) -> {warpShader.distortion = val;});
+
 	new FlxTimer().start(3, (tmr:FlxTimer) -> {
+		PlayState.loadWeek(__gen_week(), "hard");
 		FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 	});
 }
