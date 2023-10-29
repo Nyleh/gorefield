@@ -14,6 +14,11 @@ function create() {
     heatWaveShader.data.noise.filter = 4/*LINEAR*/;
 
     FlxG.camera.addShader(heatWaveShader);
+
+    remove(dad);
+    remove(boyfriend);
+    add(boyfriend);
+    add(dad);
 }
 
 var tottalTime:Float = 0;
