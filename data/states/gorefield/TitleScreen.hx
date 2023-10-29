@@ -53,6 +53,9 @@ function create() {
 	titleText.updateHitbox();
 	add(titleText);
 
+	vigentte = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
+
 	if(skippedIntro) return;
 	blackScreen = new FlxSprite().makeSolid(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
 	add(blackScreen);
@@ -65,12 +68,10 @@ function create() {
 	wiggleGorefield.screenCenter();
 	add(wiggleGorefield);
 
-	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
-	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
 	add(vigentte);
 
-	FlxG.sound.playMusic(Paths.music('gorefield-menuINTRO'),0.7,false);
-	Conductor.changeBPM(96);
+	FlxG.sound.playMusic(Paths.music('gorefield-menuINTRO'),1,false);
+	Conductor.changeBPM(115);
 }
 
 function getIntroTextShit():Array<Array<String>> {
