@@ -1,6 +1,12 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.75" name="cryfield" folder="stages/cryfield/">
-	<sprite name="BG_C" x="-276" y="-228" sprite="BG_C" antialiasing="true" scrollx="1" scrolly="1"/>
+<stage zoom="0.45" name="cryfield" folder="stages/cryfield/">
+	<countdown>
+		<three sound="cryfield/3"/>
+		<two sound="cryfield/2"/>
+		<one sound="cryfield/1"/>
+		<go sound="cryfield/Continue"/>
+	</countdown>
+	<sprite name="BG_C" x="-276" y="-428" sprite="BG_C" antialiasing="true" scrollx="1" scrolly="1" scale="2.2"/>
 	<opponent x="130" y="320" camxoffset="200" camyoffset="-40"/>
 	<player x="1210" y="340" camxoffset="-190" camyoffset="-40"/>
 </stage>

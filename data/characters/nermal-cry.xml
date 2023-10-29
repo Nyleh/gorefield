@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="face" camx="-130" y="0" isGF="false" camy="50" color="#D3E1FF" flipX="true" isPlayer="true" gameOverChar="nermal-dead-cry" holdTime="3.1" sprite="nermal-cry">
+<character x="0" icon="nermal" camx="50" y="0" iconoffsetx="30" iconoffsety="-10" animatedIcon="true" isGF="false" camy="50" color="#D3E1FF" flipX="true" isPlayer="true" gameOverChar="nermal-dead-cry" holdTime="3.1" sprite="nermal-cry">
 	<anim x="0" loop="false" y="0" fps="24" anim="NERMAL IDLE" name="idle"/>
 	<anim x="12" loop="false" y="-11" fps="24" anim="NERMAL LEFT" name="singLEFT"/>
 	<anim x="41" loop="false" y="-53" fps="24" anim="NERMAL DOWN" name="singDOWN"/>
