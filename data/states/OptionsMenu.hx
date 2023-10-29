@@ -15,10 +15,13 @@ function postCreate() {
 	logoBl.antialiasing = true;
 	add(logoBl);
 
-
 	for (option in main.members)
 		if (option.desc == "Modify mod options here")
 			main.members.remove(option);
+
+	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
+	add(vigentte);
 }
 
 function update(elapsed:Float) {

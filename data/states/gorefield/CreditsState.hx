@@ -79,6 +79,10 @@ function create()
 	descText.scrollFactor.set();
 	add(descText);
 
+	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte.alpha = 0.4; vigentte.scrollFactor.set(0,0);
+	add(vigentte);
+
 	changeSelection(0);
 }
 

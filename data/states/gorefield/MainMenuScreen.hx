@@ -90,6 +90,10 @@ function create() {
 		menuItems.add(menuItem);
 	}
 
+	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
+	add(vigentte);
+
 	changeItem(0);
 }
 

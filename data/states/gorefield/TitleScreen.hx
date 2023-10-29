@@ -8,6 +8,7 @@ var ngSpr:FlxSprite;
 var titleText:FlxSprite;
 
 var wiggleGorefield:FlxSprite;
+var vigentte:FlxSprite;
 
 function create() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
@@ -50,7 +51,7 @@ function create() {
 	add(titleText);
 
 	if(skippedIntro) return;
-	blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
+	blackScreen = new FlxSprite().makeSolid(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
 	add(blackScreen);
 	add(textGroup);
 
@@ -61,7 +62,9 @@ function create() {
 	wiggleGorefield.screenCenter();
 	add(wiggleGorefield);
 
-	trace("Start Mod");
+	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
+	add(vigentte);
 
 	FlxG.sound.playMusic(Paths.music('gorefield-menuINTRO'),0.7,false);
 	Conductor.changeBPM(96);
@@ -205,6 +208,7 @@ function skipIntro():Void
 			wiggleGorefield.visible = false;
 			skippedIntro = true;
 			FlxG.sound.playMusic(Paths.music('gorefield-menuLOOP'));
+			remove(vigentte); add(vigentte);
 		}
 	}
 
