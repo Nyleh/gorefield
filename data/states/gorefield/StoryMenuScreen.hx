@@ -43,6 +43,15 @@ var weeks:Array = [
 	{name: "FINALE Week...", songs: ["CATaclysm"]},
 ];
 
+var weekColors:Array<Int> = [
+	0xFFFF9500,
+	0xFF0F7914,
+	0xFF0087A1,
+	0xFF727272,
+	0xFFEE6110,
+	0xFFC0C000
+];
+
 var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
@@ -66,6 +75,7 @@ var weekDescsSPANISH:Array<String> = [
 ];
 
 var lerpColors = [];
+var colowTwn:FlxTween;
 
 var subMenuOpen:Bool = false;
 var curSubMenuSelected:Int = 0;
@@ -93,11 +103,13 @@ function create() {
 	if (FlxG.save.data.warp) FlxG.camera.addShader(warpShader);
 
 	bgSprite = new FlxBackdrop(Paths.image("menus/storymenu/WEA_ATRAS"), 0x11, 0, 0);
-	bgSprite.cameras = [camBG];
+	bgSprite.cameras = [camBG]; bgSprite.colorTransform.color = 0xFFFFFFFF;
 	bgSprite.velocity.set(100, 100);
 	add(bgSprite);
 
-	FlxTween.color(bgSprite, 5.4, 0xFFFFFFFF, 0xFFF07A31, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
+	colowTwn = FlxTween.color(null, 5.4, 0xFF90D141, 0xFFF09431, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/, onUpdate: function () {
+		bgSprite.colorTransform.color = colowTwn.color;
+	}});
 
 	bgShader = new CustomShader("warp");
 	bgShader.distortion = 2;
@@ -208,6 +220,8 @@ var __totalTime:Float = 0;
 
 var colorLerpSpeed:Float = 1;
 var selectingWeek:Bool = false;
+var bloomSine:Bool = true;
+var dim:Float = 0; var size:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
@@ -284,8 +298,11 @@ function update(elapsed:Float) {
 	selector.color = menuOptions[curWeek].color;
 	selector.setPosition((menuOptions[curWeek].x - selector.width - 36), menuOptions[curWeek].y + ((menuOptions[curWeek].height/2) - (selector.height/2)));
 
-	bloomShader.dim = .8 + (.3 * Math.sin(__totalTime));
-	bloomShader.size = 18 + (8 * Math.sin(__totalTime));
+	if (bloomSine) {
+		bloomShader.dim = dim = .8 + (.3 * Math.sin(__totalTime));
+		bloomShader.size = size = 18 + (8 * Math.sin(__totalTime));
+	}
+
 
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * Math.sin(__totalTime));
@@ -375,9 +392,6 @@ function openSubMenu(option1:{name:String, callback:Void->Void}, option2:{name:S
 	subMenuSelector.alpha = 0;
 	subMenuSelector.visible = subMenuSelector.active = true;
 
-	FlxTween.cancelTweensOf(bgSprite);
-	FlxTween.tween(bgSprite, {alpha: 0.5}, 0.2);
-
 	FlxTween.tween(subMenuSelector, {alpha: 1}, 0.2);
 }
 
@@ -424,17 +438,27 @@ function playWeek() { // animation
 		if(menuOption.ID != curWeek){
 			FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 			FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+			FlxTween.color(menuLocks[i], .8, 0xFFFFFFFF, weekColors[curWeek], {ease: FlxEase.circOut});
 		}
 	}
 	FlxTween.tween(selector, {angle: 45, alpha: 0}, .8, {ease: FlxEase.circOut});
 	FlxTween.tween(camText, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 	FlxTween.tween(textInfoBG, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 	FlxTween.tween(textBG, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+	
+	colowTwn.cancel();
+	colowTwn = FlxTween.color(null, 3, bgSprite.colorTransform.color, weekColors[curWeek], {ease: FlxEase.circOut, onUpdate: function () {
+		bgSprite.colorTransform.color = colowTwn.color;
+	}});
+
+	bloomSine = false;
+	FlxTween.num(dim, .5, 3, {ease: FlxEase.circOut}, (val:Float) -> {bloomShader.dim = val;});
+	FlxTween.num(size, 26, 3, {ease: FlxEase.circOut}, (val:Float) -> {bloomShader.size = val;});
 
 	FlxTween.tween(black, {alpha: 1}, 1, {ease: FlxEase.qaudOut, startDelay: .5});
 	for (cam in [FlxG.camera, camBG])
-		FlxTween.tween(cam, {zoom: 2.3}, 3, {ease: FlxEase.circInOut});
-	FlxTween.num(0, 7, 3, {ease: FlxEase.circInOut}, (val:Float) -> {warpShader.distortion = val;});
+		FlxTween.tween(cam, {zoom: 2.1}, 3, {ease: FlxEase.circInOut});
+	FlxTween.num(0, 6, 3, {ease: FlxEase.circInOut}, (val:Float) -> {warpShader.distortion = val;});
 
 	new FlxTimer().start(3, (tmr:FlxTimer) -> {
 		PlayState.loadWeek(__gen_week(), "hard");
