@@ -91,7 +91,7 @@ function create() {
 	}
 
 	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
-	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
+	vigentte.alpha = 0.2; vigentte.scrollFactor.set(0,0);
 	add(vigentte);
 
 	changeItem(0);
@@ -102,8 +102,7 @@ function changeItem(change:Int = 0) {
 
 	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
-	menuItems.forEach(function(item:FlxSprite)
-	{
+	menuItems.forEach(function(item:FlxSprite) {
 		FlxTween.cancelTweensOf(item);
 		item.animation.play(item.ID == curSelected ? 'selected' : 'idle');
 
@@ -125,10 +124,10 @@ function changeItem(change:Int = 0) {
 function goToItem() {
 	selectedSomthin = true;
 
-	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
+	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
 	switch (options[curSelected]) {
-		case "story_mode": FlxG.switchState(new StoryMenuState());
-		case "freeplay": FlxG.switchState(new FreeplayState());
+		//case "story_mode": 
+		case "freeplay": FlxG.switchState(new StoryMenuState());
 		case "options": FlxG.switchState(new OptionsMenu());
 		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
 		default: selectedSomthin = false;

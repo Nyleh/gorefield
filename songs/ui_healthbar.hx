@@ -76,7 +76,7 @@ static function createIcon(character:Character):FlxSprite {
     var icon = new FlxSprite();
     icon.ID = iconOffsets.length;
 
-    var path = 'icons/' + ((character != null) ? character.getIcon() : "icons/face");
+    var path = 'icons/' + ((character != null) ? character.getIcon() : "face");
     if (!Assets.exists(Paths.image(path))) path = 'icons/face';
 
     if ((character != null && character.xml != null && character.xml.exists("animatedIcon")) ? (character.xml.get("animatedIcon") == "true") : false) {

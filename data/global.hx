@@ -7,8 +7,8 @@ static var curStoryMenuSelected:Int = 0;
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",
     MainMenuState => "gorefield/MainMenuScreen",
-    StoryMenuState => "gorefield/StoryMenuScreen"
-
+    FreeplayState => "gorefield/StoryMenuScreen"
+    StoryMenuState => "gorefield/StoryMenuScreen",
 ];
 
 function new() {
@@ -40,7 +40,6 @@ function new() {
 
 function preStateSwitch() {
     FlxG.camera.bgColor = 0xFF000000;
-    Lib.application.window.title = "Friday Night Funkin' - Vs Gorefield";
 
     if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate)) // ! CHECK IN GAME/NOT IN GAME OVER
         && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode) // ! CHECK STORY MODE/ GOING TO OTHER SONG
