@@ -54,7 +54,7 @@ var weekColors:Array<Int> = [
 	0xFF9C04B7
 ];
 
-var weeksUnlocked:Array<Bool> = [true, false, true, false, false, false];
+var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -648,7 +648,7 @@ function changeSong(change:Int) {
 }
 
 function goToSong() {
-    FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
     PlayState.loadSong(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", false, false);
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }
