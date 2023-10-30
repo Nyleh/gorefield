@@ -5,12 +5,19 @@ import openfl.geom.Rectangle;
 import flixel.sound.FlxSound;
 import funkin.backend.system.framerate.Framerate;
 import flixel.text.FlxTextBorderStyle;
+import flixel.addons.effects.FlxTrail;
 
 var box:FlxSprite;
 var prompt:FlxSprite;
 var bars:FlxSprite;
 var eyes:FlxSprite;
 var black:FlxSprite;
+
+var cloudBubble1:FlxSprite;
+var cloudBubble2:FlxSprite;
+var cloudTrail:FlxTrail;
+var cloud:FlxSprite;
+var cloudPortrait:FlxSprite;
 
 var dialoguetext:FlxText;
 var __curTxTIndx:Int = -1;
@@ -71,22 +78,46 @@ function create()
     eyes.updateHitbox(); eyes.screenCenter(FlxAxes.X);
     if (FlxG.save.data.arlenePhase != -1) add(eyes); add(bars);
 
+    cloud = new FlxSprite().loadGraphic(Paths.image("easteregg/cloudMain"));
+    cloud.scale.set(3.5, 3.5); cloud.updateHitbox();
+    cloud.setPosition(986, 65);
+
+    cloudTrail = new FlxTrail(cloud, null, 4, 0, 1, 0.069);
+    //add(cloudTrail);
+    
+    add(cloud);
+
+    cloudBubble1 = new FlxSprite().loadGraphic(Paths.image("easteregg/cloud1"));
+    cloudBubble1.scale.set(3.5, 3.5); cloudBubble1.updateHitbox();
+    add(cloudBubble1); cloudBubble1.setPosition(956, 256);
+
+    cloudBubble2 = new FlxSprite().loadGraphic(Paths.image("easteregg/cloud2"));
+    cloudBubble2.scale.set(3.5, 3.5); cloudBubble2.updateHitbox();
+    add(cloudBubble2); cloudBubble2.setPosition(900, 246);
+
+    cloudPortrait = new FlxSprite().loadGraphic(Paths.image("easteregg/Clown"));
+    cloudPortrait.scale.set(2.5, 2.5); cloudPortrait.updateHitbox();
+    add(cloudPortrait); cloudPortrait.setPosition(cloud.x + 76, cloud.y + 38);
+
+    FlxG.camera.scroll.x = 200;
+
     box = new FlxSprite(0, (FlxG.height/6)*3).loadGraphic(Paths.image("easteregg/Arlene_Text"));
-    box.scale.set(3.7,3.7); box.alpha = 0;
+    box.scale.set(3.7,3.7); box.alpha = 0; box.scrollFactor.set();
     box.updateHitbox(); box.screenCenter(FlxAxes.X);
     add(box);
 
     dialoguetext = new FlxText(box.x + 80, box.y + 70, box.width - 160, "", 24);
 	dialoguetext.setFormat("fonts/pixelart.ttf", 44, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
 	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
-	add(dialoguetext);
+	add(dialoguetext); dialoguetext.scrollFactor.set();
 
     prompt = new FlxSprite().loadGraphic(Paths.image("easteregg/arrow"));
     prompt.scale.set(3.7,3.7); prompt.updateHitbox(); prompt.alpha = 0;
     prompt.setPosition(box.x + box.width - 160 + prompt.width, box.y + box.height - 64);
-    add(prompt);
+    add(prompt); prompt.scrollFactor.set();
 
     black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+    black.scrollFactor.set();
     add(black);
 
     for (member in members) {
@@ -117,6 +148,16 @@ function update(elapsed) {
     prompt.color = tottalTime % 1 > .5 ? 0xFFADADAD : 0xFFFFFFFF;
 
     prompt.alpha = __canAccept && __curTxTIndx == __finishedMessage.length-1 ? 1 : 0;
+
+    cloud.setPosition(986 + (6 * (Math.floor(Math.sin(tottalTime/1.5)*4)/4)), 65 + (6 * (Math.floor(Math.cos(tottalTime/1.5)*4)/4)));
+    cloudBubble1.setPosition(956 + (-4 * (Math.floor(Math.sin(tottalTime+.5/1.5)*4)/4)) + (tottalTime*6%6), 256+ (4 * (Math.floor(Math.cos(tottalTime+.5/1.5)*4)/4)));
+    cloudBubble2.setPosition(900 + (-4 * (Math.floor(Math.sin(tottalTime+1/1.5)*4)/4)), 246 + (4 * (Math.floor(Math.cos(tottalTime+1/1.5)*4)/4)));
+    for (i=>cloudTrail in cloudTrail.members) {
+        var scale = FlxMath.bound(1 + .11 * Math.sin(tottalTime + (i * FlxG.random.float(0, .3))), 0.9, 999);
+        cloudTrail.scale.set(2, 2);
+    }
+
+    cloudPortrait.setPosition(cloud.x + 76 + FlxG.random.int(-1, 1), cloud.y + 38 + FlxG.random.int(-1, 1));
 
     if (tottalTime >= (fastFirstFade ? 2 : 4)) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-(fastFirstFade ? 4 : 6))/2) * 8) / 8), 0, 1);
 
