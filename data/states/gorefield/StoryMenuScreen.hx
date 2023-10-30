@@ -42,7 +42,7 @@ var weeks:Array = [
 	{name: "Sansfield Week...", songs: ["Cat Patella", "Mondaylovania", "ULTRA FIELD"]},
 	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
 	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
-	{name: "FINALE Week...", songs: ["CATaclysm"]},
+	{name: "???????? Week...", songs: ["????????????"]},
 ];
 
 var weekColors:Array<Int> = [
@@ -51,7 +51,7 @@ var weekColors:Array<Int> = [
 	0xFF008DA9,
 	0xFF727272,
 	0xFFEB4108,
-	0xFF9C04B7
+	0xFFFFFFFF
 ];
 
 var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
@@ -62,7 +62,7 @@ var weekDescs:Array<String> = [
 	"Purring Determination...",
 	"A Big Little Problem.",
 	"He Just Wants To Go Home...",
-	"Layers on layers,\nHe will always be there..."
+	"????????????????????????????????????????????"
 ];
 
 // SPANISH - Jloor 
@@ -73,7 +73,7 @@ var weekDescsSPANISH:Array<String> = [
 	"Un ronroneo de determinacion...",
 	"Un pequeno gran problema.",
 	"El solo quiere volver a casa...",
-	"Capas tras capas,\nEl siempre estara ahi..."
+	"????????????????????????????????????????????"
 ];
 
 var lerpColors = [];
@@ -126,8 +126,8 @@ var freeplaySongLists = [
 		iconMenuObjs: []
 	},
 	{
-		songs: ["CATaclysm"],
-		icons: ["garfield"],
+		songs: ["looking in the code to find the seceret song wont work..."],
+		icons: ["???????????????"],
 		songMenuObjs: [],
 		iconMenuObjs: []
 	}
@@ -183,7 +183,7 @@ function create() {
 		sprite.ID = i;
 		menuOptions.push(add(sprite));
 
-		lerpColors[i * 2 + 0] = new FlxInterpolateColor(-1);
+		lerpColors[i * 2 + 0] = new FlxInterpolateColor(i == 5 ? 0 : -1);
 
 		var lock:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/candado"));
 		lock.scale.set(.7,.7);
@@ -191,7 +191,7 @@ function create() {
 		lock.updateHitbox();
 		menuLocks.push(add(lock));
 
-		lerpColors[i * 2 + 1] = new FlxInterpolateColor(-1);
+		lerpColors[i * 2 + 1] = new FlxInterpolateColor(i == 5 ? 0 : -1);
 	}
 
 	selector = new FlxSprite();
@@ -300,7 +300,7 @@ function update(elapsed:Float) {
 			if (__firstFrame) menuOption.x += 2000 + (i *800);
 		}
 
-		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? 0xFFFFFFFF : 0xFFBDBEFF, (1/75) * colorLerpSpeed);
+		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 ? 0xFF000000 : 0xFFFFFFFF) : (i == 5 ? 0xFF000000 : 0xFFBDBEFF), (1/75) * colorLerpSpeed);
 		menuOption.color = lerpColors[i * 2 + 0].color;
 		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
@@ -434,9 +434,9 @@ function selectWeek() {
 	if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
 		FlxG.camera.shake(0.005, .5);
-		lerpColors[curWeek * 2 + 0].color = 0xFFFF0000;
-		lerpColors[curWeek * 2 + 1].color = 0xFFFF0000;
-		menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
+		lerpColors[curWeek * 2 + 0].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
+		lerpColors[curWeek * 2 + 1].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
+		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
 
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
