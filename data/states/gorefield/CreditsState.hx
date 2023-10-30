@@ -19,7 +19,7 @@ var credits:Array<Array<String>> = [
 	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
 	["JoaDash", "Pixel Artist", "Matate oe, no trabaja"],
 	["Ani Manny", "Artist", "El de los chistes bien chistosos"],
-	["Lunar Cleint", "Coder", "El Mejor Coder de Todos los Tiempos (Messi)"],
+	["Lunar Cleint", "Main Coder", "hi guys its me lunar anyway jloor wrote the rest 'de Todos los Tiempos (Messi)'"],
 	["Lean", "Coder", "ummmm yeah i coded a lot for the mod"],
 	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
 	["Ne_Eo", "Coder", "Si"],
@@ -65,7 +65,7 @@ function create()
 		var icon:FlxSprite = new FlxSprite(i % 3 * 370 + 100, Std.int(i / 3) * 420);
 		icon.loadGraphic(Paths.image('menus/credits/' + credits[i][0]));
 		icon.setGraphicSize(332);
-		icon.ID = i;
+		icon.ID = i; icon.antialiasing = true;
 		icon.alpha = 0.5;
 		for(z in 0...sizeArray.length){
 			if(credits[i][0] == sizeArray[z]){
