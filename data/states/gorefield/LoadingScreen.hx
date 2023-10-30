@@ -37,7 +37,7 @@ function create() {
 	add(colorbg);
 
 	var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('loadingscreens/' +loadingData.loadingbg));
-	if (loadingData.loadingbg != 'loadingbg1' && loadingData.loadingbg != 'loadingbg2' && loadingData.loadingbg != 'loadingbg3')
+	if (loadingData.loadingbg != 'loadingbg1' && loadingData.loadingbg != 'pantalla_azul_2' && loadingData.loadingbg != 'loadingbg3')
 		bg.scale.set(0.68, 0.68);
 	bg.screenCenter();
 	bg.antialiasing = true;
