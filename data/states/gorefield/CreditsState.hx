@@ -13,8 +13,8 @@ var descTextName:FlxText;
 
 var credits:Array<Array<String>> = [
 	// Name's - Role - Random Description
-	["Zero Artist", "Director, Artist, and Pixel Artist", "ElTilinaso999"],
 	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
+	["Zero Artist", "Director, Artist, and Pixel Artist", "ElTilinaso999"],
 	["BitfoxOriginal", "Co Director, Musician, Pixel Artist and Charter", "El Chamaco Indio (Lo pusieron de Co director)"],
 	["Dathree_O", "Artist", "El Verdadero Charter y Viva Peru"],
 	["JoaDash", "Pixel Artist", "Matate oe, no trabaja"],
