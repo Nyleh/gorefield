@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-15" icon="bf-outside" camx="310" y="350" isGF="false" animatedIcon="true" iconoffsetx="14" iconoffsety="-10" camy="80" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="bf-sky" sprite="BF_fall">
+<character x="-15" icon="bf-outside" camx="310" y="350" isGF="false" antialiasing="true" animatedIcon="true" iconoffsetx="14" iconoffsety="-10" camy="80" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="bf-sky" sprite="BF_fall">
 	<anim x="-5" loop="true" y="0" fps="24" anim="BF 2 IDLE" name="idle"/>
 	<anim x="-19" loop="false" y="0" fps="24" anim="BF 2 RIGHT" name="singRIGHT"/>
 	<anim x="-13" loop="false" y="1" fps="24" anim="BF 2 DOWN" name="singDOWN"/>
