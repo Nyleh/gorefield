@@ -1,4 +1,5 @@
 import flixel.text.FlxTextBorderStyle;
+import funkin.backend.MusicBeatState;
 import flixel.util.FlxAxes;
 
 static var skippedIntro:Bool = false;
@@ -53,9 +54,6 @@ function create() {
 	titleText.updateHitbox();
 	add(titleText);
 
-	vigentte = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
-	vigentte.alpha = 0.25; vigentte.scrollFactor.set(0,0);
-
 	if(skippedIntro) return;
 	blackScreen = new FlxSprite().makeSolid(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
 	add(blackScreen);
@@ -67,8 +65,6 @@ function create() {
 	wiggleGorefield.visible = false;
 	wiggleGorefield.screenCenter();
 	add(wiggleGorefield);
-
-	add(vigentte);
 
 	FlxG.sound.playMusic(Paths.music('gorefield-menuINTRO'),1,false);
 	Conductor.changeBPM(115);
@@ -166,7 +162,6 @@ function skipIntro() {
 		wiggleGorefield.visible = false;
 		skippedIntro = true;
 		FlxG.sound.playMusic(Paths.music('gorefield-menuLOOP'));
-		remove(vigentte); add(vigentte);
 	}
 }
 
@@ -198,4 +193,10 @@ function pressEnter() {
 	// FlxG.sound.music.stop();
 
 	new FlxTimer().start(1.4, (_) -> 	FlxG.switchState(new MainMenuState()));
+
+	FlxTween.tween(logoBl, {y: logoBl.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
+	FlxTween.tween(house, {y: house.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
+	FlxTween.tween(titleText, {y: titleText.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
+
+	MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 }

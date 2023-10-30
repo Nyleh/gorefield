@@ -28,6 +28,7 @@ var optionsTextsSPANISH:Map<String, String> = [
 ];
 
 var menuItems:FlxTypedGroup<FlxSprite>;
+var cutscene:FlxSprite;
 var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
@@ -41,6 +42,8 @@ var keyCombos:Map<String, Void->Void> = [
 ];
 var keyComboProgress:Map<String, Int> = [];
 var canUseKeyCombos:Bool = true;
+
+var seenCutscene:Bool = false;
 
 function create() {
 	CoolUtil.playMenuSong();
@@ -88,6 +91,40 @@ function create() {
 		menuItem.y = 320 + ((menuItem.ID = i) * 92.5);
 
 		menuItems.add(menuItem);
+	}
+
+	cutscene = new FlxSprite();
+	cutscene.frames = Paths.getSparrowAtlas('menus/mainmenu/garfield_menu_startup');
+	cutscene.animation.addByPrefix('_', "GARFIELD", 24, false);
+	cutscene.updateHitbox(); cutscene.screenCenter();
+	cutscene.visible = false;
+
+	if (!seenCutscene) {
+		selectedSomthin = true;
+		var oldMembers = members.copy();
+		for (mem in members) remove(mem);
+		add(cutscene);
+
+		new FlxTimer().start(1.5, function(tmr:FlxTimer) {
+			cutscene.animation.play("_", cutscene.visible = true);
+		});
+		cutscene.animation.finishCallback = function () {
+			for (mem in oldMembers) add(mem);
+			remove(cutscene);
+
+			menuInfomation.y += 100;
+			FlxTween.tween(menuInfomation, {y: menuInfomation.y - 100}, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.circOut});
+
+			logoBl.alpha = 0; logoBl.angle = 3;
+			FlxTween.tween(logoBl, {alpha: 1 , angle: 0}, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.circOut});
+
+			menuItems.forEach(function(item:FlxSprite) {
+				item.x -= item.width;
+				if (item.ID == curSelected) FlxTween.tween(item, {x: 580 - item.width + 50}, (Conductor.stepCrochet / 1000) * 2);
+				else FlxTween.tween(item, {x: 520 - item.width}, (Conductor.stepCrochet / 1000) * 2);
+			});
+			selectedSomthin = false;
+		}
 	}
 
 	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
