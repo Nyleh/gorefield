@@ -192,11 +192,11 @@ function pressEnter() {
 	transitioning = true;
 	// FlxG.sound.music.stop();
 
-	new FlxTimer().start(1.4, (_) -> 	FlxG.switchState(new MainMenuState()));
+	new FlxTimer().start(seenMenuCutscene ? 1.2 : 1.4, (_) -> 	FlxG.switchState(new MainMenuState()));
 
 	FlxTween.tween(logoBl, {y: logoBl.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
 	FlxTween.tween(house, {y: house.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
 	FlxTween.tween(titleText, {y: titleText.y + (FlxG.height*1.4)}, 2, {ease: FlxEase.circInOut});
 
-	MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
+	MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = !seenMenuCutscene;
 }

@@ -43,8 +43,6 @@ var keyCombos:Map<String, Void->Void> = [
 var keyComboProgress:Map<String, Int> = [];
 var canUseKeyCombos:Bool = true;
 
-static var seenCutscene:Bool = false;
-
 function create() {
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
@@ -99,8 +97,8 @@ function create() {
 	cutscene.updateHitbox(); cutscene.screenCenter();
 	cutscene.visible = false;
 
-	if (!seenCutscene) {
-		selectedSomthin = seenCutscene = true;
+	if (!seenMenuCutscene) {
+		selectedSomthin = seenMenuCutscene = true;
 		var oldMembers = members.copy();
 		for (mem in members) remove(mem);
 		add(cutscene);
@@ -120,7 +118,7 @@ function create() {
 			FlxTween.tween(logoBl, {alpha: 1 , angle: 0}, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.circOut});
 
 			menuItems.forEach(function(item:FlxSprite) {
-				item.x -= item.width;
+				item.x -= 500;
 				if (item.ID == curSelected) FlxTween.tween(item, {x: 580 - item.width + 50}, (Conductor.stepCrochet / 1000) * 2);
 				else FlxTween.tween(item, {x: 520 - item.width}, (Conductor.stepCrochet / 1000) * 2);
 			});

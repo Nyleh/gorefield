@@ -4,6 +4,8 @@ import openfl.Lib;
 static var curMainMenuSelected:Int = 0;
 static var curStoryMenuSelected:Int = 0;
 
+static var seenMenuCutscene:Bool = false;
+
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",
     MainMenuState => "gorefield/MainMenuScreen",
