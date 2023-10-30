@@ -22,7 +22,7 @@ var credits:Array<Array<String>> = [
 	["Lunar Cleint", "Main Coder", "hi guys its me lunar anyway jloor wrote the rest 'de Todos los Tiempos (Messi)'"],
 	["Lean", "Coder", "ummmm yeah i coded a lot for the mod"],
 	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
-	["Ne_Eo", "Coder", "Si"],
+	["Ne_Eo", "Coder", "Why is the menu not centered?"],
 	["Nexus Moon", "Musician", "El Undertale"],
 	["AlexR", "Musician", "El que se Murio (Nunca regreso y no se que hace aqui)"],
 	["Awe", "Musician", "Otra que se murio"],
@@ -37,6 +37,7 @@ var credits:Array<Array<String>> = [
 
 var camFollow:FlxObject;
 var camFollowPos:FlxObject;
+var camFollowXOffset:Float;
 
 var iconYArray:Array<Float> = []; //intro stuff
 
@@ -116,7 +117,7 @@ var intro:Bool = true;
 function update(elapsed:Float)
 {
 	var lerpVal:Float = Math.max(0, Math.min(1, elapsed * 7.5));
-	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x-camFollowXOffset, camFollow.x, lerpVal) + camFollowXOffset, FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 	if (!quitting)
 	{
@@ -156,6 +157,8 @@ function changeSelection(change:Int)
 	var creditName:String = credits[curSelected][0];
 	var creditRole:String = credits[curSelected][1];
 	var creditDescription:String = credits[curSelected][2];
+
+	camFollowXOffset = creditName == "Ne_Eo" ? 50 : 0;
 
 	descText.text = creditRole;
 	descText2.text = creditDescription;
