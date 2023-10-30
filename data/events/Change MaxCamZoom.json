@@ -2,7 +2,7 @@
     "params": [
         {
             "name": "Amount",
-            "type": "Int(1, 9999999, 1)",
+            "type": "Int(0, 9999999, 0)",
             "defaultValue": "1"
         }
     ]

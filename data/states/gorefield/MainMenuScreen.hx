@@ -33,6 +33,8 @@ var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
+var bgMainMenu:FlxSprite;
+var gorefield:FlxSprite;
 
 var keyCombos:Map<String, Void->Void> = [
 	"PENK" => function () penk(),
@@ -49,9 +51,17 @@ function create() {
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
-	var gorefield = new FlxSprite();
+	bgMainMenu = new FlxSprite();
+	bgMainMenu.loadGraphic(Paths.image("menus/mainmenu/BGmainmenu"));
+	bgMainMenu.setGraphicSize(FlxG.width, FlxG.height);
+	bgMainMenu.updateHitbox();
+	bgMainMenu.scrollFactor.set();
+	add(bgMainMenu);
+
+	gorefield = new FlxSprite();
 	gorefield.frames = Paths.getSparrowAtlas('menus/mainmenu/gorefield_menu');
-	gorefield.animation.addByPrefix('idle', 'MenuIdle', 24);
+	gorefield.animation.addByPrefix('idle', 'MenuIdle0000', 1);
+	gorefield.animation.addByPrefix('beat', 'MenuIdle', 24);
 	gorefield.animation.addByPrefix('jeje', 'JEJE', 24);
 	gorefield.animation.play('idle');
 	gorefield.updateHitbox();
@@ -70,7 +80,8 @@ function create() {
 	add(logoBl);
 
 	menuInfomation = new FlxText(0, 675, FlxG.width, "Please select a option.", 28);
-	menuInfomation.setFormat("fonts/pixelart.ttf", 28, FlxColor.WHITE, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	menuInfomation.setFormat("fonts/pixelart.ttf", 28, FlxColor.WHITE, "center");
+	menuInfomation.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 5, 50);
 	menuInfomation.borderSize = 2;
 	add(menuInfomation);
 
@@ -213,8 +224,17 @@ function update(elapsed:Float) {
 	}
 }
 
-function beatHit() {
+var bgTween:FlxTween;
+
+function beatHit(curBeat:Int) {
 	logoBl.animation.play('bump',true);
+
+	if (curBeat % 4 == 0)
+		gorefield.animation.play('beat',true);
+
+	//Don't Work's :(((( - Jloor
+    bgMainMenu.alpha = 1;
+    bgTween = FlxTween.tween(bgMainMenu,{alpha: 0.7}, 1);
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}
