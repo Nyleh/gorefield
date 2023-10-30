@@ -48,7 +48,7 @@ function create(){
         var uv = spr.frame.uv;
         newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
 
-        spr.shader = newShader;
+		if (FlxG.save.data.wrath) spr.shader = newShader;
         spr?.forceIsOnScreen = true;
 
         wrathSprites.push(spr);

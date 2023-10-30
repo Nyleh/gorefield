@@ -13,7 +13,7 @@ function create() {
     heatWaveShader.data.noise.mipFilter = 0/*MIPLINEAR*/;
     heatWaveShader.data.noise.filter = 4/*LINEAR*/;
 
-    FlxG.camera.addShader(heatWaveShader);
+    if (FlxG.save.data.heatwave == null) FlxG.camera.addShader(heatWaveShader);
 
     remove(dad);
     remove(boyfriend);

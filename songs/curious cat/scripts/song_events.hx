@@ -41,7 +41,7 @@ function create()
 			newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
 
 			char.danceOnBeat = !(char.forceIsOnScreen = true);
-			char.shader = newShader;
+			if (FlxG.save.data.wrath) char.shader = newShader;
 		}
 	
 	for (name => sprite in stage.stageSprites)
