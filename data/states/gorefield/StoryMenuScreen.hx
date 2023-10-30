@@ -289,7 +289,7 @@ function update(elapsed:Float) {
 
 	for (i=>menuOption in menuOptions) {
 		var y:Float = ((FlxG.height - menuOption.height) / 2) + ((menuOption.ID - curWeek) * menuOption.height);
-		var x:Float = 50 - ((Math.abs(Math.cos((menuOption.y + (menuOption.height / 2) - (FlxG.camera.scroll.y + (FlxG.height / 2))) / (FlxG.height * 1.25) * Math.PI)) * 150)) + Math.floor(15 * Math.sin(__totalTime + (0.8*i)));
+		var x:Float = 50 - ((Math.abs(FlxMath.fastCos((menuOption.y + (menuOption.height / 2) - (FlxG.camera.scroll.y + (FlxG.height / 2))) / (FlxG.height * 1.25) * Math.PI)) * 150)) + Math.floor(15 * FlxMath.fastSin(__totalTime + (0.8*i)));
 
 		if (i == curWeek && selectingWeek) {
 			menuOption.y = CoolUtil.fpsLerp(menuOption.y, (FlxG.height/2) - (menuOption.height/2), 0.075);
@@ -308,39 +308,39 @@ function update(elapsed:Float) {
 
 		var lock = menuLocks[i];
 		lock.visible = !weeksUnlocked[i];
-		lock.x = (menuOption.x + (menuOption.width/2)) - (lock.width/2) + Math.floor(4 * Math.sin(__totalTime));
-		lock.y = (menuOption.y + (menuOption.height/2)) - (lock.height/2) + Math.floor(2 * Math.cos(__totalTime));
+		lock.x = (menuOption.x + (menuOption.width/2)) - (lock.width/2) + Math.floor(4 * FlxMath.fastSin(__totalTime));
+		lock.y = (menuOption.y + (menuOption.height/2)) - (lock.height/2) + Math.floor(2 * FlxMath.fastCos(__totalTime));
 		if(!selectingWeek) lock.color = lerpColors[i * 2 + 1].color;
 	}
 	__firstFrame = false;
 
 	if (subMenuOpen && subOptions.length > 0) {
 		for (i=>option in subOptions) {
-			option.x = ((menuOptions[curWeek].x + (menuOptions[curWeek].width/2)) - option.width/2) + Math.floor(4 * Math.sin(__totalTime + (12*i)));
-			option.y = (menuOptions[curWeek].y + (menuOptions[curWeek].height/2) - (((option.height + 16) * subOptions.length)/2)) + ((option.height + 16) * i) + Math.floor(2 * Math.cos(__totalTime));
+			option.x = ((menuOptions[curWeek].x + (menuOptions[curWeek].width/2)) - option.width/2) + Math.floor(4 * FlxMath.fastSin(__totalTime + (12*i)));
+			option.y = (menuOptions[curWeek].y + (menuOptions[curWeek].height/2) - (((option.height + 16) * subOptions.length)/2)) + ((option.height + 16) * i) + Math.floor(2 * FlxMath.fastCos(__totalTime));
 			option.alpha = option.ID == 0 ? i == curSubMenuSelected ? 1 : 0.2 : option.alpha;
 
 			option.y += 10; // offset cause sprite epmty space (ZERO WHY!!@!@)
 		}
-		subMenuSelector.setPosition(subOptions[curSubMenuSelected].x - subMenuSelector.width - (10 + (2 * Math.floor(Math.sin(__totalTime*2)))), subOptions[curSubMenuSelected].y+4);
+		subMenuSelector.setPosition(subOptions[curSubMenuSelected].x - subMenuSelector.width - (10 + (2 * Math.floor(FlxMath.fastSin(__totalTime*2)))), subOptions[curSubMenuSelected].y+4);
 	}
 			
 	selector.color = menuOptions[curWeek].color;
 	selector.setPosition((menuOptions[curWeek].x - selector.width - 36), menuOptions[curWeek].y + ((menuOptions[curWeek].height/2) - (selector.height/2)));
 
 	if (bloomSine) {
-		bloomShader.dim = dim = .8 + (.3 * Math.sin(__totalTime));
-		bloomShader.size = size = 18 + (8 * Math.sin(__totalTime));
+		bloomShader.dim = dim = .8 + (.3 * FlxMath.fastSin(__totalTime));
+		bloomShader.size = size = 18 + (8 * FlxMath.fastSin(__totalTime));
 	}
 
 
 	selectorCam.visible = subMenuSelector.visible;
-	//selectorBloom.size = 4 + (1 * Math.sin(__totalTime));
+	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
 	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
 
 	if (!updateFreePlay) return;
-	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? .6 + (.4*Math.sin(__totalTime*1.5)) : 0, 0.15);
+	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? .6 + (.4*FlxMath.fastSin(__totalTime*1.5)) : 0, 0.15);
 	for (menuID => data in freeplaySongLists) {
 		if (menuID != freePlayMenuID && freePlayMenuID != -1) continue;
 		for (i => song in data.songMenuObjs) {

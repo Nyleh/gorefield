@@ -43,8 +43,8 @@ var fullTime:Float = 0;
 function update(elapsed:Float) {
     if (ps <= 2) {
         fullTime += elapsed;
-        psBar.x = lerp(psBar.x, 230 + (6*Math.sin(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
-        psBar.y = lerp(psBar.y, 560 + (4*Math.cos(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
+        psBar.x = lerp(psBar.x, 230 + (6*FlxMath.fastSin(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
+        psBar.y = lerp(psBar.y, 560 + (4*FlxMath.fastCos(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
         psBar.color = FlxColor.interpolate(psBar.color, ps == 1 ?0x6CFF6A6A : 0xFFFFC8C8, 1/14);
 
         psBarTrail.active = psBarTrail.visible = psBar.alpha > 0.01;

@@ -90,8 +90,8 @@ function update(elapsed:Float) {
             dadPos[1] = lerp(dadPos[1], finalPos[1], (tottalTime*2)/endTime)
         );
 
-        dad.x += (Math.floor(Math.sin((tottalTime*100) * (enteringSinner ? 12 : 6)) * 8) * 6);
-        dad.y += (Math.floor(Math.cos((tottalTime*140) * (enteringSinner ? 12 : 6)) * 8) * (enteringSinner ? 4 : 2));
+        dad.x += (Math.floor(FlxMath.fastSin((tottalTime*100) * (enteringSinner ? 12 : 6)) * 8) * 6);
+        dad.y += (Math.floor(FlxMath.fastCos((tottalTime*140) * (enteringSinner ? 12 : 6)) * 8) * (enteringSinner ? 4 : 2));
 
         dad.x += FlxG.random.float(-2.5, 2.5);
         dad.y += FlxG.random.float(-2.5, 2.5);

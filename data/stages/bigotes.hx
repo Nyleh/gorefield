@@ -101,9 +101,9 @@ function update(elapsed:Float) {
     }
 
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
-    tornado.skew.x = tornado.skew.y = 3 * Math.sin(_curBeat/4);
-    tornado.offset.x = 10 * Math.sin(_curBeat/2);
-    tornado.offset.y = 10 * Math.cos(_curBeat/2);
+    tornado.skew.x = tornado.skew.y = 3 * FlxMath.fastSin(_curBeat/4);
+    tornado.offset.x = 10 * FlxMath.fastSin(_curBeat/2);
+    tornado.offset.y = 10 * FlxMath.fastCos(_curBeat/2);
     
     particleShader.time = _curBeat;
     particleShader.particleXY = [(camFollow.x - 1664) * 2, (camFollow.y - 900) * -1.5];
@@ -112,14 +112,14 @@ function update(elapsed:Float) {
     drunkShader.time = _curBeat;
 
     if(isLymanFlying) {
-        dad.y = 200 + (20 * Math.sin(_curBeat));
-        dad.x = 1460 + (50 * Math.sin(_curBeat/2));
+        dad.y = 200 + (20 * FlxMath.fastSin(_curBeat));
+        dad.x = 1460 + (50 * FlxMath.fastSin(_curBeat/2));
     }
 
-    if (sineSat) trailBloom.sat = 1.2 + (.2 * Math.sin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));
+    if (sineSat) trailBloom.sat = 1.2 + (.2 * FlxMath.fastSin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));
     if (!scaleTrail) return;
     for (i=>trail in jonTrail.members) {
-        var scale = FlxMath.bound(1 + (.11 * Math.sin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
+        var scale = FlxMath.bound(1 + (.11 * FlxMath.fastSin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
         trail.scale.set(scale, scale);
     }
 }

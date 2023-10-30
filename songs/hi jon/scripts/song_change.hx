@@ -47,11 +47,11 @@ function update(elapsed:Float) {
 
     for (i=>trail in gfTrail.members) {
         if (!gfTrail.active) break;
-        var scale = FlxMath.bound(1 + ((curStep < 384 ? .3 : .15) * Math.sin(_curBeat/2 + (i * (Conductor.stepCrochet / 1000)))), 1, 999);
+        var scale = FlxMath.bound(1 + ((curStep < 384 ? .3 : .15) * FlxMath.fastSin(_curBeat/2 + (i * (Conductor.stepCrochet / 1000)))), 1, 999);
         trail.colorTransform.color = curStep < 384 ? 0xFF7E0000 : 0xFFFF0000;
 
-        trail.x = gf.x + ((20 * Math.sin(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
-        trail.y = gf.y + ((20 * Math.cos(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
+        trail.x = gf.x + ((20 * FlxMath.fastSin(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
+        trail.y = gf.y + ((20 * FlxMath.fastCos(_curBeat + (i * (Conductor.stepCrochet / 1000)))) * scale);
 
         trail.scale.set(scale, scale);
     }

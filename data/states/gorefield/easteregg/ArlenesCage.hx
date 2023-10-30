@@ -140,20 +140,20 @@ var tottalTime:Float = 0;
 function update(elapsed) {
     tottalTime += elapsed; blackTime += elapsed;
 
-    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(5 * Math.sin(tottalTime + (Math.PI/2)));
+    eyes.y = bars.y + ((bars.height/2)-(eyes.height/2)) + Math.floor(5 * FlxMath.fastSin(tottalTime + (Math.PI/2)));
     var blackA:Float = Math.floor(((blackTime * (fastFirstFade ? 2 : 1))/4) * 8) / 8;
     black.alpha = FlxMath.bound(fadeOut ? blackA : 1-blackA, 0, 1);
 
-    prompt.y = box.y + box.height - 64 + Math.floor(4 * Math.sin(tottalTime* 1.5));
+    prompt.y = box.y + box.height - 64 + Math.floor(4 * FlxMath.fastSin(tottalTime* 1.5));
     prompt.color = tottalTime % 1 > .5 ? 0xFFADADAD : 0xFFFFFFFF;
 
     prompt.alpha = __canAccept && __curTxTIndx == __finishedMessage.length-1 ? 1 : 0;
 
-    cloud.setPosition(986 + (6 * (Math.floor(Math.sin(tottalTime/1.5)*4)/4)), 65 + (6 * (Math.floor(Math.cos(tottalTime/1.5)*4)/4)));
-    cloudBubble1.setPosition(956 + (-4 * (Math.floor(Math.sin(tottalTime+.5/1.5)*4)/4)) + (tottalTime*6%6), 256+ (4 * (Math.floor(Math.cos(tottalTime+.5/1.5)*4)/4)));
-    cloudBubble2.setPosition(900 + (-4 * (Math.floor(Math.sin(tottalTime+1/1.5)*4)/4)), 246 + (4 * (Math.floor(Math.cos(tottalTime+1/1.5)*4)/4)));
+    cloud.setPosition(986 + (6 * (Math.floor(FlxMath.fastSin(tottalTime/1.5)*4)/4)), 65 + (6 * (Math.floor(FlxMath.fastCos(tottalTime/1.5)*4)/4)));
+    cloudBubble1.setPosition(956 + (-4 * (Math.floor(FlxMath.fastSin(tottalTime+.5/1.5)*4)/4)) + (tottalTime*6%6), 256+ (4 * (Math.floor(FlxMath.fastCos(tottalTime+.5/1.5)*4)/4)));
+    cloudBubble2.setPosition(900 + (-4 * (Math.floor(FlxMath.fastSin(tottalTime+1/1.5)*4)/4)), 246 + (4 * (Math.floor(FlxMath.fastCos(tottalTime+1/1.5)*4)/4)));
     for (i=>cloudTrail in cloudTrail.members) {
-        var scale = FlxMath.bound(1 + .11 * Math.sin(tottalTime + (i * FlxG.random.float(0, .3))), 0.9, 999);
+        var scale = FlxMath.bound(1 + .11 * FlxMath.fastSin(tottalTime + (i * FlxG.random.float(0, .3))), 0.9, 999);
         cloudTrail.scale.set(2, 2);
     }
 
