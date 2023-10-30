@@ -389,7 +389,7 @@ function handleMenu() {
 			selectWeek();
 		else if (controls.BACK) {
 			canMove = false; 
-			FlxG.sound.play(Paths.sound("menu/cancelMenu"));
+			var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
 			FlxG.switchState(new MainMenuState());
 		}
 	}
