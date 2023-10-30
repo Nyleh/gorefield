@@ -54,7 +54,7 @@ var weekColors:Array<Int> = [
 	0xFF9C04B7
 ];
 
-var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true];
+var weeksUnlocked:Array<Bool> = [true, false, true, false, false, false];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -521,8 +521,7 @@ function playWeek() { // animation
 	for (i=>menuOption in menuOptions) { // Fade Out rest...
 		if(menuOption.ID != curWeek){
 			FlxTween.tween(menuOption, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
-			FlxTween.tween(menuLocks[i], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
-			FlxTween.color(menuLocks[i], .8, 0xFFFFFFFF, weekColors[curWeek], {ease: FlxEase.circOut});
+			FlxTween.tween(menuLocks[menuOption.ID], {alpha: 0}, 0.8, {ease: FlxEase.circOut});
 		}
 	}
 	FlxTween.tween(selector, {angle: 45, alpha: 0}, .8, {ease: FlxEase.circOut});
