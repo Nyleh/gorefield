@@ -165,7 +165,7 @@ function goToItem() {
 
 	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
 	switch (options[curSelected]) {
-		case "story_mode": FlxG.switchState(new StoryMenuState());
+		//case "story_mode": 
 		case "freeplay": FlxG.switchState(new StoryMenuState());
 		case "options": FlxG.switchState(new OptionsMenu());
 		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
