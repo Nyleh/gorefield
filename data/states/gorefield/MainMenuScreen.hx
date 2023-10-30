@@ -7,7 +7,7 @@ import funkin.backend.MusicBeatState;
 
 var options:Array<String> = [
 	'story_mode',
-	//'freeplay',
+	'freeplay',
 	'options',
 	'credits',
 ];
@@ -33,8 +33,9 @@ var curSelected:Int = curMainMenuSelected;
 
 var menuInfomation:FlxText;
 var logoBl:FlxSprite;
-var bgMainMenu:FlxSprite;
+var fire:FlxSprite;
 var gorefield:FlxSprite;
+var vigentte:FlxSprite;
 
 var keyCombos:Map<String, Void->Void> = [
 	"PENK" => function () penk(),
@@ -45,16 +46,19 @@ var keyCombos:Map<String, Void->Void> = [
 var keyComboProgress:Map<String, Int> = [];
 var canUseKeyCombos:Bool = true;
 
+var glowShader:CustomShader;
+var glitchShader:CustomShader;
+var heatWaveShader:CustomShader;
+
 function create() {
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
-	bgMainMenu = new FlxSprite();
-	bgMainMenu.loadGraphic(Paths.image("menus/mainmenu/BGmainmenu"));
-	bgMainMenu.setGraphicSize(FlxG.width, FlxG.height);
-	bgMainMenu.updateHitbox();
-	bgMainMenu.scrollFactor.set();
-	add(bgMainMenu);
+	fire = new FlxSprite(-100, -60);
+	fire.frames = Paths.getSparrowAtlas('stages/skyFire/fire_f4');
+	fire.animation.addByPrefix("fire", "FIRE", 24, true);
+	fire.animation.play("fire");
+	add(fire); fire.visible = false;
 
 	gorefield = new FlxSprite();
 	gorefield.frames = Paths.getSparrowAtlas('menus/mainmenu/gorefield_menu');
@@ -140,9 +144,20 @@ function create() {
 		changeItem(0);
 	}
 
-	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
+	vigentte = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
 	vigentte.alpha = 0.2; vigentte.scrollFactor.set(0,0);
 	add(vigentte);
+
+	glowShader = new CustomShader("glow");
+	glowShader.size = 8.0;// trailBloom.quality = 8.0;
+    glowShader.dim = 1;// trailBloom.directions = 16.0;
+
+	heatWaveShader = new CustomShader("heatwave");
+    heatWaveShader.time = 0; heatWaveShader.speed = 1; 
+    heatWaveShader.strength = 1; 
+
+	glitchShader = new CustomShader("glitch");
+    glitchShader.glitchAmount = .4;
 }
 
 function changeItem(change:Int = 0) {
@@ -174,16 +189,62 @@ function goToItem() {
 
 	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
 	switch (options[curSelected]) {
-		//case "freeplay": 
-		case "story_mode": FlxG.switchState(new StoryMenuState());
+		case "story_mode": 
+			FlxG.sound.play(Paths.sound('menu/pressStorymode'));
+			gorefield.animation.play('jeje'); gorefield.x = 250;
+			gorefield.offset.y = 15; gorefield.offset.x = -25;
+			gorefield.color = 0xFFDE8888;
+
+			FlxG.sound.music.stop();
+			FlxG.camera.shake(0.005, 5.2);
+
+			FlxG.camera.flash(FlxColor.WHITE, 1);
+
+			FlxG.camera.bgColor = 0xff80261f;
+			fire.animation.play('fire');
+
+			FlxTween.tween(vigentte, {alpha: .4}, 3.2);
+
+			if (FlxG.save.data.glitch) gorefield.shader = glitchShader;
+			if (FlxG.save.data.heatwave) fire.shader = heatWaveShader;
+			if (FlxG.save.data.bloom) FlxG.camera.addShader(glowShader);
+
+			for (member in members)
+				member.visible = member == fire || member == gorefield || member == vigentte;
+
+			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
+			(new FlxTimer()).start(2, function() {
+				FlxG.camera.fade(FlxColor.RED, 3.2, false, function() {
+					PlayState.loadWeek({
+						name: "Principal Week...",
+						id: "Principal Week...",
+						sprite: null,
+						chars: [null, null, null],
+						songs: [for (song in ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]) {name: song, hide: false}],
+						difficulties: ['hard']
+					}, "hard");
+					FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+				});
+			});
+		case "freeplay": FlxG.switchState(new StoryMenuState());
 		case "options": FlxG.switchState(new OptionsMenu());
 		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
 		default: selectedSomthin = false;
 	}
 }
 
+var tottalTime:Float = 0;
 var selectedSomthin:Bool = false;
 function update(elapsed:Float) {
+	tottalTime += elapsed;
+	heatWaveShader.time = tottalTime;
+	glitchShader.time = tottalTime;
+
+	fire.y = -50 + (FlxMath.fastSin(tottalTime) * 10);
+	if (gorefield.animation.name == "jeje") {
+		gorefield.offset.y = 15 + FlxG.random.float(-6,6); gorefield.offset.x = -25 + FlxG.random.float(-2,2);
+	}
+
 	if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;
 
@@ -229,10 +290,6 @@ function beatHit(curBeat:Int) {
 
 	if (curBeat % 4 == 0)
 		gorefield.animation.play('beat',true);
-
-	//Don't Work's :(((( - Jloor
-    bgMainMenu.alpha = 1;
-    bgTween = FlxTween.tween(bgMainMenu,{alpha: 0.7}, 1);
 }
 
 function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}

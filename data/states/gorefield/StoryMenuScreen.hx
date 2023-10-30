@@ -333,7 +333,6 @@ function update(elapsed:Float) {
 		bloomShader.size = size = 18 + (8 * FlxMath.fastSin(__totalTime));
 	}
 
-
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
@@ -638,7 +637,6 @@ function changeSong(change:Int) {
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF1CDA1C), "@"),
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF10CCED), "/"),
 	]);
-	trace(data.date);
 
 	textInfoBG.scale.set(FlxG.width, scoreText.height + 38);
 	textInfoBG.updateHitbox();
