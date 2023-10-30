@@ -19,6 +19,9 @@ function create() {
     remove(boyfriend);
     add(boyfriend);
     add(dad);
+
+	comboGroup.x += 500;
+    comboGroup.y = 200;
 }
 
 var tottalTime:Float = 0;

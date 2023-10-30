@@ -65,7 +65,7 @@ function create()
     bars.scale.set(6, 6); bars.updateHitbox(); bars.screenCenter(FlxAxes.X);
     
     if (FlxG.save.data.arlenePhase != -1)
-        menuMusic = FlxG.sound.load(Paths.sound('easteregg/menu_clown'), 1.0, true);
+        menuMusic = FlxG.sound.load(Paths.music('easteregg/areline_theme'), 1.0, true);
         
     wind = FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 0, true);
     FlxTween.tween(wind, {volume: 1}, 6);
