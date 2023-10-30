@@ -43,7 +43,7 @@ var keyCombos:Map<String, Void->Void> = [
 var keyComboProgress:Map<String, Int> = [];
 var canUseKeyCombos:Bool = true;
 
-var seenCutscene:Bool = false;
+static var seenCutscene:Bool = false;
 
 function create() {
 	CoolUtil.playMenuSong();
@@ -100,7 +100,7 @@ function create() {
 	cutscene.visible = false;
 
 	if (!seenCutscene) {
-		selectedSomthin = true;
+		selectedSomthin = seenCutscene = true;
 		var oldMembers = members.copy();
 		for (mem in members) remove(mem);
 		add(cutscene);
