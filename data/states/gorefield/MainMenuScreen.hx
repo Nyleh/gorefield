@@ -109,6 +109,7 @@ function create() {
 			cutscene.animation.play("_", cutscene.visible = true);
 		});
 		cutscene.animation.finishCallback = function () {
+			changeItem(0);
 			for (mem in oldMembers) add(mem);
 			remove(cutscene);
 
@@ -126,12 +127,13 @@ function create() {
 			selectedSomthin = false;
 		}
 	}
+	else{
+		changeItem(0);
+	}
 
 	var vigentte:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/black_vignette"));
 	vigentte.alpha = 0.2; vigentte.scrollFactor.set(0,0);
 	add(vigentte);
-
-	changeItem(0);
 }
 
 function changeItem(change:Int = 0) {
