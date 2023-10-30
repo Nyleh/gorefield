@@ -117,7 +117,7 @@ var intro:Bool = true;
 function update(elapsed:Float)
 {
 	var lerpVal:Float = Math.max(0, Math.min(1, elapsed * 7.5));
-	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x-camFollowXOffset, camFollow.x, lerpVal) + camFollowXOffset, FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
+	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x+camFollowXOffset, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 	if (!quitting)
 	{
@@ -158,7 +158,7 @@ function changeSelection(change:Int)
 	var creditRole:String = credits[curSelected][1];
 	var creditDescription:String = credits[curSelected][2];
 
-	camFollowXOffset = creditName == "Ne_Eo" ? 50 : 0;
+	camFollowXOffset = creditName == "Ne_Eo" ? 35 : 0;
 
 	descText.text = creditRole;
 	descText2.text = creditDescription;
