@@ -63,7 +63,7 @@ function create() {
 	gorefield = new FlxSprite();
 	gorefield.frames = Paths.getSparrowAtlas('menus/mainmenu/gorefield_menu');
 	gorefield.animation.addByPrefix('idle', 'MenuIdle0000', 1);
-	gorefield.animation.addByPrefix('beat', 'MenuIdle', 24);
+	gorefield.animation.addByPrefix('beat', 'MenuIdle', 24,false);
 	gorefield.animation.addByPrefix('jeje', 'JEJE', 24);
 	gorefield.animation.play('idle');
 	gorefield.updateHitbox();
@@ -288,7 +288,7 @@ var bgTween:FlxTween;
 function beatHit(curBeat:Int) {
 	logoBl.animation.play('bump',true);
 
-	if (curBeat % 4 == 0)
+	if (curBeat % 2 == 0)
 		gorefield.animation.play('beat',true);
 }
 
