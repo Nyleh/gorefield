@@ -7,10 +7,14 @@ var staticShader:CustomShader;
 
 var normalStrumPoses:Array<Array<Int>> = [];
 
+var normalBGSprites:Array<FlxSprite>;
+
 function postCreate() {
     lerpCam = false;
     defaultCamZoom = 1.25;
     FlxG.camera.zoom = 1.25;
+
+    normalBGSprites = [for (i in 1...5) stage.stageSprites["BG" + i]];
 
     stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
     remove(stage.stageSprites["black"]);
@@ -24,7 +28,7 @@ function postCreate() {
 
     drunkShader = new CustomShader("drunk");
     drunkShader.time = 0; drunkShader.strength = 0;
-    if (FlxG.save.data.drunk) stage.stageSprites["BG"].shader = drunkShader;
+    if (FlxG.save.data.drunk) for (sprite in normalBGSprites) sprite.shader = drunkShader;
 
     bloom = new CustomShader("glow");
     bloom.size = 1.0; bloom.dim = 1.3;
@@ -76,7 +80,10 @@ function superCool(turnOn:Bool, steps:Int) {
     FlxTween.tween(stage.stageSprites["light"], {alpha: turnOn ? 0.3 : 1}, (Conductor.stepCrochet / 1000) * steps);
 
     FlxTween.num(!turnOn ? .8 : .0, turnOn ? .8 : .0, (Conductor.stepCrochet / 1000) * steps, {}, (val:Float) -> {drunkShader.strength = val;});
-    FlxTween.color(stage.stageSprites["BG"], (Conductor.stepCrochet / 1000) * steps * .5, turnOn ? 0xFFFFFFFF : 0xFF31333D, !turnOn ? 0xFFFFFFFF : 0xFF31333D);
+    
+    for (sprite in normalBGSprites)
+        FlxTween.color(sprite, (Conductor.stepCrochet / 1000) * steps * .5, turnOn ? 0xFFFFFFFF : 0xFF31333D, !turnOn ? 0xFFFFFFFF : 0xFF31333D);
+    
     for (strum in strumLines)
 		for (char in strum.characters) {
 			if (char.shader == null) continue;
