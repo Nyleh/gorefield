@@ -434,9 +434,9 @@ function selectWeek() {
 	if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
 		FlxG.camera.shake(0.005, .5);
-		lerpColors[curWeek * 2 + 0].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
-		lerpColors[curWeek * 2 + 1].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
-		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 ? 0xFF290000 : 0xFFFF0000;
+		lerpColors[curWeek * 2 + 0].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
+		lerpColors[curWeek * 2 + 1].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
+		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
 
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
