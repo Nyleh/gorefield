@@ -1,4 +1,6 @@
 import funkin.game.GameOverSubstate;
+import funkin.menus.PauseSubState;
+
 import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
 
@@ -50,8 +52,8 @@ function preStateSwitch() {
     WindowUtils.resetTitle();
     FlxG.camera.bgColor = 0xFF000000;
 
-    if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate)) // ! CHECK IN GAME/NOT IN GAME OVER
-        && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode) // ! CHECK STORY MODE/ GOING TO OTHER SONG
+    if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate) && !Std.isOfType(FlxG.state.subState, PauseSubState)) // ! CHECK IN GAME/NOT IN GAME OVER
+        && Std.isOfType(FlxG.game._requestedState, PlayState) && PlayState.isStoryMode && !skipLoadingScreen) // ! CHECK STORY MODE/ GOING TO OTHER SONG
         {FlxG.switchState(new ModState("gorefield/LoadingScreen")); return;} // LOADING SCREEN
 
     for (redirectState in redirectStates.keys()) 

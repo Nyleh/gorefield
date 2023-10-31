@@ -1,6 +1,7 @@
 //
 import Xml;
 import funkin.backend.utils.WindowUtils;
+import funkin.backend.MusicBeatState;
 import openfl.Lib;
 
 var pizza:Character;
@@ -71,6 +72,7 @@ function create() {
 		FlxTween.tween(black, {alpha: 0}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
 	});
 	WindowUtils.endFix = " - Loading";
+	MusicBeatState.skipTransOut = true;
 }
 
 function update(elapsed:Float) {
