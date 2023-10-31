@@ -3,7 +3,7 @@ var heatWaveShader:CustomShader;
 var bloom:CustomShader;
 var bloom2:CustomShader;
 public var glitchShader:CustomShader;
-var characterCam:FlxCamera;
+public var characterCam:FlxCamera;
 
 var normalStrumPoses:Array<Array<Int>> = [];
 
@@ -49,7 +49,6 @@ function create() {
 
 function postCreate(){
     remove(stage.stageSprites["cloudScroll1"]);
-    insert(999999,stage.stageSprites["cloudScroll1"]);
     remove(stage.stageSprites["black_overlay"]);
     add(stage.stageSprites["black_overlay"]);
 }
@@ -83,7 +82,7 @@ function update(elapsed:Float) {
     camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime + Math.PI*2)*(6*coolSineMulti) : 0, 0.25);
     camHUD.x = lerp(camHUD.x, coolSineX ? FlxMath.fastCos(tottalTime*2 + Math.PI*2)*(12*coolSineMulti) : 0, 0.25);
 
-    // yum yum code - luner
+    // yum yum code - luner  he took a bite of that gum gum
     stage.stageSprites["cloudScroll1"].y += 700 * elapsed * cloudSpeed;
     stage.stageSprites["cloudScroll2"].y += 550 * elapsed * cloudSpeed;
     stage.stageSprites["cloudScroll3"].y += 350 * elapsed * cloudSpeed;
@@ -102,4 +101,4 @@ function update(elapsed:Float) {
 }
 
 function onPlayerHit(event) {event.showRating = false; songScore += event.score;}
-function onPostCountdown(event) {event?.sprite?.cameras = [characterCam];}
+function onPostCountdown(event) {event?.sprite?.cameras = [characterCam]; insert(999999,stage.stageSprites["cloudScroll1"]); stage.stageSprites["cloudScroll1"].cameras = [characterCam];}
