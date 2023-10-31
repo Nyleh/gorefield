@@ -3,6 +3,7 @@ import funkin.options.OptionsMenu;
 import flixel.text.FlxTextBorderStyle;
 import funkin.menus.ModSwitchMenu;
 import funkin.editors.EditorPicker;
+import hxvlc.flixel.FlxVideo;
 import funkin.backend.MusicBeatState;
 
 var options:Array<String> = [
@@ -41,7 +42,12 @@ var keyCombos:Map<String, Void->Void> = [
 	"PENK" => function () penk(),
 	"PENKA" => function () penk(),
 	"PENKR" => function () penk(),
-	"PENKARU" => function () penk()
+	"PENKARU" => function () penk(),
+	"TAE" => function () meme("t"),
+	"NIFFIRG" => function () meme("niffirgflumbo"),
+	"TANUKI" => function () meme("irl"),
+	"CABROS" => function () meme("LOOOOL"),
+	"CANDEL" => function () meme("idk what call this one")
 ];
 var keyComboProgress:Map<String, Int> = [];
 var canUseKeyCombos:Bool = true;
@@ -328,4 +334,13 @@ function penk() {
 			FlxG.switchState(new ModState("gorefield/easteregg/Penkaru"));
 		}});
 	});
+}
+
+function meme(videoS:String) {
+	selectedSomthin = true; FlxG.sound.music.volume = 0;
+
+	video = new FlxVideo();
+    video.onEndReached.add(function () {video.dispose(); selectedSomthin = false; FlxG.sound.music.volume = 1;});
+    video.play(Assets.getPath(Paths.video(videoS)));
+	add(video);
 }
