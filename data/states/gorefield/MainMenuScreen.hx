@@ -210,7 +210,7 @@ function goToItem() {
 			if (FlxG.save.data.bloom) FlxG.camera.addShader(glowShader);
 
 			for (member in members)
-				if (Std.isOfType(member, FlxSprite)) member.visible = member == fire || member == gorefield || member == vigentte;
+				if (Std.isOfType(member, FlxBasic)) member.visible = member == fire || member == gorefield || member == vigentte;
 
 			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 			(new FlxTimer()).start(2, function() {
