@@ -109,6 +109,6 @@ function stepHit(step:Int) {
             FlxTween.num(1.8, 1.3, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudOut}, (val:Float) -> {warpShader.distortion = val;});
             FlxTween.num(1, .6, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {particleShader.particlealpha = val;});
 
-        case 2256: for (cam in [camJonTrail, camCharacters, camGame, camHUD]) cam.visible = false;
+        case 2256: for (cam in [camJonTrail, camCharacters, camGame, camHUD]) cam.visible = false; remove(jonTrail);
     }
 } 

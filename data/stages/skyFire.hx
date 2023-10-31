@@ -28,7 +28,7 @@ function create() {
     if (FlxG.save.data.heatwave) characterCam.addShader(heatWaveShader);
 
     bloom = new CustomShader("glow");
-    bloom.size = 13.0; bloom.dim = 1.4;
+    bloom.size = 28.0; bloom.dim = .5;
     if (FlxG.save.data.bloom) stage.stageSprites["fireSky"].shader = bloom;
 
     bloom2 = new CustomShader("glow");
@@ -38,19 +38,19 @@ function create() {
 
     glitchShader = new CustomShader("glitch");
     glitchShader.glitchAmount = .4;
-    if (FlxG.save.data.glitch) characterCam.addShader(glitchShader);
+    //if (FlxG.save.data.glitch) characterCam.addShader(glitchShader);
 
 	comboGroup.x += 500;
     comboGroup.y = 200;
-
-    for (i=>strum in strumLines.members)
-        normalStrumPoses[i] = [for (s in strum.members) s.y];
 }
 
 function postCreate(){
     remove(stage.stageSprites["cloudScroll1"]);
     remove(stage.stageSprites["black_overlay"]);
     add(stage.stageSprites["black_overlay"]);
+
+    for (i=>strum in strumLines.members)
+        normalStrumPoses[i] = [for (i=>s in strum.members) s.y];
 }
 
 public function cool() {
@@ -61,7 +61,8 @@ public function cool() {
 var tottalTime:Float = 0;
 public var coolSineMulti:Float = 1;
 public var coolSineX:Bool = true;
-public var coolSineY:Bool = true;
+public var coolSineY:Bool = false;
+public var arrowSinner:Bool = false;
 public var cloudSpeed:Float = 1;
 var size:Float = 0; var dim:Float = 0;
 function update(elapsed:Float) {
@@ -81,6 +82,11 @@ function update(elapsed:Float) {
     camHUD.angle = lerp(camHUD.angle, coolSineY ? (2* coolSineMulti)*FlxMath.fastSin(tottalTime*2) : 0, 0.25);
     camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime + Math.PI*2)*(6*coolSineMulti) : 0, 0.25);
     camHUD.x = lerp(camHUD.x, coolSineX ? FlxMath.fastCos(tottalTime*2 + Math.PI*2)*(12*coolSineMulti) : 0, 0.25);
+
+    for (i => strumLine in strumLines.members)
+        for (k=>s in strumLine.members) 
+            s.y = lerp(s.y, arrowSinner ? normalStrumPoses[i][k] + ((16*coolSineMulti)*FlxMath.fastSin((tottalTime*4) + ((Conductor.stepCrochet / 1000) * k * 4))) : normalStrumPoses[i][k], .25);
+            
 
     // yum yum code - luner  he took a bite of that gum gum
     stage.stageSprites["cloudScroll1"].y += 700 * elapsed * cloudSpeed;
