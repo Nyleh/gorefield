@@ -7,8 +7,10 @@ static var lerpCam:Bool = true;
 public var strumLineDadMult:Float = 1;
 public var strumLineGfMult:Float = 1;
 public var strumLineBfMult:Float = 1; //i love being lazy (for change stage zoom specifically)
+public var camZoomMult:Float = 1; //i love being lazy (for change stage zoom specifically) ne too -lunar
 
 function create() {
+    strumLineBfMult = strumLineDadMult = strumLineGfMult = camZoomMult = 1;
     camZooming = false; lerpCam = true;
     if (stage == null || stage.stageXML == null) return;
 
@@ -28,7 +30,7 @@ function update(elapsed:Bool) {
         };
 
         FlxG.camera.zoom = lerp(FlxG.camera.zoom, stageZoom == -1 ? defaultCamZoom : stageZoom, 0.05);
-        camHUD.zoom = lerp(camHUD.zoom, defaultHudZoom, 0.05);
+        camHUD.zoom = lerp(camHUD.zoom, defaultHudZoom * camZoomMult, 0.05);
     }
 }
 
