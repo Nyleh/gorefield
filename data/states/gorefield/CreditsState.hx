@@ -20,7 +20,7 @@ var credits:Array<Array<String>> = [
 	["JoaDash", "Pixel Artist", "Matate oe, no trabaja"],
 	["Ani Manny", "Artist", "El de los chistes bien chistosos"],
 	["Lunar Cleint", "Main Coder", "hi guys its me lunar anyway jloor wrote the rest 'de Todos los Tiempos (Messi)'"],
-	["Lean", "Coder", "Justin Biebier What do you mean?"],
+	["Lean", "Coder", "ummmm yeah i coded a lot for the mod"],
 	["EstoyAburridoW", "Coder", "Viciado en Celeste y viva Peru de nuevo"],
 	["Ne_Eo", "Coder", "Why is the menu not centered?"],
 	["Nexus Moon", "Musician", "El Undertale"],
