@@ -28,12 +28,11 @@ function postCreate() {
 
     bloom = new CustomShader("glow");
     bloom.size = 1.0; bloom.dim = 1.3;
-    //FlxG.camera.addShader(bloom);
 
     staticShader = new CustomShader("tvstatic");
 	staticShader.time = 0; staticShader.strength = 0.6;
 	staticShader.speed = 20;
-	FlxG.camera.addShader(staticShader);
+	if (FlxG.save.data.static) FlxG.camera.addShader(staticShader);
 
     for (i=>strum in strumLines.members) {
         normalStrumPoses[i] = [for (s in strum.members) s.y];
@@ -157,7 +156,7 @@ function stepHit(step:Int){
             boyfriend.cameraOffset.y += 30;
             coolSineX = true;
         case 928:
-            FlxG.camera.addShader(bloom);
+            if (FlxG.save.data.bloom) FlxG.camera.addShader(bloom);
             FlxTween.num(1, 8, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
 
             superCool(true, (Conductor.stepCrochet / 1000) * 24);

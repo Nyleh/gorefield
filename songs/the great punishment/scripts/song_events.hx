@@ -30,7 +30,7 @@ function create(){
     staticShader = new CustomShader("tvstatic");
 	staticShader.time = 0; staticShader.strength = 0.1;
 	staticShader.speed = 20;
-	FlxG.camera.addShader(staticShader);
+	if (FlxG.save.data.static) FlxG.camera.addShader(staticShader);
 
     bg.color = 0xFF0C0D0F;
 

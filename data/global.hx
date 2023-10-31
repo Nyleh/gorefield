@@ -27,6 +27,7 @@ function new() {
     if (FlxG.save.data.warp == null) FlxG.save.data.warp = true;
     if (FlxG.save.data.wrath == null) FlxG.save.data.wrath = true;
     if (FlxG.save.data.heatwave == null) FlxG.save.data.heatwave = true;
+    if (FlxG.save.data.static == null) FlxG.save.data.static = true;
     if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
 
     if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
