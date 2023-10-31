@@ -3,7 +3,7 @@ static var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
 
 function update() {
-    if (startingSong || !canPause || paused || health <= 0) return;
+    if (startingSong || !canPause || paused || health <= 0 || !FlxG.save.data.dev) return;
     
     if (FlxG.keys.justPressed.TWO) curSpeed -= 0.1;
     if (FlxG.keys.justPressed.THREE) curSpeed = 1;
