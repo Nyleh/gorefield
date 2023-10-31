@@ -1,5 +1,6 @@
 //
 import Xml;
+import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
 
 var pizza:Character;
@@ -69,7 +70,7 @@ function create() {
 	new FlxTimer().start(1.5, (tmr:FlxTimer) -> {
 		FlxTween.tween(black, {alpha: 0}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
 	});
-	Lib.application.window.title = "Friday Night Funkin' - Vs Gorefield - Loading";
+	WindowUtils.endFix = " - Loading";
 }
 
 function update(elapsed:Float) {

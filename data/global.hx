@@ -1,4 +1,5 @@
 import funkin.game.GameOverSubstate;
+import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
 
 static var curMainMenuSelected:Int = 0;
@@ -46,6 +47,7 @@ function new() {
 }
 
 function preStateSwitch() {
+    WindowUtils.resetTitle();
     FlxG.camera.bgColor = 0xFF000000;
 
     if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate)) // ! CHECK IN GAME/NOT IN GAME OVER
