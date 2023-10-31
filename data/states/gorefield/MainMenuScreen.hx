@@ -14,7 +14,7 @@ var options:Array<String> = [
 
 var optionsTexts:Map<String, String> = [
 	'story_mode' => "Be very careful, be cautious!!",
-	//'freeplay' => "Sing along with GoreField",
+	'freeplay' => "Sing along with GoreField",
 	'options' => "The options you expected?",
 	'credits' => "Credits to those who helped!",
 ];
@@ -22,7 +22,7 @@ var optionsTexts:Map<String, String> = [
 // SPANISH - Jloor
 var optionsTextsSPANISH:Map<String, String> = [
 	'story_mode' => "Ten mucho cuidado, se cauteloso!!",
-	//'freeplay' => "Canta junto a Gorefield...",
+	'freeplay' => "Canta junto a Gorefield...",
 	'options' => "Opciones..., Que esperabas?",
 	'credits' => "Quienes trabajaron en el Mod!",
 ];
@@ -127,9 +127,9 @@ function create() {
 			remove(cutscene);
 
 			menuInfomation.y += 100;
-			FlxTween.tween(menuInfomation, {y: menuInfomation.y - 100}, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.circOut});
+			FlxTween.tween(menuInfomation, {y: menuInfomation.y - 100}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.circOut});
 
-			logoBl.alpha = 0; logoBl.angle = 3;
+			logoBl.alpha = 0;
 			FlxTween.tween(logoBl, {alpha: 1 , angle: 0}, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.circOut});
 
 			menuItems.forEach(function(item:FlxSprite) {

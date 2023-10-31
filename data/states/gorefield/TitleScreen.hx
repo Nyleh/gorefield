@@ -172,9 +172,6 @@ function update(elapsed:Float) {
 	if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;
 
-	if (FlxG.keys.justPressed.SHIFT)
-		FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
-
 	if (pressedEnter) {
 		if (!skippedIntro)
 			skipIntro();
