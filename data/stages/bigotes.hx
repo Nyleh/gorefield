@@ -55,7 +55,7 @@ function create() {
     if (FlxG.save.data.bloom) camJonTrail.addShader(trailBloom);
 
     drunkShader = new CustomShader("drunk");
-    drunkShader.time = 0;
+    drunkShader.time = 0; drunkShader.strength = 1;
     if (FlxG.save.data.drunk) camJonTrail.addShader(drunkShader);
 
     particleShader = new CustomShader("particles");

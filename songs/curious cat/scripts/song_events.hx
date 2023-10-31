@@ -2,8 +2,6 @@ var black_overlay:FlxSprite;
 var staticShader:CustomShader;
 var saturationShader:CustomShader = null;
 
-var wrathShaders:Map<Character, CustomShader> = [];
-
 function create()
 {
 	stage.stageSprites["black_overlay"].visible = stage.stageSprites["black_overlay"].active = true;
