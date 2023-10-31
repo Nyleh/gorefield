@@ -5,20 +5,10 @@ function create() {
     FlxG.camera.bgColor = FlxColor.fromRGB(54, 34, 83);
 
     heatWaveShader = new CustomShader("heatwave");
-    heatWaveShader.time = 0; heatWaveShader.speed = 1; 
-    heatWaveShader.strength = 1; 
-    
-    heatWaveShader.data.noise.input = Assets.getBitmapData("assets/shaders/maps/stupidstatic.png");
-    heatWaveShader.data.noise.wrap = 2/*REPEAT*/;
-    heatWaveShader.data.noise.mipFilter = 0/*MIPLINEAR*/;
-    heatWaveShader.data.noise.filter = 4/*LINEAR*/;
+    heatWaveShader.time = 0; heatWaveShader.speed = 5; 
+    heatWaveShader.strength = 0.38; 
 
-    if (FlxG.save.data.heatwave == null) FlxG.camera.addShader(heatWaveShader);
-
-    remove(dad);
-    remove(boyfriend);
-    add(boyfriend);
-    add(dad);
+    if (FlxG.save.data.heatwave) FlxG.camera.addShader(heatWaveShader);
 
 	comboGroup.x += 500;
     comboGroup.y = 200;
