@@ -649,6 +649,8 @@ function changeSong(change:Int) {
 function goToSong() {
 	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
     PlayState.loadSong(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", false, false);
+	PlayState.isStoryMode = PlayState.chartingMode = false; // Just incase cause people see cutscenes for some reason
+
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }
 
