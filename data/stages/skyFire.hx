@@ -1,4 +1,6 @@
 //
+import flixel.math.FlxRect;
+
 var heatWaveShader:CustomShader;
 var bloom:CustomShader;
 var bloom2:CustomShader;
@@ -30,6 +32,7 @@ function create() {
     bloom = new CustomShader("glow");
     bloom.size = 28.0; bloom.dim = .5;
     if (FlxG.save.data.bloom) stage.stageSprites["fireSky"].shader = bloom;
+    stage.stageSprites["fireSky"].clipRect = new FlxRect(0, 20,stage.stageSprites["fireSky"].width, stage.stageSprites["fireSky"].height-20);
 
     bloom2 = new CustomShader("glow");
     bloom2.size = size = 13.0; bloom2.dim = dim = .8;
