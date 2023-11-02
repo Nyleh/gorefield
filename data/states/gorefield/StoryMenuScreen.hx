@@ -54,7 +54,8 @@ var weekColors:Array<Int> = [
 	0xFFFFFFFF
 ];
 
-var weeksUnlocked:Array<Bool> = [true, false, false, false, false, false];
+var CATclysmUnlocked:Bool = false;
+var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -300,7 +301,7 @@ function update(elapsed:Float) {
 			if (__firstFrame) menuOption.x += 2000 + (i *800);
 		}
 
-		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 ? 0xFF000000 : 0xFFFFFFFF) : (i == 5 ? 0xFF000000 : 0xFFBDBEFF), (1/75) * colorLerpSpeed);
+		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFFFFFF) : (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFBDBEFF), (1/75) * colorLerpSpeed);
 		menuOption.color = lerpColors[i * 2 + 0].color;
 		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
@@ -434,9 +435,9 @@ function selectWeek() {
 	if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
 		FlxG.camera.shake(0.005, .5);
-		lerpColors[curWeek * 2 + 0].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
-		lerpColors[curWeek * 2 + 1].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
-		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 ? 0xFF000000 : 0xFFFF0000;
+		lerpColors[curWeek * 2 + 0].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
+		lerpColors[curWeek * 2 + 1].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
+		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
 
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
