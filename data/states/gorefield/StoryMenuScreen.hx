@@ -177,7 +177,7 @@ function create() {
 		sprite.updateHitbox();
 		sprite.offset.set();
 
-		sprite.screenCenter("X");
+		//sprite.screenCenter("X");
 		sprite.y = (sprite.height + 35) * i;
 
 		sprite.ID = i;
@@ -574,7 +574,7 @@ function preloadFreeplayMenus() {
 			if (Assets.exists(xmlPath))
 				charXML = Xml.parse(Assets.getText(xmlPath)).firstElement();
 		
-			var path = 'icons/' + (charXML.exists("icon") ? charXML.get("icon") : icon);
+			var path = 'icons/' + (charXML != null && charXML.exists("icon") ? charXML.get("icon") : icon);
 			if (!Assets.exists(Paths.image(path))) path = 'icons/face';
 			var icon = new FlxSprite(); icon.alpha = 0;
 			if ((charXML != null && charXML.exists("animatedIcon")) ? (charXML.get("animatedIcon") == "true") : false) {

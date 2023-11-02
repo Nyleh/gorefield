@@ -166,6 +166,36 @@ function create() {
     glitchShader.glitchAmount = .4;
 }
 
+
+function loadCheckpoint(point) {
+	if(point == null) {
+		FlxG.sound.play(Paths.sound("menu/story/locked"));
+		return;
+	}
+
+	selectedSomthin = true;
+
+	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
+
+	(new FlxTimer()).start(2, function() {
+		FlxG.camera.fade(FlxColor.RED, 3.2, false, function() {
+			PlayState.storyWeek = point.storyWeek;
+			PlayState.storyPlaylist = point.storyPlaylist;
+			PlayState.isStoryMode = true;
+			PlayState.campaignScore = point.campaignScore;
+			PlayState.campaignMisses = point.campaignMisses;
+			PlayState.campaignAccuracyTotal = point.campaignAccuracyTotal;
+			PlayState.campaignAccuracyCount = point.campaignAccuracyCount;
+			PlayState.opponentMode = point.opponentMode;
+			PlayState.coopMode = point.coopMode;
+			PlayState.chartingMode = false;
+			PlayState.difficulty = point.difficulty;
+			PlayState.__loadSong(PlayState.storyPlaylist[0], PlayState.difficulty);
+			FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+		});
+	});
+}
+
 function changeItem(change:Int = 0) {
 	curSelected = FlxMath.wrap(curSelected + change, 0, menuItems.length-1);
 
@@ -277,6 +307,11 @@ function update(elapsed:Float) {
 	if (controls.DOWN_P) changeItem(1);
 	if (controls.UP_P) changeItem(-1);
 	if (controls.ACCEPT) goToItem();
+
+
+	if(FlxG.keys.justPressed.SHIFT) {
+		loadCheckpoint(FlxG.save.data.gorePoint);
+	}
 
 	if (FlxG.keys.justPressed.SEVEN) {
 		persistentUpdate = !(persistentDraw = true);

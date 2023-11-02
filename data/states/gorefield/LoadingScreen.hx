@@ -3,6 +3,8 @@ import Xml;
 import funkin.backend.utils.WindowUtils;
 import funkin.backend.MusicBeatState;
 import openfl.Lib;
+import haxe.format.JsonPrinter;
+import haxe.format.JsonParser;
 
 var pizza:Character;
 var black:FlxSprite;
@@ -65,6 +67,23 @@ function create() {
 
 	black = new FlxSprite().makeSolid(FlxG.width, FlxG.height, 0xFF000000);
 	add(black);
+
+	if(PlayState.isStoryMode) {
+		//trace(PlayState.storyWeek);
+		FlxG.save.data.gorePoint = {
+			storyWeek: JsonParser.parse(JsonPrinter.print(PlayState.storyWeek)),
+			storyPlaylist: JsonParser.parse(JsonPrinter.print(PlayState.storyPlaylist)),
+			campaignScore: PlayState.campaignScore,
+			campaignMisses: PlayState.campaignMisses,
+			campaignAccuracyTotal: PlayState.campaignAccuracyTotal,
+			campaignAccuracyCount: PlayState.campaignAccuracyCount,
+			opponentMode: PlayState.opponentMode,
+			coopMode: PlayState.coopMode,
+			difficulty: PlayState.difficulty,
+		}
+		//trace(FlxG.save.data.gorePoint);
+		FlxG.save.flush();
+	}
 
 	FlxG.sound.play(Paths.sound("loadingsound"));
 
