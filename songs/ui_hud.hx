@@ -9,9 +9,9 @@ function create() {
 		new ComboRating(0.7, "D", 0xFFFFAA44),
 		new ComboRating(0.8, "C", 0xFFFFA02D),
 		new ComboRating(0.85, "B", 0xFFFE8503),
-		new ComboRating(0.9, "A", 0xFF933AB6),
-		new ComboRating(0.95, "S", 0xFFB11EEA),
-		new ComboRating(1, "S++", 0xFFC63BFD),
+		new ComboRating(0.9, "A", 0xFF95FBFF),
+		new ComboRating(0.95, "S", 0xFF85FBFF),
+		new ComboRating(1, "S++", 0xFF0FF7FF),
 	];
 }
 // to be used some day when we have to add a time bar cause everyone got mad and we finally add it 4 months later but no one cares cause the mod would be dead by then yeah

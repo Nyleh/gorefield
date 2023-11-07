@@ -12,6 +12,7 @@ function create()
     saturationShader = new CustomShader("saturation");
     saturationShader.sat = saturation = newSaturation = 1;
     if (FlxG.save.data.saturation) camGame.addShader(saturationShader);
+    if (FlxG.save.data.saturation) camHUD.addShader(saturationShader);
 }
 
 function update(elapsed:Float)
@@ -49,12 +50,14 @@ function stepHit(step:Int)
             FlxG.camera.shake(0.02 * Math.max(shakeAmount, 0.05), ((Conductor.crochet / 4) / 1000)/2);
             shakeAmount -= 0.15;
 
+            gf.angle += 360/6;
+
             if (step == 694) {
                 gf.active = gf.visible = true;
                 FlxTween.tween(camHUD, {alpha: 0}, (Conductor.crochet/2) / 1000);
             }
                 
-        case 733: FlxG.camera.zoom += 0.13; camZoomingStrength = 0;
+        case 733: FlxG.camera.zoom += 0.13; camZoomingStrength = 0; 
         case 748: FlxG.camera.zoom += 0.04;
         case 760: FlxG.camera.zoom += 0.02;
         case 768: FlxTween.tween(camHUD, {alpha: 1}, (Conductor.crochet * 2) / 1000);

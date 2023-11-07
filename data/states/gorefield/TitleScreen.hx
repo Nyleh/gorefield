@@ -178,6 +178,8 @@ function update(elapsed:Float) {
 		else if (!transitioning)
 			pressEnter();
 	}
+
+	if (FlxG.keys.justPressed.TAB) FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
 }
 
 function pressEnter() {

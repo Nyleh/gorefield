@@ -1,4 +1,5 @@
 //
+import Reflect;
 static function tweenHUD(a:Float, time:Float) {
     for (strumLine in strumLines) tweenStrum(strumLine, a, time);
     tweenHealthBar(a, time);
@@ -6,7 +7,7 @@ static function tweenHUD(a:Float, time:Float) {
 
 static function tweenHealthBar(a:Float, time:Float) {
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
-        FlxTween.tween(spr,{alpha: a},time);
+        if (Reflect.hasField(spr, "alpha")) FlxTween.tween(spr,{alpha: a},time);
 }
 
 static function tweenStrum(strumLine:StrumLine, a:Float, time:Float) {
