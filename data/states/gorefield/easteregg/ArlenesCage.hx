@@ -1,4 +1,5 @@
 //
+import haxe.xml.Access;
 import flixel.util.FlxAxes;
 import openfl.geom.ColorTransform;
 import openfl.geom.Rectangle;
@@ -326,13 +327,15 @@ function isCharPhrase(char:Int, string:String)
 
 function showCloud(visible:Bool) {
 	FlxTween.num(visible ? 0 : 220, visible ? 220 : 0, visible ? 1.2 : 1.6, {startDelay: visible ? .5 : 0.1}, (val:Float) -> {FlxG.camera.scroll.x = Math.floor(val/20)*20;});
+	if (visible) (new FlxTimer()).start(0.5, function () {menuMusic.fadeOut(1);});
+	else clownTheme.fadeOut(.4);
 	(new FlxTimer()).start(visible ? .5 : .3, function (t) {
 		FlxG.sound.play(Paths.sound("easteregg/Cloud_Arlene_Sound"));
 		switch (visible ? t.elapsedLoops : t.loopsLeft + 1) {
 			case 2: cloudBubble1.visible = grpClouds1.visible = visible;
 			case 1: 
 				cloudBubble2.visible = grpClouds2.visible = visible; 
-				if (!visible) {menuMusic.play(); clownTheme.pause();}
+				if (!visible) {(new FlxTimer()).start(0.4, () -> {menuMusic.play(); menuMusic.volume = 1; clownTheme.pause();});}
 			case 3 | 0: 
 				if (visible) {(new FlxTimer()).start(.7, function() {menuMusic.pause(); clownTheme.play();});}
 				cloud.visible = grpClouds.visible = visible; cloudPortrait.visible = true; cloudPortrait.alpha = visible ? 1 : 0;
