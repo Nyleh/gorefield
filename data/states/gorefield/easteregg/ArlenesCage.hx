@@ -34,6 +34,7 @@ var endingCallback:Void->Void = function () {
 var curDialogue:Int = -1;
 
 var menuMusic:FlxSound;
+var clownTheme:FlxSound;
 var wind:FlxSound;
 var introSound:FlxSound;
 
@@ -73,6 +74,8 @@ function create()
 	
 	if (FlxG.save.data.arlenePhase != -1)
 		menuMusic = FlxG.sound.load(Paths.music('easteregg/areline_theme'), 1.0, true);
+	if (FlxG.save.data.arlenePhase != -1)
+		clownTheme = FlxG.sound.load(Paths.music('easteregg/menu_clown'), 1.0, true);
 		
 	wind = FlxG.sound.play(Paths.sound('easteregg/Wind_Sound'), 0, true);
 	FlxTween.tween(wind, {volume: 1}, 6);
@@ -146,7 +149,7 @@ function create()
 	cloudPortrait.scale.set(2.5, 2.5); cloudPortrait.updateHitbox();
 	add(cloudPortrait); cloudPortrait.setPosition(cloud.x + 76, cloud.y + 38);
 
-	FlxG.camera.scroll.x = 200;
+	//FlxG.camera.scroll.x = 200;
 
 	box = new FlxSprite(0, (FlxG.height/6)*3).loadGraphic(Paths.image("easteregg/Arlene_Text"));
 	box.scale.set(3.7,3.7); box.alpha = 0; box.scrollFactor.set();
@@ -185,12 +188,13 @@ var scl = 44/48;
 		member.antialiasing = false;
 		member.visible = member == bars || member == black ? true : FlxG.save.data.canVisitArlene;
 	}
+	grpClouds.visible = cloud.visible = cloudBubble1.visible = cloudBubble2.visible = cloudPortrait.visible = grpClouds.visible = grpClouds1.visible = grpClouds2.visible = false;
 
 	fastFirstFade = FlxG.save.data.arlenePhase >= 1;
 	introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
 	(new FlxTimer()).start((FlxG.save.data.arlenePhase >= 1 ? 2 : 4)/8, function () introSound.play(), 8);
 	if (FlxG.save.data.arlenePhase == -1 && FlxG.save.data.canVisitArlene) return;
-	(new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 4.2 : 6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.2));
+	(new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 4.2 : 6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 6 : 8, progressDialogue);
 }
 
@@ -213,8 +217,8 @@ function update(elapsed) {
 	prompt.alpha = __canAccept && __curTxTIndx == __finishedMessage.length-1 ? 1 : 0;
 
 	cloud.setPosition(986 + (6 * (Math.floor(FlxMath.fastSin(tottalTime/1.5)*4)/4)), 65 + (6 * (Math.floor(FlxMath.fastCos(tottalTime/1.5)*4)/4)));
-	cloudBubble1.setPosition(956 + (-4 * (Math.floor(FlxMath.fastSin(tottalTime+.5/1.5)*4)/4)) + (tottalTime*6%6), 256+ (4 * (Math.floor(FlxMath.fastCos(tottalTime+.5/1.5)*4)/4)));
-	cloudBubble2.setPosition(900 + (-4 * (Math.floor(FlxMath.fastSin(tottalTime+1/1.5)*4)/4)), 246 + (4 * (Math.floor(FlxMath.fastCos(tottalTime+1/1.5)*4)/4)));
+	cloudBubble1.setPosition(956 + (6 * (Math.floor(FlxMath.fastSin((tottalTime+.2)/1.5)*4)/4)) + (tottalTime*6%6), 256+ (4 * (Math.floor(FlxMath.fastCos((tottalTime+.2)/1.5)*4)/4)));
+	cloudBubble2.setPosition(900 + (6 * (Math.floor(FlxMath.fastSin((tottalTime+.3)/1.5)*4)/4)), 246 + (4 * (Math.floor(FlxMath.fastCos((tottalTime+.3)/1.5)*4)/4)));
 	/*for (i=>tt in cloudTrail.members) {
 		var scale = Math.max(1.3 + .11 * FlxMath.fastSin(tottalTime + (i * FlxG.random.float(0, .3))), 0.9);
 		tt.scale.set(3 + scale, 3 + scale);
@@ -320,6 +324,25 @@ function __typeDialogue(time:Float = 0) {
 function isCharPhrase(char:Int, string:String)
 	return char == string.length-1;
 
+function showCloud(visible:Bool) {
+	FlxTween.num(visible ? 0 : 220, visible ? 220 : 0, visible ? 1.2 : 1.6, {startDelay: visible ? .5 : 0.1}, (val:Float) -> {FlxG.camera.scroll.x = Math.floor(val/20)*20;});
+	(new FlxTimer()).start(visible ? .5 : .3, function (t) {
+		FlxG.sound.play(Paths.sound("easteregg/Cloud_Arlene_Sound"));
+		switch (visible ? t.elapsedLoops : t.loopsLeft + 1) {
+			case 2: cloudBubble1.visible = grpClouds1.visible = visible;
+			case 1: 
+				cloudBubble2.visible = grpClouds2.visible = visible; 
+				if (!visible) {menuMusic.play(); clownTheme.pause();}
+			case 3 | 0: 
+				if (visible) {(new FlxTimer()).start(.7, function() {menuMusic.pause(); clownTheme.play();});}
+				cloud.visible = grpClouds.visible = visible; cloudPortrait.visible = true; cloudPortrait.alpha = visible ? 1 : 0;
+				if (visible)
+					FlxTween.num(visible ? 0 : 1, visible ? 1 : 0, visible ? 1.3 : .4, {}, (val:Float) -> {cloudPortrait.visible = true; cloudPortrait.alpha = (Math.floor((val*100)/8)*8)/100;});
+				else {cloudPortrait.visible = false; cloudPortrait.alpha = 0;}
+		}
+	}, 3);
+}
+
 function onDestroy() Framerate.instance.visible = true;
 
 var testingDialogue:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [
@@ -355,7 +378,7 @@ var testingDialogue:Array<{message:String, expression:String, typingSpeed:Float,
 var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, onEnd:Void->Void, event:Int->Void}> = [
 	{
 		message: "Hello??? && Who are you??? &&&\nHow did you get trapped down here???", 
-		typingSpeed: 0.07, startDelay: 2,
+		typingSpeed: 0.065, startDelay: 2,
 		onEnd: function () {},
 		event: function (char:Int)
 			if (char == 0) {wind.volume = 0.5; eyes.animation.play("confused", true);}
@@ -378,21 +401,61 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 			if (char == 0) {eyes.animation.play("normal", true); wind.stop(); menuMusic.play();}
 	},
 	{
-		message: "Guess being alone down here so long,& has made me a bit,&&&\nitterable...", 
-		typingSpeed: 0.05, startDelay: 0,
+		message: "Guess being alone down here so long has made me a bit,&&&\nitterable...", 
+		typingSpeed: 0.054, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("normal", true);}
-			if (isCharPhrase(char, "Guess being alone down here so long,& has made me a bit,&&&\n")) eyes.animation.play("smug", true);
+			if (isCharPhrase(char, "Guess being alone down here so long has made me a bit,&&&\n")) eyes.animation.play("smug", true);
+		}
+	},
+	{
+		message: "I might as well introduce myself,&&& since I'm alreadly spewing my life story...", 
+		typingSpeed: 0.058, startDelay: 0,
+		onEnd: function () {},
+		event: function (char:Int) {
+			if (char == 0) {eyes.animation.play("normal", true);}
+			if (isCharPhrase(char, "I might as well introduce myself,&&&")) eyes.animation.play("smug", true);
+
+		}
+	},
+	{
+		message: "My name is Areline,&&&\nand I'm garfields girlfriend.", 
+		typingSpeed: 0.052, startDelay: 0,
+		onEnd: function () {
+			(new FlxTimer()).start(.9, function () eyes.animation.play("confused", true)); __canAccept = false;
+			box.alpha = dialoguetext.alpha = prompt.alpha = 0;
+		},
+		event: function (char:Int) {
+			if (char == 0) {eyes.animation.play("normal", true);}
+		}
+	},
+	{
+		message: "Huh? &&&&&&You want to know how I got down here?", 
+		typingSpeed: 0.05, startDelay: 1.6,
+		onEnd: function () {},
+		event: function (char:Int) {
+			if (char == 0) {eyes.animation.play("confused", true);}
+		}
+	},
+	{
+		message: "To be honest I've got no clue...&&&&&&\nI just went to bed one night and woke up here...", 
+		typingSpeed: 0.05, startDelay: 0,
+		onEnd: function () {
+			box.alpha = dialoguetext.alpha = prompt.alpha = 0; eyes.animation.play("normal", true); __canAccept = false;
+			(new FlxTimer()).start(.6, function () eyes.animation.play("left", true));
+		},
+		event: function (char:Int) {
+			if (char == 0) {eyes.animation.play("confused", true);}
+			if (isCharPhrase(char, "To be honest I've got no clue...&&&&&&\n")) eyes.animation.play("normal", true);
 		}
 	},
 	{
 		message: "Hey,&&& since your down here already...&&&&\nCan you get a hold of nermal or garfield for me?", 
-		typingSpeed: 0.05, startDelay: 0,
+		typingSpeed: 0.05, startDelay: 0.9,
 		onEnd: function () {},
 		event: function (char:Int) {
-			if (char == 0) {eyes.animation.play("normal", true);}
-			if (isCharPhrase(char, "Hey,&&&")) eyes.animation.play("left", true);
+			if (char == 0) {eyes.animation.play("left", true);}
 			if (isCharPhrase(char, "Hey,&&& since your down here alreadly...&&&&\n")) eyes.animation.play("confused", true);
 		}
 	},
@@ -407,37 +470,28 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 			if (char == 0) {eyes.animation.play("normal", true);}
 			if (isCharPhrase(char, "I've been trying to reaach them for the longest time...&&&&\n")) eyes.animation.play("left", true);
 		}
-	},
+	}
 	{
-		message: "What?&&&& You don't feel like answering my questionn or something???&&&&&\nYou know it's rude to ignore someone...&", 
-		typingSpeed: 0.045, startDelay: 1.75,
-		onEnd: function () {},
-		event: function (char:Int) {
-			if (char == 0) {eyes.animation.play("confused", true); __canAccept = true;}
-			if (isCharPhrase(char, "What?&&&& You don't feel like answering my questionn or something???&&&&&\n")) eyes.animation.play("smug", true);
-		}
-	},
-	{
-		message: "Ehh it doesn't matter.&&&& I just really need someone to talk to...", 
-		typingSpeed: 0.055, startDelay: 0,
+		message: "I'm still so thankful you came down here,&&&&& I finally have someone to talk too...", 
+		typingSpeed: 0.054, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("normal", true);}
-			if (isCharPhrase(char, "Ehh it doesn't matter.&&&&")) eyes.animation.play("left", true);
+			if (isCharPhrase(char, "I'm still so thankful you came down here,&&&&&")) eyes.animation.play("left", true);
 		}
 	},
 	{
-		message: "Being down here for a long time has made me very,...&&&& \nuh,& observant...", 
-		typingSpeed: 0.06, startDelay: 0,
+		message: "Being locked up for awhile has made me a bit,...&&&& \nuh,& observant...", 
+		typingSpeed: 0.055, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("left", true);}
-			if (isCharPhrase(char, "Being down here for a long time has made me very,...&&&& \n")) eyes.animation.play("normal", true);
+			if (isCharPhrase(char, "Being locked up for awhile has made me a bit,...&&&& \n")) eyes.animation.play("normal", true);
 		}
 	},
 	{
 		message: "Like why are you carrying a microphone with you???&&&\nWhat do you want to sing together or something???", 
-		typingSpeed: 0.04, startDelay: 0,
+		typingSpeed: 0.048, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int)
 			if (char == 0) {eyes.animation.play("confused", true);}
@@ -445,7 +499,10 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 	{
 		message: "Reminds me of the other day...&&&&\nI think I heard the clown's voice somewhere...", 
 		typingSpeed: 0.05, startDelay: 0,
-		onEnd: function () {},
+		onEnd: function () {
+			showCloud(true); __canAccept = false;
+			box.alpha = dialoguetext.alpha = prompt.alpha = 0;
+		},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("left", true);}
 			if (isCharPhrase(char, "Reminds me of the other day...&&&&\n")) eyes.animation.play("normal", true);
@@ -453,15 +510,14 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 	},
 	{
 		message: "The clown was saying that a blue haired dwarf,&& and a delivery man,&& are going to stop a monsterous cat.", 
-		typingSpeed: 0.04, startDelay: 0,
+		typingSpeed: 0.055, startDelay: 2.1,
 		onEnd: function () {},
 		event: function (char:Int)
 			if (char == 0) {eyes.animation.play("confused", true);}
-
 	},
 	{
 		message: "Yeah I know right!&&&\nBiggest lies I've ever heard...", 
-		typingSpeed: 0.035, startDelay: 0,
+		typingSpeed: 0.045, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("normal", true);}
@@ -470,7 +526,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 	},
 	{
 		message: "That clown is crazy...&&\nSo crazy that he hides his jokes???", 
-		typingSpeed: 0.035, startDelay: 0,
+		typingSpeed: 0.055, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("normal", true);}
@@ -479,7 +535,7 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 	},
 	{
 		message: "Why would a clown do that???&&&\nDoesn't that defeat the purpose of being funny???", 
-		typingSpeed: 0.035, startDelay: 0,
+		typingSpeed: 0.055, startDelay: 0,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("smug", true);}
@@ -498,13 +554,13 @@ var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Flo
 	{
 		message: "Find the joke for me,&&\nand I will reward you with a adventure&&.&.&.&&&&& Of finding more jokes...", 
 		typingSpeed: 0.045, startDelay: 0,
-		onEnd: function () {},
+		onEnd: function () {showCloud(false); box.alpha = dialoguetext.alpha = prompt.alpha = 0; __canAccept = false;},
 		event: function (char:Int)
 			if (char == 0) {eyes.animation.play("normal", true);}
 	},
 	{
 		message: "Anyway, thanks for visiting me.&&& \nOne more day down here I would have went insane like that clown.", 
-		typingSpeed: 0.045, startDelay: 0,
+		typingSpeed: 0.045, startDelay: 1.5,
 		onEnd: function () {},
 		event: function (char:Int) {
 			if (char == 0) {eyes.animation.play("normal", true);}
