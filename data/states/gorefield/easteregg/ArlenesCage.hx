@@ -18,6 +18,11 @@ var cloudBubble1:FlxSprite;
 var cloudBubble2:FlxSprite;
 var cloudTrail:FlxTrail;
 var cloud:FlxSprite;
+
+var cloudPortraits:Map<String, FlxSprite> = ["Clown" => null, "cryfieldSecret" => null, "Emote" => null, "Explosion" => null, "Note" => null, "chart" => null, "Snow" => null, "Furniture" => null, "Note_Green" => null];
+var cloudPositions:Map<String, Array<Float>> = ["Clown" => null, "cryfieldSecret" => null, "Emote" => null, "Explosion" => null, "Note" => null, "chart" => null, "Snow" => null, "Furniture" => null, "Note_Green" => null];
+var cloudPortaitName:String = "Snow";
+
 var cloudPortrait:FlxSprite;
 
 var dialoguetext:FlxText;
@@ -67,7 +72,8 @@ function create()
 	FlxG.save.data.canVisitArlene = true;
 
 	switch (FlxG.save.data.arlenePhase) {
-		case 0: dialogueList = firstVisitDialogue; endingCallback = firstVisitEndCallback;
+		default: dialogueList = testingDialogue;
+		//case 0: dialogueList = firstVisitDialogue; endingCallback = firstVisitEndCallback;
 	}
 
 	bars = new FlxSprite(0, FlxG.height/6).loadGraphic(Paths.image("easteregg/Arlene_Box"));
@@ -146,10 +152,26 @@ function create()
 	cloudBubble2.setPosition(900, 246);
 	add(cloudBubble2);
 
-	cloudPortrait = new FlxSprite().loadGraphic(Paths.image("easteregg/Clown"));
-	cloudPortrait.scale.set(2.5, 2.5); cloudPortrait.updateHitbox();
-	add(cloudPortrait); cloudPortrait.setPosition(cloud.x + 76, cloud.y + 38);
+	for (name in cloudPortraits.keys()) {
+		var cloudPortrait:FlxSprite = new FlxSprite().loadGraphic(Paths.image("easteregg/" + name));
+		cloudPortrait.scale.set(2.5, 2.5); cloudPortrait.updateHitbox();
+		add(cloudPortrait); 
 
+		switch (name) {
+			case "Note" | "Note_Green": cloudPositions.set(name, [103, 73]);
+			case "chart": cloudPositions.set(name, [112, 66]);
+			case "cryfieldSecret": cloudPositions.set(name, [50, 36]);
+			case "Explosion": cloudPositions.set(name, [74, 42]);
+			case "Emote": cloudPositions.set(name, [132, 48]);
+			case "Furniture": cloudPositions.set(name, [122, 62]);
+			case "Snow": cloudPositions.set(name, [116, 62]);
+			default: cloudPositions.set(name, [76, 38]);
+		}
+		
+		cloudPortraits.set(name, cloudPortrait);
+	}
+
+	cloudPortrait = cloudPortraits.get(cloudPortaitName);
 	//FlxG.camera.scroll.x = 200;
 
 	box = new FlxSprite(0, (FlxG.height/6)*3).loadGraphic(Paths.image("easteregg/Arlene_Text"));
@@ -190,6 +212,7 @@ var scl = 44/48;
 		member.visible = member == bars || member == black ? true : FlxG.save.data.canVisitArlene;
 	}
 	grpClouds.visible = cloud.visible = cloudBubble1.visible = cloudBubble2.visible = cloudPortrait.visible = grpClouds.visible = grpClouds1.visible = grpClouds2.visible = false;
+	for (name => spr in cloudPortraits) spr.visible = false;
 
 	fastFirstFade = FlxG.save.data.arlenePhase >= 1;
 	introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
@@ -270,8 +293,18 @@ function update(elapsed) {
 		gayTimer -= delya;
 	}
 
-	cloudPortrait.setPosition(cloud.x + 76 + FlxG.random.int(-1, 1), cloud.y + 38 + FlxG.random.int(-1, 1));
+	if (cloudPortrait != null) {
+		cloudPortrait.setPosition((cloud.x + cloudPositions.get(cloudPortaitName)[0]), (cloud.y + cloudPositions.get(cloudPortaitName)[1]));
+		if (cloudPortaitName != "cryfieldSecret" && cloudPortaitName != "Furniture" && cloudPortaitName != "Snow" && cloudPortaitName != "chart" && cloudPortaitName != "Emote") 
+			{cloudPortrait.x += FlxG.random.int(-1, 1); cloudPortrait.y += FlxG.random.int(-1, 1);}
+		if (cloudPortaitName == "Snow") {
+			cloudPortrait.angle = Math.floor((Math.sin(tottalTime + Math.PI) * 16)/6)*6;
+			cloudPortrait.x += Math.floor((Math.sin(tottalTime+ (Math.PI/2))*6) *4)/4;
+			cloudPortrait.scale.x = cloudPortrait.scale.y = 2.7 + (Math.floor((Math.sin(tottalTime+Math.PI)*.3) * 6)/6);
+		}
+	}
 
+		
 	if (tottalTime >= (fastFirstFade ? 2 : 4)) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-(fastFirstFade ? 4 : 6))/2) * 8) / 8), 0, 1);
 
 	if (controls.ACCEPT && __canAccept) progressDialogue();
@@ -327,7 +360,7 @@ function isCharPhrase(char:Int, string:String)
 
 function showCloud(visible:Bool) {
 	FlxTween.num(visible ? 0 : 220, visible ? 220 : 0, visible ? 1.2 : 1.6, {startDelay: visible ? .5 : 0.1}, (val:Float) -> {FlxG.camera.scroll.x = Math.floor(val/20)*20;});
-	if (visible) (new FlxTimer()).start(0.5, function () {menuMusic.fadeOut(1);});
+	if (visible && cloudPortaitName == "Clown") (new FlxTimer()).start(0.5, function () {menuMusic.fadeOut(1);});
 	else clownTheme.fadeOut(.4);
 	(new FlxTimer()).start(visible ? .5 : .3, function (t) {
 		FlxG.sound.play(Paths.sound("easteregg/Cloud_Arlene_Sound"));
@@ -337,7 +370,7 @@ function showCloud(visible:Bool) {
 				cloudBubble2.visible = grpClouds2.visible = visible; 
 				if (!visible) {(new FlxTimer()).start(0.4, () -> {menuMusic.play(); menuMusic.volume = 1; clownTheme.pause();});}
 			case 3 | 0: 
-				if (visible) {(new FlxTimer()).start(.7, function() {menuMusic.pause(); clownTheme.play();});}
+				if (visible && cloudPortaitName == "Clown") {(new FlxTimer()).start(.7, function() {menuMusic.pause(); clownTheme.play();});}
 				cloud.visible = grpClouds.visible = visible; cloudPortrait.visible = true; cloudPortrait.alpha = visible ? 1 : 0;
 				if (visible)
 					FlxTween.num(visible ? 0 : 1, visible ? 1 : 0, visible ? 1.3 : .4, {}, (val:Float) -> {cloudPortrait.visible = true; cloudPortrait.alpha = (Math.floor((val*100)/8)*8)/100;});
@@ -346,36 +379,65 @@ function showCloud(visible:Bool) {
 	}, 3);
 }
 
+function switchPortrait(time:Float, newOne:String) {
+	FlxTween.num(1, 0, time, {}, (val:Float) -> {cloudPortraits.get(cloudPortaitName).visible = true; cloudPortraits.get(cloudPortaitName).alpha = (Math.floor((val*100)/8)*8)/100;});
+	FlxTween.num(0, 1, time, {onComplete: (_) -> {cloudPortrait = cloudPortraits.get(newOne); cloudPortaitName = newOne;}}, 
+	(val:Float) -> {cloudPortraits.get(newOne).visible = true; cloudPortraits.get(newOne).alpha = (Math.floor((val*100)/8)*8)/100;});
+}
+
 function onDestroy() Framerate.instance.visible = true;
 
 var testingDialogue:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [
 	{
-		message: "LINE\nLINE\nLINE\nLINE\nLINE", 
+		message: "ANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1", 
 		typingSpeed: 0.04, startDelay: 2,
+		onEnd: function () {switchPortrait(.8, "Clown");},
 		event: function (char:Int) {
-			if (char == 0) {wind.stop(); menuMusic.play();}
-			if (char == ("Hi guys welcome to the test dialogue...&&&&&&&&&&&&&").length-1)
-				eyes.animation.play("smug", true);
+			if (char == 0) {showCloud(true); wind.stop(); menuMusic.play();}
 		}
 	},
 	{
-		message: "This is tottaly not too insipired off deltarune...&&&&&&&&&&&&&&&&&&&&&&&&&&&&&Thanks for asking.....",
-		typingSpeed: 0.04, startDelay: 0.0,
-		event: function (char:Int) {
-			if (char == 0) eyes.animation.play("normal", true);
-			if (char == ("This is tottaly not too insipired off deltarune...&&&&&&&&&&&&&&&&&&&&&&&&&&&&&").length-1)
-				eyes.animation.play("left", true);
-		}
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "Emote");},
+		event: function (char:Int) {}
 	},
 	{
-		message: "Ok ill send you to a cool song now,&&&&&&&&&&&&&&& \nsee you later?\n&&&&&&&&&&&&&&&&&I guess.",
-		typingSpeed: 0.04, startDelay: 0.0,
-		event: function (char:Int) {
-			if (char == 0) eyes.animation.play("normal", true);
-			if (char == ("Ok ill send you to a cool song now,&&&&&&&&&&&&&&& ").length-1) eyes.animation.play("confused", true);
-			if (char == ("Ok ill send you to a cool song now,&&&&&&&&&&&&&&& \nsee you later?\n&&&&&&&&&&&&&&&&&").length-1) eyes.animation.play("smug", true);
-		}
-	}
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "cryfieldSecret");},
+		event: function (char:Int) {}
+	},
+	{
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "Furniture");},
+		event: function (char:Int) {}
+	},
+	{
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "Explosion");},
+		event: function (char:Int) {}
+	},
+	{
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "chart");},
+		event: function (char:Int) {}
+	},
+	{
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "Note");},
+		event: function (char:Int) {}
+	},
+	{
+		message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+		typingSpeed: 0.04, startDelay: 1,
+		onEnd: function () {switchPortrait(.8, "Note_Green");},
+		event: function (char:Int) {}
+	},
 ];
 
 var firstVisitDialogue:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, onEnd:Void->Void, event:Int->Void}> = [
