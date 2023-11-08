@@ -3,7 +3,7 @@ import funkin.backend.system.framerate.Framerate;
 function postCreate() {
     var bg:FlxSprite = new FlxSprite().makeSolid(FlxG.width, FlxG.height, FlxColor.fromRGB(17,5,33));
     bg.scrollFactor.set(0,0);
-    insert(1, bg); // 1 is right after bg WHICH IS NOT A VAR FOR SOME REASON!!!11
+    //insert(1, bg); // 1 is right after bg WHICH IS NOT A VAR FOR SOME REASON!!!11
 
     var logoBl:FlxSprite = new FlxSprite(1020, 6);
 	logoBl.frames = Paths.getSparrowAtlas('menus/logoMod');

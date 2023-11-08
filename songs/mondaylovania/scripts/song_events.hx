@@ -15,6 +15,8 @@ function create() {
     distortionShader = new CustomShader("chromaticWarp");
     distortionShader.distortion = 0;
     if (FlxG.save.data.warp) FlxG.game.addShader(distortionShader);
+
+    dad.cameraOffset.y += 90;
 }
 
 function postCreate() {
@@ -26,7 +28,7 @@ function postCreate() {
 
 function stepHit(step:Int) {
     switch (step){
-        case 16 | 20 | 24 | 28: dad.alpha += 0.25;
+        case 16 | 20 | 24 | 28: dad.alpha += 0.25; if (step == 28) dad.cameraOffset.y -= 90;
         case 32:
             FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
         case 96:
@@ -49,10 +51,14 @@ function stepHit(step:Int) {
             FlxTween.num(.25, .1, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
         case 224:
             boyfriend.cameraOffset.x += 80; boyfriend.cameraOffset.y += 90;
-            FlxTween.num(2.1, 2.5, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.dim = val;});
-            FlxTween.num(8, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
+            FlxTween.num(2.5, 2.1, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.dim = val;});
+            FlxTween.num(0, 8, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
             FlxTween.num(.25, .75, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
         case 288:
+            boyfriend.cameraOffset.x -= 80; boyfriend.cameraOffset.y -= 90;
+            FlxTween.num(2.1, 2.5, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.dim = val;});
+            FlxTween.num(8, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
+            FlxTween.num(.75, .1, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
         case 920: FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 24);
         case 1052: FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
         case 1312:
