@@ -15,7 +15,7 @@ function stepHit(step:Int) {
         case 124:
             FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * (4));
         case 128: coolSineX = true; camZoomMult *= .97; glitchShader.glitchAmount = .6;
-        case 516: camZoomMult *= .8; coolSineY = true; cloudSpeed = 1.6; coolSineMulti = 1.8; coolShit = true; glitchShader.glitchAmount = .8; 
+        case 512: camZoomMult *= .8; coolSineY = true; cloudSpeed = 1.6; coolSineMulti = 1.8; coolShit = true; glitchShader.glitchAmount = .8; 
         case 768: camZoomMult = 1; coolSineY = false; cloudSpeed = 1; coolSineMulti *= .8; coolShit = false; glitchShader.glitchAmount = .4; 
         case 1024: camZoomMult *= .6; coolSineY = true; cloudSpeed = 2.3; coolSineMulti *= 1.7; coolShit = arrowSinner = true; glitchShader.glitchAmount = 1.2; 
         case 1386: FlxTween.tween(stage.stageSprites["cloudScroll1"], {alpha: 0.05}, (Conductor.stepCrochet / 1000) * (1)); //so you can focus on bf when he falls incase clouds in the way
