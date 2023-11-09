@@ -42,7 +42,7 @@ var weeks:Array = [
 	{name: "Sansfield Week...", songs: ["Cat Patella", "Mondaylovania", "ULTRA FIELD"]},
 	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
 	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
-	{name: "???????? Week...", songs: ["????????????"]},
+	{name: "???????? Week...", songs: ["Cataclysm"]},
 ];
 
 var weekColors:Array<Int> = [
@@ -127,8 +127,8 @@ var freeplaySongLists = [
 		iconMenuObjs: []
 	},
 	{
-		songs: ["looking in the code to find the seceret song wont work..."],
-		icons: ["???????????????"],
+		songs: ["Cataclysm"],
+		icons: ["garfield"],
 		songMenuObjs: [],
 		iconMenuObjs: []
 	}
