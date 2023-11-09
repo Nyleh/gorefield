@@ -15,9 +15,9 @@ vec2 PincushionDistortion(in vec2 uv, float strength)
 
 vec4 ChromaticAbberation(sampler2D tex, in vec2 uv) 
 {
-    float rChannel = flixel_texture2D(tex, PincushionDistortion(uv, 0.3 * distortion)).r;
-    float gChannel = flixel_texture2D(tex, PincushionDistortion(uv, 0.15 * distortion)).g;
-    float bChannel = flixel_texture2D(tex, PincushionDistortion(uv, 0.075 * distortion)).b;
+    float rChannel = flixel_texture2D(tex, PincushionDistortion(uv, ((0.3 * distortion) * 0.9) + (distortion * 0.1))).r;
+    float gChannel = flixel_texture2D(tex, PincushionDistortion(uv, ((0.15 * distortion) * 0.9) + (distortion * 0.1))).g;
+    float bChannel = flixel_texture2D(tex, PincushionDistortion(uv, ((0.075 * distortion) * 0.9) + (distortion * 0.1))).b;
     vec3 color = vec3(rChannel, gChannel, bChannel);
 
     vec4 retColor = vec4(color, flixel_texture2D(tex, uv).a);
