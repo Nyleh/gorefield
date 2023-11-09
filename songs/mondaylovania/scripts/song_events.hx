@@ -137,10 +137,13 @@ function stepHit(step:Int) {
                 FlxTween.tween(spr, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
         case 1172: coolDadTrail = dadTrail.visible = true;
         case 1184: dadTrail._transp = 1; dadTrail._difference = 0.1; dadTrail.delay = 12; coolDadTrail = true; 
-        case 1312:
+        case 1304:
             gf.visible = gf.active = true;
-            tweenHUD(0, (Conductor.stepCrochet / 1000) * 14);
-        case 1376: stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = false;
+            gf.alpha = 0.00001; //so the camera can actually focus while still hidden because apparently you need the character visible for it to actually focus
+        case 1312: tweenHUD(0, (Conductor.stepCrochet / 1000) * 14); gf.alpha = 1;
+        case 1376: stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = false; coolDadTrail = dadTrail.visible = false;
+        case 1440: FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+        case 1488: camHUD.visible = camGame.visible = false;
     }
 }
 
