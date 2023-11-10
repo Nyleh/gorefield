@@ -30,8 +30,8 @@ var credits:Array<Array<String>> = [
 	["Tok", "Charter", "Se murio, no charteo"],
 	["KingFox", "Voice Actor", "El lobo de animal crossing!!!"],
 	["Lumpy Touch", "Gorefield Animation Creator", "The Lumpiest of Touches"],
-	["Jars Drawings", "Ultra Gorefield Design", "Sheesh"],
-	["Omega Black Art", "Ultra Gorefield Design", "Omega Art!!!!"],
+	["Jars Drawings", "Original Ultra Gorefield Designer", "Sheesh"],
+	["Omega Black Art", "Original Ultra Gorefield Designer", "Omega Art!!!!"],
 	["Aytanner", "Original Mondaylovania Musician", "El Undertale 2"]
 ];
 
