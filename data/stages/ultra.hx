@@ -14,7 +14,7 @@ function onMeasureHit() {
 }
 
 function update(elapsed:Float) {
-    bg.skew.y = lerp(bg.skew.y, curCameraTarget == 1 ? -8 : 0, 1/20);
+    bg.skew.y = lerp(bg.skew.y, camFollowChars ? (curCameraTarget == 1 ? -8 : 0) : 0, 1/20);
 
     if (controlHealthAlpha) {
         curHealthAlpha = lerp(curHealthAlpha, curCameraTarget == 1 ? 0.25 : 1, 1/20);
