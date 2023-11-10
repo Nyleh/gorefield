@@ -632,7 +632,7 @@ function changeSong(change:Int) {
 	var data = FunkinSave.getSongHighscore(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", null);
 	var dateStr = Std.string(data.date).split(" ")[0];
 	if (dateStr == null || dateStr == "null") dateStr = "????,??,??";
-	scoreText.applyMarkup("SCORE - $" + Std.string(data.score) + "$,  MISSES - #" + Std.string(data.score) + "#,  ACCURACY - @" + Std.string(FlxMath.roundDecimal(data.accuracy * 100, 2)) + "@,  DATE - /" + StringTools.replace(dateStr, "-", ",") + "/", [
+	scoreText.applyMarkup("SCORE - $" + Std.string(data.score) + "$,  MISSES - #" + Std.string(data.misses) + "#,  ACCURACY - @" + Std.string(FlxMath.roundDecimal(data.accuracy * 100, 2)) + "@,  DATE - /" + StringTools.replace(dateStr, "-", ",") + "/", [
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFF3F315), "$"),
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFE13333), "#"),
 		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF1CDA1C), "@"),
