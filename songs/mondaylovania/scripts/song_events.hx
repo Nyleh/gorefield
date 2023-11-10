@@ -1,5 +1,6 @@
 //
 import flixel.addons.effects.FlxTrail;
+import funkin.backend.utils.FlxInterpolateColor;
 
 var bloom:CustomShader = null;
 var distortionShader:CustomShader = null;
@@ -7,6 +8,11 @@ var distortionShader:CustomShader = null;
 var normalStrumPoses:Array<Array<Int>> = [];
 var dadTrail:FlxTrail;
 var bfTrail:FlxTrail;
+
+var bones:FlxSprite;
+var boneColor:FlxInterpolateColor;
+
+var overlay:FlxSprite;
 
 function create() {
     gf.visible = gf.active = boyfriend.visible = false;
@@ -29,11 +35,17 @@ function create() {
     dadTrail.visible = false;
     if (FlxG.save.data.trails) insert(members.indexOf(dad), dadTrail);
 
-    bfTrail = new FlxTrail(boyfriend, null, 6, 16, 0.3, 0.069);
+    bfTrail = new FlxTrail(boyfriend, null, 6, 16, 0.45, 0.069);
     bfTrail.beforeCache = dad.beforeTrailCache;
     bfTrail.afterCache = () -> {dad.afterTrailCache();}
     bfTrail.visible = false;
     if (FlxG.save.data.trails) insert(members.indexOf(boyfriend), bfTrail);
+
+    bones = stage.stageSprites["sansFieldBones"];
+    boneColor = new FlxInterpolateColor(0xFFFFFFFF);
+
+    overlay = stage.stageSprites["overlay"];
+    overlay.alpha = 0;
 }
 
 function postCreate() {
@@ -55,12 +67,12 @@ var tottalTime:Float = 0;
 function update(elapsed:Float) {
     tottalTime += elapsed;
     camHUD.angle = lerp(camHUD.angle, coolSineY ? (3* coolSineMulti)*FlxMath.fastSin(tottalTime*2) : 0, 0.25);
-    camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime + Math.PI*2)*(6*coolSineMulti) : 0, 0.25);
+    camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime*1.6 + Math.PI*2)*(9*coolSineMulti) : 0, 0.25);
     camHUD.x = lerp(camHUD.x, coolSineX ? FlxMath.fastCos(tottalTime*2 + Math.PI*2)*(12*coolSineMulti) : 0, 0.25);
 
-    var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
+    var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60));
     for (i=>trail in dadTrail.members) {
-        var scale = !coolDadTrail ? 1 : FlxMath.bound(1 + (.16 * FlxMath.fastSin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 1, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
+        var scale = !coolDadTrail ? 1 : FlxMath.bound(1 + (.16 * FlxMath.fastSin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 1, (Conductor.stepCrochet / 1000) * 1.2)))), 0., 999);
         trail.scale.set(scale, scale);
         trail.color = switch (dad.animation.name) {
             case "singLEFT-alt": 0xFFC24B99;
@@ -70,11 +82,35 @@ function update(elapsed:Float) {
             default: 0xFFFFFFFF;
         }
     }
-    if (coolBfTrail)
-        for (i=>trail in bfTrail.members) {
-            var scale = FlxMath.bound(1 + (.11 * FlxMath.fastSin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 1, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
-            trail.scale.set(scale, scale);
+
+    boneColor.fpsLerpTo(switch (dad.animation.name) {
+        case "singLEFT-alt": 0xFFF122A9;
+        case "singDOWN-alt": 0xFF00FFFF;
+        case "singUP-alt": 0xFF12FA05;
+        case "singRIGHT-alt": 0xFFF9393F;
+        default: 0xFFFFFFFF;
+    }, 1/10);
+    bones.color = boneColor.color;
+
+    overlay.color = switch ((curCameraTarget == 1 ? boyfriend : dad).animation.name) {
+        case "singLEFT-alt": 0xFFFF00A6;
+        case "singDOWN-alt": 0xFF3AF7F7;
+        case "singUP-alt": 0xFF22F217;
+        case "singRIGHT-alt": 0xFFFF141C;
+        default: 0xFFFFFFFF;
+    };
+
+    for (i=>trail in bfTrail.members) {
+        var scale = !coolBfTrail ? 1 : FlxMath.bound(1 + (.16 * FlxMath.fastSin(_curBeat + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 1, (Conductor.stepCrochet / 1000) * 1.2)))), 0., 999);
+        trail.scale.set(scale, scale);
+        trail.color = switch (boyfriend.animation.name) {
+            case "singLEFT-alt": 0xFFC24B99;
+            case "singDOWN-alt": 0xFF00FFFF;
+            case "singUP-alt": 0xFF12FA05;
+            case "singRIGHT-alt": 0xFFF9393F;
+            default: 0xFFFFFFFF;
         }
+    }
 }
 
 function stepHit(step:Int) {
@@ -113,7 +149,9 @@ function stepHit(step:Int) {
             FlxTween.num(2.1, 2.5, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.dim = val;});
             FlxTween.num(8, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
             FlxTween.num(.75, .1, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
+        case 416: dadTrail.visible = bfTrail.visible = true;
         case 672:
+            dadTrail.visible = bfTrail.visible = false;
             camZoomMult = 0.7; coolSineY = coolSineX = true; coolSineMulti = 1.2;
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
                 FlxTween.tween(spr, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8);
@@ -132,18 +170,62 @@ function stepHit(step:Int) {
                 for (strum in strumLine.members) FlxTween.tween(strum, {y: strum.y+80}, (Conductor.stepCrochet / 1000) * 4);
         case 928: FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 24); dad.cameraOffset.y -= 180;
         case 1052: 
+            FlxTween.num(2.4, 2.5, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.dim = val;});
+            FlxTween.num(10, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {bloom.size = val;});
+
             FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4); dad.cameraOffset.y -= 180;
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
                 FlxTween.tween(spr, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
+        case 1172:
+            devControlBotplay = !(player.cpu = dadTrail.visible = true);
+
+            tweenHealthBar(0, (Conductor.stepCrochet / 1000) * 4);
+            FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+        case 1176:
+            coolSineY = coolSineX = true; coolSineMulti = 1.4; camZoomMult = 0.9;
+            for (strum in cpu) strum.visible = false;
+            for (note in cpu.notes.members) note.visible = false;
+
+            FlxTween.num(2.5, 2, (Conductor.stepCrochet / 1000) * 16, {}, (val:Float) -> {bloom.dim = val;});
+            FlxTween.num(0, 12, (Conductor.stepCrochet / 1000) * 16, {}, (val:Float) -> {bloom.size = val;});
         case 1172: coolDadTrail = dadTrail.visible = true;
-        case 1184: dadTrail._transp = 1; dadTrail._difference = 0.1; dadTrail.delay = 12; coolDadTrail = true; 
+        case 1184: 
+            for (i => trail in dadTrail.members) FlxTween.tween(trail, {alpha: 0.55}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut}); 
+            dadTrail.delay = 12; coolDadTrail = true; 
+    
+            for (i => trail in bfTrail.members) FlxTween.tween(trail, {alpha: 1}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut}); 
+            bfTrail.visible = true; bfTrail.delay = 12; coolBfTrail = true; 
+
+            FlxTween.tween(overlay, {alpha: 1}, (Conductor.stepCrochet / 1000) * 64); 
+            overlay.visible = overlay.active = true;
+            FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 16);
+
+            for (i=>strum in player.members)
+                FlxTween.tween(strum, {x: cpu.members[i].x}, (Conductor.stepCrochet / 1000) * 14, {ease: FlxEase.circInOut, startDelay: (Conductor.stepCrochet / 2000) * i});
+        case 1200: devControlBotplay = !(player.cpu = false);
+        case 1210: boyfriend.cameraOffset.x += 80; boyfriend.cameraOffset.y += 90;
         case 1304:
             gf.visible = gf.active = true;
             gf.alpha = 0.00001; //so the camera can actually focus while still hidden because apparently you need the character visible for it to actually focus
-        case 1312: tweenHUD(0, (Conductor.stepCrochet / 1000) * 14); gf.alpha = 1;
-        case 1376: stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = false; coolDadTrail = dadTrail.visible = false;
-        case 1440: FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
-        case 1488: camHUD.visible = camGame.visible = false;
+        case 1308: FlxTween.tween(overlay, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4); 
+        case 1312: 
+            tweenHUD(0, (Conductor.stepCrochet / 1000) * 12); gf.alpha = 1;
+            for (i=>strum in player.members)
+                FlxTween.tween(strum, {x: strum.x - 2600 - (600*(3-i))}, (Conductor.stepCrochet / 1000) * 6, {ease: FlxEase.circIn, startDelay: (Conductor.stepCrochet / 2000) * i});
+        case 1324: bfTrail.visible = false;
+        case 1376: 
+            boyfriend.cameraOffset.x -= 80; boyfriend.cameraOffset.y -= 90;
+            stage.stageSprites["sansFieldBones"].active = stage.stageSprites["sansFieldBones"].visible = false; coolDadTrail = dadTrail.visible = false;
+            dad.y -= 88; dad.cameraOffset.y += 240; dad.cameraOffset.x -= 29;
+        case 1440: 
+            FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+            FlxTween.tween(FlxG.camera, {zoom: .7}, (Conductor.stepCrochet / 1000) * (16*4), {ease: FlxEase.circOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2; lerpCam = true;}});
+        case 1448: 
+            stage.stageSprites["white"].active = stage.stageSprites["white"].visible = true;
+            stage.stageSprites["white"].alpha = 0; 
+
+            FlxTween.tween(stage.stageSprites["white"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 56, {ease: FlxEase.circIn});
+        case 1508: camHUD.visible = camGame.visible = false;
     }
 }
 

@@ -7,7 +7,7 @@ static function tweenHUD(a:Float, time:Float) {
 
 static function tweenHealthBar(a:Float, time:Float) {
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
-        if (Reflect.hasField(spr, "alpha")) FlxTween.tween(spr,{alpha: a},time);
+        FlxTween.tween(spr,{alpha: a},time);
 }
 
 static function tweenStrum(strumLine:StrumLine, a:Float, time:Float) {
