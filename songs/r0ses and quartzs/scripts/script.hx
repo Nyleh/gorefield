@@ -17,6 +17,8 @@ function create() {
     stage.stageSprites["BG1"].zoomFactor = 0.7;
 }
 
+var bfStrumLine:StrumLine;
+var bfStrumY:Float;
 function postCreate() {
     controlHealthAlpha = false;
     tweenHUD(0,0.01);
@@ -24,6 +26,18 @@ function postCreate() {
     lerpCam = false;
     FlxG.camera.zoom = 1.5;
     defaultCamZoom = 0.35;
+
+    for (i=>strumLine in strumLines.members){
+        switch (i){
+            case 0:
+                strumLine.onHit.add(function(e:NoteHitEvent) {FlxG.camera.shake(0.007, 0.1);});
+            case 1:
+                bfStrumLine = strumLine;
+                for (strumNote in strumLine){
+                    bfStrumY = strumNote.y;
+                }
+        }
+    }
 }
 
 function stepHit(step:Int) {
@@ -44,6 +58,7 @@ function stepHit(step:Int) {
         case 1024:
             controlHealthAlpha = false;
             tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 8);
+            bouncy = true;
         case 1088 | 1216 | 1344:
             forceDefaultCamZoom = true;
             camFollowChars = false;
@@ -54,9 +69,27 @@ function stepHit(step:Int) {
             FlxTween.num(10, 3, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {particleShader.particlealpha = val;});
             forceDefaultCamZoom = false;
             camFollowChars = true;
+        case 1472: bouncy = false;
         case 1476: for (strumLine in strumLines) tweenStrum(strumLine, 0, (Conductor.stepCrochet / 1000) * 18);
         case 1576: for (strumLine in strumLines) tweenStrum(strumLine, 1, (Conductor.stepCrochet / 1000) * 5);
         case 1600: camHUD.visible = camGame.visible = false;
+    }
+}
+
+var bouncy:Bool = false;
+
+function beatHit(curBeat:Int){
+    if (!bouncy) return;
+
+    for(i=>strumNote in bfStrumLine.members){
+        strumNote.y = 90;
+
+        if(curBeat%2==0){
+            strumNote.angle = 10;
+        }
+        else if (curBeat%2==1){
+            strumNote.angle = -10;
+        }
     }
 }
 
@@ -65,8 +98,12 @@ function update(elapsed:Float) {
 
     particleShader.time = _curBeat * 2;
     particleShader.particleZoom = FlxG.camera.zoom*.6;
+
+    for(strumNote in bfStrumLine){
+        strumNote.y = lerp(strumNote.y, bfStrumY, .085);
+        strumNote.angle = lerp(strumNote.angle, 0, .15);
+    }
 }
 
 function onStrumCreation(_) _.__doAnimation = false;
 function onPlayerHit(event) {event.showRating = false; songScore += event.score;}
-function onDadHit(event) FlxG.camera.shake(0.005, 0.1);
