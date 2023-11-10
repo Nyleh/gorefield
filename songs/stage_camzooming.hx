@@ -9,9 +9,11 @@ public var strumLineGfMult:Float = 1;
 public var strumLineBfMult:Float = 1; //i love being lazy (for change stage zoom specifically)
 public var camZoomMult:Float = 1; //i love being lazy (for change stage zoom specifically) ne too -lunar
 
+public var forceDefaultCamZoom:Bool = false; //for songs that already have bf/dad cam zoom values
+
 function create() {
     strumLineBfMult = strumLineDadMult = strumLineGfMult = camZoomMult = 1;
-    camZooming = false; lerpCam = true;
+    camZooming = false; lerpCam = true; forceDefaultCamZoom = false;
     if (stage == null || stage.stageXML == null) return;
 
     strumLineDadZoom = stage.stageXML.exists("opponentZoom") ? Std.parseFloat(stage.stageXML.get("opponentZoom")) : -1;
@@ -22,7 +24,7 @@ function create() {
 function update(elapsed:Bool) {
     camZooming = false;
     if (lerpCam) {
-        var stageZoom:Float = switch (curCameraTarget) {
+        var stageZoom:Float = forceDefaultCamZoom ? defaultCamZoom : switch (curCameraTarget) {
             case 0: strumLineDadZoom;
             case 1: strumLineBfZoom;
             case 2: strumLineGfZoom;

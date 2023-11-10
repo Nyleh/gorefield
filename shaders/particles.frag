@@ -3,6 +3,8 @@
 uniform float time;
 uniform vec2 res;
 uniform vec2 particleXY;
+uniform vec3 particleColor;
+uniform vec2 particleDirection;
 uniform float particleZoom;
 uniform float particlealpha;
 
@@ -11,14 +13,14 @@ uniform float particlealpha;
 
 #define ANIMATION_SPEED 1.5
 #define MOVEMENT_SPEED 0.5
-#define MOVEMENT_DIRECTION (vec2(0.7, -1.0))
+#define MOVEMENT_DIRECTION (particleDirection)
 
 #define PARTICLE_SIZE 0.009
 
 #define PARTICLE_SCALE (vec2(0.5, 1.6))
 #define PARTICLE_SCALE_VAR (vec2(0.25, 0.2))
 
-#define SPARK_COLOR (vec3(0.616,0.149,0.733) * 1.5)
+#define SPARK_COLOR (particleColor * 1.5)
 #define SMOKE_COLOR (vec3(0.31,0.031,0.612) * 0.8)
 
 #define SIZE_MOD 1.2

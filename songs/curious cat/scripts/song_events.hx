@@ -90,7 +90,7 @@ function stepHit(step:Int)
 			tweenHUD(0, (Conductor.stepCrochet / 1000) * 16);
 
 			lerpCam = false;
-			FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.3}, (Conductor.stepCrochet / 1000) * 128, {ease: FlxEase.qaudInOut});
+			FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.3}, (Conductor.stepCrochet / 1000) * 128, {ease: FlxEase.quadInOut});
 			FlxTween.tween(dad.cameraOffset, {x: dad.cameraOffset.x - 260}, (Conductor.stepCrochet / 1000) * 128, {ease: FlxEase.linear});
 			FlxTween.tween(stage.stageSprites["black_overlay"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 128, {ease: FlxEase.quadOut});
 			FlxTween.num(0.0, 1.3, (Conductor.stepCrochet / 1000) * 128, {ease: FlxEase.quadOut}, (val:Float) -> {
