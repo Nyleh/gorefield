@@ -6,6 +6,9 @@ function create() {
     controlHealthAlpha = boyfriend.forceIsOnScreen = true; boyfriend.zoomFactor = 0.8;
     FlxG.camera.bgColor = 0xFFADABAB;
 
+    gameOverSong = "gameOvers/ultrafield/ultrafieldLOOP";
+	retrySFX = "gameOvers/ultrafield/ultrafieldEnd";
+
     bg = stage.stageSprites["BG1"];
 }
 
