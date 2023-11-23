@@ -59,12 +59,11 @@ function postCreate()
 {
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
-        dad.setPosition(-400,-100);
-        boyfriend.setPosition(1900,700);
-        defaultCamZoom = 0.3;
-        dad.cameraOffset.x = 400;
-        strumLineDadZoom = 0.3;
-        strumLineBfZoom = 0.6;
+        dad.setPosition(300,0);
+        boyfriend.setPosition(1450,600);
+        defaultCamZoom = 1;
+        strumLineDadZoom = 0.8;
+        strumLineBfZoom = 1.5;
         snapCam();
     }
 }

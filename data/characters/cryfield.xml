@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="cryfield" camx="-130" y="25" isGF="false" camy="50" color="#D3E1FF" iconoffsetx="-30" iconoffsety="-10" animatedIcon="true" isPlayer="false" holdTime="3.1" sprite="cryfield">
+<character x="0" icon="cryfield" camx="-230" y="25" isGF="false" camy="100" scale="0.45" color="#D3E1FF" iconoffsetx="-30" iconoffsety="0" animatedIcon="true" isPlayer="false" holdTime="3.1" sprite="cryfield">
 	<anim x="0" loop="false" y="0" fps="24" anim="CRYFIELD IDLE" name="idle"/>
 	<anim x="32" loop="false" y="15" fps="24" anim="CRYFIELD LEFT" name="singLEFT"/>
 	<anim x="-20" loop="false" y="25" fps="24" anim="CRYFIELD DOWN" name="singDOWN"/>
