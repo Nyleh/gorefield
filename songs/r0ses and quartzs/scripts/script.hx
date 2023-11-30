@@ -51,6 +51,7 @@ function stepHit(step:Int) {
                 lerpCam = true; FlxG.camera.zoom += 0.25;
             }});
         case 128:
+            camZoomingStrength = 2;
             boyfriend.cameraOffset.x += 190;
             boyfriend.cameraOffset.y -= 30;
             tweenHUD(1,(Conductor.stepCrochet / 1000) * 8);
@@ -58,6 +59,7 @@ function stepHit(step:Int) {
         case 1024:
             controlHealthAlpha = false;
             tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 8);
+            camZoomingStrength = 3;
             bouncy = true;
         case 1088 | 1216 | 1344:
             forceDefaultCamZoom = true;
@@ -69,7 +71,7 @@ function stepHit(step:Int) {
             FlxTween.num(10, 3, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {particleShader.particlealpha = val;});
             forceDefaultCamZoom = false;
             camFollowChars = true;
-        case 1472: bouncy = false;
+        case 1472: bouncy = false; camZoomingStrength = 1;
         case 1476: for (strumLine in strumLines) tweenStrum(strumLine, 0, (Conductor.stepCrochet / 1000) * 18);
         case 1576: for (strumLine in strumLines) tweenStrum(strumLine, 1, (Conductor.stepCrochet / 1000) * 5);
         case 1600: camHUD.visible = camGame.visible = false;
