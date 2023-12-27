@@ -1,0 +1,5 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.35" name="clown-floor-y-clown-stage" folder="stages/clown-floor-y-clown-stage/">
+    <sprite name="floor" x="0" y="0" sprite="Clown_Stage_Floor" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
+    <sprite name="background" x="0" y="0" sprite="Clown_Stage_face_1" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
+</stage>

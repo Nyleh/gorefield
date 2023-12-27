@@ -29,7 +29,9 @@ function create() {
 		loadingbg: "loadingbg1",
 		loadingimage: "rightloadingimage1",
 		loadinganim: "BF 1",
-		loadingpos: [561.46, -42.08]
+		loadingpos: [561.46, -42.08],
+		loadingscale: 0.68,
+		loadingantialiasing: 1 // You gotta use 1 to true ._: -EstoyAburridow
 	};
 
 	if (Assets.exists(path)) loadingData = Json.parse(Assets.getText(path));
@@ -48,14 +50,27 @@ function create() {
 	add(bg);
 	if (loadingData.bgOffset != null) bg.offset.set(loadingData.bgOffset[0], loadingData.bgOffset[1]);
 
+	if (loadingData.loadingscale == null)
+		loadingData.loadingscale = 0.68;
+
+	if (loadingData.loadingantialiasing == null)
+		loadingData.loadingantialiasing = 1;
+
 	var portrait:FlxSprite = new FlxSprite();
-	portrait.frames = Paths.getSparrowAtlas('loadingscreens/' + loadingData.loadingimage);
-	portrait.animation.addByPrefix('idle', loadingData.loadinganim, 24, true);
-	portrait.animation.play('idle');
-	portrait.scale.set(0.68, 0.68);
+	if (loadingData.loadinganim == null || loadingData.loadinganim == "")
+		portrait.loadGraphic(Paths.image('loadingscreens/' + loadingData.loadingimage));
+	else
+	{
+		portrait.frames = Paths.getSparrowAtlas('loadingscreens/' + loadingData.loadingimage);
+		portrait.animation.addByPrefix('idle', loadingData.loadinganim, 24, true);
+		portrait.animation.play('idle');
+	}
+
+	portrait.scale.set(loadingData.loadingscale, loadingData.loadingscale);
 	portrait.updateHitbox();
+
 	portrait.setPosition(loadingData.loadingpos[0], loadingData.loadingpos[1]);
-	portrait.antialiasing = true;
+	portrait.antialiasing = (loadingData.loadingantialiasing == 1);
 	add(portrait);
 
 	pizza = new Character(0,0, "loading");
