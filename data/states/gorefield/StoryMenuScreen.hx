@@ -549,7 +549,7 @@ function playWeek() { // animation
 	});
 }
 
-function __gen_week() { // for cne so i dont have to ctrl c and v alot of code
+function __gen_week() {
 	return {
 		name: weeks[curWeek].name,
 		id: weeks[curWeek].name,
