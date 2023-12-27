@@ -7,6 +7,7 @@ uniform vec3 particleColor;
 uniform vec2 particleDirection;
 uniform float particleZoom;
 uniform float particlealpha;
+uniform int layers;
 
 #define PI 3.1415927
 #define TWO_PI 6.283185
@@ -25,7 +26,6 @@ uniform float particlealpha;
 
 #define SIZE_MOD 1.2
 #define ALPHA_MOD 0.9
-#define LAYERS_COUNT 8
 
 float hash1_2(in vec2 x)
 {
@@ -207,7 +207,7 @@ void main()
     vec4 tex = flixel_texture2D(bitmap, uv).rgba;
     vec3 screen = tex.rgb;
 
-    vec3 particles = layeredParticles(particleUv*1.8, SIZE_MOD, ALPHA_MOD, LAYERS_COUNT);
+    vec3 particles = layeredParticles(particleUv*1.8, SIZE_MOD, ALPHA_MOD, layers);
     particles.rgb *= particlealpha;
     
     vec3 col = particles + screen + SMOKE_COLOR * 0.02;
