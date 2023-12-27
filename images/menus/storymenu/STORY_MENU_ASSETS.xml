@@ -12,4 +12,6 @@
 	<SubTexture name="STORY MENU 040000" x="646" y="304" width="636" height="294"/>
 	<SubTexture name="STORY MENU 050000" x="1287" y="304" width="635" height="294"/>
 	<SubTexture name="STORY MENU 060000" x="5" y="603" width="637" height="294"/>
+	<SubTexture name="STORY MENU 070000" x="647" y="603" width="636" height="296"/>
+	<SubTexture name="STORY MENU 080000" x="1288" y="603" width="637" height="294"/>
 </TextureAtlas>

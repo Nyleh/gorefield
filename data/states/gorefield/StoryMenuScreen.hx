@@ -43,6 +43,8 @@ var weeks:Array = [
 	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
 	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
 	{name: "???????? Week...", songs: ["Cataclysm"]},
+	{name: "Binky Circus...", songs: ["Laughter and Cries"]},
+	{name: "Cartoon World...", songs: ["Balls of Yarn"]},
 ];
 
 var weekColors:Array<Int> = [
@@ -55,7 +57,7 @@ var weekColors:Array<Int> = [
 ];
 
 var CATclysmUnlocked:Bool = false;
-var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true];
+var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -63,7 +65,9 @@ var weekDescs:Array<String> = [
 	"Purring Determination...",
 	"A Big Little Problem.",
 	"He Just Wants To Go Home...",
-	"????????????????????????????????????????????"
+	"????????????????????????????????????????????",
+	"Honk Honk...",
+	"A Feline Meeting..."
 ];
 
 // SPANISH - Jloor 
@@ -72,9 +76,11 @@ var weekDescsSPANISH:Array<String> = [
 	"La Lasaña huele deliciosa...",
 	"Comida de medianoche???\n(yum)",
 	"Un ronroneo de determinacion...",
-	"Un pequeno gran problema.",
+	"Un pequeno gran problema...",
 	"El solo quiere volver a casa...",
-	"????????????????????????????????????????????"
+	"????????????????????????????????????????????",
+	"Honk Honk...",
+	"Una reunion Felina..."
 ];
 
 var lerpColors = [];
@@ -131,6 +137,18 @@ var freeplaySongLists = [
 		icons: ["garfield"],
 		songMenuObjs: [],
 		iconMenuObjs: []
+	},
+	{
+		songs: ["Laughter and Cries"],
+		icons: ["garfield"],
+		songMenuObjs: [],
+		iconMenuObjs: []
+	},
+	{
+		songs: ["Balls of Yarn"],
+		icons: ["garfield"],
+		songMenuObjs: [],
+		iconMenuObjs: []
 	}
 ];
 
@@ -169,7 +187,7 @@ function create() {
     bloomShader.dim = 1;// trailBloom.directions = 16.0;
 	if (FlxG.save.data.bloom) bgSprite.shader = bloomShader;
 
-	for (i in 0...6) {
+	for (i in 0...8) {
 		var sprite:FlxSprite = new FlxSprite();
 		sprite.frames = Paths.getSparrowAtlas("menus/storymenu/STORY_MENU_ASSETS");
 		sprite.animation.addByPrefix("_", "STORY MENU 0" + Std.string(i + 1));
