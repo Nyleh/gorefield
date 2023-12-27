@@ -1,4 +1,22 @@
+import hxvlc.flixel.FlxVideo;
+import funkin.game.PlayState;
+
+var video:FlxVideo;
+
 var dodgeCat:Character;
+
+function postCreate() 
+{
+	var precacheVideo:FlxVideo = new FlxVideo();
+	precacheVideo.play(Assets.getPath(Paths.video("somethingisComming")));
+	precacheVideo.onEndReached.add(
+		function()
+		{
+			precacheVideo.dispose();
+		}
+	);
+	precacheVideo.stop();    
+}
 
 function create()
 {
@@ -37,6 +55,22 @@ function stepHit(step:Int)
 				fadeShit(1);
 			};
 			fadeShit(0);
+		case 1036:
+			video = new FlxVideo();
+			video.play(Assets.getPath(Paths.video("somethingisComming")));
+			video.onEndReached.add(
+				function()
+				{
+					canPause = true;
+					startedCountdown = true;
+
+					startTimer = new FlxTimer();
+
+					video.dispose();
+				}
+			);
+
+			canPause = false;
 		case 1056:
 			dodgeCat.visible = dodgeCat.active = true;
 			dodgeCat.playAnim("enter", true);
