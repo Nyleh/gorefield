@@ -60,6 +60,7 @@ function update(elapsed:Float){
         var scale = FlxMath.bound(1.5 + (.2 * FlxMath.fastSin((_curBeat/4) + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
         trail.scale.set(scale, scale);
     }
+    particleShader.particleZoom = .2 * (3*FlxG.camera.zoom);
 }
 
 function destroy() {FlxG.game.setFilters([]);}
