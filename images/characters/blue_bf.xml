@@ -1,25 +1,33 @@
 <?xml version='1.0' encoding='utf-8'?>
-<TextureAtlas imagePath="blue bf.png">
-<SubTexture name="blue bf blue bf idle0000" x="469" y="1421" width="448" height="427" frameX="-112" frameY="-119" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf idle0001" x="0" y="1421" width="469" height="434" frameX="-112" frameY="-112" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf idle0002" x="1743" y="0" width="455" height="455" frameX="-119" frameY="-91" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf idle0003" x="434" y="952" width="455" height="462" frameX="-119" frameY="-84" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf idle0004" x="420" y="0" width="455" height="469" frameX="-119" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf idle0005" x="420" y="0" width="455" height="469" frameX="-119" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf left0000" x="889" y="952" width="420" height="462" frameX="-112" frameY="-84" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf left0001" x="875" y="0" width="434" height="469" frameX="-126" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf right0000" x="0" y="483" width="441" height="469" frameX="-182" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf right0001" x="441" y="483" width="420" height="469" frameX="-175" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf down0000" x="1309" y="952" width="420" height="413" frameX="-161" frameY="-133" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf down0001" x="1743" y="455" width="420" height="455" frameX="-161" frameY="-91" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf up0000" x="0" y="0" width="420" height="483" frameX="-168" frameY="-63" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf up0001" x="861" y="483" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf left miss0000" x="1309" y="0" width="434" height="469" frameX="-126" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf left miss0001" x="1309" y="0" width="434" height="469" frameX="-126" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss right0000" x="1309" y="469" width="420" height="469" frameX="-175" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss right0001" x="1309" y="469" width="420" height="469" frameX="-175" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss down0000" x="1743" y="910" width="420" height="455" frameX="-161" frameY="-91" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss down0001" x="1743" y="910" width="420" height="455" frameX="-161" frameY="-91" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss up0000" x="0" y="952" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
-<SubTexture name="blue bf blue bf miss up0001" x="0" y="952" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
+<TextureAtlas imagePath="blue_bf.png">
+<SubTexture name="blue_bf idle0000" x="2163" y="434" width="427" height="427" frameX="-133" frameY="-119" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf idle0001" x="2163" y="0" width="469" height="434" frameX="-112" frameY="-112" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf idle0002" x="868" y="1442" width="469" height="455" frameX="-105" frameY="-91" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf idle0003" x="434" y="973" width="462" height="462" frameX="-112" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf idle0004" x="420" y="0" width="455" height="469" frameX="-119" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf idle0005" x="420" y="0" width="455" height="469" frameX="-119" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf left0000" x="1302" y="469" width="399" height="462" frameX="-119" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf left0001" x="875" y="0" width="427" height="469" frameX="-133" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf left0002" x="0" y="504" width="427" height="469" frameX="-140" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf left0003" x="0" y="504" width="427" height="469" frameX="-140" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf right0000" x="896" y="973" width="434" height="462" frameX="-189" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf right0001" x="1722" y="0" width="441" height="462" frameX="-189" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf right0002" x="1722" y="462" width="420" height="462" frameX="-189" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf right0003" x="1722" y="924" width="420" height="462" frameX="-189" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf down0000" x="2163" y="1281" width="420" height="413" frameX="-161" frameY="-133" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf down0001" x="2163" y="861" width="413" height="420" frameX="-168" frameY="-119" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf down0002" x="1757" y="1442" width="399" height="441" frameX="-182" frameY="-105" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf down0003" x="1757" y="1442" width="399" height="441" frameX="-182" frameY="-105" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf up0000" x="0" y="0" width="420" height="504" frameX="-168" frameY="-42" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf up0001" x="427" y="504" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf up0002" x="0" y="1442" width="434" height="462" frameX="-154" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf up0003" x="434" y="1442" width="434" height="462" frameX="-154" frameY="-84" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_left0000" x="861" y="504" width="434" height="469" frameX="-126" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_left0001" x="861" y="504" width="434" height="469" frameX="-126" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_right0000" x="1302" y="0" width="420" height="469" frameX="-175" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_right0001" x="1302" y="0" width="420" height="469" frameX="-175" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_down0000" x="1337" y="1442" width="420" height="455" frameX="-161" frameY="-91" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_down0001" x="1337" y="1442" width="420" height="455" frameX="-161" frameY="-91" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_up0000" x="0" y="973" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
+<SubTexture name="blue_bf miss_up0001" x="0" y="973" width="434" height="469" frameX="-154" frameY="-77" frameWidth="700" frameHeight="595" />
 </TextureAtlas>

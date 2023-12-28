@@ -1,12 +1,12 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="Bf_Blue_Icon" y="350" isGF="false" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="bf-dead-art" sprite="blue_bf" scale="0.75">
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf idle" name="idle"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf left0" name="singLEFT"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf down" name="singDOWN"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf up" name="singUP"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf right" name="singRIGHT"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf miss right" name="singRIGHTmiss"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf miss down" name="singDOWNmiss"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf miss up" name="singUPmiss"/>
-	<anim x="0" loop="false" y="0" fps="12" anim="blue bf blue bf left miss" name="singLEFTmiss"/>
+<character x="0" icon="Bf_Blue_Icon" y="350" isGF="false" scale="0.75" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="bf-dead-art" sprite="blue_bf">
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf idle" name="idle"/>
+	<anim x="7" loop="false" y="0" fps="12" anim="blue_bf left" name="singLEFT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf down" name="singDOWN"/>
+	<anim x="5" loop="false" y="0" fps="12" anim="blue_bf up" name="singUP"/>
+	<anim x="6" loop="false" y="0" fps="12" anim="blue_bf right" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf miss_right" name="singRIGHTmiss"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf miss_down" name="singDOWNmiss"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf miss_up" name="singUPmiss"/>
+	<anim x="0" loop="false" y="0" fps="12" anim="blue_bf miss_left" name="singLEFTmiss"/>
 </character>

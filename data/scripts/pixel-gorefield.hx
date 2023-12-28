@@ -75,8 +75,21 @@ function onPlayerHit(event:NoteHitEvent) {
 
 function postCreate() {
 	for (spr in [gorefieldhealthBarBG, gorefieldiconP1, gorefieldiconP2])
+	{
 		spr.antialiasing = false;
-	gorefieldhealthBarBG.y -= 2;
+
+		if (spr == gorefieldhealthBarBG)
+			continue;
+
+		spr.scale.set(0.83, 0.83);
+		spr.updateHitbox();
+	}
+	
+	gorefieldhealthBarBG.scale.set(daPixelZoom - 2.85, daPixelZoom - 2.85);
+	gorefieldhealthBarBG.updateHitbox();
+	gorefieldhealthBarBG.screenCenter(0x01);
+	gorefieldhealthBarBG.y -= 33;
+	gorefieldhealthBarBG.x -= 2;
 
 	if (enablePixelGameOver) {
 		gameOverSong = "gameOvers/lasagna/Gorefield_Gameover_Pixel";
