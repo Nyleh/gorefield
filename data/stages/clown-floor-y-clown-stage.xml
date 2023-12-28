@@ -1,5 +1,11 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.85" name="clown-floor-y-clown-stage" folder="stages/clown-floor-y-clown-stage/" healthBarColor="pixel_blue">
+    <countdown>
+    <three sound="pixel/3-pixel"/>
+		<two sprite="game/pixel/binky/Ready_blue" sound="pixel/2-pixel"/>
+		<one sprite="game/pixel/binky/Set_blue" sound="pixel/1-pixel"/>
+		<go sprite="game/pixel/binky/play_blue" sound="pixel/Jon-pixel"/>
+    </countdown>
     <sprite name="floor" x="0" y="0" sprite="Clown_Stage_Floor" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
     <sprite name="background" x="0" y="0" sprite="Clown_Stage_face_1" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
     <player x="243" y="-398" camxoffset="-100" camyoffset="0"/>
