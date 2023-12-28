@@ -1,5 +1,6 @@
 import flixel.input.keyboard.FlxKeyList;
 import flixel.FlxG;
+import flixel.util.FlxAxes;
 
 importScript("data/scripts/pixel-gorefield");
 

@@ -81,5 +81,6 @@ function postCreate() {
 	if (enablePixelGameOver) {
 		gameOverSong = "gameOvers/lasagna/Gorefield_Gameover_Pixel";
 		retrySFX = "gameOvers/lasagna/Continue_Pixel";
+		lossSFX = "gameOvers/lasagna/Gameover_Animation_Lasagna_Boy";
 	}
 }

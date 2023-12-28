@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-luna-angry" flipX="true" isPlayer="true" camx="0" camy="90" holdTime="6.1" scale="1" color="#2E5E48" gameOverChar="luna-dead-angry">
+<character x="0" y="0" icon="icon-luna-angry" flipX="true" isPlayer="true" iconoffsetx="14" iconoffsety="-10" camx="0" camy="90" holdTime="6.1" scale="1" color="#2E5E48" gameOverChar="luna-dead-angry" sprite="luna">
 	<anim name="idle" anim="idle instancia 1" fps="24" loop="false" x="0" y="0"/>
 	<anim name="singLEFT" anim="left poses instancia 1" fps="24" loop="false" x="50" y="2"/>
 	<anim name="singDOWN" anim="down poses instancia 1" fps="24" loop="false" x="25" y="-47"/>

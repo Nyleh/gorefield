@@ -39,10 +39,11 @@ function create(){
         case 'jon-player':
             position[0].x = 210 + PlayState.instance.boyfriend.x;
             position[0].y = 550 + PlayState.instance.boyfriend.y;
-        case 'bf-pixel':
-            fakeCamZoom = 1.4;
-            position[0].x = 320 + PlayState.instance.boyfriend.x;
-            position[0].y = 700 + PlayState.instance.boyfriend.y;
+        case 'bf-pixel-dead-lasagna':
+            fakeCamZoom = 0.85;
+            position[0].x = 820 + PlayState.instance.boyfriend.x;
+            position[0].y = 425 + PlayState.instance.boyfriend.y;
+            FlxG.camera.bgColor = 0xFF527f3a;
         default:
             characterDummy = new Character(0,0, characterName, true);
             var camPos = characterDummy.getCameraPosition();
