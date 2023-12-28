@@ -5,10 +5,9 @@ var fakeCamFollow:FlxSprite;
 var replaceCamera:Bool = false;
 var characterDummy:Character;
 var fakeCamZoom:Float;
-function create(){
+function create()
+{
     var position:Array<{x:Float,y:Float}> = [{x: 0, y: 0}];
-    trace(characterName);
-    //x+ = left x- = right || y- = down  y+ = up
 
     fakeCamZoom = 1;
     switch(characterName){
@@ -44,8 +43,12 @@ function create(){
             position[0].x = 820 + PlayState.instance.boyfriend.x;
             position[0].y = 425 + PlayState.instance.boyfriend.y;
             FlxG.camera.bgColor = 0xFF527f3a;
+        case 'binky_game_over':
+            position[0].x = 1030 + PlayState.instance.boyfriend.x;
+            position[0].y = 1070 + PlayState.instance.boyfriend.y;
         default:
-            characterDummy = new Character(0,0, characterName, true);
+            if (characterDummy == null)
+                characterDummy = new Character(0,0, characterName, true);
             var camPos = characterDummy.getCameraPosition();
             position[0].x = camPos.x + PlayState.instance.boyfriend.x;
             position[0].y = camPos.y + PlayState.instance.boyfriend.y;
