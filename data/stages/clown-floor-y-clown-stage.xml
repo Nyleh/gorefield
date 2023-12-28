@@ -1,7 +1,7 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="0.8" name="clown-floor-y-clown-stage" folder="stages/clown-floor-y-clown-stage/">
+<stage zoom="0.85" name="clown-floor-y-clown-stage" folder="stages/clown-floor-y-clown-stage/">
     <sprite name="floor" x="0" y="0" sprite="Clown_Stage_Floor" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
     <sprite name="background" x="0" y="0" sprite="Clown_Stage_face_1" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
-    <sprite name="reference" x="-830" y="-400" sprite="reference" antialiasing="true" scrollx="1" scrolly="1" scale="0.6"/>
-    <player x="243" y="-398" camxoffset="-190" camyoffset="-40"/>
+    <player x="243" y="-398" camxoffset="-100" camyoffset="0"/>
+    <opponent x="-840" y="-960" camxoffset="0" camyoffset="170"/>
 </stage>
