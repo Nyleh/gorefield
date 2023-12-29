@@ -46,6 +46,7 @@ function create()
             char.danceOnBeat = !(char.forceIsOnScreen = true);
             if (FlxG.save.data.wrath) char.shader = newShader;
         }
+        rain.velocity.set(-80, 1700);
     }
 
     heatWaveShader = new CustomShader("heatwave");
