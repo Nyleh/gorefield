@@ -3,9 +3,9 @@ import funkin.backend.shaders.CustomShader;
 
 public var jonTrail:FlxTrail;
 public var jonFlying:Bool = true;
-var bloom:CustomShader;
+public var bloom:CustomShader;
 var drunk:CustomShader;
-var chromatic:CustomShader;
+public var chromatic:CustomShader;
 var warpShader:CustomShader;
 var particleShader:CustomShader;
 
@@ -47,8 +47,6 @@ function create() {
     warpShader = new CustomShader("warp");
     warpShader.distortion = .3;
     if (FlxG.save.data.warp) camGame.addShader(warpShader);
-
-    stage.stageSprites["black_overlay"].cameras = [camHUD];
 }
 
 function update(elapsed:Float){
