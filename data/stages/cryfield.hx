@@ -2,6 +2,9 @@
 import funkin.game.ComboRating;
 import flixel.addons.display.FlxBackdrop;
 
+
+var heatWaveShader:CustomShader;
+
 function create() 
 {
     comboGroup.x += 300;
@@ -10,7 +13,7 @@ function create()
     gameOverSong = "gameOvers/cryfield/Gorefield_Gameover_Cryfield";
 	retrySFX = "gameOvers/cryfield/Continue";
 
-    var rain_image = "stages/cryfield/pngegg";
+    var rain_image = "stages/cryfield/lluvia";
     
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
@@ -34,14 +37,20 @@ function create()
             char.danceOnBeat = !(char.forceIsOnScreen = true);
             if (FlxG.save.data.wrath) char.shader = newShader;
         }
-
-        rain_image = "stages/cryfield/pngegg_1";
     }
 
-	var rain:FlxBackdrop = new FlxBackdrop(Paths.image(rain_image), 0x11, 0, 0);
+	var rain:FlxBackdrop = new FlxBackdrop(Paths.image(rain_image), 0x11, 0, -10);
     //rain.colorTransform.color = 0xFFFFFFFF;
-	rain.velocity.set(-80, 1600);
+	rain.velocity.set(-80, 1200);
+    remove(stage.stageSprites["black_overlay"]);
 	add(rain);
+    add(stage.stageSprites["black_overlay"]);
+
+    heatWaveShader = new CustomShader("heatwave");
+    heatWaveShader.time = 0; heatWaveShader.speed = 10; 
+    heatWaveShader.strength = 1.38; 
+
+    if (FlxG.save.data.heatwave) rain.shader = heatWaveShader;
 
     comboRatings = [
 		new ComboRating(0, "F", 0xFF941616),
@@ -53,6 +62,12 @@ function create()
 		new ComboRating(0.95, "S", 0xFFB11EEA),
 		new ComboRating(1, "S++", 0xFFC63BFD),
 	];
+}
+
+var tottalTime:Float = 0;
+function update(elapsed:Float){
+    tottalTime += elapsed;
+    heatWaveShader.time = tottalTime;
 }
 
 function draw(e) {
