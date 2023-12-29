@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="Binky_icon" iconoffsetx="-15" y="350" isGF="false" color="#5A50D3" flipX="false" isPlayer="true" sprite="binky_the_clown" scale="0.6">
+<character x="0" icon="Binky_icon" antialiasing="false" iconoffsetx="-20" iconoffsety="-10" y="350" isGF="false" color="#5A50D3" flipX="false" isPlayer="true" sprite="binky_the_clown" scale="0.6">
 	<anim x="0" loop="false" y="0" fps="12" anim="binky_the_clown binky Idle" name="idle"/>
 	<anim x="0" loop="false" y="0" fps="12" anim="binky_the_clown binky rigth" name="singLEFT"/>
 	<anim x="0" loop="false" y="0" fps="12" anim="binky_the_clown binky down" name="singDOWN"/>

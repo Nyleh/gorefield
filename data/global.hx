@@ -3,11 +3,14 @@ import funkin.menus.PauseSubState;
 
 import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
+import lime.graphics.Image;
 
 static var curMainMenuSelected:Int = 0;
 static var curStoryMenuSelected:Int = 0;
 
 static var seenMenuCutscene:Bool = false;
+
+static var windowTitleGOREFIELD:String = "Friday Night Funkin': Gorefield V2";
 
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",
@@ -50,6 +53,8 @@ function new() {
 
 function preStateSwitch() {
     WindowUtils.resetTitle();
+    window.title = windowTitleGOREFIELD;
+    window.setIcon(Image.fromBytes(Assets.getBytes(Paths.image('iconOG'))));
     FlxG.camera.bgColor = 0xFF000000;
 
     if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate) && !Std.isOfType(FlxG.state.subState, PauseSubState)) // ! CHECK IN GAME/NOT IN GAME OVER

@@ -1,7 +1,8 @@
-
-
 function create()
 {
+    comboGroup.x += 150;
+    comboGroup.y -= 100;
+    
     var pixelScript = importScript("data/scripts/pixel-gorefield"); 
     pixelScript.set("noteType", "binky");
 
