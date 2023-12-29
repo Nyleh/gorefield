@@ -2,6 +2,7 @@ import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
 public var jonTrail:FlxTrail;
+public var jonFlying:Bool = true;
 var bloom:CustomShader;
 var drunk:CustomShader;
 var chromatic:CustomShader;
@@ -52,7 +53,8 @@ function create() {
 
 function update(elapsed:Float){
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
-    dad.y = 400 + (40 * FlxMath.fastSin(_curBeat*0.8));
+    if(jonFlying)
+        dad.y = 400 + (40 * FlxMath.fastSin(_curBeat*0.8));
     drunk.time = _curBeat/2;
     particleShader.time = _curBeat;
 

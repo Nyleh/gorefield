@@ -4,7 +4,8 @@ import flixel.addons.display.FlxBackdrop;
 
 
 var heatWaveShader:CustomShader;
-
+public var rain:FlxBackdrop;
+public var rain2:FlxBackdrop;
 function create() 
 {
     comboGroup.x += 300;
@@ -13,7 +14,15 @@ function create()
     gameOverSong = "gameOvers/cryfield/Gorefield_Gameover_Cryfield";
 	retrySFX = "gameOvers/cryfield/Continue";
 
-    var rain_image = "stages/cryfield/lluvia";
+	rain = new FlxBackdrop(Paths.image("stages/cryfield/lluvia_2"), 0x11, 0, -10);
+	rain.velocity.set(-80, 1200);
+    rain2 = new FlxBackdrop(Paths.image("stages/cryfield/lluvia"), 0x11, 0, -10);
+	rain2.velocity.set(-80, 1200);
+    rain2.visible = false;
+    remove(stage.stageSprites["black_overlay"]);
+	add(rain);
+    add(rain2);
+    add(stage.stageSprites["black_overlay"]);
     
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
@@ -38,13 +47,6 @@ function create()
             if (FlxG.save.data.wrath) char.shader = newShader;
         }
     }
-
-	var rain:FlxBackdrop = new FlxBackdrop(Paths.image(rain_image), 0x11, 0, -10);
-    //rain.colorTransform.color = 0xFFFFFFFF;
-	rain.velocity.set(-80, 1200);
-    remove(stage.stageSprites["black_overlay"]);
-	add(rain);
-    add(stage.stageSprites["black_overlay"]);
 
     heatWaveShader = new CustomShader("heatwave");
     heatWaveShader.time = 0; heatWaveShader.speed = 10; 
