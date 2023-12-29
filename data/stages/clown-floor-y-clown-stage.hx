@@ -14,3 +14,7 @@ function create()
     retrySFX = "gameOvers/clown/CLOWN_GameOver_End";
     lossSFX = "gameOverSFX";
 }
+
+function postCreate() {
+    camFollowChars = false; camFollow.setPosition(155, 200);
+}
