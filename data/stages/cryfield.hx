@@ -50,7 +50,6 @@ function create()
             var uv = char.frame.uv;
             newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
 
-            char.danceOnBeat = !(char.forceIsOnScreen = true);
             if (FlxG.save.data.wrath) char.shader = newShader;
         }
         rain.velocity.set(-80, 1700);
