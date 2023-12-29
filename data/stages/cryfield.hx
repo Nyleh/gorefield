@@ -1,5 +1,6 @@
 //
 import funkin.game.ComboRating;
+import flixel.addons.display.FlxBackdrop;
 
 function create() 
 {
@@ -9,6 +10,8 @@ function create()
     gameOverSong = "gameOvers/cryfield/Gorefield_Gameover_Cryfield";
 	retrySFX = "gameOvers/cryfield/Continue";
 
+    var rain_image = "stages/cryfield/pngegg";
+    
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
         stage.stageSprites["BG_C"].color = 0xFF7C7C7C;
@@ -28,10 +31,17 @@ function create()
             var uv = char.frame.uv;
             newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
 
-            //char.danceOnBeat = !(char.forceIsOnScreen = true);
+            char.danceOnBeat = !(char.forceIsOnScreen = true);
             if (FlxG.save.data.wrath) char.shader = newShader;
         }
+
+        rain_image = "stages/cryfield/pngegg_1";
     }
+
+	var rain:FlxBackdrop = new FlxBackdrop(Paths.image(rain_image), 0x11, 0, 0);
+    //rain.colorTransform.color = 0xFFFFFFFF;
+	rain.velocity.set(-80, 1600);
+	add(rain);
 
     comboRatings = [
 		new ComboRating(0, "F", 0xFF941616),
