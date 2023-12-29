@@ -1,8 +1,8 @@
-<!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
-<character x="0" y="0" icon="icon-face" flipX="false" isPlayer="null" camx="-100" camy="0" holdTime="6.1" scale="1" color="#A1A1A1" sprite="cc">
-	<anim name="singLEFT" anim="left" fps="24" loop="false" x="398" y="-51"/>
-	<anim name="singDOWN" anim="down" fps="24" loop="false" x="108" y="-58"/>
-	<anim name="singUP" anim="up" fps="24" loop="false" x="91" y="259"/>
-	<anim name="singRIGHT" anim="right" fps="24" loop="false" x="-118" y="-13"/>
-	<anim name="idle" anim="idle" fps="24" loop="true" x="0" y="0"/>
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="icon-face" camx="-100" y="0" isGF="false" color="#A1A1A1" isPlayer="false" holdTime="6.1" sprite="cc">
+	<anim x="-77" loop="false" y="4" fps="24" anim="left" name="singLEFT"/>
+	<anim x="-107" loop="false" y="32" fps="24" anim="down" name="singDOWN"/>
+	<anim x="-9" loop="false" y="-37" fps="24" anim="up" name="singUP"/>
+	<anim x="16" loop="false" y="148" fps="24" anim="right" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="idle" name="idle"/>
 </character>
