@@ -1,11 +1,16 @@
 //
 import funkin.game.ComboRating;
 import flixel.addons.display.FlxBackdrop;
+import flixel.util.FlxAxes;
+import flixel.ui.FlxBarFillDirection;
+import flixel.ui.FlxBar;
 
 
 var heatWaveShader:CustomShader;
 public var rain:FlxBackdrop;
 public var rain2:FlxBackdrop;
+
+var maxMisses:Int = 4;
 function create() 
 {
     comboGroup.x += 300;
@@ -23,9 +28,11 @@ function create()
 	add(rain);
     add(rain2);
     add(stage.stageSprites["black_overlay"]);
-    
+
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
+        maxMisses = 12;
+
         stage.stageSprites["BG_C"].color = 0xFF7C7C7C;
 
         for (char in [boyfriend, dad]) 
@@ -65,12 +72,16 @@ function create()
 		new ComboRating(0.95, "S", 0xFFB11EEA),
 		new ComboRating(1, "S++", 0xFFC63BFD),
 	];
+
+    scripts.getByName("ui_healthbar.hx").call("disableScript");
 }
 
 var tottalTime:Float = 0;
 function update(elapsed:Float){
     tottalTime += elapsed;
     heatWaveShader.time = tottalTime;
+
+    moveSprite(gorefieldhealthBar);
 }
 
 function draw(e) {
@@ -83,8 +94,66 @@ function draw(e) {
     }
 }
 
+function createHealthbar()
+{
+    for (sprite in [healthBar, healthBarBG, iconP1, iconP2, scoreTxt, missesTxt, accuracyTxt]) 
+        remove(sprite);
+
+    gorefieldhealthBarBG = new FlxSprite(1177);
+    gorefieldhealthBarBG.loadGraphic(Paths.image("game/healthbar/CONVENCIMIENTO_BAR"));
+    gorefieldhealthBarBG.screenCenter(FlxAxes.Y);
+    add(gorefieldhealthBarBG);
+
+    gorefieldhealthBar = new FlxBar(1216, 176, FlxBarFillDirection.TOP_TO_BOTTOM, 19, 384, PlayState.instance, "misses", 0, maxMisses);
+    gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/C_BAR"), Paths.image("game/healthbar/C_NO_BAR"));
+    add(gorefieldhealthBar);
+
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar])
+    {
+        spr.cameras = [camHUD]; 
+        spr.antialiasing = true;
+        spr.scrollFactor.set();
+    }
+
+    for (newIcon in 0...2) 
+    {
+        var icon = createIcon(newIcon == 1 ? boyfriend : dad);
+        icon.x = 1181;
+        switch (newIcon) 
+        {
+            case 1: 
+                gorefieldiconP1 = icon;
+                gorefieldiconP1.y = 587;
+            case 0: 
+                gorefieldiconP2 = icon;
+                gorefieldiconP2.y = 52;
+                gorefieldiconP2.flipX = true;
+                if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
+                    gorefieldiconP2.setPosition(1165, 3);
+        }
+        icon.scale.set(0.75, 0.75);
+        icon.updateHitbox();
+        add(icon);
+    }
+}
+
+function onPlayerMiss(event)
+{
+    PlayState.instance.health = 2;
+    var totalMisses:Int = PlayState.instance.misses + event.misses;
+
+    if (totalMisses >= maxMisses)
+        PlayState.instance.health = 0;
+
+    if (totalMisses >= maxMisses / 2)
+        for (icon in [gorefieldiconP1, gorefieldiconP2])
+            icon.animation.play("losing", true);
+}
+
 function postCreate()
 {
+    createHealthbar();
+
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
         dad.setPosition(300,0);
