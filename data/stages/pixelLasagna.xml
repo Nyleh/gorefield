@@ -1,10 +1,10 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.9" name="pixelLasagna" folder="stages/pixelLasagna/" noteSkin="pixel_green" splashSkin="gorefield_green" healthBarColor="pixel">
 	<countdown>
-		<three sound="lasagna/3-pixel"/>
-		<two sprite="game/ready" sound="lasagna/2-pixel"/>
-		<one sprite="game/set" sound="lasagna/1-pixel"/>
-		<go sprite="game/go" sound="lasagna/Jon-pixel"/>
+		<three sound="pixel/3-pixel"/>
+		<two sprite="game/pixel/lasagnaBoy/Ready_Green" sound="pixel/2-pixel"/>
+		<one sprite="game/pixel/lasagnaBoy/Set_Green" sound="pixel/1-pixel"/>
+		<go sprite="game/pixel/lasagnaBoy/play_green" sound="pixel/Jon-pixel"/>
 	</countdown>
 	<sprite name="BG2" x="-1800" y="-500" sprite="BG_2" antialiasing="false" scrollx="1" scrolly="1" scale="0.4"/>
 	<sprite name="BG1" x="-1800" y="-500" sprite="BG_1" antialiasing="false" scrollx="1" scrolly="1" scale="0.4"/>
