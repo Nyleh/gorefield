@@ -50,19 +50,6 @@ function onStrumCreation(event) {
 	strum.updateHitbox();
 }
 
-/*function onCountdown(event) {
-	if (!enablePixelUI) return;
-
-	event.antialiasing = false;
-	event.scale = daPixelZoom;
-	event.spritePath = switch(event.swagCounter) {
-		case 0: null;
-		case 1: 'stages/school/ui/ready';
-		case 2: 'stages/school/ui/set';
-		case 3: 'stages/school/ui/go';
-	};
-}*/
-
 function onPlayerHit(event:NoteHitEvent) {
 	if (!enablePixelUI) return;
 	event.ratingPrefix = "game/pixel/" + noteType + "/";
@@ -71,6 +58,9 @@ function onPlayerHit(event:NoteHitEvent) {
 	event.ratingAntialiasing = false;
 
 	event.numAntialiasing = false;
+
+	if (event.rating == 'sick' || event.rating == 'good' || event.rating == 'bad' || event.rating == 'shit' || event.rating == 'combo')
+		event.ratingScale = 1.5;
 }
 
 function postCreate() {
