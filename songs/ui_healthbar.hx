@@ -92,6 +92,9 @@ static function createIcon(character:Character):FlxSprite {
     }
 
     icon.flipX = character.isPlayer; icon.updateHitbox();
+    if(character.xml.exists("iconScale")){
+        icon.scale.set(Std.parseFloat(character.xml.get("iconScale")),Std.parseFloat(character.xml.get("iconScale")));
+    }
     icon.cameras = [camHUD]; icon.scrollFactor.set();
     icon.antialiasing = character.antialiasing;
 
