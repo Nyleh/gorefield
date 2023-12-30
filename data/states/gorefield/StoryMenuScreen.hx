@@ -45,6 +45,7 @@ var weeks:Array = [
 	{name: "???????? Week...", songs: ["Cataclysm"]},
 	{name: "Binky Circus...", songs: ["Laughter and Cries"]},
 	{name: "Cartoon World...", songs: ["Balls of Yarn"]},
+	{name: "Code Songs...", songs: ["Take me Jon"]}
 ];
 
 var weekColors:Array<Int> = [
@@ -57,7 +58,7 @@ var weekColors:Array<Int> = [
 ];
 
 var CATclysmUnlocked:Bool = false;
-var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true];
+var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -67,7 +68,8 @@ var weekDescs:Array<String> = [
 	"He Just Wants To Go Home...",
 	"????????????????????????????????????????????",
 	"Honk Honk...",
-	"A Feline Meeting..."
+	"A Feline Meeting...",
+	"Extra stuff"
 ];
 
 // SPANISH - Jloor 
@@ -80,7 +82,8 @@ var weekDescsSPANISH:Array<String> = [
 	"El solo quiere volver a casa...",
 	"????????????????????????????????????????????",
 	"Honk Honk...",
-	"Una reunion Felina..."
+	"Una reunion Felina...",
+	"Contenido extra"
 ];
 
 var lerpColors = [];
@@ -149,6 +152,12 @@ var freeplaySongLists = [
 		icons: ["garfield"],
 		songMenuObjs: [],
 		iconMenuObjs: []
+	},
+	{
+		songs: ["Take me Jon"],
+		icons: ["minecraft"],
+		songMenuObjs: [],
+		iconMenuObjs: []
 	}
 ];
 
@@ -187,7 +196,7 @@ function create() {
     bloomShader.dim = 1;// trailBloom.directions = 16.0;
 	if (FlxG.save.data.bloom) bgSprite.shader = bloomShader;
 
-	for (i in 0...8) {
+	for (i in 0...9) {
 		var sprite:FlxSprite = new FlxSprite();
 		sprite.frames = Paths.getSparrowAtlas("menus/storymenu/STORY_MENU_ASSETS");
 		sprite.animation.addByPrefix("_", "STORY MENU 0" + Std.string(i + 1));
