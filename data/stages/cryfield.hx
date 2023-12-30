@@ -24,6 +24,8 @@ function create()
     rain2 = new FlxBackdrop(Paths.image("stages/cryfield/lluvia"), 0x11, 0, -10);
 	rain2.velocity.set(-80, 1200);
     rain2.visible = false;
+
+    rain.alpha = rain2.alpha = 0.2;
     remove(stage.stageSprites["black_overlay"]);
 	add(rain);
     add(rain2);
@@ -80,7 +82,7 @@ function update(elapsed:Float){
     tottalTime += elapsed;
     heatWaveShader.time = tottalTime;
 
-    moveSprite(gorefieldhealthBar);
+    //moveSprite(gorefieldhealthBar);
 }
 
 function draw(e) {

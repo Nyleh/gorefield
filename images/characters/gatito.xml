@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="gatito.png">
+	<!-- Created with Adobe Animate version 21.0.9.42677 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="garfield depresivo down0000" x="0" y="0" width="823" height="874" frameX="0" frameY="-15" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0001" x="0" y="0" width="823" height="874" frameX="0" frameY="-15" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0002" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0003" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0004" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0005" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0006" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0007" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0008" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0009" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo down0010" x="823" y="0" width="798" height="872" frameX="-10" frameY="0" frameWidth="823" frameHeight="889"/>
+	<SubTexture name="garfield depresivo idle0000" x="1621" y="0" width="658" height="1126" frameX="-4" frameY="0" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0001" x="1621" y="0" width="658" height="1126" frameX="-4" frameY="0" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0002" x="1621" y="0" width="658" height="1126" frameX="-4" frameY="0" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0003" x="2279" y="0" width="653" height="1191" frameX="-7" frameY="-5" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0004" x="2279" y="0" width="653" height="1191" frameX="-7" frameY="-5" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0005" x="2279" y="0" width="653" height="1191" frameX="-7" frameY="-5" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0006" x="2932" y="0" width="658" height="1142" frameX="0" frameY="-4" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0007" x="2932" y="0" width="658" height="1142" frameX="0" frameY="-4" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo idle0008" x="2932" y="0" width="658" height="1142" frameX="0" frameY="-4" frameWidth="662" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo left0000" x="0" y="1191" width="868" height="1087" frameX="0" frameY="0" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0001" x="0" y="1191" width="868" height="1087" frameX="0" frameY="0" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0002" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0003" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0004" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0005" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0006" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0007" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0008" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0009" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo left0010" x="868" y="1191" width="849" height="1074" frameX="-22" frameY="-7" frameWidth="871" frameHeight="1087"/>
+	<SubTexture name="garfield depresivo right0000" x="1717" y="1191" width="678" height="1183" frameX="-13" frameY="-13" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0001" x="1717" y="1191" width="678" height="1183" frameX="-13" frameY="-13" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0002" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0003" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0004" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0005" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0006" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0007" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0008" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0009" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo right0010" x="2395" y="1191" width="662" height="1163" frameX="0" frameY="0" frameWidth="691" frameHeight="1196"/>
+	<SubTexture name="garfield depresivo up0000" x="3057" y="1191" width="626" height="1139" frameX="0" frameY="0" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0001" x="3057" y="1191" width="626" height="1139" frameX="0" frameY="0" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0002" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0003" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0004" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0005" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0006" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0007" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0008" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0009" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+	<SubTexture name="garfield depresivo up0010" x="0" y="2374" width="646" height="1097" frameX="-4" frameY="-5" frameWidth="650" frameHeight="1139"/>
+</TextureAtlas>

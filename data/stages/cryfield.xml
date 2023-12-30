@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="1.25" name="cryfield" folder="stages/cryfield/">
+<stage zoom="1.25" name="cryfield" folder="stages/cryfield/" splashSkin="gorefield_cry" noteSkin="gorefield_cry">
 	<countdown>
 		<three sound="cryfield/3"/>
 		<two sound="cryfield/2"/>

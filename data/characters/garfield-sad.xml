@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character x="0" icon="garfield" y="0" isGF="false" color="#D44D29" isPlayer="false" iconoffsetx="-30" iconoffsety="-18" animatedIcon="true" gameOverChar="face" holdTime="3" sprite="gatito">
+	<anim x="0" loop="true" y="0" fps="24" anim="garfield depresivo idle" name="idle"/>
+	<anim x="130" loop="false" y="-31" fps="24" anim="garfield depresivo left" name="singLEFT"/>
+	<anim x="70" loop="false" y="-244" fps="24" anim="garfield depresivo down" name="singDOWN"/>
+	<anim x="-13" loop="false" y="25" fps="24" anim="garfield depresivo up" name="singUP"/>
+	<anim x="-90" loop="false" y="6" fps="24" anim="garfield depresivo right" name="singRIGHT"/>
+</character>
