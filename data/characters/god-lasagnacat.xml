@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-710" icon="icon-lasagnacat-pixel" camx="-200" y="-400" isGF="false" camy="420" color="#346756" isPlayer="false" antialiasing="true" holdTime="4" sprite="GOD_CAT">
+<character x="-710" icon="icon-lasagnacat-pixel" camx="-200" y="-520" isGF="false" scale="1.5" camy="420" color="#346756" isPlayer="false" sprite="GOD_CAT">
 	<anim x="0" loop="false" y="0" fps="24" anim="GOD CAT IDLE" name="idle"/>
 	<anim x="5" loop="false" y="50" fps="24" anim="GOD CAT LEFT" name="singLEFT"/>
 	<anim x="50" loop="false" y="-117.5" fps="24" anim="GOD CAT DOWN" name="singDOWN"/>
