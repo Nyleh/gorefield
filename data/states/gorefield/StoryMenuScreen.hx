@@ -10,6 +10,7 @@ import funkin.backend.system.framerate.Framerate;
 import funkin.backend.utils.FlxInterpolateColor;
 import Xml;
 import StringTools;
+import openfl.ui.Mouse;
 
 var canMove:Bool = true;
 
@@ -161,7 +162,15 @@ var freeplaySongLists = [
 	}
 ];
 
+// CODES MENU
+var codesPanel:FlxSprite;
+var codesOpenHitbox:FlxObject;
+var codesTween:FlxTween;
+var codesOpened:Bool = false;
+var lastFrameRateMode:Int = 1;
+
 function create() {
+	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
 
 	camBG = new FlxCamera(0, 0);
@@ -238,6 +247,15 @@ function create() {
 	selector.angle = 45;
 	add(selector);
 
+	codesPanel = new FlxSprite(-415).loadGraphic(Paths.image("menus/storymenu/MENU_CODE_STATIC"));
+	codesPanel.scale.set(551/codesPanel.height, 551/codesPanel.height);
+	add(codesPanel);
+
+	// 551
+
+	codesOpenHitbox = new FlxObject(0, 0, 70, 124);
+	add(codesOpenHitbox);
+
 	preloadFreeplayMenus();
 
 	weekText = new FunkinText(32, 20, FlxG.width, "WEEK NAME", 42, true);
@@ -309,6 +327,7 @@ var bloomSine:Bool = true;
 var dim:Float = 0; var size:Float = 0;
 var lerpMenuSpeed:Float = 1;
 var updateFreePlay:Bool = false;
+var hoveringButton:Bool = false;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
@@ -318,6 +337,7 @@ function update(elapsed:Float) {
 	for (i=>menuOption in menuOptions) {
 		var y:Float = ((FlxG.height - menuOption.height) / 2) + ((menuOption.ID - curWeek) * menuOption.height);
 		var x:Float = 50 - ((Math.abs(FlxMath.fastCos((menuOption.y + (menuOption.height / 2) - (FlxG.camera.scroll.y + (FlxG.height / 2))) / (FlxG.height * 1.25) * Math.PI)) * 150)) + Math.floor(15 * FlxMath.fastSin(__totalTime + (0.8*i)));
+		x += codesOpened ? 200 : 0;
 
 		if (i == curWeek && selectingWeek) {
 			menuOption.y = CoolUtil.fpsLerp(menuOption.y, (FlxG.height/2) - (menuOption.height/2), 0.075);
@@ -364,7 +384,31 @@ function update(elapsed:Float) {
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
+	codesPanel.updateHitbox();
+	codesPanel.screenCenter(0x10);
+	codesPanel.y += 65 + (8*FlxMath.fastSin(__totalTime));
+	
+	codesOpenHitbox.x = codesPanel.x + 415;
+	codesOpenHitbox.screenCenter(0x10);
+	codesOpenHitbox.y += 50;
+
+	hoveringButton = false;
+	var lastOpened:Bool = codesOpened;
+	if (FlxG.mouse.overlaps(codesOpenHitbox)) {
+		hoveringButton = true;
+		if (FlxG.mouse.justPressed) codesMenu(!codesOpened, 0); 
+	}
+
 	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
+	
+	if (!lastOpened && codesOpened) lastFrameRateMode = Framerate.debugMode;
+	if (lastOpened && !codesOpened) Framerate.debugMode = lastFrameRateMode;
+	if (codesOpened) Framerate.debugMode = 0;
+
+	textInfoBG.y = CoolUtil.fpsLerp(textInfoBG.y, codesOpened ? FlxG.height : FlxG.height - textInfoBG.height, 0.25);
+	scoreText.y = CoolUtil.fpsLerp(scoreText.y, codesOpened ? FlxG.height : FlxG.height - scoreText.height - 22, 0.25);
+
+	Mouse.cursor = hoveringButton ? "button" : "arrow";
 
 	if (!updateFreePlay) return;
 	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? .6 + (.4*FlxMath.fastSin(__totalTime*1.5)) : 0, 0.15);
@@ -390,6 +434,11 @@ function update(elapsed:Float) {
 }
 
 function handleMenu() {
+	if (codesOpened) {
+		if (controls.BACK) codesMenu(false, 0);
+		return;
+	}
+
 	if (inFreeplayMenu) {
 		if (controls.DOWN_P) changeSong(1);
 		if (controls.UP_P) changeSong(-1);
@@ -625,6 +674,8 @@ function preloadFreeplayMenus() {
 }
 
 function openFreePlayMenu() {
+	codesMenu(false, -100);
+
 	__firstFreePlayFrame = inFreeplayMenu = updateFreePlay = true;
 	freePlayMenuID = curWeek; changeSong(0);
 
@@ -637,6 +688,8 @@ function openFreePlayMenu() {
 var lerpTimer:FlxTimer = null;
 var updateTimer:FlxTimer = null;
 function closeFreePlayMenu() {
+	codesMenu(false, 0);
+
 	__firstFreePlayFrame = inFreeplayMenu = false;
 	freePlayMenuID = -1; changeWeek(0);
 
@@ -684,4 +737,10 @@ function goToSong() {
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0;}
+function codesMenu(open:Bool, offset:Float) {
+	codesOpened = open;
+	if (codesTween != null) codesTween.cancel();
+	codesTween = FlxTween.tween(codesPanel, {x: (codesOpened ? 0 : -415) + offset}, .25, {ease: FlxEase.circInOut});
+}
+
+function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0; Framerate.debugMode = 1;}
