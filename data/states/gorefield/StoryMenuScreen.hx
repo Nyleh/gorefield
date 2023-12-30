@@ -544,6 +544,7 @@ function playWeek() { // animation
 		case 5: FlxG.sound.play(Paths.sound("menu/story/godfieldenter"));
 		case 6: FlxG.sound.play(Paths.sound("menu/story/Binky_Week_Enter"));
 		case 7: FlxG.sound.play(Paths.sound("menu/story/Cartoon_Week_Enter"));
+		case 8: FlxG.sound.play(Paths.sound("Codes_Week_Enter.ogg"));
 		default: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 	}
 
