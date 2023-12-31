@@ -66,6 +66,7 @@ function create() {
     particleShader.particleZoom = 1;
     particleShader.particleColor = [0.616,0.149,0.733];
     particleShader.particleDirection = [0.7, -1.0];
+    particleShader.layers = 8;
     if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
 
     warpShader = new CustomShader("warp");
