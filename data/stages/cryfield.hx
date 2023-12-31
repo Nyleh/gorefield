@@ -21,6 +21,9 @@ function create()
     comboGroup.x += 300;
     comboGroup.y += 300;
 
+    if (FlxG.save.data.spanish)
+        missSubtitle = "Convencelo.";
+
     gameOverSong = "gameOvers/cryfield/Gorefield_Gameover_Cryfield";
 	retrySFX = "gameOvers/cryfield/Continue";
 
@@ -39,7 +42,11 @@ function create()
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
         maxMisses = 12;
-        missSubtitle = "Resist.";
+        if (FlxG.save.data.spanish) {
+            missSubtitle = "Resiste.";
+        } else {
+            missSubtitle = "Resist.";
+        }
 
         stage.stageSprites["BG_C"].color = 0xFF7C7C7C;
 
