@@ -97,7 +97,7 @@ function draw(e) {
 
 function createHealthbar()
 {
-    for (sprite in [healthBar, healthBarBG, iconP1, iconP2, scoreTxt, missesTxt, accuracyTxt]) 
+    for (sprite in [healthBar, healthBarBG, iconP1, iconP2]) 
         remove(sprite);
 
     gorefieldhealthBarBG = new FlxSprite(1177);
