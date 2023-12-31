@@ -1,3 +1,5 @@
+var vhs:CustomShader;
+
 function postCreate()
 {
     comboGroup.x -= 500;
@@ -12,7 +14,15 @@ function postCreate()
     if (!FlxG.save.data.vhs)
         return;
 
-    var vhsShader:CustomShader = new CustomShader("vhs");
-    vhsShader.time = 0; 
-    FlxG.camera.addShader(vhsShader);
+    vhs = new CustomShader("vhs");
+    vhs.time = 0; 
+    FlxG.camera.addShader(vhs);
+}
+
+var totalTime:Float = 0;
+function update(elapsed){
+    totalTime += elapsed;
+    if (!FlxG.save.data.vhs)
+        return;
+    vhs.time = totalTime;
 }
