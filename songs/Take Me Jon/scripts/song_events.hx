@@ -1,4 +1,8 @@
-function postCreate(){
+function postCreate()
+{
+    comboGroup.x -= 500;
+    comboGroup.y += 300;
+
     gf.visible = false;
     dad.visible = false;
 
