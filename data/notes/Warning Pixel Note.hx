@@ -12,7 +12,6 @@ function onNoteCreation(event) {
     event.note.loadGraphic(Paths.image('game/pixel/types/Warning Pixel Note'), true, 17, 17);
     event.note.animation.add("scroll", [4 + event.strumID]);
     event.note.scale.set(6, 6);
-    event.note.updateHitbox();
 }
 
 function onPlayerMiss(event)

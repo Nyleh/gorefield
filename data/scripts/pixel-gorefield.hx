@@ -15,7 +15,9 @@ var noteType:String = "lasagnaBoy";
 /**
  * UI
  */
-function onNoteCreation(event) {
+function onNoteCreation(event) 
+{
+	if (event.noteType != null && event.noteType != "") return; // Avoid modifying notes with his own textures
 	if (event.note.strumLine == playerStrums && !pixelNotesForBF) return;
 	if (event.note.strumLine == cpuStrums && !pixelNotesForDad) return;
 
