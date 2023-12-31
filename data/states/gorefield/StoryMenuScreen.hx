@@ -584,6 +584,7 @@ function playWeek() { // animation
 	FlxG.sound.music.fadeOut(0.25);
 
 	FlxG.sound.play(Paths.sound("menu/story/weekenter")); // Sound
+	codesMenu(false, -100);
 	switch(curWeek){
 		case 0: FlxG.sound.play(Paths.sound("menu/story/principalenter"));
 		case 1: FlxG.sound.play(Paths.sound("menu/story/lasboyenter"));
