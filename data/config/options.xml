@@ -20,6 +20,7 @@
 			<checkbox id="static" name="Static Shaders" desc="Enable/Disable Static Shaders. (low/no intensive)" />
 			<checkbox id="saturation" name="Saturation Shaders" desc="Enable/Disable Saturation Shaders. (low/no intensive)" />
 			<checkbox id="drunk" name="Drunk Shaders" desc="Enable/Disable Drunk Shaders. (low/no intensive)" />
+			<checkbox id="vhs" name="VHS Shader" desc="Enable/Disable VHS Shaders. (low/no intensive)" />
 		</menu>
 		<checkbox id="particles" name="Particle Effects" desc="Enable/Disable Particles (ok i actually get why you want to disable this one its very uhhh 'bright' in the stage (medium intensive))"/>
 		<checkbox id="trails" name="Sprite Trails" desc="Enable/Disable Trails On Sprites. (for even bigger toasters)" />

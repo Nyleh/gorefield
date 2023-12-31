@@ -35,6 +35,7 @@ function new() {
     if (FlxG.save.data.heatwave == null) FlxG.save.data.heatwave = true;
     if (FlxG.save.data.static == null) FlxG.save.data.static = true;
     if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
+    if (FlxG.save.data.vhs == null) FlxG.save.data.vhs = true;
 
     if (FlxG.save.data.drunk == null) FlxG.save.data.drunk = true;
     if (FlxG.save.data.saturation == null) FlxG.save.data.saturation = true;
