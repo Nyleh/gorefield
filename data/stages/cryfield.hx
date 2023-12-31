@@ -4,11 +4,16 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxAxes;
 import flixel.ui.FlxBarFillDirection;
 import flixel.ui.FlxBar;
+import flixel.text.FlxText.FlxTextFormat;
 
 
 var heatWaveShader:CustomShader;
 public var rain:FlxBackdrop;
 public var rain2:FlxBackdrop;
+
+var missSubtitle:String = "Convince Him.";
+var missSubtitleText:FunkinText;
+var missesLeftText:FunkinText;
 
 var maxMisses:Int = 4;
 function create() 
@@ -34,6 +39,7 @@ function create()
     if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
     {
         maxMisses = 12;
+        missSubtitle = "Resist.";
 
         stage.stageSprites["BG_C"].color = 0xFF7C7C7C;
 
@@ -75,6 +81,24 @@ function create()
 	];
 
     scripts.getByName("ui_healthbar.hx").call("disableScript");
+
+
+    missSubtitleText = new FunkinText(0, 0, 0, missSubtitle, 70);
+    missSubtitleText.addFormat(new FlxTextFormat(0xFFFFFFFF, false, false, 0));
+    missSubtitleText.cameras = [camHUD];
+    missSubtitleText.borderSize = 5;
+    missSubtitleText.updateHitbox();
+    missSubtitleText.screenCenter();
+    missSubtitleText.alpha = 0.0001;
+    add(missSubtitleText);
+
+    missesLeftText = new FunkinText(missSubtitleText.x, missSubtitleText.y + 100, 0, 'MISSES LEFT: ' + maxMisses, 40);
+    missesLeftText.addFormat(new FlxTextFormat(0xFF9B8686, false, false, 0));
+    missesLeftText.cameras = [camHUD];
+    missesLeftText.borderSize = 5;
+    missesLeftText.updateHitbox();
+    missesLeftText.alpha = 0.0001;
+    add(missesLeftText);
 }
 
 var tottalTime:Float = 0;
@@ -138,10 +162,32 @@ function createHealthbar()
     }
 }
 
+var isShown:Bool = false;
+function showPopUp(intro:Bool,?misses:Int){
+    missesLeftText.text = 'MISSES LEFT: ' + (maxMisses - (misses != null ? misses : 0));
+
+    if (isShown) return;
+    isShown = true;
+    FlxTween.tween(missesLeftText, {alpha: 1}, 0.4);
+    FlxTween.tween(missSubtitleText, {alpha: 1}, 0.4);
+    (new FlxTimer()).start(intro ? 3.8 : 1.5, function () {
+        FlxTween.tween(missesLeftText, {alpha: 0}, 0.4);
+        FlxTween.tween(missSubtitleText, {alpha: 0}, 0.4, {onComplete: function(tween){
+            isShown = false;
+        }});
+    });
+}
+
+function onSongStart(){
+    showPopUp(true);
+}
+
 function onPlayerMiss(event)
 {
     PlayState.instance.health = 2;
     var totalMisses:Int = PlayState.instance.misses + event.misses;
+
+    showPopUp(false,totalMisses);
 
     if (totalMisses >= maxMisses)
         PlayState.instance.health = 0;
