@@ -10,6 +10,7 @@ function create() {
     particleShader.particleColor = [0.1,0.1,0.1];
     particleShader.particleDirection = [-1.2, -0.5];
     particleShader.particleZoom = 1;
+    particleShader.layers = 10;
     particleShader.particlealpha = 0;
     if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
     stage.stageSprites["BG1"].zoomFactor = 0.7;

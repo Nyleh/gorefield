@@ -168,20 +168,17 @@ function createHealthbar()
         add(icon);
     }
 }
-
-var isShown:Bool = false;
 function showPopUp(intro:Bool,?misses:Int){
     missesLeftText.text = 'MISSES LEFT: ' + (maxMisses - (misses != null ? misses : 0));
 
-    if (isShown) return;
-    isShown = true;
+    FlxTween.cancelTweensOf(missesLeftText);
+    FlxTween.cancelTweensOf(missSubtitleText);
+
     FlxTween.tween(missesLeftText, {alpha: 1}, 0.4);
     FlxTween.tween(missSubtitleText, {alpha: 1}, 0.4);
     (new FlxTimer()).start(intro ? 3.8 : 1.5, function () {
         FlxTween.tween(missesLeftText, {alpha: 0}, 0.4);
-        FlxTween.tween(missSubtitleText, {alpha: 0}, 0.4, {onComplete: function(tween){
-            isShown = false;
-        }});
+        FlxTween.tween(missSubtitleText, {alpha: 0}, 0.4);
     });
 }
 
