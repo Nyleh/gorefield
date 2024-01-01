@@ -5,7 +5,7 @@ var bloom:CustomShader = null;
 var blackandwhite:CustomShader = null;
 
 function create() {
-    FlxG.sound.play(Paths.sound('explosionsound'), 0); // Preload sound
+    FlxG.sound.play(Paths.sound('Explosion_Jon'), 0); // Preload sound
 
     for (sprite in [stage.stageSprites["bgFinal"], stage.stageSprites["lightFinal"], stage.stageSprites["cloudsFinal"], stage.stageSprites["frontFinal"]])
     {
@@ -110,13 +110,13 @@ function stepHit(step:Int) {
                 FlxTween.tween(spr, {alpha: 1}, 1.5);
 
             if (FlxG.save.data.bloom) camGame.removeShader(bloom);
-        case 1024:
+        case 1152:
             gfTrail.active = gfTrail.visible = true;
             gfTrail.color = 0xFFFF0000;
             
             stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = true;
-            FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.7}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
-        case 1136: // ! Fade Infront Stuff
+            FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.7}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadInOut, type: 4 /*PINGPONG*/});
+        case 1400: // ! Fade Infront Stuff
             for (sprite in [dad, boyfriend])
                 FlxTween.tween(sprite, {alpha: 0.3}, (Conductor.stepCrochet / 1000) * 4);
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
@@ -130,10 +130,10 @@ function stepHit(step:Int) {
                     FlxTween.tween(n, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
                 });
             }
-        case 1140: // ! Zoom
+        case 1402: // ! Zoom
             lerpCam = false;
             FlxTween.tween(FlxG.camera, {zoom: 1.2}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {defaultCamZoom = 1.2;}});
-        case 1152: // ! Stage Change
+        case 1408: // ! Stage Change
             lerpCam = true;
             FlxG.camera.bgColor = 0xFFFFFFFF;
             for (spr in [psBar, gorefieldhealthBar])
@@ -172,7 +172,7 @@ function stepHit(step:Int) {
             for (strum in cpu)
                 FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
 
-            FlxG.sound.play(Paths.sound('explosionsound'), 3);
+            FlxG.sound.play(Paths.sound('Explosion_Jon'), 1);
             FlxG.camera.shake(0.006, 3.6);
             camHUD.shake(0.009, 3.6); // sorry (not sorry -lunar)
             FlxG.camera.zoom += 2;
@@ -183,7 +183,7 @@ function stepHit(step:Int) {
             });
 
             snapCam();
-        case 1664:
+        case 1920:
             FlxG.camera.stopFX();
             camHUD.stopFX();
 
@@ -195,8 +195,9 @@ function stepHit(step:Int) {
             insert(0, stage.stageSprites["black"]);
 
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 32);
-        case 1712:
-            camHUD.visible = FlxG.camera.visible = false;
+        case 1956:
+            tweenHUD(0,(Conductor.stepCrochet / 1000) * 60);
+            FlxTween.tween(psBar, {alpha: 0}, (Conductor.stepCrochet / 1000) * 60);
     }
 }
 
