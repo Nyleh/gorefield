@@ -20,10 +20,10 @@
 	</sprite>
 
 	<player x="0" y="420" camxoffset="30" camyoffset="-670"/>
-	<sprite name="ALO" x="1200" y="-440" sprite="ALO" antialiasing="true" scrollx="1" scrolly="1.4" scale="1.2">
+	<sprite name="ALO" x="1160" y="-440" sprite="ALO" antialiasing="true" scrollx="1" scrolly="1.4" scale="1.2">
 		<anim name="aro" anim="tormenta" loop="true"/>
 	</sprite>
-	<sprite name="ALO2" x="-2220" y="-440" sprite="ALO" antialiasing="true" scrollx="1" scrolly="1.4" scale="1.2">
+	<sprite name="ALO2" x="-2160" y="-440" sprite="ALO" antialiasing="true" scrollx="1" scrolly="1.4" scale="1.2">
 		<anim name="aro" anim="tormenta" loop="true"/>
 		<property name="flipX" type="bool" value="true" />
 	</sprite>

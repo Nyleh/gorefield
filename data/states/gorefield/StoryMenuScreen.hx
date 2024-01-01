@@ -251,8 +251,6 @@ function create() {
 	codesPanel.scale.set(551/codesPanel.height, 551/codesPanel.height);
 	add(codesPanel);
 
-	// 551
-
 	codesOpenHitbox = new FlxObject(0, 0, 70, 124);
 	add(codesOpenHitbox);
 

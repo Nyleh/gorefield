@@ -3,11 +3,13 @@ import funkin.backend.shaders.CustomShader;
 
 public var jonTrail:FlxTrail;
 public var jonFlying:Bool = true;
+
 public var bloom:CustomShader;
-var drunk:CustomShader;
+public var drunk:CustomShader;
+public var warpShader:CustomShader;
 public var chromatic:CustomShader;
-var warpShader:CustomShader;
-var particleShader:CustomShader;
+public var particleSprite:FunkinSprite;
+public var particleShader:CustomShader;
 
 function create() {
     comboGroup.x += 300;
@@ -23,14 +25,19 @@ function create() {
     jonTrail.color = 0xFFB3B1D8;
     if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
 
+    particleSprite = new FunkinSprite().makeGraphic(FlxG.width, FlxG.height, 0x00FFFFFF);
+    particleSprite.scrollFactor.set(0, 0);
+    particleSprite.zoomFactor = 0;
+    insert(members.indexOf(stage.stageSprites["BG"])+1, particleSprite);
+
     particleShader = new CustomShader("particles");
     particleShader.time = 0; particleShader.particlealpha = 1;
-	particleShader.res = [FlxG.width, FlxG.height];
+	particleShader.res = [particleSprite.width, particleSprite.height];
     particleShader.particleXY = [0, 0];
     particleShader.particleColor = [.7,.7,.7];
     particleShader.particleDirection = [-1, 0];
-    particleShader.particleZoom = .2; particleShader.layers = 10;
-    if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
+    particleShader.particleZoom = .2; particleShader.layers = 6;
+    if (FlxG.save.data.particles) particleSprite.shader = particleShader;
 
     bloom = new CustomShader("glow");
     bloom.size = 8.0; bloom.dim = 1.8;
@@ -45,8 +52,16 @@ function create() {
     if (FlxG.save.data.warp) FlxG.camera.addShader(chromatic);
 
     warpShader = new CustomShader("warp");
-    warpShader.distortion = .3;
+    warpShader.distortion = 1;
     if (FlxG.save.data.warp) camGame.addShader(warpShader);
+
+    var pixel = new CustomShader("pixel");
+    pixel.uBlocksize = [1, 1];
+    pixel.inner = .5;
+    pixel.outer = 1.2;
+    pixel.strength = 1.4;
+    pixel.curvature = .5;
+    camGame.addShader(pixel);
 }
 
 function update(elapsed:Float){
@@ -57,7 +72,7 @@ function update(elapsed:Float){
     particleShader.time = _curBeat;
 
     for (i=>trail in jonTrail.members) {
-        var scale = FlxMath.bound(1.5 + (.2 * FlxMath.fastSin((_curBeat/4) + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
+        var scale = FlxMath.bound(1.5 + Math.abs(.2 * FlxMath.fastSin((_curBeat/4) + (i * FlxG.random.float((Conductor.stepCrochet / 1000) * 0.5, (Conductor.stepCrochet / 1000) * 1.2)))), 0.9, 999);
         trail.scale.set(scale, scale);
     }
     particleShader.particleZoom = .2 * (3*FlxG.camera.zoom);
