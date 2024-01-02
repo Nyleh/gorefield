@@ -171,11 +171,13 @@ var codesTween:FlxTween;
 var codesOpened:Bool = false;
 var lastFrameRateMode:Int = 1;
 var codesTextHitbox:FlxObject;
+var codesButton:FlxSprite;
 // TEXT
 var codesPosition:Int = 0;
 var codesText:FunkinText;
 var caretSpr:FlxSprite;
 var codesFocused:Bool = false;
+var codesSound:FlxSound;
 
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
@@ -262,14 +264,20 @@ function create() {
 	codesText = new FunkinText(0, 0, 295 - (24), "COOL CODE!!!", 24, true);
 	codesText.setFormat("fonts/pixelart.ttf", 24, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	codesText.borderSize = 3;
-	codesText.scrollFactor.set();
 	codesText.cameras = [camText];
 	add(codesText);
 
 	caretSpr = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/carcet"));
-	caretSpr.scrollFactor.set();
 	caretSpr.cameras = [camText];
 	add(caretSpr);
+
+	codesButton = new FlxSprite();
+	codesButton.frames = Paths.getSparrowAtlas("menus/storymenu/enter");
+	codesButton.animation.addByPrefix("idle", "enter0000", 24, false);
+	codesButton.animation.addByPrefix("press", "enter press", 24, false);
+	codesButton.animation.play("idle");
+	codesButton.cameras = [camText];
+	add(codesButton);
 
 	codesOpenHitbox = new FlxObject(0, 0, 70, 124);
 	add(codesOpenHitbox);
@@ -279,6 +287,8 @@ function create() {
 
 	FlxG.stage.window.onKeyDown.add(onKeyDown);
 	FlxG.stage.window.onTextInput.add(onTextInput);
+
+	codesSound = FlxG.sound.load(Paths.sound('menu/story/Code_Write_Song'));
 
 	preloadFreeplayMenus();
 
@@ -376,7 +386,7 @@ function update(elapsed:Float) {
 			if (__firstFrame) menuOption.x += 2000 + (i *800);
 		}
 
-		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFFFFFF) : (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFBDBEFF), (1/75) * colorLerpSpeed);
+		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 && !CATclysmUnlocked ? 0xFF000000 : (codesOpened ? 0xFF626262 : 0xFFFFFFFF)) : (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFBDBEFF), ((1/75) * colorLerpSpeed) * (codesOpened ? 3 : 1));
 		menuOption.color = lerpColors[i * 2 + 0].color;
 		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
 
@@ -426,11 +436,17 @@ function update(elapsed:Float) {
 	codesText.x = codesPanel.x + 24 + 12;
 	codesText.y = codesTextHitbox.y + (codesTextHitbox.height/2) - (codesText.height/2);
 
+	codesButton.x = codesPanel.x + 103;
+	codesButton.y = codesPanel.y + 330;
+
 	cursor = null;
 	var lastOpened:Bool = codesOpened;
 	if (FlxG.mouse.overlaps(codesOpenHitbox)) {
 		cursor = "button";
-		if (FlxG.mouse.justReleased) codesMenu(!codesOpened, 0); 
+		if (FlxG.mouse.justReleased) {
+			codesMenu(!codesOpened, 0);
+			FlxG.sound.play(Paths.sound('menu/story/Open_and_Close_Secret_Menu'));
+		}
 	} else if (FlxG.mouse.overlaps(codesTextHitbox)) {
 		cursor = "ibeam";
 		if (FlxG.mouse.justReleased) {
@@ -446,8 +462,17 @@ function update(elapsed:Float) {
 			}
 		}
 			
+	} else if (FlxG.mouse.overlaps(codesButton)) {
+		cursor = "button";
+		if (FlxG.mouse.justReleased) {
+			codesButton.animation.play("press", true);
+		}
 	} else if (FlxG.mouse.justReleased)
 		codesFocused = false;
+
+	if (codesButton.animation.name == "press" && codesButton.animation.finished)
+		codesButton.animation.play("idle", true);
+	if (codesButton.animation.name == "press") codesButton.x -= 5;
 
 	switch(codesPosition) {
 		default:
@@ -848,12 +873,14 @@ function onKeyDown(keyCode:Int, modifier:Int) {
 function onTextInput(text:String):Void {
 	codesText.text = codesText.text.substr(0, codesPosition) + text + codesText.text.substr(codesPosition);
 	codesPosition += text.length; carcetTime = 0;
+	codesSound.play(true);
 }
 
 function onDestroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
 	curStoryMenuSelected = curWeek; 
 	Framerate.offset.y = 0; Framerate.debugMode = 1;
+
 	FlxG.stage.window.onKeyDown.remove(onKeyDown);
 	FlxG.stage.window.onTextInput.remove(onTextInput);
 }
