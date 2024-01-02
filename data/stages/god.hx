@@ -39,6 +39,14 @@ function create() {
     particleShader.particleZoom = .2; particleShader.layers = 6;
     if (FlxG.save.data.particles) particleSprite.shader = particleShader;
 
+    var pixel = new CustomShader("pixel");
+    pixel.uBlocksize = [8, 8];
+    pixel.inner = .5;
+    pixel.outer = 1.2;
+    pixel.strength = 1.4;
+    pixel.curvature = .5;
+    camGame.addShader(pixel);
+
     bloom = new CustomShader("glow");
     bloom.size = 8.0; bloom.dim = 1.8;
     FlxG.camera.addShader(bloom);
@@ -54,14 +62,6 @@ function create() {
     warpShader = new CustomShader("warp");
     warpShader.distortion = 1;
     if (FlxG.save.data.warp) camGame.addShader(warpShader);
-
-    var pixel = new CustomShader("pixel");
-    pixel.uBlocksize = [1, 1];
-    pixel.inner = .5;
-    pixel.outer = 1.2;
-    pixel.strength = 1.4;
-    pixel.curvature = .5;
-    camGame.addShader(pixel);
 }
 
 function update(elapsed:Float){

@@ -11,6 +11,8 @@ import funkin.backend.utils.FlxInterpolateColor;
 import Xml;
 import StringTools;
 import openfl.ui.Mouse;
+import openfl.geom.Rectangle;
+import openfl.desktop.Clipboard;
 
 var canMove:Bool = true;
 
@@ -168,6 +170,12 @@ var codesOpenHitbox:FlxObject;
 var codesTween:FlxTween;
 var codesOpened:Bool = false;
 var lastFrameRateMode:Int = 1;
+var codesTextHitbox:FlxObject;
+// TEXT
+var codesPosition:Int = 0;
+var codesText:FunkinText;
+var caretSpr:FlxSprite;
+var codesFocused:Bool = false;
 
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
@@ -251,8 +259,26 @@ function create() {
 	codesPanel.scale.set(551/codesPanel.height, 551/codesPanel.height);
 	add(codesPanel);
 
+	codesText = new FunkinText(0, 0, 295 - (24), "COOL CODE!!!", 24, true);
+	codesText.setFormat("fonts/pixelart.ttf", 24, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	codesText.borderSize = 3;
+	codesText.scrollFactor.set();
+	codesText.cameras = [camText];
+	add(codesText);
+
+	caretSpr = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/carcet"));
+	caretSpr.scrollFactor.set();
+	caretSpr.cameras = [camText];
+	add(caretSpr);
+
 	codesOpenHitbox = new FlxObject(0, 0, 70, 124);
 	add(codesOpenHitbox);
+
+	codesTextHitbox = new FlxObject(0, 0, 295, 45);
+	add(codesTextHitbox);
+
+	FlxG.stage.window.onKeyDown.add(onKeyDown);
+	FlxG.stage.window.onTextInput.add(onTextInput);
 
 	preloadFreeplayMenus();
 
@@ -325,7 +351,11 @@ var bloomSine:Bool = true;
 var dim:Float = 0; var size:Float = 0;
 var lerpMenuSpeed:Float = 1;
 var updateFreePlay:Bool = false;
-var hoveringButton:Bool = false;
+var cursor:String = null;
+var cacheRect:Rectangle = new Rectangle();
+var cachePoint:FlxPoint = FlxPoint.get(0,0);
+var cachePoint2:FlxPoint = FlxPoint.get(0,0);
+var carcetTime:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
@@ -390,12 +420,51 @@ function update(elapsed:Float) {
 	codesOpenHitbox.screenCenter(0x10);
 	codesOpenHitbox.y += 50;
 
-	hoveringButton = false;
+	codesTextHitbox.x = codesPanel.x + 24;
+	codesTextHitbox.y = codesPanel.y + 258;
+
+	codesText.x = codesPanel.x + 24 + 12;
+	codesText.y = codesTextHitbox.y + (codesTextHitbox.height/2) - (codesText.height/2);
+
+	cursor = null;
 	var lastOpened:Bool = codesOpened;
 	if (FlxG.mouse.overlaps(codesOpenHitbox)) {
-		hoveringButton = true;
-		if (FlxG.mouse.justPressed) codesMenu(!codesOpened, 0); 
-	}
+		cursor = "button";
+		if (FlxG.mouse.justReleased) codesMenu(!codesOpened, 0); 
+	} else if (FlxG.mouse.overlaps(codesTextHitbox)) {
+		cursor = "ibeam";
+		if (FlxG.mouse.justReleased) {
+			codesFocused = true; carcetTime = 0;
+
+			// Position from mouse
+			cachePoint2.set(FlxG.mouse.screenX-codesText.x, FlxG.mouse.screenY-codesText.y);
+			if (cachePoint2.x < 0)
+				codesPosition = 0;
+			else {
+				var index = codesText.textField.getCharIndexAtPoint(cachePoint2.x, cachePoint2.y);
+				if (index > -1) codesPosition = index;
+			}
+		}
+			
+	} else if (FlxG.mouse.justReleased)
+		codesFocused = false;
+
+	switch(codesPosition) {
+		default:
+			if (codesPosition >= codesText.text.length) {
+				codesText.textField.__getCharBoundaries(codesText.text.length-1, cacheRect);
+				cachePoint.set(cacheRect.x + cacheRect.width, cacheRect.y);
+			} else {
+				codesText.textField.__getCharBoundaries(codesPosition, cacheRect);
+				cachePoint.set(cacheRect.x, cacheRect.y);
+			}
+	};
+	carcetTime += elapsed;
+	caretSpr.alpha = Math.floor(((carcetTime+1.6)*2)%2);
+	caretSpr.visible = codesFocused;
+
+	caretSpr.x = codesText.x + (codesText.text.length == 0 ? 0 : cachePoint.x + 0);
+	caretSpr.y = codesText.y + cachePoint.y;
 
 	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
 	
@@ -406,7 +475,7 @@ function update(elapsed:Float) {
 	textInfoBG.y = CoolUtil.fpsLerp(textInfoBG.y, codesOpened ? FlxG.height : FlxG.height - textInfoBG.height, 0.25);
 	scoreText.y = CoolUtil.fpsLerp(scoreText.y, codesOpened ? FlxG.height : FlxG.height - scoreText.height - 22, 0.25);
 
-	Mouse.cursor = hoveringButton ? "button" : "arrow";
+	Mouse.cursor = cursor ?? "arrow";
 
 	if (!updateFreePlay) return;
 	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? .6 + (.4*FlxMath.fastSin(__totalTime*1.5)) : 0, 0.15);
@@ -433,7 +502,7 @@ function update(elapsed:Float) {
 
 function handleMenu() {
 	if (codesOpened) {
-		if (controls.BACK) codesMenu(false, 0);
+		if (controls.BACK && !codesFocused) codesMenu(false, 0);
 		return;
 	}
 
@@ -737,9 +806,54 @@ function goToSong() {
 }
 
 function codesMenu(open:Bool, offset:Float) {
+	if (open == false) codesFocused = false;
 	codesOpened = open;
 	if (codesTween != null) codesTween.cancel();
 	codesTween = FlxTween.tween(codesPanel, {x: (codesOpened ? 0 : -415) + offset}, .25, {ease: FlxEase.circInOut});
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); curStoryMenuSelected = curWeek; Framerate.offset.y = 0; Framerate.debugMode = 1;}
+var RIGHT = 0x4000004F;
+var LEFT = 0x40000050;
+var BACKSPACE = 0x08;
+var HOME = 0x4000004A;
+var END = 0x4000004D;
+var V = 0x76;
+var LEFT_CTRL = 0x0040;
+var RIGHT_CTRL = 0x0080;
+function onKeyDown(keyCode:Int, modifier:Int) {
+	switch(keyCode) {
+		case LEFT:
+			codesPosition = FlxMath.bound(codesPosition-1, 0, codesText.text.length); carcetTime = 0;
+		case RIGHT:
+			codesPosition = FlxMath.bound(codesPosition+1, 0, codesText.text.length); carcetTime = 0;
+		case BACKSPACE:
+			if (codesPosition > 0) {
+				codesText.text = codesText.text.substr(0, codesPosition-1) + codesText.text.substr(codesPosition);
+				codesPosition = FlxMath.bound(codesPosition-1, 0, codesText.text.length); carcetTime = 0;
+			}
+		case HOME:
+			codesPosition = 0;
+		case END:
+			codesPosition = codesText.text.length;
+		case V:
+			// paste
+			if (modifier == LEFT_CTRL || modifier == RIGHT_CTRL) {
+				var data:String = Clipboard.generalClipboard.getData(2/**TEXTFORMAT**/);
+				if (data != null) onTextInput(data);
+			}
+		default: // nothing
+	}
+}
+
+function onTextInput(text:String):Void {
+	codesText.text = codesText.text.substr(0, codesPosition) + text + codesText.text.substr(codesPosition);
+	codesPosition += text.length; carcetTime = 0;
+}
+
+function onDestroy() {
+	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
+	curStoryMenuSelected = curWeek; 
+	Framerate.offset.y = 0; Framerate.debugMode = 1;
+	FlxG.stage.window.onKeyDown.remove(onKeyDown);
+	FlxG.stage.window.onTextInput.remove(onTextInput);
+}
