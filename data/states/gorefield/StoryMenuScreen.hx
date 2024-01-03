@@ -84,7 +84,7 @@ var weekDescsSPANISH:Array<String> = [
 	"Un pequeno gran problema...",
 	"El solo quiere volver a casa...",
 	"????????????????????????????????????????????",
-	"Honk Honk...",
+	"Honk Honk!",
 	"Una reunion Felina...",
 	"Contenido extra"
 ];
@@ -178,6 +178,10 @@ var codesText:FunkinText;
 var caretSpr:FlxSprite;
 var codesFocused:Bool = false;
 var codesSound:FlxSound;
+
+var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
+var numbers:String = "1234567890";
+var symbols:String = "*[]^_.,'!?";
 
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
@@ -451,6 +455,7 @@ function update(elapsed:Float) {
 		cursor = "ibeam";
 		if (FlxG.mouse.justReleased) {
 			codesFocused = true; carcetTime = 0;
+			codesPosition = codesText.text.length;
 
 			// Position from mouse
 			cachePoint2.set(FlxG.mouse.screenX-codesText.x, FlxG.mouse.screenY-codesText.y);
@@ -492,6 +497,7 @@ function update(elapsed:Float) {
 	caretSpr.y = codesText.y + cachePoint.y;
 
 	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
+	if (FlxG.game.soundTray != null) FlxG.sound.muteKeys = codesFocused ? [] : [40 /*ZERO*/, 96 /*NUMPADZERO*/];
 	
 	if (!lastOpened && codesOpened) lastFrameRateMode = Framerate.debugMode;
 	if (lastOpened && !codesOpened) Framerate.debugMode = lastFrameRateMode;
@@ -871,6 +877,15 @@ function onKeyDown(keyCode:Int, modifier:Int) {
 }
 
 function onTextInput(text:String):Void {
+	if (!codesFocused) return;
+
+	for (char in 0...text.length) {
+		if (StringTools.contains(alphabet, text.charAt(char))) continue;
+		if (StringTools.contains(numbers, text.charAt(char))) continue;
+		if (StringTools.contains(symbols, text.charAt(char))) continue;
+		return; // char not found in font - lunar
+	}
+
 	codesText.text = codesText.text.substr(0, codesPosition) + text + codesText.text.substr(codesPosition);
 	codesPosition += text.length; carcetTime = 0;
 	codesSound.play(true);
@@ -879,7 +894,7 @@ function onTextInput(text:String):Void {
 function onDestroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
 	curStoryMenuSelected = curWeek; 
-	Framerate.offset.y = 0; Framerate.debugMode = 1;
+	Framerate.offset.y = 0; Framerate.debugMode = lastFrameRateMode;
 
 	FlxG.stage.window.onKeyDown.remove(onKeyDown);
 	FlxG.stage.window.onTextInput.remove(onTextInput);
