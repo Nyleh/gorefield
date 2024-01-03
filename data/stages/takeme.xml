@@ -1,6 +1,5 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.77" name="stage" folder="stages/takemejon/">
-	<sprite name="BG" x="-300" y="-200" sprite="fondo-negrooooo" antialiasing="true" scrollx="0" scrolly="0" scale="1.8"/>
 	<sprite name="B2" x="-290" y="20" sprite="piso-del-fondo-negroooo" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
 	<sprite name="otherView" x="-300" y="-200" sprite="fondo-azuuuul" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
 	<gf x="755" y="285" camxoffset="210" camyoffset="100" scroll="1"/>

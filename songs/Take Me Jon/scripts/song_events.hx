@@ -7,8 +7,8 @@ function postCreate()
 
     gorefieldiconP2.visible = false;
 
-    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
-        spr.alpha = 0.2;
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2])
+        spr.alpha = 0;
 
     if (!FlxG.save.data.vhs)
         return;

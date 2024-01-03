@@ -10,6 +10,8 @@ function create() {
     comboGroup.x += 300;
     comboGroup.y += 300;
 
+	FlxG.camera.bgColor = 0xff231118;
+
 	camCharacters = new FlxCamera(0, 0);
 	camCharacters.x = -800;
 	camCharacters.zoom = 0.71;
