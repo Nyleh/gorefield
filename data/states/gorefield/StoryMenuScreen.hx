@@ -497,7 +497,6 @@ function update(elapsed:Float) {
 	caretSpr.y = codesText.y + cachePoint.y;
 
 	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
-	if (FlxG.game.soundTray != null) FlxG.sound.muteKeys = codesFocused ? [] : [40 /*ZERO*/, 96 /*NUMPADZERO*/];
 	
 	if (!lastOpened && codesOpened) lastFrameRateMode = Framerate.debugMode;
 	if (lastOpened && !codesOpened) Framerate.debugMode = lastFrameRateMode;
