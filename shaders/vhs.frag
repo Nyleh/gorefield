@@ -1,11 +1,11 @@
 #pragma header
 
 uniform float time;
+uniform float noiseIntensity;
+uniform float colorOffsetIntensity;
 
 const float range = 0.5;
 const float noiseQuality = 250.0;
-const float noiseIntensity = 0.002;
-const float colorOffsetIntensity = 0.5;
 
 float rand(vec2 co)
 {

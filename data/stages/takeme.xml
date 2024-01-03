@@ -1,0 +1,13 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.77" name="stage" folder="stages/takemejon/">
+	<sprite name="BG" x="-300" y="-200" sprite="fondo-negrooooo" antialiasing="true" scrollx="0" scrolly="0" scale="1.8"/>
+	<sprite name="B2" x="-290" y="20" sprite="piso-del-fondo-negroooo" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
+	<sprite name="otherView" x="-300" y="-200" sprite="fondo-azuuuul" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
+	<gf x="755" y="285" camxoffset="210" camyoffset="100" scroll="1"/>
+	<opponent x="-300" y="320"  camxoffset="210" camyoffset="0"/>
+	<player x="1170" y="220" camxoffset="-160" camyoffset="-110"/>
+	<solid name="black" x="-700" y="-500" width="3000" height="2000" scrollx="0" scrolly="0" color="0x000000">
+		<property name="active" type="bool" value="false" />
+		<property name="visible" type="bool" value="false" />
+	</solid>
+</stage>
