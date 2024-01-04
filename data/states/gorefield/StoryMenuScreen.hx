@@ -181,7 +181,7 @@ var caretSpr:FlxSprite;
 var codesFocused:Bool = false;
 var codesSound:FlxSound;
 
-var alphabet:String = "abcdefghijklmnopqrstuvwxyz";
+var alphabet:String = "abcdefghijklmnopqrstuvwxyz ";
 var numbers:String = "1234567890";
 var symbols:String = "*[]^_.,'!?";
 
@@ -269,7 +269,7 @@ function create() {
 
 	codeColorLerp = new FlxInterpolateColor(-1);
 
-	codesText = new FunkinText(0, 0, 295 - (24), "COOL CODE!!!", 24, true);
+	codesText = new FunkinText(0, 0, 295 - (24), "TYPE CODE HERE!!!", 24, true);
 	codesText.setFormat("fonts/pixelart.ttf", 24, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	codesText.borderSize = 3;
 	codesText.cameras = [camText];
@@ -483,7 +483,9 @@ function update(elapsed:Float) {
 			cursor = "button";
 			if (FlxG.mouse.justReleased) {
 				codesButton.animation.play("press", true);
-				selectCode();
+				if (codes.contains(codesText.text))
+					selectCode();
+				else incorrectCode();
 			}
 		} else if (FlxG.mouse.justReleased)
 			codesFocused = false;
@@ -901,10 +903,12 @@ function onTextInput(text:String):Void {
 		return; // char not found in font - lunar
 	}
 
-	codesText.text = codesText.text.substr(0, codesPosition) + text + codesText.text.substr(codesPosition);
+	codesText.text = codesText.text.substr(0, codesPosition) + text.toUpperCase() + codesText.text.substr(codesPosition);
 	codesPosition += text.length; carcetTime = 0;
 	codesSound.play(true);
 }
+
+var codes:Array<String> = ["TAKE ME", "LYMAN", "LASAGNA", "CATNIP", "FULLCAT"];
 
 function selectCode():Void {
 	canMove = codesFocused = false;
@@ -914,9 +918,18 @@ function selectCode():Void {
 
 	FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
 	FlxTween.tween(FlxG.camera, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut, onComplete: function () {
-		var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
-		FlxG.switchState(new MainMenuState());
-		trace(codesTexts.text);
+		switch (codesText.text) {
+			/*
+			case "TAKE ME":
+			case "LYMAN":
+			case "LASAGNA":
+			case "CATNIP":
+			case "FULLCAT": // cheater >:((
+			*/
+			default:
+				var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
+				FlxG.switchState(new MainMenuState());
+		}
 	}});
 
 	for (cam in [FlxG.camera, camText, camBG]) {
