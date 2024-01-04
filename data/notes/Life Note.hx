@@ -20,5 +20,13 @@ function onNoteCreation(event) {
     event.note.antialiasing = true;
 }
 
+function onPlayerMiss(event)
+    if (event.noteType == "Life Note") {event.cancel(true); event.note.strumLine.deleteNote(event.note);}
+
 function onPlayerHit(event)
-    if (event.noteType == "Life Note") {health += 0.3; event.cancel(true);}
+    if (event.noteType == "Life Note") {
+        health += 0.4; 
+        event.showSplash = false; 
+        event.preventAnim();
+        FlxG.sound.play(Paths.sound('mechanics/health'),10);
+    }

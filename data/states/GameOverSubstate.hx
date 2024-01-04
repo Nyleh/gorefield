@@ -58,6 +58,9 @@ function create()
         case 'binky_game_over':
             position[0].x = 1030 + daCharacter.x;
             position[0].y = 1070 + daCharacter.y;
+        case 'bf-dead-art':
+            position[0].x = 200 + daCharacter.x;
+            position[0].y = 500 + daCharacter.y;
         default:
             var camPos = daCharacter.getCameraPosition();
             position[0].x = camPos.x + daCharacter.x;
