@@ -50,8 +50,6 @@ function stepHit(step:Int)
             FlxG.camera.shake(0.02 * Math.max(shakeAmount, 0.05), ((Conductor.crochet / 4) / 1000)/2);
             shakeAmount -= 0.15;
 
-            gf.angle += 360/6;
-
             if (step == 694) {
                 gf.active = gf.visible = true;
                 FlxTween.tween(camHUD, {alpha: 0}, (Conductor.crochet/2) / 1000);

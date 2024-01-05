@@ -111,7 +111,7 @@ function update(elapsed:Float) {
 
     if (controlHealthAlpha) {
         curHealthAlpha = lerp(curHealthAlpha, curCameraTarget == 1 ? 0.25 : 1, 1/20);
-        for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+        for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt, psBar])
             spr.alpha = curHealthAlpha;
     }
 
@@ -129,6 +129,7 @@ function update(elapsed:Float) {
     if(isLymanFlying) {
         dad.y = 200 + (20 * FlxMath.fastSin(_curBeat));
         dad.x = 1460 + (50 * FlxMath.fastSin(_curBeat/2));
+        stage.stageSprites["BGAGUA"].x = dad.x + 10;
     }
 
     if (sineSat) trailBloom.sat = 1.2 + (.2 * FlxMath.fastSin(_curBeat + ((Conductor.stepCrochet / 1000) * 16) + ((Conductor.stepCrochet / 1000))));

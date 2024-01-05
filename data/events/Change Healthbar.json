@@ -4,6 +4,11 @@
             "name": "New Bar",
             "type": "String",
             "defaultValue": "default"
+        },
+        {
+            "name": "Pixel?",
+            "type": "Bool",
+            "defaultValue": "false"
         }
     ]
 }

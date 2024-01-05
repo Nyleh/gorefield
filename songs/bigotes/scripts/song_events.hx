@@ -79,10 +79,10 @@ function stepHit(step:Int) {
             camCharacters.flash(0x1f0d37, (Conductor.stepCrochet / 1000) * 8);
 
             for (name => sprite in stage.stageSprites)
-                sprite.visible = (name == "pixelblack" || name == 'black');
+                sprite.visible = (name == "pixelblack" || name == 'black' || name == 'BGAGUAPixel');
 
             boyfriend.visible = isLymanFlying = jonTrail.visible = jonTrail.active = false;
-            tweenStrum(player, 1, (Conductor.stepCrochet / 1000) * 8);
+            tweenHUD(1, (Conductor.stepCrochet / 1000) * 1);
         case 1712:
             FlxTween.cancelTweensOf(stage.stageSprites["black"]);
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = false;
@@ -93,7 +93,7 @@ function stepHit(step:Int) {
             camCharacters.flash(0xFF7403A1, (Conductor.stepCrochet / 1000) * 16);
 
             for (name => sprite in stage.stageSprites)
-                sprite.visible = name != "pixelblack" && name != "black";
+                sprite.visible = name != "pixelblack" && name != "black" && name != 'BGAGUAPixel';
             
             boyfriend.visible = isLymanFlying = jonTrail.visible = jonTrail.active = true;
             controlHealthAlpha = true; curHealthAlpha = 0;
