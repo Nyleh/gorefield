@@ -120,8 +120,6 @@ function changeItem(change:Int, force:Bool)
     if (force && curSelected == change)
         return;
 
-    FlxG.sound.play(Paths.sound("menu/scrollMenu"));
-
     if (curSelected != -1)
     {
         var prevText:FlxText = options.members[curSelected];
@@ -142,6 +140,8 @@ function changeItem(change:Int, force:Bool)
 
     if (curSelected != -1)
     {
+        FlxG.sound.play(Paths.sound("menu/scrollMenu"));
+
         var curText:FlxText = options.members[curSelected];   
         curText.alpha = 1;
     }
