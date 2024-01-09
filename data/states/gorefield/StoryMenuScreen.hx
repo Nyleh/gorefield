@@ -203,7 +203,7 @@ function create() {
 	warpShader.distortion = 0;
 	if (FlxG.save.data.warp) FlxG.camera.addShader(warpShader);
 
-	bgSprite = new FlxBackdrop(Paths.image("menus/storymenu/WEA_ATRAS"), 0x11, 0, 0);
+	bgSprite = new FlxBackdrop(Paths.image("menus/WEA_ATRAS"), 0x11, 0, 0);
 	bgSprite.cameras = [camBG]; bgSprite.colorTransform.color = 0xFFFFFFFF;
 	bgSprite.velocity.set(100, 100);
 	add(bgSprite);

@@ -1,5 +1,6 @@
 import funkin.game.GameOverSubstate;
 import funkin.menus.PauseSubState;
+import funkin.menus.BetaWarningState;
 
 import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
@@ -17,6 +18,7 @@ static var redirectStates:Map<FlxState, String> = [
     MainMenuState => "gorefield/MainMenuScreen",
     FreeplayState => "gorefield/StoryMenuScreen"
     StoryMenuState => "gorefield/StoryMenuScreen",
+    BetaWarningState => "gorefield/LaguageSelectorScreen",
 ];
 
 function new() {
