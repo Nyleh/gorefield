@@ -32,7 +32,7 @@ function create(){
 	staticShader.speed = 20;
 	if (FlxG.save.data.static) FlxG.camera.addShader(staticShader);
 
-    bg.color = 0xFF0C0D0F;
+    bg.color = 0xFF3F3F3F;
 
     for (spr in [boyfriend, stage.stageSprites["TV"], dad]) {
         var newShader = new CustomShader("wrath");
