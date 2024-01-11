@@ -63,6 +63,11 @@ function onEvent(_) {
         // Change Icon
         var oldIcon = oldCharacter.isPlayer ? gorefieldiconP1 : gorefieldiconP2; // ! GOREFIELD ONLY
         var newIcon = preloadedIcons.get(newCharacter.getIcon());
+        if (newCharacter.getIcon() == "BF_sansfield")
+        {
+            trace("newCharacter: " + newCharacter);
+            trace("newCharacter.alpha: " + newCharacter.alpha);
+        }
 
         if (oldIcon == newIcon) return;
         insert(members.indexOf(oldIcon), newIcon);

@@ -3,6 +3,11 @@
 	<sprite name="BG" x="-1950" y="-1600" sprite="BG_GOD" antialiasing="true" scrollx="1" scrolly="0.8" scale="1"/>
 	<sprite name="BG2" x="-970" y="-1500" sprite="ANGEL_BG" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
 
+	<sprite name="BONES_SANS" x="50" y="-900" sprite="BONES_GOD" antialiasing="true" scrollx="1" scrolly="1" scale="1">
+		<anim name="idle" anim="bones" loop="true"/>
+		<property name="alpha" type="float" value="0.0000001"/>
+	</sprite>
+
 	<sprite name="PUNISH_BG1" x="-200" y="100" sprite="BG_GOD_GOREFIELD" antialiasing="true" scrollx="1" scrolly="1" scale="1">
 		<property name="alpha" type="float" value="0.0000001"/>
 	</sprite>
@@ -20,6 +25,9 @@
 	</sprite>
 
 	<player x="0" y="420" camxoffset="30" camyoffset="-670"/>
+	<sprite name="MARCO_BG" x="0" y="0" sprite="marco_UNDERTALE_GOD" antialiasing="true" scrollx="1" scrolly="1" scale="1">
+		<property name="alpha" type="float" value="0.0000001"/>
+	</sprite>
 	<sprite name="ALO" x="1160" y="-440" sprite="ALO" antialiasing="true" scrollx="1" scrolly="1.4" scale="1.2">
 		<anim name="aro" anim="tormenta" loop="true"/>
 	</sprite>

@@ -45,7 +45,7 @@ function create() {
     pixel.outer = 1.2;
     pixel.strength = 1.4;
     pixel.curvature = .5;
-    camGame.addShader(pixel);
+    //camGame.addShader(pixel); No se porque lunar puso esto, pero por ahora lo quito lol - Jloor
 
     bloom = new CustomShader("glow");
     bloom.size = 8.0; bloom.dim = 1.8;
