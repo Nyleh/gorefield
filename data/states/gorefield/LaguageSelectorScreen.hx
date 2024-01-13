@@ -1,10 +1,13 @@
 import flixel.util.FlxAxes;
+import openfl.ui.Mouse;
 import flixel.addons.display.FlxBackdrop;
+import flixel.effects.FlxFlicker;
 
 var curSelected:Int = -1;
-var selected_something:Bool = false;
+var selected_something:Bool = true;
 
 var languages:Array<String> = ["English", "Espanol"];
+var ogOffset:Array<Float> = [0, 0];
 var options:FlxTypedGroup<FlxSprite>;
 
 var colowTwn:FlxTween;
@@ -14,82 +17,67 @@ var camBG:FlxCamera;
 function create()
 {
     FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
-    FlxG.cameras.remove(FlxG.camera, false);
-
-    camBG = new FlxCamera(0, 0);
-    for (cam in [camBG, FlxG.camera])
-	{
-        FlxG.cameras.add(cam, cam == FlxG.camera); 
-        cam.bgColor = 0x00000000; 
-        cam.antialiasing = true;
-    }
-
-    camBG.bgColor = FlxColor.fromRGB(17,5,33);
-
-    var warpShader:CustomShader = new CustomShader("warp");
-	warpShader.distortion = 0;
-	if (FlxG.save.data.warp) FlxG.camera.addShader(warpShader);
-
-	bgSprite = new FlxBackdrop(Paths.image("menus/WEA_ATRAS"), 0x11, 0, 0);
-    bgSprite.cameras = [camBG];
-	bgSprite.colorTransform.color = 0xFFFFFFFF;
-	bgSprite.velocity.set(100, 100);
-	add(bgSprite);
-
-	colowTwn = FlxTween.color(null, 5.4, 0xFF90D141, 0xFFF09431, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/, onUpdate: function () {
-		bgSprite.colorTransform.color = colowTwn.color;
-	}});
-
-    var bgShader:CustomShader = new CustomShader("warp");
-	bgShader.distortion = 2;
-	if (FlxG.save.data.warp) camBG.addShader(bgShader);
-
-    var bloomShader:CustomShader = new CustomShader("glow");
-	bloomShader.size = 18.0;
-    bloomShader.dim = 1;
-	if (FlxG.save.data.bloom) bgSprite.shader = bloomShader;
 
     options = new FlxTypedGroup();
     add(options);
 
     for (i => language in languages)
     {
-        var option:FlxSprite = new FlxSprite(83 + i * 697);
+        var option:FlxSprite = new FlxSprite();
         option.loadGraphic(Paths.image("menus/language/" + language.toUpperCase()));
         option.ID = i;
-        option.screenCenter(FlxAxes.Y);
-        option.antialiasing = true;
-        option.alpha = 0.5;
-        options.add(option);
         
-        /* option.x = 640;
-        if (i == 0)
-            option.x -= 140 + option.width;
-        else
-            option.x += 140;
-        trace("option: " + option); */
+        option.antialiasing = true;
+        option.color = 0xFF7B7B7B;
+
+        option.scale.set(0.7, 0.7);
+        option.updateHitbox();
+
+        option.screenCenter(FlxAxes.XY);
+        option.x = (i * 600) + 180;
+        option.y -= 40;
+
+        ogOffset.push(option.offset.y);
+
+        option.alpha = 0; option.y + 40;
+        FlxTween.tween(option, {alpha: 1, y: option.y-40}, .3, {startDelay: .4 +  0.1*i});
+
+        options.add(option);
     }
+
+    FlxG.camera.alpha = 0;
+    (new FlxTimer()).start(.3, (_) -> {
+        FlxTween.tween(FlxG.camera, {alpha: 1}, .3);
+        selected_something = false;
+        FlxG.camera.zoom = 0.8;
+    });
+
 }
 
+var tottalTimer:Float = -.6;
+var cursor:String = null;
+var zoomShit:Float = 0.9;
 function update(elapsed:Float)
 {
-    if (!selected_something)
-    {
-        if (FlxG.mouse.justMoved)
-        {
-            var overSomething:Bool = false;
-            for (option in options)
-            {
-                if (FlxG.mouse.overlaps(option))
-                {
-                    overSomething = true;
-                    changeItem(option.ID, true);
-                }
-            }
+    tottalTimer += elapsed;
+    cursor = null;
 
-            if (!overSomething)
-                changeItem(-1, true);
+    var overSomething:Bool = false;
+    if (!selected_something) {
+        for (i=>option in options.members) {
+            if (FlxG.mouse.overlaps(option)) {
+                overSomething = true;
+                changeItem(option.ID, true);
+                
+                cursor = "button";
+            }
         }
+
+        if (!overSomething)
+            changeItem(-1, true);
+
+        for (i=>option in options.members)
+            option.offset.y = ogOffset[i] + ((Math.sin(tottalTimer + (i*.8)) * 10));
 
         if (controls.RIGHT_P)
             changeItem(1, false);
@@ -98,21 +86,41 @@ function update(elapsed:Float)
 
         if (curSelected != -1
             && ((FlxG.mouse.justPressed && FlxG.mouse.overlaps(options.members[curSelected]))
-            || controls.ACCEPT))
-        {
-            FlxG.sound.play(Paths.sound('menu/confirmMenu'));
+            || controls.ACCEPT)) {
+            FlxG.sound.play(Paths.sound('menu/confirm'));
 
             FlxG.save.data.spanish = curSelected == 1;
             FlxG.save.flush();
 
-            new FlxTimer().start(0.2, 
-                function (tmr:FlxTimer) 
-                {
-                    FlxG.switchState(new ModState("gorefield/AlphaWarningScreen"));
+            for (i=>option in options.members)
+                if (i != curSelected) 
+                    FlxTween.tween(option, {alpha:0}, 0.15);
+                else {
+                    FlxTween.tween(option, {x: FlxG.width/2 - option.width/2, y: (FlxG.height/2 - option.height/2)-60}, 0.4, {ease: FlxEase.circOut});
+                    zoomShit = 1;
+                    FlxFlicker.flicker(option, .6, .05, true, false);
+                    (new FlxTimer()).start(0.6, (_) -> {option.visible = false;});
                 }
-            );
+                    
+
+            new FlxTimer().start(.7, function (tmr:FlxTimer) {
+                FlxG.switchState(new ModState("gorefield/AlphaWarningScreen"));
+            });
         }
     }
+
+    // MARIO MADNESS ????????? -lunar
+    FlxG.camera.scroll.x = FlxMath.lerp(FlxG.camera.scroll.x, (FlxG.mouse.screenX-(FlxG.width/2)) * 0.008, (1/30)*240*elapsed);
+    FlxG.camera.scroll.y = FlxMath.lerp(FlxG.camera.scroll.y, (FlxG.mouse.screenY-6-(FlxG.height/2)) * 0.008, (1/30)*240*elapsed);
+
+    FlxG.camera.zoom = FlxMath.lerp(
+        FlxG.camera.zoom, zoomShit * (.98 - 
+        (Math.abs(((FlxG.mouse.screenX*0.4) + 
+        (FlxMath.remapToRange(FlxG.mouse.screenY, 0, FlxG.height, 0, FlxG.width)*0.6))
+        -(FlxG.width/2)) * 0.00001)), 
+    (1/80)*240*elapsed);
+
+    Mouse.cursor = cursor ?? "arrow";
 }
 
 function changeItem(change:Int, force:Bool)
@@ -120,16 +128,14 @@ function changeItem(change:Int, force:Bool)
     if (force && curSelected == change)
         return;
 
-    if (curSelected != -1)
-    {
-        var prevText:FlxText = options.members[curSelected];
-        prevText.alpha = 0.5;
+    if (curSelected != -1) {
+        var prevText = options.members[curSelected];
+        prevText.color = 0xFF7B7B7B;
     }
 
     if (force)
         curSelected = change;
-    else
-    {
+    else {
         curSelected += change;
 
         if (curSelected >= options.members.length)
@@ -138,11 +144,10 @@ function changeItem(change:Int, force:Bool)
 			curSelected = options.members.length - 1;
     }
 
-    if (curSelected != -1)
-    {
+    if (curSelected != -1) {
         FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
         var curText:FlxText = options.members[curSelected];   
-        curText.alpha = 1;
+        curText.color = 0xFFFFFF;
     }
 }
