@@ -24,9 +24,20 @@ function onPlayerMiss(event)
     if (event.noteType == "Life Note") {event.cancel(true); event.note.strumLine.deleteNote(event.note);}
 
 function onPlayerHit(event)
-    if (event.noteType == "Life Note") {
-        health += 0.4; 
-        event.showSplash = false; 
-        event.preventAnim();
-        FlxG.sound.play(Paths.sound('mechanics/health'),10);
-    }
+{
+    if (event.noteType != "Life Note") 
+        return;
+
+    health += 0.4; 
+    event.showSplash = false; 
+    event.preventAnim();
+
+    FlxG.sound.play(Paths.sound('mechanics/health'),10);
+
+    if (ps >= 4)
+        return;
+
+    ps++;
+    
+    psBar.animation.play(Std.string(ps) + " appear", true);
+}
