@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-800" icon="face" camx="-160" y="-1050" isGF="false" camy="350" color="#999999" flipX="true" isPlayer="true" gameOverChar="bf-blue" sprite="NERMALL_FALL">
+<character x="-450" icon="face" camx="-160" y="-1200" isGF="false" camy="350" color="#999999" flipX="true" isPlayer="true" gameOverChar="bf-blue" sprite="NERMALL_FALL">
 	<anim x="0" loop="true" y="0" fps="24" anim="NERMALL FALL IDLE" name="idle"/>
 	<anim x="5" loop="false" y="-19" fps="24" anim="NERMALL LEFT0" name="singLEFT"/>
 	<anim x="-8" loop="false" y="12" fps="24" anim="NERMALL DOWN" name="singDOWN"/>

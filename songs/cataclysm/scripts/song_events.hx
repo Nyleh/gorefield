@@ -66,8 +66,8 @@ function stepHit(step:Int) {
             }
             jonTrail.color = 0xFFB3B1D8;
             if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
-        case 1072:
-            FlxTween.tween(camHUD, {alpha: 1}, 1);
+        case 1070:
+            FlxTween.tween(camHUD, {alpha: 1}, 0.5);
         case 1588:
             videos[0].play(Assets.getPath(Paths.video("CINEMATIC_LAYER")));
             canPause = false;
@@ -147,7 +147,7 @@ function stepHit(step:Int) {
             camFollowChars = false; camFollow.setPosition(-50, -320);
 
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
-                spr.alpha = 0.25;
+                spr.alpha = 0.2;
             
             snapCam();
     }
