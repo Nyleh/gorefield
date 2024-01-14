@@ -14,6 +14,17 @@ function postCreate() {
     psBar.animation.addByPrefix('4 remove', 'LIVE 3 loose', 24, false);
     psBar.animation.addByPrefix('3 remove', 'LIVE 2 LOSE', 24, false);
     psBar.animation.addByPrefix('2 remove', 'LIVE 1 LOSE', 24, false);
+
+    // Playing the animation reverse for some reason doesn't call "finishCallback" :sob:
+    psBar.animation.addByIndices('4 appear', 'LIVE 3 loose', [for (i in 0...22) 21 - i] , "", 24, false);
+    psBar.animation.addByIndices('3 appear', 'LIVE 2 LOSE', [for (i in 0...21) 20 - i], "", 24, false);
+    psBar.animation.addByIndices('2 appear', 'LIVE 1 LOSE', [for (i in 0...22) 21 - i], "", 24, false);
+
+    psBar.animation.finishCallback = function(name)
+        {
+            if (name == "4 appear" && ps >= 4)
+                psBar.animation.play("4", true);
+        }
     psBar.scale.set(0.6, 0.6); psBar.updateHitbox();
     psBar.animation.play(Std.string(ps), true);
     psBar.cameras = [camHUD];
