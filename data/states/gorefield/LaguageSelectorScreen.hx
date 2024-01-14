@@ -64,17 +64,20 @@ function update(elapsed:Float)
 
     var overSomething:Bool = false;
     if (!selected_something) {
-        for (i=>option in options.members) {
-            if (FlxG.mouse.overlaps(option)) {
-                overSomething = true;
-                changeItem(option.ID, true);
-                
-                cursor = "button";
+        if (FlxG.mouse.justMoved)
+        {
+            for (i=>option in options.members) {
+                if (FlxG.mouse.overlaps(option)) {
+                    overSomething = true;
+                    changeItem(option.ID, true);
+                    
+                    cursor = "button";
+                }
             }
-        }
 
-        if (!overSomething)
-            changeItem(-1, true);
+            if (!overSomething)
+                changeItem(-1, true);
+        }
 
         for (i=>option in options.members)
             option.offset.y = ogOffset[i] + ((Math.sin(tottalTimer + (i*.8)) * 10));
@@ -109,7 +112,7 @@ function update(elapsed:Float)
         }
     }
 
-    // MARIO MADNESS ????????? -lunar
+    // MARIO MADNESS ????????? -lunar | OMG -EstoyAburridow
     FlxG.camera.scroll.x = FlxMath.lerp(FlxG.camera.scroll.x, (FlxG.mouse.screenX-(FlxG.width/2)) * 0.008, (1/30)*240*elapsed);
     FlxG.camera.scroll.y = FlxMath.lerp(FlxG.camera.scroll.y, (FlxG.mouse.screenY-6-(FlxG.height/2)) * 0.008, (1/30)*240*elapsed);
 
