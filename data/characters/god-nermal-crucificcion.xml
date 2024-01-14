@@ -1,0 +1,4 @@
+<!DOCTYPE codename-engine-character>
+<character x="-180" icon="face" camx="-160" y="350" isGF="false" camy="350" color="#999999" isPlayer="true" gameOverChar="bf-blue" sprite="NERMALL_CRUCIFICCION">
+	<anim x="0" loop="false" y="0" fps="24" anim="NERMALL CRUCIFICCION" name="start"/>
+</character>

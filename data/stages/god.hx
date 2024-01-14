@@ -12,6 +12,8 @@ public var particleSprite:FunkinSprite;
 public var particleShader:CustomShader;
 
 function create() {
+    FlxG.camera.bgColor = 0xff000000;
+
     comboGroup.x += 300;
     comboGroup.y += 300;
 

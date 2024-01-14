@@ -1,8 +1,8 @@
 <!DOCTYPE codename-engine-character>
 <character x="830" icon="face" camx="10" y="-180" isGF="false" camy="550" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="" sprite="GOD_BF_SANS">
 	<anim x="-5" loop="false" y="0" fps="24" anim="BF IDLE" name="idle"/>
-	<anim x="-66" loop="false" y="-4" fps="24" anim="BF LEFT" name="singLEFT"/>
-	<anim x="-15" loop="false" y="-26" fps="24" anim="BF DOWN" name="singDOWN"/>
-	<anim x="-46" loop="false" y="17" fps="24" anim="BF UP" name="singUP"/>
-	<anim x="17" loop="false" y="8" fps="24" anim="BF RIGHT" name="singRIGHT"/>
+	<anim x="19" loop="false" y="11" fps="24" anim="BF LEFT" name="singLEFT"/>
+	<anim x="-9" loop="false" y="-19" fps="24" anim="BF DOWN" name="singDOWN"/>
+	<anim x="-46" loop="false" y="22" fps="24" anim="BF UP" name="singUP"/>
+	<anim x="-55" loop="false" y="2" fps="24" anim="BF RIGHT" name="singRIGHT"/>
 </character>

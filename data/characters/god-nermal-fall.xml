@@ -1,12 +1,12 @@
 <!DOCTYPE codename-engine-character>
-<character x="-180" icon="face" camx="-160" y="350" isGF="false" camy="350" color="#999999" isPlayer="true" gameOverChar="bf-blue" sprite="NERMALL_FALL">
+<character x="-650" icon="face" camx="-160" y="-900" isGF="false" camy="350" color="#999999" flipX="true" isPlayer="true" gameOverChar="bf-blue" sprite="NERMALL_FALL">
 	<anim x="0" loop="true" y="0" fps="24" anim="NERMALL FALL IDLE" name="idle"/>
-	<anim x="5" loop="false" y="-19" fps="24" anim="NERMALL LEFT0" name="singLEFT"/>
+	<anim x="-34" loop="false" y="20" fps="24" anim="NERMALL LEFT0" name="singLEFT"/>
 	<anim x="-8" loop="false" y="12" fps="24" anim="NERMALL DOWN" name="singDOWN"/>
 	<anim x="18" loop="false" y="-4" fps="24" anim="NERMALL UP" name="singUP"/>
-	<anim x="-34" loop="false" y="20" fps="24" anim="NERMALL RIGHT" name="singRIGHT"/>
-	<anim x="49" loop="false" y="-6" fps="24" anim="NERMALL MISS LEFT" name="singLEFTmiss"/>
+	<anim x="5" loop="false" y="-19" fps="24" anim="NERMALL RIGHT" name="singRIGHT"/>
+	<anim x="-17" loop="false" y="37" fps="24" anim="NERMALL MISS LEFT" name="singLEFTmiss"/>
 	<anim x="30" loop="false" y="32" fps="24" anim="NERMALL MISS DOWN" name="singDOWNmiss"/>
 	<anim x="58" loop="false" y="13" fps="24" anim="NERMALL MISS UP" name="singUPmiss"/>
-	<anim x="-17" loop="false" y="37" fps="24" anim="NERMALL MISS RIGHT" name="singRIGHTmiss"/>
+	<anim x="49" loop="false" y="-6" fps="24" anim="NERMALL MISS RIGHT" name="singRIGHTmiss"/>
 </character>

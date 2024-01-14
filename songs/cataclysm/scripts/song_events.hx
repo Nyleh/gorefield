@@ -1,45 +1,46 @@
 import hxvlc.flixel.FlxVideo;
 import funkin.game.PlayState;
+import flixel.addons.effects.FlxTrail;
 
 var controlHealthAlpha:Bool = true;
 var curHealthAlpha:Float = 1;
 
-var video:FlxVideo;
+var videos:Array<FlxVideo> = [];
+
+function create() 
+{
+    for (path in ["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"])
+    {
+        video = new FlxVideo();
+        video.play(Assets.getPath(Paths.video(path)));
+        video.onEndReached.add(
+            function()
+            {
+                canPause = true;
+                startedCountdown = true;
+
+                startTimer = new FlxTimer();
+    
+                videos[0].dispose();
+                videos.shift();   
+
+                FlxG.camera.flash(FlxColor.WHITE);
+            }
+        );
+        video.stop();
+        videos.push(video);
+    }    
+}
 
 function onStartCountdown(event) 
 {
     event.cancel(true); 
 
-    video = new FlxVideo();
-    video.play(Assets.getPath(Paths.video("GODFIELD_INTRO")));
-    video.onEndReached.add(
-        function()
-        {
-            canPause = true;
-            startedCountdown = true;
-
-            startTimer = new FlxTimer();
-
-            video.dispose();
-        }
-    );
+    videos[0].play(Assets.getPath(Paths.video("GODFIELD_INTRO")));
 
     canPause = false;
 
     startSong();
-}
-
-function postCreate() 
-{
-    var precacheVideo:FlxVideo = new FlxVideo();
-    precacheVideo.play(Assets.getPath(Paths.video("GODFIELD_INTRO")));
-    precacheVideo.onEndReached.add(
-        function()
-        {
-            precacheVideo.dispose();
-        }
-    );
-    precacheVideo.stop();    
 }
 
 function update(elapsed:Float) {
@@ -52,6 +53,24 @@ function update(elapsed:Float) {
 
 function stepHit(step:Int) {
     switch (step){
+        case 1052:
+            FlxTween.tween(camHUD, {alpha: 0}, 0.5);
+        case 1059:
+            remove(jonTrail);
+            jonTrail = new FlxTrail(dad, null, 4, 10, 0.3, 0.0052);
+            jonTrail.beforeCache = dad.beforeTrailCache;
+            jonTrail.afterCache = () -> {
+                dad.afterTrailCache();
+                jonTrail.members[0].x += FlxG.random.float(-1, 4);
+                jonTrail.members[0].y += FlxG.random.float(-1, 4);
+            }
+            jonTrail.color = 0xFFB3B1D8;
+            if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
+        case 1072:
+            FlxTween.tween(camHUD, {alpha: 1}, 1);
+        case 1588:
+            videos[0].play(Assets.getPath(Paths.video("CINEMATIC_LAYER")));
+            canPause = false;
         case 1584:
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadIn});
         case 1632:
@@ -116,5 +135,20 @@ function stepHit(step:Int) {
             FlxTween.num(6, 0.2, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {chromatic.distortion = val;});
             FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
             FlxTween.num(0.2, 1.8, (Conductor.stepCrochet / 1000) * 5, {}, (val:Float) -> {bloom.dim = val;});
+        case 3536:
+            videos[0].play(Assets.getPath(Paths.video("GODFIELD_CINEMATIC_2")));
+            canPause = false;
+        case 3856:
+            stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 0;
+            stage.stageSprites["RAYO_DIVISOR"].alpha = stage.stageSprites["viento"].alpha = 1;
+            forceDefaultCamZoom = true;
+            defaultCamZoom = 0.7;
+
+            camFollowChars = false; camFollow.setPosition(-50, -320);
+
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                spr.alpha = 0.25;
+            
+            snapCam();
     }
 }
