@@ -32,28 +32,6 @@ function create(){
 	staticShader.speed = 20;
 	if (FlxG.save.data.static) FlxG.camera.addShader(staticShader);
 
-    bg.color = 0xFF3F3F3F;
-
-    for (spr in [boyfriend, stage.stageSprites["TV"], dad]) {
-        var newShader = new CustomShader("wrath");
-        newShader.uDirection = 0.;
-        newShader.uOverlayOpacity = 0.9;
-        newShader.uDistance = 21.;
-        newShader.uChoke = 10.;
-        newShader.uPower = spr == dad ? 0.1 : 1.0;
-
-        newShader.uShadeColor = [(26-25) / 255, (184-25) / 255, (73-25) / 255];
-        newShader.uOverlayColor = [21 / 255, 19 / 255, 63 / 255];
-    
-        var uv = spr.frame.uv;
-        newShader.applyRect = [uv.x, uv.y, uv.width, uv.height];
-
-		if (FlxG.save.data.wrath) spr.shader = newShader;
-        spr?.forceIsOnScreen = true;
-
-        wrathSprites.push(spr);
-    }
-
     stage.stageSprites["black"].visible = stage.stageSprites["black"].active = true;
     camHUD.alpha = 0;
 
@@ -66,15 +44,6 @@ function create(){
 	bulletsText.setFormat("fonts/pixelart.ttf", 32, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	bulletsText.borderSize = 4; bulletsText.alpha = 0;
     insert(members.indexOf(redOverlay)-1, bulletsText);
-}
-
-function draw(e) {
-	for (spr in wrathSprites) {
-        if (spr.shader == null) continue;
-
-        var uv = spr.frame.uv;
-        spr.shader.applyRect = [uv.x, uv.y, uv.width, uv.height];
-    }
 }
 
 var doHealthLerp:Bool = true;
@@ -119,23 +88,8 @@ function stepHit(step:Int) {
             FlxTween.tween(FlxG.camera, {zoom: 1.4}, (Conductor.stepCrochet / 1000) * 112);
             FlxG.camera.shake(0.0015, 999999);
         case 64: lerpGorefield = true; tottalTime = 0;
-        case 78: 
-            FlxTween.color(dad, (Conductor.stepCrochet / 1000) * 48, 0xFF20251F, 0xFF92B8A3);
-        case 98:
-            for (spr in wrathSprites) {
-                if (spr.shader == null) continue;
-                FlxTween.num(0.9, spr == dad ? .3 : .5, (Conductor.stepCrochet / 1000) * 36, {}, (val:Float) -> {
-				    spr.shader.uOverlayOpacity = val;
-			    });
-
-                if (spr == dad) continue;
-                FlxTween.num(1.0, .7, (Conductor.stepCrochet / 1000) * 38, {}, (val:Float) -> {
-				    spr.shader.uPower = val;
-			    });
-                FlxTween.num(21, 60, (Conductor.stepCrochet / 1000) * 38, {}, (val:Float) -> {
-				    spr.shader.uDistance = val;
-			    });
-            }
+        //case 78: 
+            //FlxTween.color(dad, (Conductor.stepCrochet / 1000) * 48, 0xFF20251F, 0xFF92B8A3);
         case 112:
             FlxTween.cancelTweensOf(FlxG.camera); 
             lerpCam = true; FlxG.camera.stopFX();
