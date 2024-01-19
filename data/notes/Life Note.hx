@@ -34,10 +34,5 @@ function onPlayerHit(event)
 
     FlxG.sound.play(Paths.sound('mechanics/health'),10);
 
-    if (ps >= 4)
-        return;
-
-    ps++;
-    
-    psBar.animation.play(Std.string(ps) + " appear", true);
+    addPS(1);
 }
