@@ -7,15 +7,19 @@ var dodgeCat:Character;
 
 function postCreate() 
 {
-	var precacheVideo:FlxVideo = new FlxVideo();
-	precacheVideo.play(Assets.getPath(Paths.video("somethingisComming")));
-	precacheVideo.onEndReached.add(
+	video = new FlxVideo();
+	video.load(Assets.getPath(Paths.video("somethingisComming")));
+	video.onEndReached.add(
 		function()
 		{
-			precacheVideo.dispose();
+			canPause = true;
+			startedCountdown = true;
+
+			startTimer = new FlxTimer();
+
+			video.dispose();
 		}
-	);
-	precacheVideo.stop();    
+	); 
 }
 
 function create()
@@ -55,20 +59,8 @@ function stepHit(step:Int)
 				fadeShit(1);
 			};
 			fadeShit(0);
-		case 1036:
-			video = new FlxVideo();
-			video.play(Assets.getPath(Paths.video("somethingisComming")));
-			video.onEndReached.add(
-				function()
-				{
-					canPause = true;
-					startedCountdown = true;
-
-					startTimer = new FlxTimer();
-
-					video.dispose();
-				}
-			);
+		case 1035:
+			video.play();
 
 			canPause = false;
 		case 1056:

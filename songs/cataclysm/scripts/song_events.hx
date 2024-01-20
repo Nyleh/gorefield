@@ -12,7 +12,7 @@ function create()
     for (path in ["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"])
     {
         video = new FlxVideo();
-        video.play(Assets.getPath(Paths.video(path)));
+        video.load(Assets.getPath(Paths.video(path)));
         video.onEndReached.add(
             function()
             {
@@ -27,7 +27,6 @@ function create()
                 FlxG.camera.flash(FlxColor.WHITE);
             }
         );
-        video.stop();
         videos.push(video);
     }    
 }
@@ -36,7 +35,7 @@ function onStartCountdown(event)
 {
     event.cancel(true); 
 
-    videos[0].play(Assets.getPath(Paths.video("GODFIELD_INTRO")));
+    videos[0].play();
 
     canPause = false;
 
@@ -69,7 +68,7 @@ function stepHit(step:Int) {
         case 1070:
             FlxTween.tween(camHUD, {alpha: 1}, 0.5);
         case 1588:
-            videos[0].play(Assets.getPath(Paths.video("CINEMATIC_LAYER")));
+            videos[0].play();
             canPause = false;
         case 1584:
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadIn});
@@ -136,7 +135,7 @@ function stepHit(step:Int) {
             FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
             FlxTween.num(0.2, 1.8, (Conductor.stepCrochet / 1000) * 5, {}, (val:Float) -> {bloom.dim = val;});
         case 3536:
-            videos[0].play(Assets.getPath(Paths.video("GODFIELD_CINEMATIC_2")));
+            videos[0].play();
             canPause = false;
         case 3856:
             stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 0;
