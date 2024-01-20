@@ -33,5 +33,5 @@ function onPlayerMiss(event)
 function onPlayerHit(event) 
     if (event.noteType == "Blue Note") {
         event.countAsCombo = event.showRating = event.showSplash = false; 
-        event.strumGlowCancelled = true; health -= FlxG.save.data.blue_hard ? 99999 : 2/3;
+        event.strumGlowCancelled = true; health -= FlxG.save.data.blue_hard ? 0.25 : 2/3;
     }
