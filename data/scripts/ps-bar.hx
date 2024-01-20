@@ -9,7 +9,7 @@ function postCreate()
 {
     ps = FlxG.save.data.ps_hard ? 2 : 4; FlxG.sound.play(Paths.sound('mechanics/ps'), 0); // Preload sound
 
-    psBar = new FlxSprite(230, 560);
+    psBar = new FlxSprite(1070, 610);
     psBar.frames = Paths.getFrames('mechanics/ps');
     psBar.animation.addByPrefix('4', 'LIVE 4 MAIN', 24, false);
     psBar.animation.addByPrefix('4 remove', 'LIVE 3 loose', 24, false);
@@ -46,8 +46,8 @@ function update(elapsed:Float)
         return;
 
     fullTime += elapsed;
-    psBar.x = lerp(psBar.x, 230 + (6*FlxMath.fastSin(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
-    psBar.y = lerp(psBar.y, 560 + (4*FlxMath.fastCos(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
+    psBar.x = lerp(psBar.x, 1070 + (6*FlxMath.fastSin(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
+    psBar.y = lerp(psBar.y, 610 + (4*FlxMath.fastCos(fullTime)), 1/4) + FlxG.random.float(0, ps == 1 ? .5 : .4);
     psBar.color = FlxColor.interpolate(psBar.color, ps == 1 ?0x6CFF6A6A : 0xFFFFC8C8, 1/14);
 
     psBarTrail.active = psBarTrail.visible = psBar.alpha > 0.01;
