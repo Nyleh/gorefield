@@ -15,6 +15,8 @@ var missSubtitle:String = "Convince Him.";
 var missSubtitleText:FunkinText;
 var missesLeftText:FunkinText;
 
+var isNocturnalMeow:Bool = PlayState.instance.SONG.meta.name == 'Nocturnal Meow';
+
 var maxMisses:Int = 4;
 function create() 
 {
@@ -22,7 +24,7 @@ function create()
     comboGroup.y += 300;
 
     if (FlxG.save.data.spanish)
-        missSubtitle = "Convencelo.";
+        missSubtitle = "Convéncelo.";
 
     gameOverSong = "gameOvers/cryfield/Gorefield_Gameover_Cryfield";
 	retrySFX = "gameOvers/cryfield/Continue";
@@ -39,7 +41,7 @@ function create()
     add(rain2);
     add(stage.stageSprites["black_overlay"]);
 
-    if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
+    if (isNocturnalMeow)
     {
         maxMisses = 12;
         if (FlxG.save.data.spanish) {
@@ -160,7 +162,7 @@ function createHealthbar()
                 gorefieldiconP2 = icon;
                 gorefieldiconP2.y = 52;
                 gorefieldiconP2.flipX = true;
-                if (PlayState.instance.SONG.meta.name == 'Nocturnal Meow')
+                if (isNocturnalMeow)
                     gorefieldiconP2.setPosition(1165, 3);
         }
         icon.scale.set(0.75, 0.75);
@@ -168,7 +170,9 @@ function createHealthbar()
         add(icon);
     }
 }
-function showPopUp(intro:Bool,?misses:Int){
+
+public function showPopUp(intro:Bool, ?misses:Int)
+{
     missesLeftText.text = 'MISSES LEFT: ' + (maxMisses - (misses != null ? misses : 0));
 
     FlxTween.cancelTweensOf(missesLeftText);
@@ -182,7 +186,11 @@ function showPopUp(intro:Bool,?misses:Int){
     });
 }
 
-function onSongStart(){
+function onSongStart()
+{
+    if (isNocturnalMeow)
+        return;
+
     showPopUp(true);
 }
 
@@ -211,7 +219,7 @@ function postCreate()
         boyfriend.setPosition(1450,600);
         defaultCamZoom = 1;
         strumLineDadZoom = 0.8;
-        strumLineBfZoom = 1.5;
+        strumLineBfZoom = 2.1;
         snapCam();
     }
 }
