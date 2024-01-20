@@ -138,6 +138,8 @@ function stepHit(step:Int) {
             videos[0].play();
             canPause = false;
         case 3856:
+            boyfriend.playAnim("idle", true, "DANCE");
+
             stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 0;
             stage.stageSprites["RAYO_DIVISOR"].alpha = stage.stageSprites["viento"].alpha = 1;
             forceDefaultCamZoom = true;
