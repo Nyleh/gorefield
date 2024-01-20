@@ -1,29 +1,25 @@
 import hxvlc.flixel.FlxVideo;
 
-var videos:Array<FlxVideo> = [];
+var video:FlxVideo;
 
 function create() 
 {
-    for (path in ["OH_NO_AGAIN"])
-    {
-        video = new FlxVideo();
-        video.load(Assets.getPath(Paths.video(path)));
-        video.onEndReached.add(
-            function()
-            {
-                canPause = true;
-                startedCountdown = true;
+    video = new FlxVideo();
+    video.load(Assets.getPath(Paths.video("OH_NO_AGAIN")));
+    video.onEndReached.add(
+        function()
+        {
+            canPause = true;
+            startedCountdown = true;
 
-                startTimer = new FlxTimer();
-    
-                videos[0].dispose();
-                videos.shift();   
+            startTimer = new FlxTimer();
 
-                FlxG.camera.flash(0xffD4DE8F);
-            }
-        );
-        videos.push(video);
-    }    
+            video.dispose();
+            video.shift();   
+
+            FlxG.camera.flash(0xffD4DE8F);
+        }
+    );
 
     gf.scrollFactor.set(1, 1);
     gf.visible = false;
@@ -34,7 +30,7 @@ function stepHit(step:Int)
     switch (step) 
     {
         case 832:
-            videos[0].play();
+            video.play();
             canPause = false;
         case 864:
             gf.visible = true;
