@@ -13,4 +13,8 @@
 		<property name="zoomFactor" type="float" value="0"/>
 		<property name="alpha" type="float" value="0.75"/>
 	</sprite>
+	<sprite name="lightning_bolt" x="200" y="-170" sprite="RAYOS" antialiasing="true" scrollx="0" scrolly="0" scale="2">
+		<anim name="lightning_bolt" anim="RAYO 2" loop="false"/>
+		<property name="visible" type="bool" value="false"/>
+	</sprite>
 </stage>

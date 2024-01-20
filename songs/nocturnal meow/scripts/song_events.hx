@@ -34,5 +34,17 @@ function stepHit(step:Int)
         case 1232:
             rain.visible = false;
             rain2.visible = scaryTime = true;
+
+            FlxG.camera.flash(0x808B3537, 1);
+
+            var lightning_bolt:FlxSprite = stage.stageSprites["lightning_bolt"];
+            lightning_bolt.visible = true;
+            lightning_bolt.animation.play("lightning_bolt");
+            lightning_bolt.animation.finishCallback = 
+                function(_)
+                {
+                    lightning_bolt.animation.stop();
+                    lightning_bolt.visible = lightning_bolt.active = false;
+                }
     }
 }
