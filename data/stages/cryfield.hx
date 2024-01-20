@@ -221,5 +221,11 @@ function postCreate()
         strumLineDadZoom = 0.8;
         strumLineBfZoom = 2.1;
         snapCam();
+
+        camHUD.alpha = 0;
+        stage.stageSprites["black"].visible = true;
+
+        FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, 5, {startDelay: 5});
+        FlxTween.tween(camHUD, {alpha: 1}, 5, {startDelay: 5});
     }
 }
