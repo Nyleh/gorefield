@@ -1,6 +1,8 @@
 import openfl.Lib;
 import funkin.backend.utils.WindowUtils;
 
+static var deathCounter:Int = 0;
+
 var fakeCamFollow:FlxSprite;
 var replaceCamera:Bool = false;
 var daCharacter:Character;
@@ -67,6 +69,9 @@ function create()
             position[0].y = camPos.y + daCharacter.y; 
     }
 
+    if (!FlxG.save.data.baby)
+        deathCounter++;
+
     fakeCamFollow = new FlxSprite(position[0].x, position[0].y).makeSolid(1, 1, 0xFFFFFFFF);
     fakeCamFollow.visible = false;
     add(fakeCamFollow);
@@ -106,6 +111,13 @@ function update(elapsed:Float)
     if(replaceCamera){
         FlxG.camera.target = fakeCamFollow;
         replaceCamera = false;
+    }
+
+    if (!FlxG.save.data.baby && deathCounter == 3 && controls.ACCEPT && !isEnding)
+    {
+        isEnding = true;
+        deathCounter = 0;
+        FlxG.switchState(new ModState("gorefield/BebeRepeatAfterMem"));
     }
 
     if (createNewCharacter)
