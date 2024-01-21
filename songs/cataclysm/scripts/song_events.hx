@@ -28,18 +28,21 @@ function create()
             }
         );
         videos.push(video);
-    }    
+    } 
 }
 
 function onStartCountdown(event) 
 {
     event.cancel(true); 
 
-    videos[0].play();
+    new FlxTimer().start(0.001, function(_)
+    {
+        videos[0].play();
 
-    canPause = false;
+        canPause = false;
 
-    startSong();
+        startSong();
+    });
 }
 
 function update(elapsed:Float) {
