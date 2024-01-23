@@ -15,7 +15,6 @@ function create()
             startTimer = new FlxTimer();
 
             video.dispose();
-            video.shift();   
 
             FlxG.camera.flash(0xffD4DE8F);
         }
@@ -35,9 +34,7 @@ function stepHit(step:Int)
         case 864:
             gf.visible = true;
             
-            dad.x = -1200;
-        case 870:
-            FlxTween.tween(dad, { x: -500}, 1);
+            dad.x = -500;
         case 1662:
             gf.visible = false;
     }

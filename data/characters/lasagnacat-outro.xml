@@ -1,4 +1,4 @@
 <!DOCTYPE codename-engine-character> <!-- Made with WizardMantis's Character Converter -->
 <character x="600" y="-520" icon="icon-lasagnacat-pixel" flipX="false" isPlayer="null" camx="-610" camy="540" holdTime="6.1" scale="0.4" color="#346756" antialiasing="false">
-	<anim name="intro" anim="LASAGNA CAT RUN OUTRO" fps="24" loop="false" x="0" y="0"/>
+	<anim name="outro" anim="LASAGNA CAT RUN OUTRO" fps="24" loop="false" x="0" y="0"/>
 </character>
