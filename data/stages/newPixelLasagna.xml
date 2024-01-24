@@ -8,9 +8,9 @@
 	</countdown>
 	<sprite name="floor" x="0" y="0" sprite="Lasagna_Boy_Stage_Floor" antialiasing="false" scrollx="1" scrolly="1" scale="5"/>
 	<sprite name="walls" x="0" y="0" sprite="Lasagna_Boy_Stage_Walls" antialiasing="false" scrollx="1" scrolly="1" scale="5"/>
-	<opponent x="-490" y="-150" camxoffset="109.5" camyoffset="-140"/>
 	<gf x="0" y="-190" camxoffset="68.5" camyoffset="-310"/>
 	<player x="170" y="-545" camxoffset="68.5" camyoffset="-310"/>
+	<opponent x="-490" y="-150" camxoffset="109.5" camyoffset="-140"/>
     <solid name="nonblack" x="-640" y="-360" width="2560" height="1440" color="0x527F3A">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="scrollFactor.y" type="float" value="0"/>

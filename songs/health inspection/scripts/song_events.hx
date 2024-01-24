@@ -35,7 +35,15 @@ function stepHit(step:Int)
             gf.visible = true;
             
             dad.x = -500;
+        case 1652:
+            camFollowChars = false;
+        case 1653:
+            FlxTween.tween(dad, {x: 800}, 0.8);
         case 1662:
+            FlxTween.cancelTweensOf(dad);
+            camFollowChars = true;
+
             gf.visible = false;
+            dad.x = -490;
     }
 }
