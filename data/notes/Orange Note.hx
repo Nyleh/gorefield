@@ -36,5 +36,12 @@ function postCreate()
 function onPlayerHit(event)
     if (event.noteType == "Orange Note") {event.showSplash = false; event.strumGlowCancelled = true;}
 
+
 function onPlayerMiss(event)
-    if (event.noteType == "Orange Note") {trace(health); health -= FlxG.save.data.orange_hard ? 0.25 : 2/3; trace(health); event.cancel(true);}
+    if (event.noteType == "Orange Note") 
+    {
+        health -= FlxG.save.data.orange_hard ? 0.25 : 2/3;
+
+        event.note.strumLine.deleteNote(event.note);
+        event.cancel(true);
+    }
