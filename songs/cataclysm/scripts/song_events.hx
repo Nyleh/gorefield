@@ -19,7 +19,8 @@ function create()
                 canPause = true;
                 startedCountdown = true;
 
-                startTimer = new FlxTimer();
+                if (startTimer == null)
+                    startTimer = new FlxTimer();
     
                 videos[0].dispose();
                 videos.shift();   

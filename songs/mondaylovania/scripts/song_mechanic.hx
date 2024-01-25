@@ -1,7 +1,14 @@
 var strumColors:Array<Int> = [];
 var strumColorMulti:Float = 2;
 
-function update(elapsed:Float) {
+function create()
+{
+    if (FlxG.save.data.baby)
+        __script__.didLoad = __script__.active = false;
+}
+
+function update(elapsed:Float) 
+{
     strumColors = [0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF,0xFFFFFFFF];
         strumLines.members[1].notes.forEach(function (note) {
             if (note.strumTime > (Conductor.songPosition - (hitWindow * note.latePressWindow * 0.2))

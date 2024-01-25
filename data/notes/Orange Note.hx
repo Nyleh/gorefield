@@ -1,12 +1,13 @@
 function onNoteCreation(event) {
-    if (event.noteType != "Orange Note") return;
-    event.cancel(true); // stop continued calls to other scripts
-
-    if (FlxG.save.data.baby) {
-        event.note.strumTime -= 999999;
-        event.note.exists = event.note.active = event.note.visible = false;
+    if (FlxG.save.data.baby) 
+    {
+        event.noteType = null;
+        event.noteSprite = "game/notes/sans";
         return;
     }
+
+    if (event.noteType != "Orange Note") return;
+    event.cancel(true); // stop continued calls to other scripts
 
     event.note.frames = Paths.getFrames(event.noteSprite);
     switch(event.strumID % 4) {
@@ -24,6 +25,12 @@ function onNoteCreation(event) {
 
     event.note.latePressWindow *= FlxG.save.data.orange_hard ? 0.3 : 0.5; 
     event.note.earlyPressWindow *= FlxG.save.data.orange_hard ? 0.3 : 0.5;
+}
+
+function postCreate()
+{
+    if (FlxG.save.data.baby)
+        __script__.didLoad = __script__.active = false;
 }
 
 function onPlayerHit(event)
