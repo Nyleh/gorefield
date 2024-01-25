@@ -11,39 +11,132 @@ var descText:FlxText;
 var descText2:FlxText;
 var descTextName:FlxText;
 
-var credits:Array<Array<String>> = [
-	// Name's - Role - Random Description
-	["Jloor", "Director, Coder", "Tu Jloor Favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador Clasifica al Mundial"],
-	["Zero Artist", "Director, Artist, and Pixel Artist", "Por su culpa el mod se retrasó 2 años (No escuchaste la canción?)"],
-	["BitfoxOriginal", "Co Director, Musician, SFX Designer, Voice Actor [Lasagna Boy y Gorefield], Pixel Artist and Charter", "Sacrifiqué mucho tiempo de mi vida (Espera que valiera la pena)"],
-	["Dathree_O", "Artist", "Entró y salió varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"],
-	["JoaDash", "Pixel Artist", "Tic tac, casi se te va el tren"],
-	["Ani Manny", "Artist", "Si algunos íconos estaban animados, es gracias a él"],
-	["Uri4n", "Artist", "Jon, llevame contigo"],
-	["ZeuzMoons", "Pixel Artist", "Yo salvé el pixel art"],
-	["Lunar Cleint", "Main Coder", "hi guys its me lunar de Todos los Tiempos (Messi)"],
-	["Lean", "Coder, Musician", "ummmm yeah i coded a lot for the mod"],
-	["EstoyAburridow", "Coder", "Jueguen Celeste"],
-	["Ne_Eo", "Coder", "Why is the menu not centered?"],
-	["Nexus Moon", "Musician", "Experto en megalovanias, licenciado"],
-	["AlexR", "Musician", "El que se murió (Nunca regreso y no sé que hace aquí)"],
-	["Awe", "Musician", "Es fan de Steven Universe? (Roses and Quartzs = Rose Quartz)"],
-	["Deadshot", "Charter", "Solo iba a chartear una canción y charteó casi todo el mod"],
-	["Tok", "Charter", "Si no fuera porque Bitfox re hizo las canciones 5 veces, hubira tnido más trabajo"],
-	["Trevent", "Charter", "Llego a salvar a Deadshot de su lecho de muerte"],
-	["KingFox", "Voice Actor [Godfield y Jon psicópata]", "El tipo que hizo casi todas las voces en Inner Mirror (Jueguen Inner Mirror)"],
-	["SpringXy", "Voice Actor [Arlene y Liz]", "Adios al mundo"],
-	["Lumpy Touch", "Gorefield Animation Creator", "The Lumpiest of Touches"],
-	["William Burke", "Original Gorefield Designer", "The origin of Gorefield (I think)"],
-	["Jars Drawings", "Original Ultra Gorefield Designer", "Sheesh"],
-	["Omega Black Art", "Original Ultra Gorefield Designer", "Omega Art!!!!"],
-	["Aytanner", "Original Mondaylovania Musician", "El Undertale"],
-	["Cartoon Cat Team", "Cartoon Cat Team", "Hey hey hey skidibi, no digas toilet"]
+var credits:Array<Array<Dynamic>> = [
+	// Name's - Role[EN, ES] - Random Description[EN, ES]
+	["Jloor",
+		["Director, Coder", "Director, Coder"], 
+		["Your favorite Jloor! (Zero, you should kill yourself, now! Peruvian chamaco), Please Ecuador qualify for the World Cup",
+		"Tu Jloor favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador clasifica al Mundial"]
+	],
+	["Zero Artist",
+		["Director, Artist and Pixel Artist", "Director, Artista y Artista Pixel"], 
+		["Because of him the mod was delayed 2 years (Didn't you hear the song?)", 
+		"Por su culpa el mod se retraso 2 años (No escuchaste la cancion?)"]
+	],
+	["BitfoxOriginal", 		
+		["Co Director, Musician, SFX Designer, Voice Actor (Lasagna Boy and Gorefield), Pixel Artist and Charter",
+		"Co Director, Musico, Diseñador de SFX, Actor de Voz (Lasagna Boy y Gorefield), Artista Pixel y Charter"], 
+		["I sacrificed a lot of time of my life (Hope it was worth it)", 
+		"Sacrifique mucho tiempo de mi vida (Espera que valiera la pena)"]
+	],
+	["Dathree_O", 			
+		["Artist", "Artista"], 
+		["He entered and left several times (Like a Minecraft villager [Because he enters and leaves the house all the time])",
+		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"]
+	],
+	["JoaDash",
+		["Pixel Artist", "Artista Pixel"], 
+		["Tic tac, you almost didn't catch the train", "Tic tac, casi se te va el tren"]
+	],
+	["Ani Manny",
+		["Artist", "Artista"], 
+		["If some icons were animated it is thanks to him", "Si algunos iconos estaban animados, es gracias a el"]
+	],
+	["Uri4n",
+		["Artist", "Artista"], 
+		["Jon, take me with you", "Jon, llevame contigo"]
+	],
+	["ZeuzMoons",
+		["Pixel Artist", "Artista Pixel"], 
+		["I saved pixel art", "Yo salve el pixel art"]
+	],
+	["Lunar Cleint", 		
+		["Main Coder", "Coder Principal"], 
+		["hola chicos soy yo lunar of All Times (Messi)", "hi guys its me lunar de Todos los Tiempos (Messi)"]
+	],
+	["Lean",
+		["Coder, Musician", "Coder, Musico"], 
+		["ummmm si yo codifique una banda para el mod", "ummmm yeah i coded a lot for the mod"]
+	],
+	["EstoyAburridow", 		
+		["Coder", "Coder"], 
+		["Play Celeste", "Jueguen Celeste"]
+	],
+	["Ne_Eo", 				
+		["Coder", "Coder"], 
+		["¿Por que el menu no esta centrado?", "Why is the menu not centered?"]
+	],
+	[
+		"Nexus Moon", 			
+		["Musician", "Musico"], 
+		["Expert in megalovanias, licensed", "Experto en megalovanias, licenciado"]
+	],
+	["AlexR",
+		["Musician", "Musico"], 
+		["The one who died (He never came back and I don't know what he's doing here)", 
+		"El que se murio (Nunca regreso y no se que hace aqui)"]
+	],
+	[
+		"Awe",
+		["Musician", "Musico"], 
+		["Is a fan of Steven Universe? (Roses and Quartzs = Rose Quartz)", "Es fan de Steven Universe? (Roses and Quartzs = Rose Cuarzo)"]
+	],
+	[
+		"Deadshot", 			
+		["Charter", "Charter"], 
+		["He was only going to chart one song and he charted most of the mod.", 
+		"Solo iba a chartear una cancion y charteo casi todo el mod"]
+	],
+	[
+		"Tok",
+		["Charter", "Charter"], 
+		["If it wasn't for Bitfox redoing the songs 5 times, would had more work to do.", 
+		"Si no fuera porque Bitfox re hizo las canciones 5 veces, hubira tnido mas trabajo"]
+	],
+	["Trevent",
+		["Charter", "Charter"], 
+		["Arrived to save Deadshot from his deathbed", "Llego a salvar a Deadshot de su lecho de muerte"]
+	],
+	["KingFox",
+		["Voice Actor (Godfield and Psychopathic Jon)", "Actor de Voz (Godfield y Jon Psicopata)"], 
+		["The guy who did almost all the voices in Inner Mirror (Play Inner Mirror)",
+		"El tipo que hizo casi todas las voces en Inner Mirror (Jueguen Inner Mirror)"]
+	],
+	["SpringXy",
+		["Voice Actor (Arlene and Liz)", "Actor de Voz (Arlene y Liz)"], 
+		["Goodbye To a World", "Adios Al Mundo"]
+	],
+	["Lumpy Touch",
+		["Gorefield Animation Creator", "Creador de la Animacion de Gorefield"], 
+		["The Lumpiest of Touches", "The Lumpiest of Touches"]
+	],
+	["William Burke", 		
+		["Original Gorefield Designer", "Diseñador Original de Gorefield"], 
+		["El origen de Gorefield (Creo)", "The origin of Gorefield (I think)"]
+	],
+	["Jars Drawings",
+		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
+		["Sheesh", "Sheesh"]
+	],
+	["Omega Black Art", 	
+		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
+		["Omega Arte!!!!", "Omega Art!!!!"]
+	],
+	["Aytanner",
+		["Original Mondaylovania Musician", "Musico Original de Mondaylovania"], 
+		["The Undertale", "El Undertale"]
+	],
+	["Cartoon Cat Team", 	
+		["Cartoon Cat Team", "Cartoon Cat Team"], 
+		["Hey hey hey skidibi, no digas toilet", "Hey hey hey skidibi, no digas toilet"]
+	]
 ];
 
 var camFollow:FlxObject;
 var camFollowPos:FlxObject;
 var camFollowXOffset:Float;
+
+var language:Int = FlxG.save.data.spanish ? 1 : 0;
 
 var iconYArray:Array<Float> = []; //intro stuff
 
@@ -90,13 +183,13 @@ function create()
 	FlxG.camera.follow(camFollowPos, null, 1);
 
 	descText = new FlxText(32, 10, FlxG.width, "", 19, true);
-	descText.setFormat("fonts/pixelart.ttf", 30, FlxColor.WHITE, "center");
+	descText.setFormat("fonts/Harbinger_Caps.otf", 30, FlxColor.WHITE, "center");
 	descText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 6, 100);
 	descText.scrollFactor.set();
 	add(descText);
 
 	descTextName = new FlxText(32, 620, FlxG.width, "", 19, true);
-	descTextName.setFormat("fonts/pixelart.ttf", 50, FlxColor.WHITE, "center");
+	descTextName.setFormat("fonts/Harbinger_Caps.otf", 50, FlxColor.WHITE, "center");
 	descTextName.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 5, 50);
 	descTextName.scrollFactor.set();
 	add(descTextName);
@@ -161,19 +254,19 @@ function changeSelection(change:Int)
 	}
 
 	var creditName:String = credits[curSelected][0];
-	var creditRole:String = credits[curSelected][1];
-	var creditDescription:String = credits[curSelected][2];
+	var creditRole:String = credits[curSelected][1][language];
+	var creditDescription:String = credits[curSelected][2][language];
 
 	camFollowXOffset = creditName == "Ne_Eo" ? 35 : 0;
 
 	descText.text = creditRole;
 	descText2.text = creditDescription;
 	if(descText2.text.length > 55){
-		descText2.setFormat("fonts/pixelart.ttf", 20, 0xF2C0AC, "center");
+		descText2.setFormat("fonts/Harbinger_Caps.otf", 20, 0xF2C0AC, "center");
 		descText2.y = descTextName.y + 55;
 	}
 	else{
-		descText2.setFormat("fonts/pixelart.ttf", 30, 0xF2C0AC, "center");
+		descText2.setFormat("fonts/Harbinger_Caps.otf", 30, 0xF2C0AC, "center");
 		descText2.y = descTextName.y + 50;
 	}
 	descText2.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 3.2, 50);
