@@ -264,7 +264,7 @@ function goToItem() {
 			});
 		case "freeplay": FlxG.switchState(new StoryMenuState());
 		case "options": FlxG.switchState(new OptionsMenu());
-		case "credits": FlxG.switchState(new ModState("gorefield/CreditsState"));
+		case "credits": FlxG.switchState(new ModState("gorefield/CreditsScreen"));
 		default: selectedSomthin = false;
 	}
 }
