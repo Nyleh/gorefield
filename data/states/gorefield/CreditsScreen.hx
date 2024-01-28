@@ -44,11 +44,11 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Uri4n",
 		["Artist", "Artista"], 
-		["Jon, take me with you", "Jon, llevame contigo"]
+		["Hello im colombian people, nice to meet you", "Los sueños se cumplen chabales, solo que el mio no se a cumplido"]
 	],
 	["ZeuzMoons",
 		["Pixel Artist", "Artista Pixel"], 
-		["I saved pixel art", "Yo salve el pixel art"]
+		["I saved pixel art, this one goes for you Guiller", "Yo salve el pixel art, te la dedico Guilller"]
 	],
 	["Lunar Cleint", 		
 		["Main Coder", "Coder Principal"], 
