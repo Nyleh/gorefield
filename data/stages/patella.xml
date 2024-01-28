@@ -2,9 +2,9 @@
 <stage zoom="0.55" name="patella" folder="stages/patella/" noteSkin="sans" splashSkin="default" healthBarColor="gray">
 	<countdown>
 		<three sound="sansfield/3"/>
-		<two sprite="game/ready" sound="sansfield/2"/>
-		<one sprite="game/set" sound="sansfield/1"/>
-		<go sprite="game/go" sound="sansfield/Blast"/>
+		<two sprite="game/ready's/patella/Ready" sound="sansfield/2"/>
+		<one sprite="game/ready's/patella/Set" sound="sansfield/1"/>
+		<go sprite="game/ready's/patella/Monday" sound="sansfield/Blast"/>
 	</countdown>
 	<sprite name="patellaBG1" x="0" y="0" sprite="sansfield_cave" antialiasing="true" scrollx="0.6" scrolly="0.6" scale="1.5"/>
 	<sprite name="ice" x="-900" y="400" sprite="sansfield_ice" antialiasing="true" scrollx="0.8" scrolly="1" scale="1.5"/>

@@ -2,9 +2,9 @@
 <stage zoom="0.6" name="sans" folder="stages/patella/" opponentZoom="0.6" playerZoom="0.65" gfZoom="1.1" noteSkin="sans" splashSkin="default" healthBarColor="gray">
 	<countdown>
 		<three sound="sansfield/3"/>
-		<two sprite="game/ready" sound="sansfield/2"/>
-		<one sprite="game/set" sound="sansfield/1"/>
-		<go sprite="game/go" sound="sansfield/Blast"/>
+		<two sprite="game/ready's/patella/Ready" sound="sansfield/2"/>
+		<one sprite="game/ready's/patella/Set" sound="sansfield/1"/>
+		<go sprite="game/ready's/patella/Monday" sound="sansfield/Blast"/>
 	</countdown>
 	<opponent x="440" y="-520" camxoffset="186" camyoffset="0"/>
 	<player x="830" y="-130" camxoffset="-70" camyoffset="-60"/>
