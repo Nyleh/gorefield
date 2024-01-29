@@ -40,7 +40,7 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Ani Manny",
 		["Artist", "Artista"], 
-		["If some icons were animated it is thanks to him", "Si algunos iconos estaban animados, es gracias a el"]
+		["If some icons were animated, it is thanks to him", "Si algunos iconos estaban animados, es gracias a el"]
 	],
 	["Uri4n",
 		["Artist", "Artista"], 
@@ -52,11 +52,11 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Lunar Cleint", 		
 		["Main Coder", "Coder Principal"], 
-		["hola chicos soy yo lunar of All Times (Messi)", "hi guys its me lunar de Todos los Tiempos (Messi)"]
+		["hi guys its me lunar de Todos los Tiempos (Messi)", "hola chicos soy yo lunar of All Times (Messi)"]
 	],
 	["Lean",
 		["Coder, Musician", "Coder, Musico"], 
-		["ummmm si yo codifique una banda para el mod", "ummmm yeah i coded a lot for the mod"]
+		["ummmm yeah i coded a lot for the mod", "ummmm si yo codifique una banda para el mod"]
 	],
 	["EstoyAburridow", 		
 		["Coder", "Coder"], 
@@ -64,7 +64,7 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Ne_Eo", 				
 		["Coder", "Coder"], 
-		["¿Por que el menu no esta centrado?", "Why is the menu not centered?"]
+		["Why is the menu not centered?", "¿Por que el menu no esta centrado?"]
 	],
 	[
 		"Nexus Moon", 			
@@ -112,7 +112,7 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["William Burke", 		
 		["Original Gorefield Designer", "Diseñador Original de Gorefield"], 
-		["El origen de Gorefield (Creo)", "The origin of Gorefield (I think)"]
+		["The origin of Gorefield (I think)", "El origen de Gorefield (Creo)"]
 	],
 	["Jars Drawings",
 		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
@@ -120,7 +120,7 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Omega Black Art", 	
 		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
-		["Omega Arte!!!!", "Omega Art!!!!"]
+		["Omega Art!!!!", "Omega Arte!!!!"]
 	],
 	["Aytanner",
 		["Original Mondaylovania Musician", "Musico Original de Mondaylovania"], 
