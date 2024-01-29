@@ -23,9 +23,8 @@ function postCreate()
     staticShader = new CustomShader("tvstatic");
 	staticShader.time = 0; staticShader.strength = 0.3;
 	staticShader.speed = 20;
-	if (FlxG.save.data.static){
+	if (FlxG.save.data.static)
         FlxG.camera.addShader(staticShader);
-    }
 }
 
 function tweenCamera(in:Bool){
@@ -88,7 +87,11 @@ function update(elapsed){
 
     FlxG.camera.angle = lerp(FlxG.camera.angle, 0, .1);
     camHUD.angle = lerp(camHUD.angle, 0, .1);
-    staticShader.time = totalTime;
+
+
+    if (FlxG.save.data.static)
+        staticShader.time = totalTime;
+    
     if (!FlxG.save.data.vhs)
         return;
     vhs.time = totalTime;

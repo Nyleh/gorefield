@@ -39,10 +39,7 @@ var gorefield:FlxSprite;
 var vigentte:FlxSprite;
 
 var keyCombos:Map<String, Void->Void> = [
-	"PENK" => function () penk(),
-	"PENKA" => function () penk(),
-	"PENKR" => function () penk(),
-	"PENKARU" => function () penk(),
+	"penkaru" => function () penk(),
 	"TAE" => function () meme("t"),
 	"NIFFIRG" => function () meme("niffirgflumbo"),
 	"TANUKI" => function () meme("irl"),
@@ -369,13 +366,4 @@ function penk() {
 			FlxG.switchState(new ModState("gorefield/easteregg/Penkaru"));
 		}});
 	});
-}
-
-function meme(videoS:String) {
-	selectedSomthin = true; FlxG.sound.music.volume = 0;
-
-	video = new FlxVideo();
-    video.onEndReached.add(function () {video.dispose(); selectedSomthin = false; FlxG.sound.music.volume = 1;});
-    video.play(Assets.getPath(Paths.video(videoS)));
-	add(video);
 }

@@ -11,7 +11,8 @@ function create() {
 
     video = new FlxVideo();
     video.onEndReached.add(end);
-    video.play(Assets.getPath(Paths.video("PENKARU GRIDDY")));
+    video.load(Assets.getPath(Paths.video("PENKARU GRIDDY")));
+    video.play();
 
     oldVolume = FlxG.sound.volume;
     FlxG.sound.changeVolume(2);
@@ -28,7 +29,8 @@ function end() {
     NativeAPI.showMessageBox("JK :P", "Thanks for playing the mod penk :)\n                         -lunar & lean & gorefield team", 0x00000000);
 
     video.dispose();
-    FlxG.switchState(new MainMenuState());
+    FlxG.switchState(new StoryMenuState());
+    FlxG.sound.music.volume = 1;
 
     FlxG.sound.volume = oldVolume;
     FlxG.sound.showSoundTray(true);

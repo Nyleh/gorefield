@@ -13,6 +13,8 @@ import StringTools;
 import openfl.ui.Mouse;
 import openfl.geom.Rectangle;
 import openfl.desktop.Clipboard;
+import hxvlc.flixel.FlxVideo;
+import funkin.backend.MusicBeatState;
 
 var canMove:Bool = true;
 
@@ -73,7 +75,7 @@ var weekDescs:Array<String> = [
 	"????????????????????????????????????????????",
 	"Honk Honk...",
 	"A Feline Meeting...",
-	"Extra stuff"
+	"Extra stuff..."
 ];
 
 // SPANISH - Jloor 
@@ -491,7 +493,7 @@ function update(elapsed:Float) {
 			cursor = "button";
 			if (FlxG.mouse.justReleased) {
 				codesButton.animation.play("press", true);
-				if (codes.contains(codesText.text))
+				if (codes.exists(codesText.text))
 					selectCode();
 				else incorrectCode();
 			}
@@ -851,7 +853,8 @@ function changeSong(change:Int) {
 	freeplayMenuText.y = scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
-function goToSong() {
+function goToSong() 
+{
 	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
     PlayState.loadSong(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", false, false);
 	PlayState.isStoryMode = PlayState.chartingMode = false; // Just incase cause people see cutscenes for some reason
@@ -930,34 +933,105 @@ function onTextInput(text:String):Void
 	codesSound.play(true);
 }
 
-var codes:Array<String> = ["TAKE ME", "LYMAN", "LASAGNA", "CATNIP", "FULLCAT"];
+var CodesFunctions:{} = 
+{
+	penk: function() 
+	{
+		new FlxTimer().start(0.7, function(tween) 
+		{
+			var penkProgress:Int = tween.loops - tween.loopsLeft;
+
+			FlxG.sound.play(Paths.sound("vineboom"));
+			FlxG.sound.music.volume -= 0.25;
+		
+			var newSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/wow i love easter what about you/penkarue (" + Std.string(penkProgress) + ")"));
+			newSprite.updateHitbox(); newSprite.antialiasing = true; newSprite.alpha = 0; newSprite.angle = FlxG.random.float(-900, 900);
+			newSprite.setPosition(FlxG.random.float(0, FlxG.width-newSprite.width), FlxG.random.float(0, FlxG.height-newSprite.height));
+			newSprite.cameras = [camText];
+			add(newSprite); newSprite.scale.set(1.2, 1.2); canUseKeyCombos = false;
+		
+			for (camera in FlxG.cameras.list) 
+				camera.shake(0.002, 0.3);
+			
+			FlxTween.tween(newSprite, {"scale.x": 1, "scale.y": 1, alpha: 1, angle: 0}, 0.3, {ease: FlxEase.qaudInOut, onComplete: function () {if (penkProgress != 4) canUseKeyCombos = true;}});
+			if (penkProgress != 4) return;
+			(new FlxTimer()).start(.3, function (_) 
+			{
+				for (camera in FlxG.cameras.list)
+					FlxTween.tween(camera, {zoom: 3, alpha:0, angle: -800}, 2, {ease: FlxEase.circInOut});
+
+				new FlxTimer().start(2, function(_)
+				{
+					MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
+					FlxG.switchState(new ModState("gorefield/easteregg/Penkaru"));
+				});
+			});
+		}, 4);
+	},
+	meme: function(path:String) 
+	{
+		FlxG.sound.music.volume = 0;
+
+		video = new FlxVideo();
+		video.load(Assets.getPath(Paths.video(path)));
+		video.onEndReached.add(function() 
+		{
+			video.dispose(); 
+			
+			FlxG.sound.music.volume = 1;
+			canMove = true;
+		});
+		video.play();
+	},
+	selectSong: function(songName:String) 
+	{
+		FlxTween.tween(vigentte, {alpha:1}, 1.2);
+
+		FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
+		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut, 
+			onComplete: function () 
+			{
+				PlayState.loadSong(songName, "hard", false, false);
+				PlayState.isStoryMode = PlayState.chartingMode = false;
+			
+				FlxG.switchState(new ModState("gorefield/LoadingScreen"));
+			}
+		});
+
+		for (cam in [FlxG.camera, camText, camBG]) 
+		{
+			FlxTween.tween(cam.scroll, {x: -50, y: 50}, 1, {ease: FlxEase.qaudInOut});
+			FlxTween.tween(cam, {alpha: 0}, 1);
+		}	
+	}
+}
+
+var codes:Map<String, Void -> Void> = [
+	// Youtuber codes
+	"PENKARU" => CodesFunctions.penk,
+	"TAEYAI" => function() CodesFunctions.meme("t"),
+	"NIFFIRG" => function() CodesFunctions.meme("niffirgflumbo"),
+	"TANUKI" => function() CodesFunctions.meme("irl"),
+	"CABROS" => function() CodesFunctions.meme("LOOOOL"),
+ 	"CANDEL" => function() CodesFunctions.meme("idk what call this one"),
+
+	// Songs codes
+	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon"), 
+	"LYMAN" => function() CodesFunctions.selectSong("Captive"), 
+	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat"), 
+
+	// Dev codes
+/*	"CASSETTE",
+
+	// Cheat codes
+	"FULLCAT" */
+];
 
 function selectCode():Void {
 	canMove = codesFocused = false;
 	FlxG.sound.play(Paths.sound("menu/story/Enter_Code_Sound"));
 
-	FlxTween.tween(vigentte, {alpha:1}, 1.2);
-
-	FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
-	FlxTween.tween(FlxG.camera, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut, onComplete: function () {
-		switch (codesText.text) {
-			/*
-			case "TAKE ME":
-			case "LYMAN":
-			case "LASAGNA":
-			case "CATNIP":
-			case "FULLCAT": // cheater >:((
-			*/
-			default:
-				var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
-				FlxG.switchState(new MainMenuState());
-		}
-	}});
-
-	for (cam in [FlxG.camera, camText, camBG]) {
-		FlxTween.tween(cam.scroll, {x: -50, y: 50}, 1, {ease: FlxEase.qaudInOut});
-		FlxTween.tween(cam, {alpha: 0}, 1);
-	}
+	codes[codesText.text]();
 }
 
 function incorrectCode():Void {
