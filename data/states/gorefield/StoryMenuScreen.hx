@@ -1022,6 +1022,18 @@ var CodesFunctions:{} =
 			FlxTween.tween(cam.scroll, {x: -50, y: 50}, 1, {ease: FlxEase.qaudInOut});
 			FlxTween.tween(cam, {alpha: 0}, 1);
 		}	
+	},
+	unlockAll: function()
+	{
+		FlxG.save.data.canVisitArlene = true;
+		FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
+		FlxG.save.data.extrasSongsIcons = ["garfield-sad", "lyman", "breaking-garfield"];
+
+		weeksUnlocked = weeksFinished = [true, true, true, true, true, true, true, true, true];
+
+		FlxG.save.flush();
+
+		canMove = true;
 	}
 }
 
@@ -1040,10 +1052,10 @@ var codes:Map<String, Void -> Void> = [
 	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "breaking-garfield"), 
 
 	// Dev codes
-/*	"CASSETTE",
+	// "CASSETTE",
 
 	// Cheat codes
-	"FULLCAT" */
+	"FULLCAT" => CodesFunctions.unlockAll
 ];
 
 function selectCode():Void {
