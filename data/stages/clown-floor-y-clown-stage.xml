@@ -8,6 +8,9 @@
     </countdown>
     <sprite name="floor" x="0" y="0" sprite="Clown_Stage_Floor" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
     <sprite name="background" x="0" y="0" sprite="Clown_Stage_face_1" antialiasing="false" scrollx="1" scrolly="1" scale="6"/>
-    <player x="240" y="-300" camxoffset="-220" camyoffset="-50" scale="0.8"/>
     <opponent x="-900" y="-810" camxoffset="120" camyoffset="160" scale="0.8"/>
+    <sprite name="light" x="0" y="120" sprite="Clown_Stage_Ligth" antialiasing="false" scrollx="1" scrolly="1" scale="7">
+              <property name="alpha" type="float" value="0.0000001"/>
+    </sprite>
+    <player x="240" y="-300" camxoffset="-220" camyoffset="-50" scale="0.8"/>
 </stage>
