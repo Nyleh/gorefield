@@ -273,6 +273,7 @@ function create() {
 	codesText.setFormat("fonts/pixelart.ttf", 24, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	codesText.borderSize = 3;
 	codesText.cameras = [camText];
+	codesText.alpha = 0.4;
 	add(codesText);
 
 	caretSpr = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/carcet"));
@@ -465,7 +466,14 @@ function update(elapsed:Float) {
 			}
 		} else if (FlxG.mouse.overlaps(codesTextHitbox)) {
 			cursor = "ibeam";
-			if (FlxG.mouse.justReleased) {
+			if (FlxG.mouse.justReleased) 
+			{
+				if (codesText.alpha != 1)
+				{
+					codesText.text = "";
+					codesText.alpha = 1;
+				}
+
 				codesFocused = true; carcetTime = 0;
 				codesPosition = codesText.text.length;
 	
@@ -885,7 +893,8 @@ function onKeyDown(keyCode:Int, modifier:Int) {
 			codesPosition = codesText.text.length;
 		case V:
 			// paste
-			if (modifier == LEFT_CTRL || modifier == RIGHT_CTRL) {
+			if (modifier == LEFT_CTRL || modifier == RIGHT_CTRL) // This does not work for me :sob: -EstoyAburridow
+			{
 				var data:String = Clipboard.generalClipboard.getData(2/**TEXTFORMAT**/);
 				if (data != null) onTextInput(data);
 			}
@@ -893,18 +902,31 @@ function onKeyDown(keyCode:Int, modifier:Int) {
 	}
 }
 
-function onTextInput(text:String):Void {
-	if (!codesFocused || !canMove) return;
+function onTextInput(text:String):Void 
+{
+	if (!codesFocused || !canMove  || text.length < 1 || codesText.text.length >= 28)
+		return;
 
-	for (char in 0...text.length) {
-		if (StringTools.contains(alphabet, text.charAt(char))) continue;
-		if (StringTools.contains(numbers, text.charAt(char))) continue;
-		if (StringTools.contains(symbols, text.charAt(char))) continue;
-		return; // char not found in font - lunar
+	text = text.toLowerCase();
+
+	var newText:String = "";
+
+	for (char in 0...text.length) 
+	{
+		if (!StringTools.contains(alphabet + numbers + symbols, text.charAt(char))) 
+			continue;
+
+		newText += text.charAt(char).toUpperCase();
 	}
 
-	codesText.text = codesText.text.substr(0, codesPosition) + text.toUpperCase() + codesText.text.substr(codesPosition);
-	codesPosition += text.length; carcetTime = 0;
+	if (newText.length < 1)
+		return;
+
+	newText = newText.substr(0, 28 - codesText.text.length);
+
+	codesText.text = codesText.text.substr(0, codesPosition) + newText + codesText.text.substr(codesPosition);
+
+	codesPosition += newText.length; carcetTime = 0;
 	codesSound.play(true);
 }
 
