@@ -46,6 +46,10 @@ function new() {
     if (FlxG.save.data.particles == null) FlxG.save.data.particles = true;
     if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
 
+    // CODES 
+    if (FlxG.save.data.extrasSongs == null) FlxG.save.data.extrasSongs = [];
+    if (FlxG.save.data.extrasSongsIcons == null) FlxG.save.data.extrasSongsIcons = [];
+
     // EASTER EGG
     if (FlxG.save.data.canVisitArlene == null) FlxG.save.data.canVisitArlene = false;
 

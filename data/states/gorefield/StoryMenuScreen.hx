@@ -51,7 +51,7 @@ var weeks:Array = [
 	{name: "???????? Week...", songs: ["Cataclysm"]},
 	{name: "Binky Circus...", songs: ["Laughter and Cries"]},
 	{name: "Cartoon World...", songs: ["Balls of Yarn"]},
-	{name: "Code Songs...", songs: ["Take me Jon"]}
+	{name: "Code Songs...", songs: FlxG.save.data.extrasSongs}
 ];
 
 var weekColors:Array<Int> = [
@@ -60,11 +60,14 @@ var weekColors:Array<Int> = [
 	0xFF008DA9,
 	0xFF727272,
 	0xFFEB4108,
-	0xFFFFFFFF
+	0xFFFFFFFF,
+	0xFFFFFFFF,
+	0xFFFFFFFF,
+	0xFF90D141
 ];
 
 var CATclysmUnlocked:Bool = false;
-var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true];
+var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, FlxG.save.data.extrasSongs.length != 0];
 var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
@@ -80,6 +83,7 @@ var weekDescs:Array<String> = [
 
 // SPANISH - Jloor 
 // hi jloor -lunar
+// Buenos dias -EstoyAburridow
 var weekDescsSPANISH:Array<String> = [
 	"La Lasaña huele deliciosa...",
 	"Comida de medianoche???\n(yum)",
@@ -89,7 +93,7 @@ var weekDescsSPANISH:Array<String> = [
 	"????????????????????????????????????????????",
 	"Honk Honk!",
 	"Una reunion Felina...",
-	"Contenido extra"
+	"Contenido extra..."
 ];
 
 var lerpColors = [];
@@ -160,8 +164,8 @@ var freeplaySongLists = [
 		iconMenuObjs: []
 	},
 	{
-		songs: ["Take me Jon"],
-		icons: ["minecraft"],
+		songs: FlxG.save.data.extrasSongs,
+		icons: FlxG.save.data.extrasSongsIcons,
 		songMenuObjs: [],
 		iconMenuObjs: []
 	}
@@ -641,6 +645,14 @@ function selectWeek() {
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
 	}
+
+	if (curWeek == 8)
+	{ 
+		openFreePlayMenu(); 
+		FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+		return;
+	}
+
 	if (!weeksFinished[curWeek]) {playWeek(); return;} // ! play week for first time
 
 	if (subMenuOpen) return;
@@ -983,7 +995,7 @@ var CodesFunctions:{} =
 		});
 		video.play();
 	},
-	selectSong: function(songName:String) 
+	selectSong: function(songName:String, icon:String) 
 	{
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
 
@@ -993,6 +1005,13 @@ var CodesFunctions:{} =
 			{
 				PlayState.loadSong(songName, "hard", false, false);
 				PlayState.isStoryMode = PlayState.chartingMode = false;
+
+				if (!FlxG.save.data.extrasSongs.contains(songName))
+				{
+					FlxG.save.data.extrasSongs.push(songName);
+					FlxG.save.data.extrasSongsIcons.push(icon);
+					FlxG.save.flush();
+				}
 			
 				FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 			}
@@ -1016,9 +1035,9 @@ var codes:Map<String, Void -> Void> = [
  	"CANDEL" => function() CodesFunctions.meme("idk what call this one"),
 
 	// Songs codes
-	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon"), 
-	"LYMAN" => function() CodesFunctions.selectSong("Captive"), 
-	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat"), 
+	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon", "garfield-sad"), 
+	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman"), 
+	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "breaking-garfield"), 
 
 	// Dev codes
 /*	"CASSETTE",
