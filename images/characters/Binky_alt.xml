@@ -10,7 +10,7 @@
 <SubTexture name="Binky_alt_ up0000" x="5600" y="0" width="5621" height="1414" frameX="-42" frameY="0" frameWidth="5726" frameHeight="1631" />
 <SubTexture name="Binky_alt_ up0001" x="0" y="1435" width="5621" height="1358" frameX="-42" frameY="-28" frameWidth="5726" frameHeight="1631" />
 <SubTexture name="Binky_alt_ up0002" x="0" y="1435" width="5621" height="1358" frameX="-42" frameY="-28" frameWidth="5726" frameHeight="1631" />
-<SubTexture name="Binky_alt_ idle0000" x="5460" y="6804" width="5460" height="1239" frameX="-105" frameY="-70" frameWidth="5726" frameHeight="1631" />
+<SubTexture name="Binky_alt_ left0000" x="5460" y="6804" width="5460" height="1239" frameX="-105" frameY="-70" frameWidth="5726" frameHeight="1631" />
 <SubTexture name="Binky_alt_ left0000" x="5663" y="2793" width="5460" height="1260" frameX="-77" frameY="-56" frameWidth="5726" frameHeight="1631" />
 <SubTexture name="Binky_alt_ left0001" x="5663" y="2793" width="5460" height="1260" frameX="-77" frameY="-56" frameWidth="5726" frameHeight="1631" />
 <SubTexture name="Binky_alt_ rigth0000" x="0" y="8064" width="5460" height="1239" frameX="-119" frameY="-84" frameWidth="5726" frameHeight="1631" />
