@@ -1,4 +1,8 @@
+import hxvlc.flixel.FlxVideo;
+import funkin.backend.MusicBeatState;
 var vhs:CustomShader;
+
+var video:FlxVideo;
 
 function postCreate()
 {
@@ -25,6 +29,16 @@ function postCreate()
 	staticShader.speed = 20;
 	if (FlxG.save.data.static)
         FlxG.camera.addShader(staticShader);
+
+    video = new FlxVideo();
+	video.load(Assets.getPath(Paths.video("takemejon")));
+	video.onEndReached.add(
+		function()
+		{
+            MusicBeatState.skipTransOut = true;
+            FlxG.switchState(new PlayState());
+		}
+	); 
 }
 
 function tweenCamera(in:Bool){
@@ -106,3 +120,17 @@ function update(elapsed){
     vhs.noiseIntensity = noiseIntensity = lerp(noiseIntensity, 0.002, .1);
     vhs.colorOffsetIntensity = colorOffsetIntensity = lerp(colorOffsetIntensity, 0.5, .1);
 }
+
+function onGameOver(event){
+    event.cancel(true);
+    persistentUpdate = false;
+    persistentDraw = false;
+    paused = true;
+    canPause = false;
+
+    vocals.stop();
+    if (FlxG.sound.music != null)
+        FlxG.sound.music.stop();
+
+    video.play();
+} 
