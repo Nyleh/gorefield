@@ -49,8 +49,16 @@ function stepHit(step:Int) {
     switch (step) {
         case 238:
             tweenCamera(true);
-        case 496:
+        case 368:
             tweenCamera(false);
+
+            stage.stageSprites["B2"].visible = stage.stageSprites["B2"].active = false;
+
+            for (sprite in ["fondo2", "mesa"])
+                stage.stageSprites[sprite].alpha = 1;
+        case 369:
+            for (spr in [gorefieldiconP1, gorefieldiconP2])
+                spr.alpha = 0;
         case 656:
             boogie = true;
         case 784:
