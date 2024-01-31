@@ -3,6 +3,17 @@ import funkin.backend.MusicBeatState;
 var vhs:CustomShader;
 
 var video:FlxVideo;
+var blackOverlay:FlxSprite;
+
+function create() 
+{
+    blackOverlay = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xff231118);
+	blackOverlay.updateHitbox();
+	blackOverlay.screenCenter();
+	blackOverlay.scrollFactor.set();
+    blackOverlay.alpha = 0;
+	insert(9, blackOverlay);
+}
 
 function postCreate()
 {
@@ -70,9 +81,19 @@ function stepHit(step:Int) {
 
             for (sprite in ["fondo2", "mesa"])
                 stage.stageSprites[sprite].alpha = 1;
-        case 369:
-            for (spr in [gorefieldiconP1, gorefieldiconP2])
-                spr.alpha = 0;
+
+            snapCam();
+        case 432:
+            stage.stageSprites["fondo3"].alpha = 1;
+
+            for (sprite in ["fondo2", "mesa"])
+                stage.stageSprites[sprite].alpha = 0;
+
+            snapCam();
+        case 496:
+            FlxTween.tween(blackOverlay, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
+        case 528:
+            FlxTween.tween(blackOverlay, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
         case 656:
             boogie = true;
         case 784:
@@ -110,6 +131,8 @@ function update(elapsed){
     FlxG.camera.angle = lerp(FlxG.camera.angle, 0, .1);
     camHUD.angle = lerp(camHUD.angle, 0, .1);
 
+    for (spr in [gorefieldiconP1, gorefieldiconP2])
+        spr.alpha = 0;
 
     if (FlxG.save.data.static)
         staticShader.time = totalTime;
