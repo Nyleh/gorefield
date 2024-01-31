@@ -175,9 +175,13 @@ var freeplaySongLists = [
 // Television
 var blackBackground:FlxSprite;
 var videos:Array<FlxVideoSprite> = [];
+var videosChannel:Array<String> = ["CH1","CH2","CH3","CH4"];
 static var curVideo:Int = 0;
 var isTVOn:Bool = false;
 var television:FlxSprite;
+var channelBar:FlxSprite;
+var fastForwardIcon:FlxSprite;
+var pauseIcon:FlxSprite;
 var videosHitbox:FlxObject;
 var powerHitbox:FlxObject;
 var pauseHitbox:FlxObject;
@@ -420,6 +424,31 @@ function create() {
 	television.animation.play("OFF");
 	add(television);
 
+
+	var channelBarName = videosChannel[curVideo];
+	channelBar = new FlxSprite(700, 300);
+	channelBar.loadGraphic(Paths.image("menus/storymenu/" + channelBarName));
+	channelBar.scale.set(0.2,0.2);
+	channelBar.visible = false;
+	channelBar.updateHitbox();
+	add(channelBar);
+
+	fastForwardIcon = new FlxSprite(1000, 510);
+	fastForwardIcon.loadGraphic(Paths.image("menus/storymenu/FASTZ"));
+	fastForwardIcon.scale.set(0.35,0.35);
+	fastForwardIcon.visible = false;
+	fastForwardIcon.updateHitbox();
+	add(fastForwardIcon);
+
+	pauseIcon = new FlxSprite(700,510);
+	pauseIcon.frames = Paths.getSparrowAtlas("menus/storymenu/Pause");
+	pauseIcon.animation.addByPrefix("idle", "Pause Animation", 12, true);
+	pauseIcon.animation.play("idle");
+	pauseIcon.scale.set(0.3,0.3);
+	pauseIcon.visible = false;
+	pauseIcon.updateHitbox();
+	add(pauseIcon);
+
 	videosHitbox = new FlxObject(692, 281, 376, 292);
 	add(videosHitbox);
 
@@ -591,11 +620,15 @@ function update(elapsed:Float) {
 				{
 					videos[curVideo].togglePaused();
 					videoWasPaused = !videoWasPaused;
+					pauseIcon.visible = videoWasPaused;
 				}
 			} else if (FlxG.mouse.overlaps(speedHitbox)) {
 				cursor = "button";
-				if (FlxG.mouse.justReleased)
-					videos[curVideo].bitmap.rate = (videos[curVideo].bitmap.rate == 1) ? 2 : 1;
+				if (FlxG.mouse.justReleased){
+					var thatBool = (videos[curVideo].bitmap.rate == 1);
+					videos[curVideo].bitmap.rate = thatBool ? 2 : 1;
+					fastForwardIcon.visible = thatBool ? true : false;
+				}
 			} else if (FlxG.mouse.overlaps(change1Hitbox)) {
 				cursor = "button";
 				if (FlxG.mouse.justReleased)
@@ -989,13 +1022,17 @@ function goToSong() {
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }
 
+var channelTimer:FlxTimer = null;
 function turnTV(off:Bool) {
+	if (channelTimer != null) channelTimer.cancel();
 	isTVOn = off;
 	var mode:String = isTVOn ? "ON" : "OFF";
 
 	if (isTVOn) {
 		FlxG.sound.music.fadeOut(0.5, 0);
 		videos[curVideo].play();
+
+		channelTimer = (new FlxTimer()).start(4, function (t) {channelBar.visible = false;});
 	}
 	else {
 		FlxG.sound.music.fadeIn(0.5, 0.7);
@@ -1004,24 +1041,39 @@ function turnTV(off:Bool) {
 		blackBackground.visible = false;
 	}
 	new FlxTimer().start(isTVOn ? 0.1 : 0, function() television.animation.play(mode));
+	videoWasPaused = false;
 
 	videos[curVideo].visible = isTVOn;
+	channelBar.visible = isTVOn;
+	fastForwardIcon.visible = isTVOn ? (videos[curVideo].bitmap.rate == 2) : false;
+	pauseIcon.visible = isTVOn ? videoWasPaused : false;
 
 	FlxG.sound.play(Paths.sound("menu/story/television/Turn_" + mode + "_TV"));
 }
 
 var changeChannelCount:Int = 1;
 function changeChannel(change:Int) {
+	if (channelTimer != null) channelTimer.cancel();
 	videos[curVideo].stop();
 	videos[curVideo].visible = false;
+	
+	videoWasPaused = false;
 
 	curVideo = FlxMath.wrap(curVideo + change, 0, videos.length - 1);
 	changeChannelCount = FlxMath.wrap(changeChannelCount + 1, 1, 3);
 
 	FlxG.sound.play(Paths.sound("menu/story/television/Change_channel_" + changeChannelCount));
 
+	var channelBarName = videosChannel[curVideo];
+	channelBar.loadGraphic(Paths.image('menus/storymenu/' + channelBarName));
+
+	fastForwardIcon.visible = isTVOn ? (videos[curVideo].bitmap.rate == 2) : false;
+	channelBar.visible = isTVOn;
+	pauseIcon.visible = false;
 	videos[curVideo].play();
 	videos[curVideo].visible = true;
+
+	channelTimer = (new FlxTimer()).start(4, function (t) {channelBar.visible = false;});
 }
 
 function codesMenu(open:Bool, offset:Float) {
@@ -1037,8 +1089,9 @@ function codesMenu(open:Bool, offset:Float) {
 	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
 		hitbox.x += open ? 1000 : -1000;
 	
-	if (!codesOpened)
+	if (!codesOpened){
 		turnTV(false);
+	}
 }
 
 function fullscreenVideo(enabled:Bool) {
