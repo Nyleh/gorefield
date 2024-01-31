@@ -5,5 +5,5 @@
     <sprite name="buildings" x="0" y="0" sprite="gbStage_buildings" antialiasing="true" scrollx="1" scrolly="0.9" scale="1"/>
     <sprite name="base" x="0" y="0" sprite="gbStage_base" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
     <player x="1100" y="700" camxoffset="-100" camyoffset="-300"/>
-    <opponent x="-550" y="-150" camxoffset="600" camyoffset="60"/>
+    <opponent x="350" y="400" camxoffset="600" camyoffset="60"/>
 </stage>
