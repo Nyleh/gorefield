@@ -482,6 +482,7 @@ var bloomSine:Bool = true;
 var dim:Float = 0; var size:Float = 0;
 var lerpMenuSpeed:Float = 1;
 var updateFreePlay:Bool = false;
+var songLargeName:String = "";
 var cursor:String = null;
 var cacheRect:Rectangle = new Rectangle();
 var cachePoint:FlxPoint = FlxPoint.get(0,0);
@@ -680,7 +681,9 @@ function update(elapsed:Float) {
 	Mouse.cursor = cursor ?? "arrow";
 
 	if (!updateFreePlay) return;
-	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? .6 + (.4*FlxMath.fastSin(__totalTime*1.5)) : 0, 0.15);
+	freeplayMenuText.alpha = lerp(freeplayMenuText.alpha, inFreeplayMenu ? (.6 + (.4*FlxMath.fastSin(__totalTime*1.5))) : 0, 0.15);
+	if (freeplayMenuText.alpha < 0.01 && !inFreeplayMenu)
+		updateFreePlay = false;
 	for (menuID => data in freeplaySongLists) {
 		if (menuID != freePlayMenuID && freePlayMenuID != -1) continue;
 		for (i => song in data.songMenuObjs) {
@@ -691,7 +694,7 @@ function update(elapsed:Float) {
 			song.y = __firstFreePlayFrame ? y + 0 : CoolUtil.fpsLerp(song.y, y, inFreeplayMenu ? 0.16 : 0.04);
 			song.x = __firstFreePlayFrame ? x : CoolUtil.fpsLerp(song.x, menuID == freePlayMenuID ? x : -1500, inFreeplayMenu ? 0.16 : 0.08);
 			if (menuID == freePlayMenuID && __firstFreePlayFrame) {song.x -= 500+(1500*i);}
-	
+
 			data.iconMenuObjs[i].alpha = song.alpha = lerp(song.alpha, menuID == freePlayMenuID ? (i == freeplaySelected[freePlayMenuID] ? 1 : 0.4) : 0, inFreeplayMenu ? 0.25 : 0.2);
 	
 			data.iconMenuObjs[i].updateHitbox();
@@ -982,7 +985,7 @@ function closeFreePlayMenu() {
 	lerpTimer = (new FlxTimer()).start(0.5, function () {lerpMenuSpeed = 1;});
 
 	if (updateTimer != null) updateTimer.cancel();
-	updateTimer = (new FlxTimer()).start(0.6, function () {updateFreePlay = false;});
+	//updateTimer = (new FlxTimer()).start(0.6, function () {});
 
 	colowTwn.cancel();
 	colowTwn = FlxTween.color(null, 5.4, 0xFF90D141, 0xFFF09431, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/, onUpdate: function () {
@@ -1023,9 +1026,12 @@ function goToSong() {
 }
 
 var channelTimer:FlxTimer = null;
-function turnTV(off:Bool) {
+function turnTV(on:Bool) {
+	if (isTVOn == on)
+		return;
+
 	if (channelTimer != null) channelTimer.cancel();
-	isTVOn = off;
+	isTVOn = on;
 	var mode:String = isTVOn ? "ON" : "OFF";
 
 	if (isTVOn) {
