@@ -89,7 +89,10 @@ function update(elapsed:Float)
 
         if (curSelected != -1
             && ((FlxG.mouse.justPressed && FlxG.mouse.overlaps(options.members[curSelected]))
-            || controls.ACCEPT)) {
+            || controls.ACCEPT)) 
+        {
+            selected_something = true;
+
             FlxG.sound.play(Paths.sound('menu/confirm'));
 
             FlxG.save.data.spanish = curSelected == 1;

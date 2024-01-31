@@ -14,6 +14,7 @@ import openfl.ui.Mouse;
 import openfl.geom.Rectangle;
 import openfl.desktop.Clipboard;
 import hxvlc.flixel.FlxVideo;
+import hxvlc.flixel.FlxVideoSprite;
 import funkin.backend.MusicBeatState;
 
 var canMove:Bool = true;
@@ -170,6 +171,20 @@ var freeplaySongLists = [
 		iconMenuObjs: []
 	}
 ];
+
+// Television
+var blackBackground:FlxSprite;
+var videos:Array<FlxVideoSprite> = [];
+static var curVideo:Int = 0;
+var isTVOn:Bool = false;
+var television:FlxSprite;
+var videosHitbox:FlxObject;
+var powerHitbox:FlxObject;
+var pauseHitbox:FlxObject;
+var speedHitbox:FlxObject;
+var change1Hitbox:FlxObject;
+var change2Hitbox:FlxObject;
+var televisionTween:FlxTween;
 
 // CODES MENU
 var codesPanel:FlxSprite;
@@ -367,6 +382,65 @@ function create() {
 	
 	FlxTween.tween(selector, {angle: -90, alpha: 1}, 0.2, {ease: FlxEase.circInOut});
 
+	blackBackground = new FlxSprite();
+	blackBackground.makeSolid(FlxG.width, FlxG.height, 0xFF000000);
+	blackBackground.cameras = [camText];
+	blackBackground.visible = false;
+	add(blackBackground);
+
+	prevAutoPause = FlxG.autoPause;
+	FlxG.autoPause = false; // Así evitamos que se añada el "resume" al momento de volver al juego y lo añadimos nosotros mismos con una condición -EstoyAburridow
+	for (path in ["Odivision_Channel", "Fat_Cat_TV", "Purrfect_Show", "Funny_Clown"]) {
+		video = new FlxVideoSprite(555, 186);
+		video.load(Assets.getPath(Paths.video(path)), [':input-repeat=65535']); // Lunar, actualiza la hxvlc lib porfis :sob: -EstoyAburridow
+
+		video.scale.set(0.6, 0.6);
+		video.updateHitbox(); 
+		video.visible = false;
+		videos.push(video);
+
+		add(video);
+	}
+	FlxG.autoPause = prevAutoPause;
+
+	if (FlxG.autoPause) 
+	{
+		for (video in videos)
+			if (!FlxG.signals.focusLost.has(video.pause))
+				FlxG.signals.focusLost.add(video.pause);
+	
+		if (!FlxG.signals.focusGained.has(focusGained))
+			FlxG.signals.focusGained.add(focusGained);
+	}
+
+	television = new FlxSprite(-800, 200);
+	television.loadGraphic(Paths.image("menus/storymenu/TV_CODE0002+TV_CODE0002"), true, 450, 465);
+	television.animation.add("OFF", [0], 0, false); // "OFF" el videojuego!!1!!!11!111!! -EstoyAburridow
+	television.animation.add("ON", [1], 0, false);
+	television.animation.play("OFF");
+	add(television);
+
+	videosHitbox = new FlxObject(692, 281, 376, 292);
+	add(videosHitbox);
+
+	powerHitbox = new FlxObject(693, 590, 52, 52);
+	add(powerHitbox);
+
+	pauseHitbox = new FlxObject(755, 590, 52, 52);
+	add(pauseHitbox);
+
+	speedHitbox = new FlxObject(820, 590, 52, 52);
+	add(speedHitbox);
+
+	change1Hitbox = new FlxObject(926, 599, 35, 35);
+	add(change1Hitbox);
+
+	change2Hitbox = new FlxObject(971, 590, 35, 35);
+	add(change2Hitbox);
+
+	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
+		hitbox.x -= 1000;
+
 	changeWeek(0);
 }
 
@@ -393,7 +467,7 @@ function update(elapsed:Float) {
 	for (i=>menuOption in menuOptions) {
 		var y:Float = ((FlxG.height - menuOption.height) / 2) + ((menuOption.ID - curWeek) * menuOption.height);
 		var x:Float = 50 - ((Math.abs(FlxMath.fastCos((menuOption.y + (menuOption.height / 2) - (FlxG.camera.scroll.y + (FlxG.height / 2))) / (FlxG.height * 1.25) * Math.PI)) * 150)) + Math.floor(15 * FlxMath.fastSin(__totalTime + (0.8*i)));
-		x += codesOpened ? 200 : 0;
+		x += codesOpened ? 1000 : 0;
 
 		if (i == curWeek && selectingWeek) {
 			menuOption.y = CoolUtil.fpsLerp(menuOption.y, (FlxG.height/2) - (menuOption.height/2), 0.075);
@@ -464,7 +538,12 @@ function update(elapsed:Float) {
 	cursor = null;
 	var lastOpened:Bool = codesOpened;
 	if (canMove) {
-		if (FlxG.mouse.overlaps(codesOpenHitbox)) {
+		// Tal vez luego yo intente mejorar esto usando Typedefs -EstoyAburridow
+		if (FlxG.mouse.overlaps(powerHitbox)) {
+			cursor = "button";
+			if (FlxG.mouse.justReleased) 
+				turnTV(!isTVOn);
+		} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
 			cursor = "button";
 			if (FlxG.mouse.justReleased) {
 				codesMenu(!codesOpened, 0);
@@ -501,8 +580,38 @@ function update(elapsed:Float) {
 					selectCode();
 				else incorrectCode();
 			}
+		} else if (isTVOn) {
+			if (FlxG.mouse.overlaps(videosHitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased)
+					fullscreenVideo(true);
+			} else if (FlxG.mouse.overlaps(pauseHitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased)
+				{
+					videos[curVideo].togglePaused();
+					videoWasPaused = !videoWasPaused;
+				}
+			} else if (FlxG.mouse.overlaps(speedHitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased)
+					videos[curVideo].bitmap.rate = (videos[curVideo].bitmap.rate == 1) ? 2 : 1;
+			} else if (FlxG.mouse.overlaps(change1Hitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased)
+					changeChannel(-1);
+			} else if (FlxG.mouse.overlaps(change2Hitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased)
+					changeChannel(1);
+			}
 		} else if (FlxG.mouse.justReleased)
 			codesFocused = false;
+	} else if (blackBackground.visible) {
+		cursor = "button";
+
+		if (FlxG.mouse.justReleased)
+			fullscreenVideo(false);
 	}
 
 	if (codesButton.animation.name == "press" && codesButton.animation.finished)
@@ -558,6 +667,13 @@ function update(elapsed:Float) {
 		}
 	}
 	__firstFreePlayFrame = false;
+}
+
+var videoWasPaused:Bool = false;
+function focusGained()
+{
+	if (isTVOn && !videoWasPaused)
+		videos[curVideo].resume();
 }
 
 function handleMenu() {
@@ -865,8 +981,7 @@ function changeSong(change:Int) {
 	freeplayMenuText.y = scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
-function goToSong() 
-{
+function goToSong() {
 	var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/confirmMenu")); sound.volume = 1; sound.play();
     PlayState.loadSong(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", false, false);
 	PlayState.isStoryMode = PlayState.chartingMode = false; // Just incase cause people see cutscenes for some reason
@@ -874,11 +989,71 @@ function goToSong()
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 }
 
+function turnTV(off:Bool) {
+	isTVOn = off;
+	var mode:String = isTVOn ? "ON" : "OFF";
+
+	if (isTVOn) {
+		FlxG.sound.music.fadeOut(0.5, 0);
+		videos[curVideo].play();
+	}
+	else {
+		FlxG.sound.music.fadeIn(0.5, 0.7);
+		videos[curVideo].stop();
+
+		blackBackground.visible = false;
+	}
+	new FlxTimer().start(isTVOn ? 0.1 : 0, function() television.animation.play(mode));
+
+	videos[curVideo].visible = isTVOn;
+
+	FlxG.sound.play(Paths.sound("menu/story/television/Turn_" + mode + "_TV"));
+}
+
+var changeChannelCount:Int = 1;
+function changeChannel(change:Int) {
+	videos[curVideo].stop();
+	videos[curVideo].visible = false;
+
+	curVideo = FlxMath.wrap(curVideo + change, 0, videos.length - 1);
+	changeChannelCount = FlxMath.wrap(changeChannelCount + 1, 1, 3);
+
+	FlxG.sound.play(Paths.sound("menu/story/television/Change_channel_" + changeChannelCount));
+
+	videos[curVideo].play();
+	videos[curVideo].visible = true;
+}
+
 function codesMenu(open:Bool, offset:Float) {
 	if (open == false) codesFocused = false;
 	codesOpened = open;
+
 	if (codesTween != null) codesTween.cancel();
 	codesTween = FlxTween.tween(codesPanel, {x: (codesOpened ? 0 : -415) + offset}, .25, {ease: FlxEase.circInOut});
+
+	if (televisionTween != null) televisionTween.cancel();
+	televisionTween = FlxTween.tween(television, {x: codesOpened ? 650 : -1280}, 0.23, {ease: FlxEase.circInOut});
+
+	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
+		hitbox.x += open ? 1000 : -1000;
+	
+	if (!codesOpened)
+		turnTV(false);
+}
+
+function fullscreenVideo(enabled:Bool) {
+	videos[curVideo].cameras = [enabled ? camText : FlxG.camera];
+	blackBackground.visible = enabled;
+	canMove = !enabled;
+
+	// Vaya, se me hace muy extraño colocar los {} así -EstoyAburridow
+	if (enabled) {
+		videos[curVideo].scale.set(1.5, 1.5);
+		videos[curVideo].screenCenter();
+	} else {
+		videos[curVideo].scale.set(0.6, 0.6);
+		videos[curVideo].setPosition(555, 186);
+	}
 }
 
 var RIGHT = 0x4000004F;
@@ -908,7 +1083,7 @@ function onKeyDown(keyCode:Int, modifier:Int) {
 			codesPosition = codesText.text.length;
 		case V:
 			// paste
-			if (modifier == LEFT_CTRL || modifier == RIGHT_CTRL) // This does not work for me :sob: -EstoyAburridow
+			if (modifier == LEFT_CTRL || modifier == RIGHT_CTRL) // Esto a mi no me funciona :sob: -EstoyAburridow
 			{
 				var data:String = Clipboard.generalClipboard.getData(2/**TEXTFORMAT**/);
 				if (data != null) onTextInput(data);
@@ -982,7 +1157,7 @@ var CodesFunctions:{} =
 	},
 	meme: function(path:String) 
 	{
-		FlxG.sound.music.volume = 0;
+		var prevMusicVolume:Int = FlxG.sound.music.volume;
 
 		video = new FlxVideo();
 		video.load(Assets.getPath(Paths.video(path)));
@@ -990,7 +1165,7 @@ var CodesFunctions:{} =
 		{
 			video.dispose(); 
 			
-			FlxG.sound.music.volume = 1;
+			FlxG.sound.music.volume = prevMusicVolume;
 			canMove = true;
 		});
 		video.play();
@@ -1079,6 +1254,12 @@ function onDestroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
 	curStoryMenuSelected = curWeek; 
 	Framerate.offset.y = 0; Framerate.debugMode = lastFrameRateMode;
+
+	for (video in videos)
+		video.stop();
+
+	if (FlxG.signals.focusGained.has(focusGained))
+		FlxG.signals.focusGained.remove(focusGained);
 
 	FlxG.stage.window.onKeyDown.remove(onKeyDown);
 	FlxG.stage.window.onTextInput.remove(onTextInput);
