@@ -35,7 +35,7 @@ var credits:Array<Array<Dynamic>> = [
 		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"]
 	],
 	["JoaDash",
-		["Pixel Artist", "Artista Pixel"], 
+		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
 		["Tic tac, you almost didn't catch the train", "Tic tac, casi se te va el tren"]
 	],
 	["Ani Manny",
@@ -47,7 +47,7 @@ var credits:Array<Array<Dynamic>> = [
 		["Hello im colombian people, nice to meet you", "Los sueños se cumplen chabales, solo que el mio no se a cumplido"]
 	],
 	["ZeuzMoons",
-		["Pixel Artist", "Artista Pixel"], 
+		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
 		["I saved pixel art, this one goes for you Guiller", "Yo salve el pixel art, te la dedico Guilller"]
 	],
 	["Lunar Cleint", 		
