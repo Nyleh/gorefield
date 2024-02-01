@@ -1258,6 +1258,12 @@ var CodesFunctions:{} = {
 		}
 	},
 	selectSong: function(songName:String, icon:String) {
+		if (videos[curVideo].bitmap.isPlaying){
+			videos[curVideo].togglePaused();
+			videoWasPaused = !videoWasPaused;
+			pauseIcon.visible = videoWasPaused;
+		}
+
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
 
 		FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
