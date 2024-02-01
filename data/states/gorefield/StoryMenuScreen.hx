@@ -1227,6 +1227,12 @@ var CodesFunctions:{} = {
 				newSprite.destroy();
 			}
 		});
+
+		if (videos[curVideo].bitmap.isPlaying){
+			videos[curVideo].togglePaused();
+			videoWasPaused = !videoWasPaused;
+			pauseIcon.visible = videoWasPaused;
+		}
 	},
 	meme: function(path:String) {
 		var prevMusicVolume:Float = FlxG.sound.music.volume;
@@ -1244,6 +1250,12 @@ var CodesFunctions:{} = {
 		});
 		video.play();
 		curVideoMeme = video;
+
+		if (videos[curVideo].bitmap.isPlaying){
+			videos[curVideo].togglePaused();
+			videoWasPaused = !videoWasPaused;
+			pauseIcon.visible = videoWasPaused;
+		}
 	},
 	selectSong: function(songName:String, icon:String) {
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
