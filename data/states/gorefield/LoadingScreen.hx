@@ -105,7 +105,7 @@ function create() {
 	new FlxTimer().start(1.5, (tmr:FlxTimer) -> {
 		FlxTween.tween(black, {alpha: 0}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
 	});
-	WindowUtils.endFix = " - Loading";
+	window.title = windowTitleGOREFIELD + " - Loading";
 	MusicBeatState.skipTransOut = true;
 }
 

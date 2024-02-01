@@ -12,7 +12,7 @@ function create() {camFollowChars = true; camMoveOffset = 15;}
 function postCreate() {
     var cameraStart = strumLines.members[curCameraTarget].characters[0].getCameraPosition();
     cameraStart.y -= 100; FlxG.camera.focusOn(cameraStart);
-    WindowUtils.endFix = " - " + PlayState.instance.SONG.meta.name;
+    window.title = windowTitleGOREFIELD + " - " + PlayState.instance.SONG.meta.name;
 }
 
 function onCameraMove(camMoveEvent) {

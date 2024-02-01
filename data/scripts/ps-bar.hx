@@ -1,6 +1,7 @@
 import flixel.addons.effects.FlxTrail;
 
 public var psBar:FlxSprite = null;
+public var startPsBarVisible = true;
 public var psBarTrail:FlxTrail = null;
 
 public var ps:Int = 4;
@@ -37,6 +38,7 @@ function postCreate()
 
     if (FlxG.save.data.trails) insert(members.indexOf(gorefieldhealthBarBG), psBarTrail);
     insert(members.indexOf(gorefieldhealthBarBG), psBar);
+    psBar.alpha = startPsBarVisible ? 1 : 0.00001;
 }
 
 var fullTime:Float = 0;

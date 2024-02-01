@@ -77,7 +77,8 @@ function create()
     add(fakeCamFollow);
     replaceCamera = true;
 
-    WindowUtils.endfix = " - " + PlayState.instance.SONG.meta.name + " - GAME OVER";
+
+    window.title = windowTitleGOREFIELD + " - " + PlayState.instance.SONG.meta.name + " - GAME OVER";
 }
 
 function postCreate()

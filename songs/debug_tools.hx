@@ -1,3 +1,6 @@
+import funkin.editors.charter.Charter;
+import funkin.game.PlayState;
+
 public var curSpeed:Float = 1;
 static var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
@@ -11,8 +14,18 @@ function update() {
     curSpeed = FlxMath.bound(curSpeed, 0.1, 2);
     
     if (FlxG.keys.justPressed.SIX) curBotplay = !curBotplay;
-    if (devControlBotplay) player.cpu = FlxG.keys.pressed.FIVE || curBotplay;
+    if (devControlBotplay){
+        for(strumLine in strumLines) {
+            if(!strumLine.opponentSide){
+                strumLine.cpu = FlxG.keys.pressed.FIVE || curBotplay;
+            }
+        }
+    } 
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
+
+    if (FlxG.keys.justPressed.SEVEN) { //i got tired of exiting the song ok - lean
+        FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, false));
+    }
 }
 
 function updateSpeed(speed:Float)

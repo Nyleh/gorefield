@@ -36,8 +36,9 @@ function create() {
 }
 
 function postCreate() {
-    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, psBar, scoreTxt, missesTxt, accuracyTxt])
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
         spr.alpha = 0;
+    startPsBarVisible = false;
     for (strumLine in strumLines)
         for (strum in strumLine.members) strum.alpha = 0;
 }
@@ -75,6 +76,8 @@ function stepHit(step:Int) {
 
             FlxTween.tween(FlxG.camera, {zoom: 0.825}, (Conductor.stepCrochet / 1000) * 128);
             FlxG.camera.shake(0.003, 999999);
+
+            snapCam();
 
             FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.25}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.qaudInOut, type: 4 /*PINGPONG*/});
         case 124:
@@ -116,6 +119,18 @@ function stepHit(step:Int) {
             
             stage.stageSprites["red_overlay"].active = stage.stageSprites["red_overlay"].visible = true;
             FlxTween.tween(stage.stageSprites["red_overlay"], {alpha: 0.7}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadInOut, type: 4 /*PINGPONG*/});
+            tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 28);
+            FlxTween.tween(psBar, {alpha: 0}, (Conductor.stepCrochet / 1000) * 28);
+        case 1153:
+            lerpCam = false;
+			FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.2}, (Conductor.stepCrochet / 1000) * 100, {ease: FlxEase.quadInOut});
+			FlxTween.tween(dad.cameraOffset, {x: dad.cameraOffset.x - 200}, (Conductor.stepCrochet / 1000) * 100, {ease: FlxEase.linear});
+            for (strum in player)
+                FlxTween.tween(strum, {alpha: 0}, (Conductor.stepCrochet / 1000) * 24);
+        case 1264:
+            for (strum in player)
+                FlxTween.tween(strum, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
+        case 1280: lerpCam = true; dad.cameraOffset.x += 200;
         case 1400: // ! Fade Infront Stuff
             for (sprite in [dad, boyfriend])
                 FlxTween.tween(sprite, {alpha: 0.3}, (Conductor.stepCrochet / 1000) * 4);
@@ -181,6 +196,9 @@ function stepHit(step:Int) {
                 FlxG.camera.shake(0.0015, 999999);
                 camHUD.shake(0.002, 999999);
             });
+
+            tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 14);
+            FlxTween.tween(psBar, {alpha: 1}, (Conductor.stepCrochet / 1000) * 14);
 
             snapCam();
         case 1920:
