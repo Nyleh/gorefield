@@ -491,6 +491,9 @@ var carcetTime:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
+	if (curVideoMeme != null && controls.ACCEPT)
+		curVideoMeme.onEndReached.dispatch();
+
 	if (canMove)
 		handleMenu();
 
@@ -1179,69 +1182,79 @@ function onTextInput(text:String):Void
 	codesSound.play(true);
 }
 
-var CodesFunctions:{} = 
-{
-	penk: function() 
-	{
-		new FlxTimer().start(0.7, function(tween) 
-		{
+var curVideoMeme:FlxVideo;
+var CodesFunctions:{} = {
+	penk: function() {
+		new FlxTimer().start(0.7, function(tween) {
 			var penkProgress:Int = tween.loops - tween.loopsLeft;
 
-			FlxG.sound.play(Paths.sound("vineboom"));
+			CodesFunctions.image("penkarue (" + Std.string(penkProgress) + ")");
 			FlxG.sound.music.volume -= 0.25;
 		
-			var newSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/wow i love easter what about you/penkarue (" + Std.string(penkProgress) + ")"));
-			newSprite.updateHitbox(); newSprite.antialiasing = true; newSprite.alpha = 0; newSprite.angle = FlxG.random.float(-900, 900);
-			newSprite.setPosition(FlxG.random.float(0, FlxG.width-newSprite.width), FlxG.random.float(0, FlxG.height-newSprite.height));
-			newSprite.cameras = [camText];
-			add(newSprite); newSprite.scale.set(1.2, 1.2); canUseKeyCombos = false;
-		
-			for (camera in FlxG.cameras.list) 
-				camera.shake(0.002, 0.3);
-			
-			FlxTween.tween(newSprite, {"scale.x": 1, "scale.y": 1, alpha: 1, angle: 0}, 0.3, {ease: FlxEase.qaudInOut, onComplete: function () {if (penkProgress != 4) canUseKeyCombos = true;}});
 			if (penkProgress != 4) return;
-			(new FlxTimer()).start(.3, function (_) 
-			{
+			(new FlxTimer()).start(.3, function (_) {
 				for (camera in FlxG.cameras.list)
 					FlxTween.tween(camera, {zoom: 3, alpha:0, angle: -800}, 2, {ease: FlxEase.circInOut});
 
-				new FlxTimer().start(2, function(_)
-				{
+				new FlxTimer().start(2, function(_) {
 					MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 					FlxG.switchState(new ModState("gorefield/easteregg/Penkaru"));
 				});
 			});
 		}, 4);
 	},
-	meme: function(path:String) 
-	{
-		var prevMusicVolume:Int = FlxG.sound.music.volume;
+	image: function(path:String) {
+		FlxG.sound.play(Paths.sound("vineboom"));
+
+		var newSprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/wow i love easter what about you/" + path));
+		newSprite.updateHitbox(); newSprite.antialiasing = true; newSprite.alpha = 0; newSprite.angle = FlxG.random.float(-900, 900);
+		newSprite.setPosition(FlxG.random.float(0, FlxG.width-newSprite.width), FlxG.random.float(0, FlxG.height-newSprite.height));
+		newSprite.cameras = [camText];
+		add(newSprite); newSprite.scale.set(1.2, 1.2);
+
+		for (camera in FlxG.cameras.list) 
+			camera.shake(0.002, 0.3);
+		
+		FlxTween.tween(newSprite, {"scale.x": 1, "scale.y": 1, alpha: 1, angle: 0}, 0.3, {ease: FlxEase.qaudInOut});
+		FlxTween.tween(newSprite, {alpha: 0}, 2, {
+			startDelay: 3.3,
+			onComplete: function(_)
+			{
+				canMove = true;
+
+				newSprite.kill();
+				remove(newSprite);
+				newSprite.destroy();
+			}
+		});
+	},
+	meme: function(path:String) {
+		var prevMusicVolume:Float = FlxG.sound.music.volume;
+		FlxG.sound.music.volume = 0;
 
 		video = new FlxVideo();
 		video.load(Assets.getPath(Paths.video(path)));
-		video.onEndReached.add(function() 
-		{
+		video.onEndReached.add(function() {
 			video.dispose(); 
 			
 			FlxG.sound.music.volume = prevMusicVolume;
 			canMove = true;
+
+			curVideoMeme = null;
 		});
 		video.play();
+		curVideoMeme = video;
 	},
-	selectSong: function(songName:String, icon:String) 
-	{
+	selectSong: function(songName:String, icon:String) {
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
 
 		FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
 		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut, 
-			onComplete: function () 
-			{
+			onComplete: function () {
 				PlayState.loadSong(songName, "hard", false, false);
 				PlayState.isStoryMode = PlayState.chartingMode = false;
 
-				if (!FlxG.save.data.extrasSongs.contains(songName))
-				{
+				if (!FlxG.save.data.extrasSongs.contains(songName)) {
 					FlxG.save.data.extrasSongs.push(songName);
 					FlxG.save.data.extrasSongsIcons.push(icon);
 					FlxG.save.flush();
@@ -1251,14 +1264,12 @@ var CodesFunctions:{} =
 			}
 		});
 
-		for (cam in [FlxG.camera, camText, camBG]) 
-		{
+		for (cam in [FlxG.camera, camText, camBG]) {
 			FlxTween.tween(cam.scroll, {x: -50, y: 50}, 1, {ease: FlxEase.qaudInOut});
 			FlxTween.tween(cam, {alpha: 0}, 1);
 		}	
 	},
-	unlockAll: function()
-	{
+	unlockAll: function() {
 		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
 		FlxG.save.data.extrasSongsIcons = ["garfield-sad", "lyman", "breaking-garfield"];
@@ -1272,24 +1283,42 @@ var CodesFunctions:{} =
 }
 
 var codes:Map<String, Void -> Void> = [
-	// Youtuber codes
-	"PENKARU" => CodesFunctions.penk,
-	"TAEYAI" => function() CodesFunctions.meme("t"),
-	"NIFFIRG" => function() CodesFunctions.meme("niffirgflumbo"),
-	"TANUKI" => function() CodesFunctions.meme("irl"),
-	"CABROS" => function() CodesFunctions.meme("LOOOOL"),
- 	"CANDEL" => function() CodesFunctions.meme("idk what call this one"),
-
 	// Songs codes
 	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon", "garfield-sad"), 
 	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman"), 
 	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "breaking-garfield"), 
 
+	// Youtubers spanish codes
+	"TANUKI" => function() CodesFunctions.meme("irl"),
+	"CABROS" => function() CodesFunctions.meme("LOOOOL"),
+	"CANDEL" => function() CodesFunctions.meme("idk what call this one"),
+	"MAGO" => function() CodesFunctions.meme("Pepe_el_Magin_Video"),
+	"SOY NOCHE" => function() CodesFunctions.meme("IM_NIGHT_Video"),
+
+	// Youtubers english codes
+	"PENKARU" => CodesFunctions.penk,
+	"TAEYAI" => function() CodesFunctions.meme("t"),
+	"NIFFIRG" => function() CodesFunctions.meme("niffirgflumbo"),
+
 	// Dev codes
 	// "CASSETTE",
+	// "ESTOY",
+	"PIJURRO" => function() CodesFunctions.image("PIJURRO"),
+	"RECIPE" => function() CodesFunctions.meme("SDFSDF"),
+	"GOKU BLACK" => function() CodesFunctions.meme("GOKU_NEGRO"),
+	"CHART" => function() CodesFunctions.meme("Gorefield_lore"),
+	"RETURN" => function() CodesFunctions.meme("gorefield_code_video"),
+	"BUFFIELD" => function() CodesFunctions.image("SPOILER_queacabodehacer_20240130060334"),
+	// "MANIAS",
+	// "FREE DIAMOND"
 
 	// Cheat codes
-	"FULLCAT" => CodesFunctions.unlockAll
+	"FULLCAT" => CodesFunctions.unlockAll,
+	//"CATBOT",
+
+	// Extras codes
+	"SPIDERS" => function() CodesFunctions.meme("cry")
+	// "MOUSTACHE",
 ];
 
 function selectCode():Void {
