@@ -1,5 +1,6 @@
 import hxvlc.flixel.FlxVideo;
 import funkin.backend.MusicBeatState;
+
 var vhs:CustomShader;
 
 var video:FlxVideo;
@@ -25,22 +26,6 @@ function postCreate()
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar])
         spr.alpha = 0.35;
 
-    if (!FlxG.save.data.vhs)
-        return;
-
-    vhs = new CustomShader("vhs");
-    vhs.time = 0; 
-    vhs.noiseIntensity = 0.002;
-    vhs.colorOffsetIntensity = 0.5;
-    FlxG.camera.addShader(vhs);
-    camCharacters.addShader(vhs);
-
-    staticShader = new CustomShader("tvstatic");
-	staticShader.time = 0; staticShader.strength = 0.3;
-	staticShader.speed = 20;
-	if (FlxG.save.data.static)
-        FlxG.camera.addShader(staticShader);
-
     video = new FlxVideo();
 	video.load(Assets.getPath(Paths.video("takemejon")));
 	video.onEndReached.add(
@@ -48,8 +33,28 @@ function postCreate()
 		{
             MusicBeatState.skipTransOut = true;
             FlxG.switchState(new PlayState());
+
+            video.dispose();
 		}
 	); 
+
+    if (FlxG.save.data.vhs)
+    {
+        vhs = new CustomShader("vhs");
+        vhs.time = 0; 
+        vhs.noiseIntensity = 0.002;
+        vhs.colorOffsetIntensity = 0.5;
+        FlxG.camera.addShader(vhs);
+        camCharacters.addShader(vhs);
+    }
+
+    if (FlxG.save.data.static)
+    {
+        staticShader = new CustomShader("tvstatic");
+        staticShader.time = 0; staticShader.strength = 0.3;
+        staticShader.speed = 20;
+        FlxG.camera.addShader(staticShader);
+    }
 }
 
 function tweenCamera(in:Bool){
@@ -125,8 +130,14 @@ function stepHit(step:Int) {
 var totalTime:Float = 0;
 var noiseIntensity:Float = 0; 
 var colorOffsetIntensity:Float = 0;
-function update(elapsed){
+function update(elapsed) {
     totalTime += elapsed;
+
+    if (video.isPlaying && controls.ACCEPT)
+    {
+        video.onEndReached.dispatch();
+        return;
+    }
 
     FlxG.camera.angle = lerp(FlxG.camera.angle, 0, .1);
     camHUD.angle = lerp(camHUD.angle, 0, .1);
@@ -154,6 +165,9 @@ function onGameOver(event){
     vocals.stop();
     if (FlxG.sound.music != null)
         FlxG.sound.music.stop();
+
+    camGame.visible = false;
+    camHUD.visible = false;
 
     video.play();
 } 
