@@ -54,5 +54,5 @@
 	<SubTexture name="LASAGNA CAT SCAPE0007" x="6624" y="3070" width="686" height="915" frameX="-68" frameY="-251" frameWidth="906" frameHeight="1303"/>
 	<SubTexture name="LASAGNA CAT SCAPE0008" x="7315" y="3070" width="351" height="900" frameX="-68" frameY="-266" frameWidth="906" frameHeight="1303"/>
 	<SubTexture name="LASAGNA CAT SCAPE0009" x="7315" y="3070" width="351" height="900" frameX="-68" frameY="-266" frameWidth="906" frameHeight="1303"/>
-	<SubTexture name="LASAGNA CAT SCAPE0010" x="7671" y="3070" width="0" height="0" frameX="-154" frameY="-661" frameWidth="906" frameHeight="1303"/>
+	<SubTexture name="LASAGNA CAT SCAPE0010" x="7671" y="3070" width="1" height="1" frameX="-154" frameY="-661" frameWidth="906" frameHeight="1303"/>
 </TextureAtlas>

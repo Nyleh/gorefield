@@ -20,6 +20,8 @@ function postCreate()
 			video.dispose();
 		}
 	); 
+
+	tweenHUD(0,0.01);
 }
 
 function create()
@@ -34,6 +36,7 @@ function create()
 	stage.stageSprites["lasagnaCat"].drawComplex(FlxG.camera);
 	
 	stage.stageSprites["black"].cameras = [camHUD];
+	stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
 }
 
 function stepHit(step:Int) 
@@ -41,8 +44,27 @@ function stepHit(step:Int)
     switch (step) 
     {
         case 0:
+			FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 140);
 			maxCamZoom = 0;
+		case 128:
+			defaultCamZoom += 0.5;
+			dad.cameraOffset.x -= 270;
+			dad.cameraOffset.y += 100;
+			boyfriend.cameraOffset.x += 270;
+			boyfriend.cameraOffset.y += 100;
+		case 138:
+			zoomDisabled = true;
+			FlxTween.tween(FlxG.camera, {zoom: FlxG.camera.zoom + 0.4}, (Conductor.stepCrochet / 1000) * 113, {ease: FlxEase.linear});
+		case 252:
+			zoomDisabled = false;
+			defaultCamZoom -= 0.5;
+			dad.cameraOffset.x += 270;
+			dad.cameraOffset.y -= 100;
+			boyfriend.cameraOffset.x -= 270;
+			boyfriend.cameraOffset.y -= 100;
+			tweenHUD(1,(Conductor.stepCrochet / 1000) * 4);
 		case 1024:
+			var itsFinished:Bool = false;
 			function fadeShit(alpha:Float) {
 				for (strumLine in strumLines)
 					for (strum in strumLine.members)
@@ -55,8 +77,11 @@ function stepHit(step:Int)
 			stage.stageSprites["lasagnaCat"].visible = true;
 			
 			stage.stageSprites["lasagnaCat"].animation.finishCallback = function () {
+				if (itsFinished) return;
+				
 				stage.stageSprites["lasagnaCat"].visible = false;
 				fadeShit(1);
+				itsFinished = true;
 			};
 			fadeShit(0);
 		case 1035:
@@ -70,16 +95,16 @@ function stepHit(step:Int)
 			camHUD.angle -= 10;
 			camGame.angle -= 3.5;
 			camHUD.y += 5;
-			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
-			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
+			FlxTween.tween(camHUD, {angle: 0, y: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut});
+			FlxTween.tween(camGame, {angle: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut});
 
 			dodgeCat.playAnim('attack', true);
 		case 1108 | 1116 | 1172 | 1180 | 1236 | 1244 | 1300 | 1308:
 			camHUD.angle += 10;
 			camGame.angle += 3.5;
 			camHUD.y -= 5;
-			FlxTween.tween(camHUD, {angle: 0, y: 0}, 0.3, {ease: FlxEase.quadOut});
-			FlxTween.tween(camGame, {angle: 0}, 0.3, {ease: FlxEase.quadOut});
+			FlxTween.tween(camHUD, {angle: 0, y: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut});
+			FlxTween.tween(camGame, {angle: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut});
 
 			dodgeCat.playAnim('attack', true);
 		case 1312:
@@ -87,7 +112,10 @@ function stepHit(step:Int)
 			dodgeCat.animation.finishCallback = (name:String) -> {if (name == 'scape') dodgeCat.visible = false;};
 		case 1568:
 			stage.stageSprites["black"].alpha = 0;
-            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
-            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, 1);
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
+		case 1587:
+			tweenHUD(0,(Conductor.stepCrochet / 1000) * 4);
     }
 }
+
+function onStrumCreation(_) _.__doAnimation = false;

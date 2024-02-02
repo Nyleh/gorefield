@@ -25,3 +25,8 @@ function create()
     FlxTween.tween(stage.stageSprites["nonblack"], {alpha: 0}, 1.3, {startDelay: 3});
     FlxTween.tween(floorText, {alpha: 0}, 1.3, {startDelay: 3});
 }
+
+
+function postCreate(){
+	snapCam();
+}

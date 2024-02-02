@@ -3,6 +3,7 @@ static var strumLineBfZoom:Float = 0;
 static var strumLineGfZoom:Float = 0;
 
 static var lerpCam:Bool = true;
+static var zoomDisabled:Bool = false;
 
 public var strumLineDadMult:Float = 1;
 public var strumLineGfMult:Float = 1;
@@ -13,7 +14,7 @@ public var forceDefaultCamZoom:Bool = false; //for songs that already have bf/da
 
 function create() {
     strumLineBfMult = strumLineDadMult = strumLineGfMult = camZoomMult = 1;
-    camZooming = false; lerpCam = true; forceDefaultCamZoom = false;
+    camZooming = false; lerpCam = true; zoomDisabled = false; forceDefaultCamZoom = false;
     if (stage == null || stage.stageXML == null) return;
 
     strumLineDadZoom = stage.stageXML.exists("opponentZoom") ? Std.parseFloat(stage.stageXML.get("opponentZoom")) : -1;
@@ -31,8 +32,9 @@ function update(elapsed:Bool) {
             default: defaultCamZoom;
         };
 
-        FlxG.camera.zoom = lerp(FlxG.camera.zoom, stageZoom == -1 ? defaultCamZoom : stageZoom, 0.05);
         camHUD.zoom = lerp(camHUD.zoom, defaultHudZoom * camZoomMult, 0.05);
+        if (zoomDisabled) return;
+        FlxG.camera.zoom = lerp(FlxG.camera.zoom, stageZoom == -1 ? defaultCamZoom : stageZoom, 0.05);
     }
 }
 
