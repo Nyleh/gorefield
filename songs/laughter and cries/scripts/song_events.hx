@@ -1,12 +1,16 @@
 import hxvlc.flixel.FlxVideo;
 import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxAxes;
+import funkin.backend.utils.WindowUtils;
 
 var video:FlxVideo;
 
 var dadBackdrop:FlxBackdrop;
 
-function create() {
+function create() 
+{
+    devControlBotplay = !(player.cpu = false);
+
     video = new FlxVideo();
     video.load(Assets.getPath(Paths.video("BinkyLaugh")));
     video.onEndReached.add(
@@ -29,13 +33,62 @@ function create() {
     dadBackdrop.scale.set(0.65, 0.65);
     dadBackdrop.velocity.x -= 500;
     dadBackdrop.visible = dadBackdrop.active = false;
+    dadBackdrop.alpha = 0;
     insert(members.indexOf(boyfriend), dadBackdrop);
+
+    blackOverlay = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, 0xff000000);
+	blackOverlay.updateHitbox();
+	blackOverlay.screenCenter();
+	blackOverlay.scrollFactor.set();
+    blackOverlay.cameras = [camGame];
+	add(blackOverlay);
+}
+
+function postCreate() 
+{
+    defaultCamZoom = 1.4;
+    FlxG.camera.zoom = 1.4;
+
+    boyfriend.cameraOffset.x += 300;
+    boyfriend.cameraOffset.y += 120;
+
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+        spr.alpha = 0;
+
+    camHUD.alpha = 0;
+    cpuStrums.visible = false;
 }
 
 function stepHit(step:Int) 
 {
     switch (step) 
     {
+        case 124:
+            FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
+        case 128:
+            FlxTween.tween(blackOverlay, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+
+            for (sprite in ["floor", "background"])
+                stage.stageSprites[sprite].alpha = 0.35;
+        
+            snapCam();
+        case 256:
+            cpuStrums.visible = true;
+
+            defaultCamZoom = 0.65;
+            FlxG.camera.zoom = 0.65;
+
+            for (sprite in ["floor", "background"])
+                stage.stageSprites[sprite].alpha = 1;
+
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                spr.alpha = 1;
+
+            camFollowChars = false; camFollow.setPosition(155, 200);
+            snapCam();
+        case 257:
+            boyfriend.cameraOffset.x -= 300;
+            boyfriend.cameraOffset.y -= 120;
         case 752:
             devControlBotplay = !(player.cpu = true);
             video.play();
@@ -51,14 +104,22 @@ function stepHit(step:Int)
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
                 spr.alpha = 0.3;
 
-            dadBackdrop.visible = dadBackdrop.active = true;
-
             dad.alpha = 0;
-            dad.fixChar(true);
         case 768:
             (new FlxTimer()).start((Conductor.stepCrochet / 1000) * 8, function () {
                 devControlBotplay = !(player.cpu = false);
             });
+        case 896:
+            dadBackdrop.visible = dadBackdrop.active = true;
+            FlxTween.tween(dadBackdrop, {alpha: 1}, (Conductor.stepCrochet / 1000) * 16);
+        case 1152:
+            FlxTween.tween(dadBackdrop, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+        case 1270:
+            devControlBotplay = !(player.cpu = true);
+            FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+        case 1286:
+            blackOverlay.alpha = 1;
+            devControlBotplay = !(player.cpu = false);
     }
 }
 
@@ -70,5 +131,5 @@ function update(elapsed:Float)
     dadBackdrop.animation.addByPrefix("b", dad.animation.frameName, 1, true);
     dadBackdrop.animation.play("b", true);
     
-    dadBackdrop.frameOffset = dad.frameOffset;
+    //dadBackdrop.frameOffset = dad.frameOffset;
 }

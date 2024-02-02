@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-350" icon="garfield" camx="-250" y="10" isGF="false" camy="40" color="#D44D29" isPlayer="true" flipX="true" gameOverChar="face" holdTime="1.5" sprite="garfield_negocia">
+<character x="-350" icon="icon-garsad" camx="-250" y="10" isGF="false" camy="40" color="#D44D29" flipX="true" isPlayer="true" gameOverChar="face" holdTime="1.5" sprite="garfield_negocia">
 	<anim x="0" loop="true" y="0" fps="24" anim="garfield negocia idle" name="idle"/>
 	<anim x="95" loop="false" y="20" fps="24" anim="garfield negocia left0" name="singLEFT"/>
 	<anim x="48" loop="false" y="-28" fps="24" anim="garfield negocia down0" name="singDOWN"/>

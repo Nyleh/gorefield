@@ -1290,7 +1290,7 @@ var CodesFunctions:{} = {
 	unlockAll: function() {
 		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
-		FlxG.save.data.extrasSongsIcons = ["garfield-sad", "lyman", "breaking-garfield"];
+		FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "breaking-garfield"];
 
 		weeksUnlocked = weeksFinished = [true, true, true, true, true, true, true, true, true];
 
@@ -1337,6 +1337,11 @@ var codes:Map<String, Void -> Void> = [
 	// Extras codes
 	"SPIDERS" => function() CodesFunctions.meme("cry")
 	// "MOUSTACHE",
+	"SANS" => function() CodesFunctions.meme("SANS")
+	"JLOOR" => function() CodesFunctions.meme("JLOOR")
+	"FNF" => function() CodesFunctions.meme("FNF")
+	// "PUEBLO MARRON" => function() CodesFunctions.meme("Pueblo_Marron")
+	"PERUFIELD" => function() CodesFunctions.image("cuy"),
 ];
 
 function selectCode():Void {

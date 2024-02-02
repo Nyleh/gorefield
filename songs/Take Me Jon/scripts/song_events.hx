@@ -22,8 +22,8 @@ function postCreate()
 
     gorefieldiconP2.visible = false;
 
-    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2])
-        spr.alpha = 0;
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar])
+        spr.alpha = 0.35;
 
     if (!FlxG.save.data.vhs)
         return;
@@ -132,7 +132,7 @@ function update(elapsed){
     camHUD.angle = lerp(camHUD.angle, 0, .1);
 
     for (spr in [gorefieldiconP1, gorefieldiconP2])
-        spr.alpha = 0;
+        spr.alpha = 0.35;
 
     if (FlxG.save.data.static)
         staticShader.time = totalTime;
