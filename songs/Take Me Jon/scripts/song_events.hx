@@ -75,6 +75,7 @@ function tweenCamera(in:Bool){
 }
 
 var boogie:Bool = false;
+var alphaControlIcon2:Bool = true;
 function stepHit(step:Int) {
     switch (step) {
         case 238:
@@ -96,9 +97,24 @@ function stepHit(step:Int) {
 
             snapCam();
         case 496:
+            alphaControlIcon2 = false;
             FlxTween.tween(blackOverlay, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
+            FlxTween.tween(gorefieldiconP2, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8);
         case 528:
+            stage.stageSprites["fondo3"].alpha = 0;
             FlxTween.tween(blackOverlay, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);
+            stage.stageSprites["fondo4"].alpha = 1;
+
+            snapCam();
+            for (strum in strumLines){
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 0 | 2:
+                            for (char in strumLine.characters)
+                                char.visible = false;
+                    }
+                }
+            }
         case 656:
             boogie = true;
         case 784:
@@ -142,8 +158,15 @@ function update(elapsed) {
     FlxG.camera.angle = lerp(FlxG.camera.angle, 0, .1);
     camHUD.angle = lerp(camHUD.angle, 0, .1);
 
-    for (spr in [gorefieldiconP1, gorefieldiconP2])
-        spr.alpha = 0.35;
+    for (spr in [gorefieldiconP1, gorefieldiconP2]){
+        if (spr == gorefieldiconP2){
+            if (alphaControlIcon2)
+                spr.alpha = 0.35;
+        }
+        else{
+            spr.alpha = 0.35;
+        }
+    }
 
     if (FlxG.save.data.static)
         staticShader.time = totalTime;
