@@ -175,7 +175,7 @@ var freeplaySongLists = [
 // Television
 var blackBackground:FlxSprite;
 var videos:Array<FlxVideoSprite> = [];
-var videosChannel:Array<String> = ["CH1","CH2","CH3","CH4"];
+var videosChannel:Array<String> = ["CH1","CH2","CH3","CH4", "CH5"];
 static var curVideo:Int = 0;
 var isTVOn:Bool = false;
 var television:FlxSprite;
@@ -394,7 +394,7 @@ function create() {
 
 	prevAutoPause = FlxG.autoPause;
 	FlxG.autoPause = false; // Así evitamos que se añada el "resume" al momento de volver al juego y lo añadimos nosotros mismos con una condición -EstoyAburridow
-	for (path in ["Odivision_Channel", "Fat_Cat_TV", "Purrfect_Show", "Funny_Clown"]) {
+	for (path in ["Odivision_Channel", "Fat_Cat_TV", "Purrfect_Show", "Funny_Clown", "The_Unknow_World"]) {
 		video = new FlxVideoSprite(555, 186);
 		video.load(Assets.getPath(Paths.video(path)), [':input-repeat=65535']); // Lunar, actualiza la hxvlc lib porfis :sob: -EstoyAburridow
 
