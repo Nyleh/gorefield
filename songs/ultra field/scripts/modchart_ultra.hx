@@ -2,7 +2,10 @@ import funkin.backend.shaders.CustomShader;
 
 var ultraCam:FlxCamera;
 var chromaticWarpShader:CustomShader;
+var chromaticWarpShader2:CustomShader;
+var chromatic:CustomShader;
 var glowShader:CustomShader;
+var glowShader2:CustomShader;
 
 function create() {
     for (cam in [camGame, camHUD]) FlxG.cameras.remove(cam, false);
@@ -13,12 +16,22 @@ function create() {
     chromaticWarpShader = new CustomShader("warp");
     chromaticWarpShader.distortion = 3;
 
+    chromaticWarpShader2 = new CustomShader("warp");
+    chromaticWarpShader2.distortion = 1.25;
+
+    chromatic = new CustomShader("chromaticWarp");
+    chromatic.distortion = 0; 
+
     glowShader = new CustomShader("glow");
     glowShader.size = 20.0;
     glowShader.dim = 0.6;
 
-    if (FlxG.save.data.warp) ultraCam.addShader(chromaticWarpShader);
-    if (FlxG.save.data.bloom) ultraCam.addShader(glowShader);
+    glowShader2 = new CustomShader("glow");
+    glowShader2.size = 0.0;
+    glowShader2.dim = 2.2;
+
+    if (FlxG.save.data.warp) {ultraCam.addShader(chromaticWarpShader); camGame.addShader(chromaticWarpShader2); camGame.addShader(chromatic);}
+    if (FlxG.save.data.bloom) {ultraCam.addShader(glowShader); camGame.addShader(glowShader2); camHUD.addShader(glowShader2);}
     
     FlxG.cameras.add(ultraCam, false);
     for (cam in [camGame, camHUD]) {cam.bgColor = 0x00000000; FlxG.cameras.add(cam, cam == camGame);}
@@ -28,13 +41,9 @@ function onStrumCreation(strumEvent) if (strumEvent.player == 0) strumEvent.__do
 
 function postCreate() {
     ultraNotes();
-
-    /*
-    for (strum in playerStrums) {strum.visible = false; strum.alpha = 0;}
-
-    for (spr in [psychScoreTxt, timeTxt, timeBarBG, timeBar, gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2])
-        {spr.visible = false; spr.alpha = 0;}
-    */
+    camHUD.alpha = 0;
+    dad.cameraOffset.y -= 100;
+    boyfriend.cameraOffset.y += 100;
 }
 
 function ultraNotes() {
@@ -52,6 +61,9 @@ var doUltraFlashes:Bool = true;
 var dimTween:FlxTween;
 var sizeTween:FlxTween;
 var distortTween:FlxTween;
+var dimTween2:FlxTween;
+var sizeTween2:FlxTween;
+var abberationTween:FlxTween;
 function measureHit() {
     if (!doUltraFlashes) return;
 
@@ -69,19 +81,93 @@ function measureHit() {
         chromaticWarpShader.distortion = val;
     });
 }
-
+var glowThingy:Bool = false;
+var abberationStuff:Bool = false;
 function beatHit(beat:Int) {
-    switch (beat) {
-        case 64, 192: camZoomingInterval = 2; camZoomingStrength = 4;
-        case 128, 256: camZoomingInterval = 4; camZoomingStrength = 2;
+    if(glowThingy){
+        for (tween in [dimTween2, sizeTween2]) if (tween != null) tween.cancel();
+        dimTween2 = FlxTween.num(1, 2.2, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadOut}, (val:Float) -> {
+            glowShader2.dim = val;
+        });
+    
+        sizeTween2 = FlxTween.num(10.0, 0.0, (Conductor.stepCrochet / 1000) * 2, {ease: FlxEase.quadOut}, (val:Float) -> {
+            glowShader2.size = val;
+        });
     }
 
-    // Still do the normal bumps cause they cool
-    if (camZoomingStrength > 0 && camZoomingInterval != 4) {
-        if (camZooming && FlxG.camera.zoom < maxCamZoom && curBeat % 4 == 0)
-            {
-                FlxG.camera.zoom += 0.015 * camZoomingStrength;
-                camHUD.zoom += 0.03;
+    if(abberationStuff){
+        if(beat % 2 == 0){
+            if(abberationTween != null) abberationTween.cancel();
+            abberationTween = FlxTween.num((curStep >= 1152 && curStep < 1408) ? 2 : 1.2, 0, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut}, (val:Float) -> {
+                chromatic.distortion = val;
+            });
+        }
+    }
+}
+
+var tottalTime:Float = 0;
+var coolSineMulti:Float = 0.8;
+var coolSineX:Bool = false;
+var coolSineY:Bool = false;
+function update(elapsed:Float){
+    tottalTime += elapsed;
+    camHUD.angle = lerp(camHUD.angle, coolSineY ? (3* coolSineMulti)*FlxMath.fastSin(tottalTime*2) : 0, 0.25);
+    camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime*1.6 + Math.PI*2)*(9*coolSineMulti) : 0, 0.25);
+    camHUD.x = lerp(camHUD.x, coolSineX ? FlxMath.fastCos(tottalTime*2 + Math.PI*2)*(12*coolSineMulti) : 0, 0.25);
+}
+
+function stepHit(step:Int){
+    switch(step){
+        case 0:
+            lerpCam = false;
+            FlxG.camera.zoom += 0.9;
+            FlxTween.tween(FlxG.camera,{zoom: FlxG.camera.zoom - 0.9}, (Conductor.stepCrochet / 1000) * 248);
+            FlxTween.tween(stage.stageSprites["black"],{alpha: 0}, (Conductor.stepCrochet / 1000) * 298);
+        case 252:
+            lerpCam = true;
+            dad.cameraOffset.y += 100;
+            boyfriend.cameraOffset.y -= 100;
+            FlxTween.tween(camHUD,{alpha: 1},(Conductor.stepCrochet / 1000) * 4);
+        case 384 | 1024:
+            abberationStuff = true;
+            if (step == 1024){
+                coolSineX = coolSineY = true;
             }
+        case 768 | 1681:
+            abberationStuff = false;
+            if(step == 1681){
+                coolSineX = coolSineY = glowThingy = false;
+            }
+        case 896:
+            camFollowChars = false;
+            camFollow.y = -100;
+            tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 8);
+            defaultCamZoom -= 0.25;
+        case 906:
+            FlxTween.tween(FlxG.camera,{zoom: FlxG.camera.zoom - 0.2}, (Conductor.stepCrochet / 1000) * 109);
+        case 1016:
+            camFollowChars = true;
+            tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 8);
+            defaultCamZoom += 0.25;
+        case 1152 | 1552: 
+            glowThingy = true;
+        case 1408:
+            glowThingy = false;
+        case 1424:
+            coolSineMulti = 1.3;
+        case 1648:
+            defaultCamZoom += 0.4;
+            boyfriend.cameraOffset.y += 120;
+        case 1692:
+            defaultCamZoom -= 0.4;
+            boyfriend.cameraOffset.y -= 120;
+        case 1696:
+            camFollowChars = false;
+            zoomDisabled = true;
+            camFollow.y = -100;
+            FlxTween.tween(camHUD,{alpha: 0},(Conductor.stepCrochet / 1000) * 4);
+            FlxTween.tween(FlxG.camera,{zoom: FlxG.camera.zoom - 0.6}, (Conductor.stepCrochet / 1000) * 128);
+        case 1824:
+            camGame.visible = camHUD.visible = ultraCam.visible = false;
     }
 }

@@ -15,6 +15,29 @@ function create()
     if (FlxG.save.data.saturation) camHUD.addShader(saturationShader);
 }
 
+function postCreate(){
+	snapCam();
+
+    zoomDisabled = true;
+    FlxG.camera.zoom += 0.6;
+    stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
+    camHUD.alpha = 0.0001;
+    stage.stageSprites["overlay"].alpha = 0;
+    tweenHealthBar(0,0.001);
+}
+
+function onStartCountdown(event){
+    FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, 1.5, {startDelay: 0.4, onComplete: (tmr:FlxTween) -> {
+        stage.stageSprites["black"].visible = false;
+        stage.stageSprites["black"].alpha = 1;
+    }});
+    FlxTween.tween(camHUD, {alpha: 1}, .5, {startDelay: 0.4});
+    FlxTween.tween(stage.stageSprites["overlay"], {alpha: 1}, .3, {startDelay: 0.4});
+    FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2, {ease: FlxEase.cubeOut, startDelay: 0.4, onComplete: (tmr:FlxTween) -> {
+        zoomDisabled = false;
+    }});
+}
+
 function update(elapsed:Float)
     saturationShader.sat = saturation = lerp(saturation, newSaturation, 1/30);
 
@@ -27,8 +50,11 @@ function stepHit(step:Int)
     // No heart flicker? :sob:
     switch (step) 
     {
+        case 120:
+            tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 2);
         case 637 | 638 | 639 | 640: // * Black screen flickering
-            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = !stage.stageSprites["black"].visible;
+            stage.stageSprites["black"].active = stage.stageSprites["black"].visible = stage.stageSprites["overlay"].visible = !stage.stageSprites["black"].visible;
+            tweenHealthBar(stage.stageSprites["black"].visible ? 0 : 1,0.001);
 
             if (step != 640) return; // * Stage Change
 
@@ -59,8 +85,25 @@ function stepHit(step:Int)
         case 748: FlxG.camera.zoom += 0.04;
         case 760: FlxG.camera.zoom += 0.02;
         case 768: FlxTween.tween(camHUD, {alpha: 1}, (Conductor.crochet * 2) / 1000);
-        case 960: FlxG.camera.shake(0.05, ((Conductor.crochet / 4) / 1000));
+        case 816:
+            strumLineGfZoom += 0.2;
+        case 832:  
+            strumLineGfZoom -= 0.2;
+        case 944: 
+            strumLineGfZoom += 0.4;
+            gf.cameraOffset.x -= 200;
+            gf.cameraOffset.y += 50;
+            tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 3);
+        case 960: 
+            strumLineGfZoom -= 0.4;
+            FlxG.camera.shake(0.05, ((Conductor.crochet / 4) / 1000));
+            tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 4);
         case 965: gf.active = gf.visible = false; camZoomingStrength = 1;
+        case 1136:
+            strumLineBfZoom += 0.4;
+            boyfriend.cameraOffset.x += 350;
+            boyfriend.cameraOffset.y += 50;
+            tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 6);
         case 1152: 
             stage.stageSprites["black"].alpha = 0;
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;

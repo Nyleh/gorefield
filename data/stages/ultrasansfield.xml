@@ -9,4 +9,8 @@
 	<opponent x="-72" y="-520" camxoffset="0" camyoffset="100"/>
 	<player x="370" y="-170" camxoffset="-50" camyoffset="-200"/>
 	<sprite name="sansFieldHUD" x="0" y="0" sprite="cuadro_ULTRA" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
+	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
+		<property name="scrollFactor.x" type="float" value="0"/>
+		<property name="scrollFactor.y" type="float" value="0"/>
+	</solid>
 </stage>
