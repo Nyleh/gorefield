@@ -1,4 +1,5 @@
 import funkin.backend.shaders.CustomShader;
+import funkin.backend.utils.FlxInterpolateColor;
 
 var ultraCam:FlxCamera;
 var chromaticWarpShader:CustomShader;
@@ -6,6 +7,9 @@ var chromaticWarpShader2:CustomShader;
 var chromatic:CustomShader;
 var glowShader:CustomShader;
 var glowShader2:CustomShader;
+
+var overlay:FlxSprite;
+var overlayColor:FlxInterpolateColor;
 
 function create() {
     for (cam in [camGame, camHUD]) FlxG.cameras.remove(cam, false);
@@ -35,6 +39,9 @@ function create() {
     
     FlxG.cameras.add(ultraCam, false);
     for (cam in [camGame, camHUD]) {cam.bgColor = 0x00000000; FlxG.cameras.add(cam, cam == camGame);}
+
+    overlay = stage.stageSprites["overlay"];
+    overlayColor = new FlxInterpolateColor(0xFFFFFFFF);
 }
 
 function onStrumCreation(strumEvent) if (strumEvent.player == 0) strumEvent.__doAnimation = false;
@@ -98,7 +105,7 @@ function beatHit(beat:Int) {
     if(abberationStuff){
         if(beat % 2 == 0){
             if(abberationTween != null) abberationTween.cancel();
-            abberationTween = FlxTween.num((curStep >= 1152 && curStep < 1408) ? 2 : 1.2, 0, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut}, (val:Float) -> {
+            abberationTween = FlxTween.num((curStep >= 1152 && curStep < 1408) ? 1.4 : 1.2, 0, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut}, (val:Float) -> {
                 chromatic.distortion = val;
             });
         }
@@ -114,6 +121,24 @@ function update(elapsed:Float){
     camHUD.angle = lerp(camHUD.angle, coolSineY ? (3* coolSineMulti)*FlxMath.fastSin(tottalTime*2) : 0, 0.25);
     camHUD.y = lerp(camHUD.y, coolSineY ? FlxMath.fastSin(tottalTime*1.6 + Math.PI*2)*(9*coolSineMulti) : 0, 0.25);
     camHUD.x = lerp(camHUD.x, coolSineX ? FlxMath.fastCos(tottalTime*2 + Math.PI*2)*(12*coolSineMulti) : 0, 0.25);
+
+    overlayColor.fpsLerpTo(switch (dad.animation.name) {
+        case "singLEFT": 0xFFF122A9;
+        case "singDOWN": 0xFF00FFFF;
+        case "singUP": 0xFF12FA05;
+        case "singRIGHT": 0xFFF9393F;
+        default: 0xFFFFFFFF;
+    }, 1/4);
+    overlay.color = overlayColor.color;
+
+    overlay.alpha = lerp(overlay.alpha, switch (dad.animation.name) {
+        case "singLEFT" | "singDOWN" | "singUP" | "singRIGHT" : (curStep >= 1152) ? 1 : 0.6;
+        default: 0;
+    }, 
+        switch (dad.animation.name) { //LERP SPEED
+            case "singLEFT" | "singDOWN" | "singUP" | "singRIGHT" : 1/4;
+            default: 1/22;
+    } * elapsed * 32);
 }
 
 function stepHit(step:Int){
@@ -137,6 +162,7 @@ function stepHit(step:Int){
             abberationStuff = false;
             if(step == 1681){
                 coolSineX = coolSineY = glowThingy = false;
+                defaultHudZoom += 0.3;
             }
         case 896:
             camFollowChars = false;
@@ -145,16 +171,22 @@ function stepHit(step:Int){
             defaultCamZoom -= 0.25;
         case 906:
             FlxTween.tween(FlxG.camera,{zoom: FlxG.camera.zoom - 0.2}, (Conductor.stepCrochet / 1000) * 109);
+            FlxTween.num(defaultHudZoom, .85, (Conductor.stepCrochet / 1000) * 109, {ease: FlxEase.circOut}, (val:Float) -> {defaultHudZoom = val;});
         case 1016:
             camFollowChars = true;
             tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 8);
             defaultCamZoom += 0.25;
+            defaultHudZoom = 1;
         case 1152 | 1552: 
             glowThingy = true;
         case 1408:
+            camHUD.alpha = 0;
+            tweenHealthBar(0.3,(Conductor.stepCrochet / 1000) * 2);
             glowThingy = false;
+        case 1420: FlxTween.tween(camHUD,{alpha: 1},(Conductor.stepCrochet / 1000) * 4);
         case 1424:
             coolSineMulti = 1.3;
+            defaultHudZoom -= 0.3;
         case 1648:
             defaultCamZoom += 0.4;
             boyfriend.cameraOffset.y += 120;
