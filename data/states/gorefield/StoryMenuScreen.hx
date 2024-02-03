@@ -1342,6 +1342,7 @@ var codes:Map<String, Void -> Void> = [
 	"FNF" => function() CodesFunctions.meme("FNF")
 	"TOP 5" => function() CodesFunctions.meme("top 5")
 	// "PUEBLO MARRON" => function() CodesFunctions.meme("Pueblo_Marron")
+	"YO SOY LUIGI" => function() CodesFunctions.meme("yo soy luigi")
 	"PERUFIELD" => function() CodesFunctions.image("cuy"),
 ];
 
