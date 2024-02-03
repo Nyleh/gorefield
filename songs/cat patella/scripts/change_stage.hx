@@ -16,7 +16,7 @@ function create()
 }
 
 function postCreate(){
-	snapCam();
+	if(!PlayState.isStoryMode) snapCam();
 
     zoomDisabled = true;
     FlxG.camera.zoom += 0.6;
@@ -24,9 +24,15 @@ function postCreate(){
     camHUD.alpha = 0.0001;
     stage.stageSprites["overlay"].alpha = 0;
     tweenHealthBar(0,0.001);
+
+    for (strum in strumLines)
+        for (strumNotes in strum.members)
+            strumNotes.y += camHUD.downscroll ? -200 : 700;
 }
 
 function onStartCountdown(event){
+    if(PlayState.isStoryMode) snapCam();
+
     FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, 1.5, {startDelay: 0.4, onComplete: (tmr:FlxTween) -> {
         stage.stageSprites["black"].visible = false;
         stage.stageSprites["black"].alpha = 1;
@@ -52,6 +58,12 @@ function stepHit(step:Int)
     {
         case 120:
             tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 2);
+
+            for (strum in strumLines)
+                for (i => strumNote in strum.members){
+                    strumNote.angle -= camHUD.downscroll ? -180 : 180;
+                    FlxTween.tween(strumNote, {y: strumNote.y - (camHUD.downscroll ? -200 : 700), angle: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.cubeOut, startDelay: 0.1 * i});
+                }
         case 637 | 638 | 639 | 640: // * Black screen flickering
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = stage.stageSprites["overlay"].visible = !stage.stageSprites["black"].visible;
             tweenHealthBar(stage.stageSprites["black"].visible ? 0 : 1,0.001);
@@ -110,3 +122,5 @@ function stepHit(step:Int)
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.crochet * 4) / 1000);
     }
 }
+
+function onStrumCreation(_) _.__doAnimation = false;
