@@ -385,7 +385,7 @@ function switchPortrait(time:Float, newOne:String) {
 	(val:Float) -> {cloudPortraits.get(newOne).visible = true; cloudPortraits.get(newOne).alpha = (Math.floor((val*100)/8)*8)/100;});
 }
 
-function onDestroy() Framerate.instance.visible = true;
+function destroy() Framerate.instance.visible = true;
 
 var testingDialogue:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [
 	{

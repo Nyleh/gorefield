@@ -277,4 +277,4 @@ function changeSelection(change:Int)
 	descTextName.screenCenter(FlxAxes.X);
 }
 
-function onDestroy() Framerate.instance.visible = true;
+function destroy() Framerate.instance.visible = true;

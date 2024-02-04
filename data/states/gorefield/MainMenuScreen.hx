@@ -330,7 +330,7 @@ function beatHit(curBeat:Int) {
 		gorefield.animation.play('beat',true);
 }
 
-function onDestroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}
+function destroy() {FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0);curMainMenuSelected = curSelected;}
 
 // easter eggs
 var penkOrder:Array<Int> = [1, 2, 3, 4];

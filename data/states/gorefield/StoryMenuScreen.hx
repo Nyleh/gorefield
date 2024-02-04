@@ -1363,7 +1363,7 @@ function incorrectCode():Void {
 	FlxG.sound.play(Paths.sound("menu/story/locked"));
 }
 
-function onDestroy() {
+function destroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
 	curStoryMenuSelected = curWeek; 
 	Framerate.offset.y = 0; Framerate.debugMode = lastFrameRateMode;

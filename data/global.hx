@@ -73,4 +73,4 @@ function preStateSwitch() {
             FlxG.game._requestedState = new ModState(redirectStates.get(redirectState));
 }
 
-function onDestroy() FlxG.camera.bgColor = 0xFF000000;
+function destroy() FlxG.camera.bgColor = 0xFF000000;
