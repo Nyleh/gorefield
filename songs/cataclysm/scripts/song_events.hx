@@ -32,8 +32,23 @@ function create()
     } 
 }
 
-function onStartCountdown(event) 
-{
+function postCreate() {
+    for (sprite in stage.stageSprites)
+        sprite.alpha = 0;
+
+    stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 0;
+    stage.stageSprites["RAYO_DIVISOR"].alpha = stage.stageSprites["viento"].alpha = 1;
+    forceDefaultCamZoom = true;
+    defaultCamZoom = 0.7;
+
+    camFollowChars = false; camFollow.setPosition(-50, -320);
+
+    jonTrail.visible = jonTrail.active = jonFlying = false;
+    
+    snapCam();
+}
+
+function onStartCountdown(event) {
     event.cancel(true); 
 
     new FlxTimer().start(0.001, function(_)
@@ -55,7 +70,7 @@ function update(elapsed:Float) {
 }
 
 function stepHit(step:Int) {
-    switch (step){
+    switch (step) {
         case 1052:
             FlxTween.tween(camHUD, {alpha: 0}, 0.5);
         case 1059:
@@ -155,5 +170,30 @@ function stepHit(step:Int) {
                 spr.alpha = 0.2;
             
             snapCam();
+
+        // Test
+        case 92:
+            for (sprite in ["RAYO_DIVISOR", "viento"])
+                FlxTween.tween(stage.stageSprites[sprite], {alpha: 0}, 0.4, {
+                    onComplete: function() {
+                        stage.stageSprites[sprite].active = false;
+                    }
+                });
+
+            FlxTween.tween(dad, {y: dad.y + 600}, 0.7, {startDelay: 0.2});
+            FlxTween.tween(boyfriend, {y: boyfriend.y + 240}, 0.7, {startDelay: 0.2});
+        case 101:
+            gorefieldiconP1.alpha = 0.2;
+
+            boyfriend.animation.finishCallback = function(name:String) {
+                if (name == "transition") {
+                    
+                }
+            }
+        case 136:
+            gorefieldiconP2.alpha = 0.2;
+            dad.y = -330;
+
+            FlxG.camera.zoom = defaultCamZoom = 0.85;
     }
 }
