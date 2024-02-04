@@ -17,7 +17,7 @@
 		<anim name="lightning_bolt" anim="RAYO 2" loop="false"/>
 		<property name="visible" type="bool" value="false"/>
 	</sprite>
-	<solid name="black" x="600" y="300" width="1280" height="720" color="0x000000">
+	<solid name="black" x="600" y="-300" width="2600" height="1480" color="0x000000">
 		<property name="visible" type="bool" value="false"/>
 	</solid>
 </stage>
