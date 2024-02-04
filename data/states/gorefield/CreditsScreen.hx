@@ -128,7 +128,7 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Cartoon Cat Team", 	
 		["Cartoon Cat Team", "Cartoon Cat Team"], 
-		["Hey hey hey skidibi, no digas toilet", "Hey hey hey skidibi, no digas toilet"]
+		["iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson and FRANDERMAN123", "iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson y FRANDERMAN123"]
 	]
 ];
 
