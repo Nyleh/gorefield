@@ -1,5 +1,5 @@
 function postCreate(){
-    tweenHUD(0,0.0001);
+    tweenHUD(0,0.01);
     snapCam();
 }
 
