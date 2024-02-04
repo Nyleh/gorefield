@@ -1267,8 +1267,8 @@ var CodesFunctions:{} = {
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
 		FlxG.sound.play(Paths.sound("menu/story/secretsong"));
 		FlxG.sound.music.fadeOut(0.4, 0);
-		FlxTween.tween(camText, {zoom: 1.6}, 2.6, {ease: FlxEase.circInOut});
-		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 2.6, {ease: FlxEase.circInOut, 
+		FlxTween.tween(camText, {zoom: 1.6}, 3.1, {ease: FlxEase.circInOut});
+		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 3.1, {ease: FlxEase.circInOut, 
 			onComplete: function () {
 				PlayState.loadSong(songName, "hard", false, false);
 				PlayState.isStoryMode = PlayState.chartingMode = false;
