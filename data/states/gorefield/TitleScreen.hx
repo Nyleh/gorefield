@@ -118,22 +118,43 @@ function beatHit(curBeat:Int) {
 	if(skippedIntro) return;
 	switch (curBeat)
 	{
+/* Querido Lean y estimado equipo de coders:
+
+Es un honor para mí dirigirme a ustedes en esta ocasión con el propósito de compartir una 
+sugerencia constructiva que podría aportar un valor considerable a nuestro trabajo conjunto.
+Me gustaría expresar mi firme convicción en la importancia de mantener los mensajes tal
+cual como están ahora en esta pantalla de introducción. Es crucial que, independientemente 
+del idioma utilizado, estos mensajes se mantengan igual, ya que proporcionen una experiencia 
+fluida y armoniosa a nuestros usuarios.
+
+Esta sugerencia que ahora comparto con ustedes, a diferencia de la última acerca del 
+CreditsScreen fue una orden directa de BitfoxOriginal, cualquier duda que tengan, la 
+pueden consultar con él. Estoy seguro de que implementar esta recomendación, contribuirá 
+significativamente a elevar la satisfacción y fidelidad de nuestros usuarios.
+
+Les agradezco sinceramente por dedicar su tiempo y consideración a este asunto. Su atención 
+y colaboración son vitales para alcanzar y superar los estándares de calidad que nos 
+esforzamos por mantener en cada paso de nuestro camino hacia la excelencia.
+
+Con un profundo aprecio y gratitud por su compromiso y dedicación,
+
+EstoyAburridow */ 
 		case 2: createCoolText(["FNF' Gorefield Team"]);
-		case 4: addMoreText('Present');
+		case 4: addMoreText(FlxG.save.data.spanish ? 'Presenta' : 'Present');
 		case 5: deleteCoolText();
-		case 6: createCoolText(['In not association', 'with'], -40);
+		case 6: createCoolText(FlxG.save.data.spanish ? ['Sin asociación', 'con'] : ['In not association', 'with'], -40);
 		case 8: addMoreText('newgrounds', -40); ngSpr.visible = true;
 		case 9: deleteCoolText(); ngSpr.visible = false;
-		case 10: createCoolText(["Dathree estuvo aqui"]);
+		case 10: createCoolText(FlxG.save.data.spanish ? ["Dathree estuvo aqui"] : ["Dathree was here"]);
 		case 12: addMoreText("'Dathree'");
 		case 13: deleteCoolText();
-		case 14: createCoolText(["I don't speak spanish"]);
+		case 14: createCoolText([FlxG.save.data.spanish ? "I don't speak spanish" : "Yo no hablo inglés"]);
 		case 15: addMoreText("'Lean'");
 		case 16: deleteCoolText();
-		case 17: createCoolText(["Gorefield para ti BB"]);
+		case 17: createCoolText([FlxG.save.data.spanish ? "Gorefield para ti BB" : "Gorefield for you BB"]);
 		case 18: addMoreText("'Nexus'");
 		case 19: deleteCoolText();
-		case 20: createCoolText(["Jon requiero enchiladas"]);
+		case 20: createCoolText([FlxG.save.data.spanish ? "Jon requiero enchiladas" : "Jon I require enchiladas"]);
 		case 21: addMoreText("'Bitfox'");
 		case 22: deleteCoolText();
 		case 23: createCoolText(["Fifa 24"]);
@@ -142,12 +163,12 @@ function beatHit(curBeat:Int) {
 		case 26: createCoolText(["JLoorcito fiu fiu"]);
 		case 27: addMoreText("'Zero'");
 		case 28: deleteCoolText();
-		case 29: createCoolText(["el peor mod de fnf"]);
+		case 29: createCoolText([FlxG.save.data.spanish ? "el peor mod de fnf" : "the worst fnf mod"]);
 		case 30: addMoreText("'Keneth'");
 		case 31: deleteCoolText();
 		case 32: addMoreText("FNF'");
 		case 33: addMoreText('Vs Gorefield');
-		case 34: addMoreText('Part II');
+		case 34: addMoreText(FlxG.save.data.spanish ? "Parte II" : 'Part II');
 		case 35:
 			if(!FlxG.random.bool(10)) return;
 			deleteCoolText();
