@@ -15,6 +15,7 @@ var wiggleGorefield:FlxSprite;
 var vigentte:FlxSprite;
 
 function create() {
+	FlxG.sound.playMusic(Paths.music('gorefield-menuLOOP'),0);
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 	FlxG.mouse.visible = false;
 
