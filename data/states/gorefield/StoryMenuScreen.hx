@@ -1265,9 +1265,10 @@ var CodesFunctions:{} = {
 		}
 
 		FlxTween.tween(vigentte, {alpha:1}, 1.2);
-
-		FlxTween.tween(camText, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut});
-		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 1.6, {ease: FlxEase.circInOut, 
+		FlxG.sound.play(Paths.sound("menu/story/secretsong"));
+		FlxG.sound.music.fadeOut(0.4, 0);
+		FlxTween.tween(camText, {zoom: 1.6}, 2.6, {ease: FlxEase.circInOut});
+		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 2.6, {ease: FlxEase.circInOut, 
 			onComplete: function () {
 				PlayState.loadSong(songName, "hard", false, false);
 				PlayState.isStoryMode = PlayState.chartingMode = false;
@@ -1283,8 +1284,8 @@ var CodesFunctions:{} = {
 		});
 
 		for (cam in [FlxG.camera, camText, camBG]) {
-			FlxTween.tween(cam.scroll, {x: -50, y: 50}, 1, {ease: FlxEase.qaudInOut});
-			FlxTween.tween(cam, {alpha: 0}, 1);
+			FlxTween.tween(cam.scroll, {x: -50, y: 50}, 2, {ease: FlxEase.qaudInOut});
+			FlxTween.tween(cam, {alpha: 0}, 2);
 		}	
 	},
 	unlockAll: function() {
