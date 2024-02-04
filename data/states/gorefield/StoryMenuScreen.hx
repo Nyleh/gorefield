@@ -1320,7 +1320,7 @@ var codes:Map<String, Void -> Void> = [
 
 	// Dev codes
 	// "CASSETTE",
-	"ESTOY", => function() CodesFunctions.meme("Test"),
+	"ESTOY" => function() CodesFunctions.meme("Test"),
 	"PIJURRO" => function() CodesFunctions.image("PIJURRO"),
 	"RECIPE" => function() CodesFunctions.meme("SDFSDF"),
 	"GOKU BLACK" => function() CodesFunctions.meme("GOKU_NEGRO"),
