@@ -67,8 +67,6 @@ function create() {
 }
 
 function update(elapsed:Float){
-    strumLineBfZoom = 0.1;
-
     var _curBeat:Float = ((Conductor.songPosition / 1000) * (Conductor.bpm / 60) + ((Conductor.stepCrochet / 1000) * 16));
     if(jonFlying)
         dad.y = 400 + (40 * FlxMath.fastSin(_curBeat*0.8));

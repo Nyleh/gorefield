@@ -1,0 +1,12 @@
+<!DOCTYPE codename-engine-character>
+<character x="-110" icon="face" y="-850" isGF="false" color="#999999" flipX="true" isPlayer="true" gameOverChar="bf-blue">
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS DOWN" name="singDOWNmiss"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS LEFT" name="singLEFTmiss"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS RIGHT" name="singRIGHTmiss"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS UP" name="singUPmiss"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ NERMALL DOWN" name="singDOWN"/>
+	<anim x="0" loop="false" y="0" fps="30" anim="CRUZ NERMALL IDLE" name="idle"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ NERMALL LEFT" name="singLEFT"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ NERMALL RIGHT" name="singRIGHT"/>
+	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ NERMALL UP" name="singUP"/>
+</character>
