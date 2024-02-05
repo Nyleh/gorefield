@@ -6,7 +6,7 @@ var cinematicBar2:FunkinSprite = null;
 
 function create() {
     for (i in 0...2) {
-        var cinematicBar:FunkinSprite = new FunkinSprite().makeSolid(1, 1, 0xFF000000);
+        var cinematicBar:FunkinSprite = new FunkinSprite().makeSolid(1, 1, 0xFFFFFFFF);
         cinematicBar.scrollFactor.set(0, 0);
         cinematicBar.zoomFactor = 0;
         cinematicBar.cameras = [camHUD];
@@ -29,6 +29,7 @@ function update(elapsed:Float) {
 function onEvent(eventEvent) {
     var params:Array = eventEvent.event.params;
     if (eventEvent.event.name == "Cineamatic Bars") {
+        for (bar in [cinematicBar1, cinematicBar2]) bar.color = params[5];
         if (params[0] == false)
             for (bar in [cinematicBar1, cinematicBar2]) {
                 bar.scale.y = (FlxG.height/2) * params[1];

@@ -33,10 +33,10 @@ function create()
 	add(dodgeCat);
 
 	stage.stageSprites["lasagnaCat"].color = 0xFF000000;
+	stage.stageSprites["lasagnaCat"].colorTransform.color = 0xFF527F3A;
 	stage.stageSprites["lasagnaCat"].drawComplex(FlxG.camera);
 	
-	stage.stageSprites["black"].cameras = [camHUD];
-	stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
+	stage.stageSprites["nonblack"].active = stage.stageSprites["nonblack"].visible = true;
 }
 
 function stepHit(step:Int) 
@@ -44,7 +44,7 @@ function stepHit(step:Int)
     switch (step) 
     {
         case 0:
-			FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 140);
+			FlxTween.tween(stage.stageSprites["nonblack"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 140);
 			maxCamZoom = 0;
 		case 128:
 			defaultCamZoom += 0.5;
@@ -111,8 +111,8 @@ function stepHit(step:Int)
 			dodgeCat.playAnim('scape', true);
 			dodgeCat.animation.finishCallback = (name:String) -> {if (name == 'scape') dodgeCat.visible = false;};
 		case 1568:
-			stage.stageSprites["black"].alpha = 0;
-            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
+			stage.stageSprites["nonblack"].alpha = 0;
+            FlxTween.tween(stage.stageSprites["nonblack"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
 		case 1587:
 			tweenHUD(0,(Conductor.stepCrochet / 1000) * 4);
     }

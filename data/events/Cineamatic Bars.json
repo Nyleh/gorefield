@@ -24,6 +24,11 @@
             "name": "Tween Type (ex: InOut)",
             "type": "DropDown('In', 'Out', 'InOut')",
             "defaultValue": "In"
+        },
+        {
+            "name": "Color",
+            "type": "ColorWheel",
+            "defaultValue": "#000000"
         }
     ]
 }
