@@ -2,6 +2,7 @@ importScript("data/scripts/ps-bar");
 
 function onNoteCreation(event)
     if (event.noteType == "PS Note") {
+        event.note.avoid = true;
         if (FlxG.save.data.baby) {
             event.note.strumTime -= 999999;
             event.note.exists = event.note.active = event.note.visible = false;

@@ -67,6 +67,7 @@ function scream() {
 
 function onNoteCreation(event)
     if (event.noteType == "Scream Note") {
+        event.note.avoid = true;
         event.note.latePressWindow = 0.25;
         if (FlxG.save.data.scare_hard) event.note.alpha = 0.5;
         

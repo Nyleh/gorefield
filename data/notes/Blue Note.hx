@@ -1,6 +1,7 @@
 function onNoteCreation(event) {
     if (event.noteType != "Blue Note") return;
     event.cancel(true); // stop continued calls to other script
+    event.note.avoid = true;
 
     if (FlxG.save.data.baby) {
         event.note.strumTime -= 999999;

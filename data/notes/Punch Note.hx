@@ -3,6 +3,7 @@ importScript("data/scripts/ps-bar");
 function onNoteCreation(event) {
     if (event.noteType != "Punch Note") return;
     event.cancel(true); // stop continued calls to other script
+    event.note.avoid = true;
 
     if (FlxG.save.data.baby) 
 	{
