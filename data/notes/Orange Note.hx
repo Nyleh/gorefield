@@ -40,7 +40,7 @@ function onPlayerHit(event)
 function onPlayerMiss(event)
     if (event.noteType == "Orange Note") 
     {
-        health -= FlxG.save.data.orange_hard ? 0.25 : 2/3;
+        health -= FlxG.save.data.orange_hard ? 2/3 : 0.25;
 
         event.note.strumLine.deleteNote(event.note);
         event.cancel(true);
