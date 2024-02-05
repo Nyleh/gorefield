@@ -1291,7 +1291,7 @@ var CodesFunctions:{} = {
 	unlockAll: function() {
 		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
-		FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "breaking-garfield"];
+		FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "walter"];
 
 		weeksUnlocked = weeksFinished = [true, true, true, true, true, true, true, true, true];
 
