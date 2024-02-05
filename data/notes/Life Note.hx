@@ -1,6 +1,7 @@
 function onNoteCreation(event) {
     if (event.noteType != "Life Note") return;
     event.cancel(true); // stop continued calls to other scripts
+    event.note.avoid = true;
 
     if (FlxG.save.data.baby) {
         event.note.strumTime -= 999999;
