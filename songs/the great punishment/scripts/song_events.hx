@@ -24,7 +24,7 @@ function create(){
 
     bloom = new CustomShader("glow");
     bloom.size = 8.0;// trailBloom.quality = 8.0;
-    bloom.dim = 1.4;// trailBloom.directions = 16.0;
+    bloom.dim = 1.7;// trailBloom.directions = 16.0;
     if (FlxG.save.data.bloom) FlxG.camera.addShader(bloom);
 
     staticShader = new CustomShader("tvstatic");
