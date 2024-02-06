@@ -47,7 +47,7 @@
 	<SubTexture name="JON DEATH SANSFIELD0027" x="2663" y="539" width="120" height="223" frameX="-165" frameY="-313" frameWidth="545" frameHeight="546"/>
 	<SubTexture name="JON DEATH SANSFIELD0028" x="2788" y="539" width="120" height="191" frameX="-165" frameY="-345" frameWidth="545" frameHeight="546"/>
 	<SubTexture name="JON DEATH SANSFIELD0029" x="2913" y="539" width="64" height="137" frameX="-186" frameY="-399" frameWidth="545" frameHeight="546"/>
-	<SubTexture name="JON DEATH SANSFIELD0030" x="2982" y="539" width="0" height="0" frameX="-200" frameY="-96" frameWidth="545" frameHeight="546"/>
+	<SubTexture name="JON DEATH SANSFIELD0030" x="2982" y="539" width="1" height="1" frameX="-200" frameY="-96" frameWidth="545" frameHeight="546"/>
 	<SubTexture name="JON DOWN0000" x="2987" y="539" width="265" height="399" frameX="0" frameY="-3" frameWidth="265" frameHeight="403"/>
 	<SubTexture name="JON DOWN0001" x="2987" y="539" width="265" height="399" frameX="0" frameY="-3" frameWidth="265" frameHeight="403"/>
 	<SubTexture name="JON DOWN0002" x="3257" y="539" width="260" height="403" frameX="0" frameY="0" frameWidth="265" frameHeight="403"/>

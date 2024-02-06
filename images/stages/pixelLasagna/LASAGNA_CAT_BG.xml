@@ -22,5 +22,5 @@
 	<SubTexture name="LASAGNA CAT RUN BG0017" x="1285" y="2113" width="1274" height="1049" frameX="-313" frameY="0" frameWidth="3772" frameHeight="1049"/>
 	<SubTexture name="LASAGNA CAT RUN BG0018" x="1285" y="2113" width="1274" height="1049" frameX="0" frameY="0" frameWidth="3772" frameHeight="1049"/>
 	<SubTexture name="LASAGNA CAT RUN BG0019" x="1285" y="2113" width="1274" height="1049" frameX="0" frameY="0" frameWidth="3772" frameHeight="1049"/>
-	<SubTexture name="LASAGNA CAT RUN BG0020" x="2564" y="2113" width="0" height="0" frameX="-2697" frameY="-164" frameWidth="3772" frameHeight="1049"/>
+	<SubTexture name="LASAGNA CAT RUN BG0020" x="2564" y="2113" width="1" height="1" frameX="-2697" frameY="-164" frameWidth="3772" frameHeight="1049"/>
 </TextureAtlas>
