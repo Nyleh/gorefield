@@ -28,6 +28,7 @@
 	</menu>
 	<checkbox id="spanish" name="Spanish Language" desc="Enable/Disable Spanish. (VAMO MESSI!!!!)" />
 	<checkbox id="dev" name="Developer Mode" desc="Enables debug_tools.hx, allows for speeding up/slowing down the game.
+	PRESS 1 - Skip Song
 	PRESS 2 - Slows Game By 10% (Min Speed: 10%)
 	PRESS 3 - Resets Game Speed To 100%
 	PRESS 4 - Speeds Game By 10% (Max Speed: 200%)

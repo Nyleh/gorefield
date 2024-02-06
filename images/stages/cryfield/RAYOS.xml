@@ -3,11 +3,11 @@
 	<!-- Created with Adobe Animate version 21.0.7.42652 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="RAYO 10000" x="5" y="5" width="278" height="594" frameX="-26" frameY="0" frameWidth="304" frameHeight="594"/>
-	<SubTexture name="RAYO 10001" x="288" y="5" width="0" height="0" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
-	<SubTexture name="RAYO 10002" x="288" y="5" width="0" height="0" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
+	<SubTexture name="RAYO 10001" x="288" y="5" width="1" height="1" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
+	<SubTexture name="RAYO 10002" x="288" y="5" width="1" height="1" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 10003" x="293" y="5" width="258" height="421" frameX="-10" frameY="-118" frameWidth="304" frameHeight="594"/>
-	<SubTexture name="RAYO 10004" x="556" y="5" width="0" height="0" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
-	<SubTexture name="RAYO 10005" x="556" y="5" width="0" height="0" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
+	<SubTexture name="RAYO 10004" x="556" y="5" width="1" height="1" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
+	<SubTexture name="RAYO 10005" x="556" y="5" width="1" height="1" frameX="-134" frameY="-107" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 10006" x="561" y="5" width="275" height="483" frameX="0" frameY="-70" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 10007" x="841" y="5" width="275" height="483" frameX="-1" frameY="-71" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 10008" x="1121" y="5" width="275" height="482" frameX="-2" frameY="-73" frameWidth="304" frameHeight="594"/>
@@ -29,10 +29,10 @@
 	<SubTexture name="RAYO 10024" x="1685" y="604" width="275" height="483" frameX="-12" frameY="-86" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 10025" x="1965" y="604" width="275" height="483" frameX="-12" frameY="-86" frameWidth="304" frameHeight="594"/>
 	<SubTexture name="RAYO 20000" x="2245" y="604" width="398" height="573" frameX="0" frameY="0" frameWidth="412" frameHeight="579"/>
-	<SubTexture name="RAYO 20001" x="2648" y="604" width="0" height="0" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
-	<SubTexture name="RAYO 20002" x="2648" y="604" width="0" height="0" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
+	<SubTexture name="RAYO 20001" x="2648" y="604" width="1" height="1" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
+	<SubTexture name="RAYO 20002" x="2648" y="604" width="1" height="1" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
 	<SubTexture name="RAYO 20003" x="2653" y="604" width="276" height="467" frameX="-136" frameY="-106" frameWidth="412" frameHeight="579"/>
-	<SubTexture name="RAYO 20004" x="2934" y="604" width="0" height="0" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
+	<SubTexture name="RAYO 20004" x="2934" y="604" width="1" height="1" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
 	<SubTexture name="RAYO 20005" x="2939" y="604" width="273" height="508" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
 	<SubTexture name="RAYO 20006" x="3217" y="604" width="273" height="509" frameX="-95" frameY="-65" frameWidth="412" frameHeight="579"/>
 	<SubTexture name="RAYO 20007" x="3495" y="604" width="273" height="508" frameX="-94" frameY="-66" frameWidth="412" frameHeight="579"/>
