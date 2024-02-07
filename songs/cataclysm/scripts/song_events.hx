@@ -154,11 +154,11 @@ function stepHit(step:Int) {
 
             camFollowChars = false; camFollow.setPosition(-50, -320);
 
+            snapCam();
+        case 3857:
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
                 spr.alpha = 0.2;
             
-            snapCam();
-
         case 4312:
             for (sprite in ["RAYO_DIVISOR", "viento"])
                 FlxTween.tween(stage.stageSprites[sprite], {alpha: 0}, 0.4, {

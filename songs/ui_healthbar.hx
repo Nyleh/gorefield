@@ -63,8 +63,11 @@ static function updateIcons() {
             default: false;
         };
 
-        if (icon.animation.name == "non-animated") icon.animation.curAnim.curFrame = losing ? 1 : 0;
-        else icon.animation.play(losing ? "losing" : "idle");
+        if (icon.animation.name == "non-animated"){ icon.animation.curAnim.curFrame = losing ? 1 : 0;}
+        else{
+            if(icon.animation.exists("losing"))
+                icon.animation.play(losing ? "losing" : "idle");
+        }
     }
 }
 
@@ -81,7 +84,10 @@ static function createIcon(character:Character):FlxSprite {
 
     if ((character != null && character.xml != null && character.xml.exists("animatedIcon")) ? (character.xml.get("animatedIcon") == "true") : false) {
         icon.frames = Paths.getSparrowAtlas(path);
-        icon.animation.addByPrefix("losing", "losing", 24, true);
+        
+        if(!character.xml.exists("noLosingIcon")){
+            icon.animation.addByPrefix("losing", "losing", 24, true);
+        }
         icon.animation.addByPrefix("idle", "idle", 24, true);
         icon.animation.play("idle");
     } else {
