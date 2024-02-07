@@ -33,18 +33,6 @@ function create()
 }
 
 function postCreate() {
-    for (sprite in stage.stageSprites)
-        sprite.alpha = 0;
-
-    stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 0;
-    stage.stageSprites["RAYO_DIVISOR"].alpha = stage.stageSprites["viento"].alpha = 1;
-    forceDefaultCamZoom = true;
-    defaultCamZoom = 0.7;
-
-    camFollowChars = false; camFollow.setPosition(-50, -320);
-
-    jonTrail.visible = jonTrail.active = jonFlying = false;
-    
     snapCam();
 }
 
@@ -86,7 +74,7 @@ function stepHit(step:Int) {
             if (FlxG.save.data.trails) insert(members.indexOf(dad), jonTrail);
         case 1070:
             FlxTween.tween(camHUD, {alpha: 1}, 0.5);
-        case 1588:
+        case 1585:
             videos[0].play();
             canPause = false;
         case 1584:
@@ -147,13 +135,13 @@ function stepHit(step:Int) {
             stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 1;
             forceDefaultCamZoom = true;
             defaultCamZoom = 0.6;
-            
+
             snapCam();
 
             FlxTween.num(6, 0.2, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {chromatic.distortion = val;});
             FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
             FlxTween.num(0.2, 1.8, (Conductor.stepCrochet / 1000) * 5, {}, (val:Float) -> {bloom.dim = val;});
-        case 3536:
+        case 3532:
             videos[0].play();
             canPause = false;
         case 3856:
@@ -171,8 +159,7 @@ function stepHit(step:Int) {
             
             snapCam();
 
-        // Test
-        case 92:
+        case 4312:
             for (sprite in ["RAYO_DIVISOR", "viento"])
                 FlxTween.tween(stage.stageSprites[sprite], {alpha: 0}, 0.4, {
                     onComplete: function() {
@@ -182,18 +169,70 @@ function stepHit(step:Int) {
 
             FlxTween.tween(dad, {y: dad.y + 600}, 0.7, {startDelay: 0.2});
             FlxTween.tween(boyfriend, {y: boyfriend.y + 240}, 0.7, {startDelay: 0.2});
-        case 101:
+        case 4320:
             gorefieldiconP1.alpha = 0.2;
-
-            boyfriend.animation.finishCallback = function(name:String) {
-                if (name == "transition") {
-                    
-                }
-            }
-        case 136:
+        case 4369:
             gorefieldiconP2.alpha = 0.2;
             dad.y = -330;
 
             FlxG.camera.zoom = defaultCamZoom = 0.85;
+            boyfriend.playAnim("idle", true, "DANCE");
+            dad.animation.callback = function(name:String, frameNumber:Int, frameIndex:Int){
+                if(frameNumber == 0 && name != 'idle')
+                    FlxG.camera.shake(0.005, .15);
+                switch(name){
+                    case 'singUP':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -15);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -12);
+                            case 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -11);
+                        }
+                    case 'singDOWN':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -15);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -10);
+                            case 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -9);
+                        }
+                    case 'singLEFT':
+                        switch(frameNumber){
+                            case 0 | 1 | 2 | 3 | 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 29,dad.y + 981 + 4);
+                        }
+                    case 'singRIGHT':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 21 + 2,dad.y + 977 + 4);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 24 + 2,dad.y + 977 + 4);
+                            case 4:
+                                boyfriend.setPosition(dad.x - 25 + 2,dad.y + 977 + 4);
+                        }
+                    case 'idle':
+                        switch(frameNumber){
+                            case 0 | 1 | 2 | 3 | 25:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981);
+                            case 4 | 5:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
+                            case 6 | 7:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
+                            case 8 | 9:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 9);
+                            case 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 10);
+                            case 19 | 20:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
+                            case 21 | 22:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
+                            case 23 | 24:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 2);
+                        }
+                }
+            };
     }
 }
