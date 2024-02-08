@@ -141,9 +141,15 @@ function stepHit(step:Int) {
             FlxTween.num(6, 0.2, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {chromatic.distortion = val;});
             FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
             FlxTween.num(0.2, 1.8, (Conductor.stepCrochet / 1000) * 5, {}, (val:Float) -> {bloom.dim = val;});
-        case 3532:
+        case 3504:
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 21, {ease: FlxEase.quadIn});
+            FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 24, {ease: FlxEase.quadIn});
+        case 3533:
             videos[0].play();
             canPause = false;
+        case 3850:
+            camFollowChars = false; 
+            camFollow.setPosition(-50, -320);
         case 3856:
             boyfriend.playAnim("idle", true, "DANCE");
 
@@ -152,13 +158,13 @@ function stepHit(step:Int) {
             forceDefaultCamZoom = true;
             defaultCamZoom = 0.7;
 
-            camFollowChars = false; camFollow.setPosition(-50, -320);
-
-            snapCam();
-        case 3857:
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
                 spr.alpha = 0.2;
-            
+
+            snapCam();
+
+            FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadIn});
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 4, {ease: FlxEase.quadIn});
         case 4312:
             for (sprite in ["RAYO_DIVISOR", "viento"])
                 FlxTween.tween(stage.stageSprites[sprite], {alpha: 0}, 0.4, {
@@ -171,7 +177,11 @@ function stepHit(step:Int) {
             FlxTween.tween(boyfriend, {y: boyfriend.y + 240}, 0.7, {startDelay: 0.2});
         case 4320:
             gorefieldiconP1.alpha = 0.2;
+        case 4322:
+            camFollow.setPosition(0, -320);
         case 4369:
+            camFollow.setPosition(-50, -320);
+            snapCam();
             gorefieldiconP2.alpha = 0.2;
             dad.y = -330;
 

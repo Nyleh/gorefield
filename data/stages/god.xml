@@ -40,7 +40,7 @@
 		<anim name="aro" anim="aro" loop="true"/>
 		<property name="flipX" type="bool" value="true" />
 	</sprite>
-	<sprite name="RAYO_DIVISOR" x="-690" y="-380" sprite="RAYO_DIVISOR" antialiasing="true" scrollx="1" scrolly="1" scale="2">
+	<sprite name="RAYO_DIVISOR" x="-696" y="-365" sprite="RAYO_DIVISOR" antialiasing="true" scrollx="1" scrolly="1" scale="1.8">
 		<anim name="idle" anim="rayo divisorio" loop="true"/>
 		<property name="alpha" type="float" value="0.0000001"/>
 	</sprite>
