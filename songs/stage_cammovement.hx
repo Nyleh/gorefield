@@ -13,6 +13,8 @@ function postCreate() {
     var cameraStart = strumLines.members[curCameraTarget].characters[0].getCameraPosition();
     cameraStart.y -= 100; FlxG.camera.focusOn(cameraStart);
     window.title = windowTitleGOREFIELD + " - " + PlayState.instance.SONG.meta.name;
+
+    allowGitaroo = false;
 }
 
 function onCameraMove(camMoveEvent) {

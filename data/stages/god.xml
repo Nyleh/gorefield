@@ -60,7 +60,6 @@
 	<solid name="black" x="-640" y="-360" width="2560" height="1440" color="0x000000">
 		<property name="scrollFactor.x" type="float" value="0"/>
 		<property name="scrollFactor.y" type="float" value="0"/>
-		<property name="zoomFactor" type="float" value="0"/>
-		<property name="alpha" type="float" value="0"/>
+		<property name="alpha" type="float" value="1"/>
 	</solid>
 </stage>

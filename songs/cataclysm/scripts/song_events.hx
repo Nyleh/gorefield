@@ -59,6 +59,8 @@ function update(elapsed:Float) {
 
 function stepHit(step:Int) {
     switch (step) {
+        case 32:
+            stage.stageSprites["black"].alpha = 0;
         case 1052:
             FlxTween.tween(camHUD, {alpha: 0}, 0.5);
         case 1059:
