@@ -25,7 +25,7 @@ function update() {
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 
     if (FlxG.keys.justPressed.SEVEN) { //i got tired of exiting the song ok - lean
-        FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, false));
+        FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, true));
     }
 }
 
