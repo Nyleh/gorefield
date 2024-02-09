@@ -1,0 +1,8 @@
+<!DOCTYPE codename-engine-character>
+<character color="#D44D29" sprite="WALTER_CAT" x="-5" isGF="false" y="-5" camx="195" camy="280" icon="garfield" isPlayer="false" holdTime="2" animatedIcon="true" iconoffsetx="-30" iconoffsety="-18">
+	<anim x="0" loop="true" y="0" fps="24" anim="WALTER IDLE" name="idle"/>
+	<anim x="130" loop="false" y="-46" fps="24" anim="WALTER LEFT" name="singLEFT"/>
+	<anim x="0" loop="false" y="-65" fps="24" anim="WALTER DOWN" name="singDOWN"/>
+	<anim x="17" loop="false" y="55" fps="24" anim="WALTER UP" name="singUP"/>
+	<anim x="-40" loop="false" y="41" fps="24" anim="WALTER RIGHT" name="singRIGHT"/>
+</character>

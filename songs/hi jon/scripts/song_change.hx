@@ -13,7 +13,7 @@ function create() {
         sprite.drawComplex(FlxG.camera); // Push to GPU
     }
 
-    for (char in [gf, boyfriend, dad]) char.visible = char.active = false;
+    for (char in [gf, boyfriend, dad]) char.visible = false;
     for (char in [boyfriend, dad]) char.alpha = 0;
 
     gfTrail = new FlxTrail(gf, null, 10, 4, 0.3, 0.1);
