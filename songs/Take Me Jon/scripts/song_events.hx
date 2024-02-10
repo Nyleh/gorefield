@@ -12,8 +12,8 @@ function create()
 	blackOverlay.updateHitbox();
 	blackOverlay.screenCenter();
 	blackOverlay.scrollFactor.set();
-    blackOverlay.alpha = 0;
-	insert(9, blackOverlay);
+    blackOverlay.alpha = 1;
+	insert(20, blackOverlay);
 }
 
 function postCreate()
@@ -22,6 +22,7 @@ function postCreate()
     comboGroup.y += 300;
 
     gorefieldiconP2.visible = false;
+    camHUD.alpha = 0.0001;
 
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar])
         spr.alpha = 0.35;
@@ -78,8 +79,13 @@ var boogie:Bool = false;
 var alphaControlIcon2:Bool = true;
 function stepHit(step:Int) {
     switch (step) {
+        case 0:
+            FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 12, {ease: FlxEase.cubeInOut});
+            FlxTween.tween(blackOverlay, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16, {ease: FlxEase.cubeIn});
         case 238:
             tweenCamera(true);
+            remove(blackOverlay);
+            insert(10, blackOverlay);
         case 368:
             tweenCamera(false);
 
@@ -115,22 +121,28 @@ function stepHit(step:Int) {
                     }
                 }
             }
+        case 648:
+            stage.stageSprites["fondo4"].alpha = 0;
+            stage.stageSprites["fondoAnimation"].alpha = 1;
+            stage.stageSprites["fondoAnimation"].animation.play('idle');
         case 656:
+            defaultCamZoom -= 0.2;
             boogie = true;
         case 784:
             boogie = false;
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 5);
         case 788:
+            remove(blackOverlay);
+            insert(20, blackOverlay);
             lerpCam = false;
-            FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet / 1000) * 60);
-        case 848:
-            camGame.visible = camHUD.visible = camCharacters.visible = false;
+            FlxTween.tween(FlxG.camera, {zoom: 0.1}, (Conductor.stepCrochet / 1000) * 60);
+            FlxTween.tween(blackOverlay, {alpha: 1}, (Conductor.stepCrochet / 1000) * 60, {ease: FlxEase.cubeIn});
     }
     if (boogie && step%2==0) {
-        noiseIntensity = 0.03;
+        noiseIntensity = 0.02;
         FlxG.camera.zoom += 0.1;
         camHUD.zoom += 0.03;
-        colorOffsetIntensity = 2;
+        colorOffsetIntensity = 1.5;
 
         if (step%4==0){
             FlxG.camera.angle = 8;
