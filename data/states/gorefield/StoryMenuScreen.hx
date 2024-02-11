@@ -1496,6 +1496,7 @@ function incorrectCode():Void {
 function destroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
 	FlxG.sound.music.pitch = 1;
+	FlxG.sound.music.volume = 1;
 	curStoryMenuSelected = curWeek; 
 	Framerate.offset.y = 0; Framerate.debugMode = lastFrameRateMode;
 
