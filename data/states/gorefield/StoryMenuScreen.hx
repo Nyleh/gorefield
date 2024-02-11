@@ -1180,7 +1180,7 @@ function changeChannel(change:Int) {
 
 	channelTimer = (new FlxTimer()).start(4, function (t) {channelBar.visible = false;});
 }
-
+var previousOpen:Bool = false;
 function codesMenu(open:Bool, offset:Float) {
 	if (open == false) codesFocused = false;
 	codesOpened = open;
@@ -1192,11 +1192,14 @@ function codesMenu(open:Bool, offset:Float) {
 	televisionTween = FlxTween.tween(television, {x: codesOpened ? 650 : -1280}, 0.23, {ease: FlxEase.circInOut});
 
 	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
-		hitbox.x += open ? 1000 : -1000;
+		if(previousOpen != open){
+			hitbox.x += open ? 1000 : -1000;
+		}
 	
 	if (!codesOpened){
 		turnTV(false);
 	}
+	previousOpen = open;
 }
 
 function fullscreenVideo(enabled:Bool) {
