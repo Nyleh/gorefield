@@ -23,7 +23,6 @@ var menuOptions:Array<FlxSprite> = [];
 var menuLocks:Array<FlxSprite> = [];
 var selector:FlxSprite;
 
-var weeks:Array<Dynamic> = [];
 var curWeek:Int = curStoryMenuSelected;
 
 var camBG:FlxCamera = null;
@@ -49,7 +48,7 @@ var weeks:Array = [
 	{name: "Sansfield Week...", songs: ["Cat Patella", "Mondaylovania", "ULTRA FIELD"]},
 	{name: "ULTRA Week...", songs: ["The Complement", "R0ses and Quartzs"]},
 	{name: "Cryfield Week...", songs: ["Cryfield", "Nocturnal Meow"]},
-	{name: "???????? Week...", songs: ["Cataclysm"]},
+	{name: "Godfield's Will...", songs: ["Cataclysm"]},
 	{name: "Binky Circus...", songs: ["Laughter and Cries"]},
 	{name: "Cartoon World...", songs: ["Balls of Yarn"]},
 	{name: "Code Songs...", songs: FlxG.save.data.extrasSongs}
@@ -67,20 +66,25 @@ var weekColors:Array<Int> = [
 	0xFF90D141
 ];
 
-var CATclysmUnlocked:Bool = false;
-var weeksUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, FlxG.save.data.extrasSongs.length != 0];
-var weeksFinished:Array<Bool> = [true, true, true, true, true, true];
+var weeksUnlocked:Array<Bool> = []; //week access
+var weeksFinished:Array<Bool> = []; //freeplay access
+var codesUnlocked:Bool = false;
+var codeWeekUnlocked:Bool = false;
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
 	"Midnight meal???\n(yum)",
 	"Purring Determination...",
 	"A Big Little Problem.",
 	"He Just Wants To Go Home...",
-	"????????????????????????????????????????????",
+	"Enlightenment Awaits.",
 	"Honk Honk...",
 	"A Feline Meeting...",
 	"Extra stuff..."
 ];
+
+//cool shader
+public var chromatic:CustomShader;
+public var chromatic2:CustomShader;
 
 // SPANISH - Jloor 
 // hi jloor -lunar
@@ -91,7 +95,7 @@ var weekDescsSPANISH:Array<String> = [
 	"Un ronroneo de determinacion...",
 	"Un pequeno gran problema...",
 	"El solo quiere volver a casa...",
-	"????????????????????????????????????????????",
+	"spanish translation here",
 	"Honk Honk!",
 	"Una reunion Felina...",
 	"Contenido extra..."
@@ -214,6 +218,11 @@ function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
 
+	weeksFinished = FlxG.save.data.weeksFinished;
+	weeksUnlocked = FlxG.save.data.weeksUnlocked;
+	codesUnlocked = FlxG.save.data.dev ? true : FlxG.save.data.codesUnlocked;
+	codeWeekUnlocked = FlxG.save.data.extrasSongs.length != 0;
+
 	camBG = new FlxCamera(0, 0);
 	selectorCam = new FlxCamera(0,0);
 	camText = new FlxCamera(0, 0);
@@ -227,6 +236,14 @@ function create() {
 	warpShader = new CustomShader("warp");
 	warpShader.distortion = 0;
 	if (FlxG.save.data.warp) FlxG.camera.addShader(warpShader);
+
+	chromatic = new CustomShader("chromaticWarp");
+    chromatic.distortion = 0; 
+    if (FlxG.save.data.warp) {camText.addShader(chromatic);}
+
+	chromatic2 = new CustomShader("chromaticWarp");
+    chromatic2.distortion = 0; 
+    if (FlxG.save.data.warp) {FlxG.camera.addShader(chromatic2); camBG.addShader(chromatic2);}
 
 	bgSprite = new FlxBackdrop(Paths.image("menus/WEA_ATRAS"), 0x11, 0, 0);
 	bgSprite.cameras = [camBG]; bgSprite.colorTransform.color = 0xFFFFFFFF;
@@ -261,7 +278,7 @@ function create() {
 		sprite.ID = i;
 		menuOptions.push(add(sprite));
 
-		lerpColors[i * 2 + 0] = new FlxInterpolateColor(i == 5 ? 0 : -1);
+		lerpColors[i * 2 + 0] = new FlxInterpolateColor(((i == 8) ? !codeWeekUnlocked : weeksUnlocked[i] == false) ? 0 : -1);
 
 		var lock:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menus/storymenu/candado"));
 		lock.scale.set(.7,.7);
@@ -269,7 +286,7 @@ function create() {
 		lock.updateHitbox();
 		menuLocks.push(add(lock));
 
-		lerpColors[i * 2 + 1] = new FlxInterpolateColor(i == 5 ? 0 : -1);
+		lerpColors[i * 2 + 1] = new FlxInterpolateColor(((i == 8) ? !codeWeekUnlocked : weeksUnlocked[i] == false) ? 0 : -1);
 	}
 
 	selector = new FlxSprite();
@@ -290,6 +307,7 @@ function create() {
 
 	codesPanel = new FlxSprite(-415).loadGraphic(Paths.image("menus/storymenu/MENU_CODE_STATIC"));
 	codesPanel.scale.set(551/codesPanel.height, 551/codesPanel.height);
+	codesPanel.visible = codesUnlocked;
 	add(codesPanel);
 
 	codeColorLerp = new FlxInterpolateColor(-1);
@@ -511,14 +529,26 @@ function update(elapsed:Float) {
 			if (__firstFrame) menuOption.x += 2000 + (i *800);
 		}
 
-		lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? (i == 5 && !CATclysmUnlocked ? 0xFF000000 : (codesOpened ? 0xFF626262 : 0xFFFFFFFF)) : (i == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFBDBEFF), ((1/75) * colorLerpSpeed) * (codesOpened ? 3 : 1));
+		if (menuOption.ID == 8){
+			lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : codeWeekUnlocked ? ((codesOpened ? 0xFF626262 : 0xFFFFFFFF)) : ( 0xFF0E0E0E), ((1/75) * colorLerpSpeed) * (codesOpened ? 3 : 1));
+		}
+		else{
+			lerpColors[i * 2 + 0].fpsLerpTo(subMenuOpen ? 0xFF343434 : weeksUnlocked[i] ? ((codesOpened ? 0xFF626262 : 0xFFFFFFFF)) : ( 0xFF0E0E0E), ((1/75) * colorLerpSpeed) * (codesOpened ? 3 : 1));
+		}
 		menuOption.color = lerpColors[i * 2 + 0].color;
-		if(!selectingWeek) menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
+		if(!selectingWeek){
+			if (menuOption.ID == 8){
+				menuOption.alpha = codeWeekUnlocked ? 1 : 0.75;
+			}
+			else{
+				menuOption.alpha = weeksUnlocked[i] ? 1 : 0.75;
+			}
+		}
 
 		lerpColors[i * 2 + 1].fpsLerpTo(subMenuOpen ? 0xFF343434 : 0xFF92A2FF, (1/75) * colorLerpSpeed);
 
 		var lock = menuLocks[i];
-		lock.visible = !weeksUnlocked[i];
+		lock.visible = (i == 8) ? !codeWeekUnlocked : !weeksUnlocked[i];
 		lock.x = (menuOption.x + (menuOption.width/2)) - (lock.width/2) + Math.floor(4 * FlxMath.fastSin(__totalTime));
 		lock.y = (menuOption.y + (menuOption.height/2)) - (lock.height/2) + Math.floor(2 * FlxMath.fastCos(__totalTime));
 		if(!selectingWeek) lock.color = lerpColors[i * 2 + 1].color;
@@ -577,6 +607,8 @@ function update(elapsed:Float) {
 			if (FlxG.mouse.justReleased) 
 				turnTV(!isTVOn);
 		} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
+			if(!codesUnlocked) return;
+
 			cursor = "button";
 			if (FlxG.mouse.justReleased) {
 				codesMenu(!codesOpened, 0);
@@ -753,6 +785,9 @@ function handleMenu() {
 	}
 }
 
+var pitchTween:Tween;
+var chromaticDistortion1:Tween;
+var chromaticDistortion2:Tween;
 function changeWeek(change:Int) {
 	if(selectingWeek) return;
 
@@ -761,12 +796,51 @@ function changeWeek(change:Int) {
 
 	if (oldWeek != curWeek) FlxG.sound.play(Paths.sound('menu/scrollMenu'));
 
-	weekText.text = weeks[curWeek].name;
+	if (curWeek == 5){
+		if (weeksUnlocked[curWeek] && !weeksFinished[curWeek]){
+			for(tween in [pitchTween,chromaticDistortion1,chromaticDistortion2]){
+				if(tween != null) 
+					tween.cancel();
+			}
+			pitchTween = FlxTween.tween(FlxG.sound.music,{pitch: 0.6},0.65,{
+				onComplete: function(twn){
+					pitchTween = null;
+				}
+			});
+			chromaticDistortion1 = FlxTween.num(0, 0.2, 0.55, {ease: FlxEase.cubeOut}, (val:Float) -> {chromatic.distortion = val;});
+			chromaticDistortion2 = FlxTween.num(0, 1.3, 0.55, {ease: FlxEase.cubeOut}, (val:Float) -> {chromatic2.distortion = val;});
+		}
+	}
+	else{
+		if(FlxG.sound.music.pitch != 1){
+			for(tween in [pitchTween,chromaticDistortion1,chromaticDistortion2]){
+				if(tween != null) 
+					tween.cancel();
+			}
+			pitchTween = FlxTween.tween(FlxG.sound.music,{pitch: 1},0.3,{
+				onComplete: function(twn){
+					pitchTween = null;
+				}
+			});
+			chromaticDistortion1 = FlxTween.num(0.2, 0, 0.3, {ease: FlxEase.cubeOut}, (val:Float) -> {chromatic.distortion = val;});
+			chromaticDistortion2 = FlxTween.num(1.3, 0, 0.3, {ease: FlxEase.cubeOut}, (val:Float) -> {chromatic2.distortion = val;});
+		}
+	}
+
+	weekText.text = (curWeek == 8) ? codeWeekUnlocked ? weeks[curWeek].name : "?????" : weeksUnlocked[curWeek] ? weeks[curWeek].name : "?????";
 
 	if (FlxG.save.data.spanish) {
-		flavourText.text = weekDescsSPANISH[curWeek];
+		flavourText.text = weeksUnlocked[curWeek] ? weekDescsSPANISH[curWeek] : (codesUnlocked && curWeek == 8) ? "spanish code text here" : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "spanish clown text here" : "spanish progress text here";
+
+		if(curWeek == 8 && codeWeekUnlocked){
+			flavourText.text = weekDescsSPANISH[curWeek];
+		}
 	} else {
-		flavourText.text = weekDescs[curWeek];
+		flavourText.text = weeksUnlocked[curWeek] ? weekDescs[curWeek] : (codesUnlocked && curWeek == 8) ? "Find Hidden Secrets." : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "Can't Find Me?   Boo Hoo!                           Till a Breeze..." :"Progress through the weeks to unlock!"; //T ill A   B reeze (TAB)
+
+		if(curWeek == 8 && codeWeekUnlocked){
+			flavourText.text = weekDescs[curWeek];
+		}
 	}
 
 	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
@@ -775,10 +849,18 @@ function changeWeek(change:Int) {
 	Framerate.offset.y = textBG.height;
 
 	var score:Float = FunkinSave.getWeekHighscore(weeks[curWeek].name, "hard").score;
-	scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + weeks[curWeek].songs.length + " SONGS,    #" + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
-		new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
-		new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
-	]);
+	if(curWeek == 8 && codeWeekUnlocked){
+		scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + (codeWeekUnlocked ? weeks[curWeek].songs.length : "?") + (weeks[curWeek].songs.length == 1 ? " SONG,    #" : " SONGS,    #") + (codeWeekUnlocked ? "UNLOCKED" : "LOCKED") + "!#", [
+			new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
+			new FlxTextFormatMarkerPair(new FlxTextFormat(codeWeekUnlocked ? 0xFF00FF00 : 0xFFFF0000), "#"),
+		]);
+	}
+	else{
+		scoreText.applyMarkup("WEEK SCORE - $" + Std.string(score) + "$,   " + (weeksUnlocked[curWeek] ? weeks[curWeek].songs.length : "?") + (weeks[curWeek].songs.length == 1 ? " SONG,    #" : " SONGS,    #") + (weeksUnlocked[curWeek] ? "UNLOCKED" : "LOCKED") + "!#", [
+			new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFFFF00), "$"),
+			new FlxTextFormatMarkerPair(new FlxTextFormat(weeksUnlocked[curWeek] ? 0xFF00FF00 : 0xFFFF0000), "#"),
+		]);
+	}
 
 	textInfoBG.scale.set(FlxG.width, scoreText.height + 38);
 	textInfoBG.updateHitbox();
@@ -790,21 +872,32 @@ function changeWeek(change:Int) {
 function selectWeek() {
 	if(selectingWeek) return; 
 
-	if (!weeksUnlocked[curWeek]) { // ! LOCKED
-		FlxG.camera.stopFX();
-		FlxG.camera.shake(0.005, .5);
-		lerpColors[curWeek * 2 + 0].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
-		lerpColors[curWeek * 2 + 1].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
-		menuOptions[curWeek].color = menuLocks[curWeek].color = curWeek == 5 && !CATclysmUnlocked ? 0xFF000000 : 0xFFFF0000;
-
-		FlxG.sound.play(Paths.sound("menu/story/locked"));
-		return;
-	}
-
 	if (curWeek == 8)
 	{ 
-		openFreePlayMenu(); 
-		FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+		if(!codeWeekUnlocked){
+			FlxG.camera.stopFX();
+			FlxG.camera.shake(0.005, .5);
+			lerpColors[curWeek * 2 + 0].color = 0xFF6A0000;
+			lerpColors[curWeek * 2 + 1].color = 0xFF6A0000;
+			menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
+	
+			FlxG.sound.play(Paths.sound("menu/story/locked"));
+			return;
+		}
+		else{
+			openFreePlayMenu(); 
+			FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+			return;
+		}
+	}
+	else if (!weeksUnlocked[curWeek]) { // ! LOCKED
+		FlxG.camera.stopFX();
+		FlxG.camera.shake(0.005, .5);
+		lerpColors[curWeek * 2 + 0].color = 0xFF6A0000;
+		lerpColors[curWeek * 2 + 1].color = 0xFF6A0000;
+		menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
+
+		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
 	}
 
@@ -997,11 +1090,14 @@ function closeFreePlayMenu() {
 }
 
 function changeSong(change:Int) {
+	var oldFreeplaySelected = freeplaySelected[freePlayMenuID];
     freeplaySelected[freePlayMenuID] = FlxMath.wrap(
 		freeplaySelected[freePlayMenuID] + change, 0, 
 		freeplaySongLists[freePlayMenuID].songMenuObjs.length-1
 	);
-	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
+
+	if(oldFreeplaySelected != freeplaySelected[freePlayMenuID])
+		FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
 	var data = FunkinSave.getSongHighscore(freeplaySongLists[freePlayMenuID].songs[freeplaySelected[freePlayMenuID]], "hard", null);
 	var dateStr = Std.string(data.date).split(" ")[0];
@@ -1290,14 +1386,43 @@ var CodesFunctions:{} = {
 	},
 	unlockAll: function() {
 		FlxG.save.data.canVisitArlene = true;
-		FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
-		FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "walter"];
+		//FlxG.save.data.extrasSongs = ["Take Me Jon", "Captive", "Breaking Cat"];
+		//FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "walter"];
 
-		weeksUnlocked = weeksFinished = [true, true, true, true, true, true, true, true, true];
+		FlxG.save.data.weeksFinished = [true, true, true, true, true, true];
+		FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, true, true];
+		FlxG.save.data.codesUnlocked = true;
+		
+		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG7 = FlxG.save.data.beatWeekG8 = true;
 
 		FlxG.save.flush();
 
-		canMove = true;
+		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
+	},
+	resetAll: function() { //dev
+		FlxG.save.data.canVisitArlene = false;
+		FlxG.save.data.extrasSongs = [];
+		FlxG.save.data.extrasSongsIcons = [];
+
+		FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
+		FlxG.save.data.codesUnlocked = false;
+		FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
+		
+		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG7 = FlxG.save.data.beatWeekG8 = false;
+
+		/*for(week in weeks){
+			FunkinSave.setWeekHighscore(week.name, "hard", {
+				score: 0,
+				misses: 0,
+				accuracy: 0,
+				hits: [],
+				date: "???"
+			});
+		}idk how to do this properly lol -lean */
+
+		FlxG.save.flush();
+
+		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	}
 }
 
@@ -1333,6 +1458,7 @@ var codes:Map<String, Void -> Void> = [
 
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
+	"RESET" => CodesFunctions.resetAll, //DEV
 	//"CATBOT",
 
 	// Extras codes
@@ -1366,6 +1492,7 @@ function incorrectCode():Void {
 
 function destroy() {
 	FlxG.camera.bgColor = FlxColor.fromRGB(0,0,0); 
+	FlxG.sound.music.pitch = 1;
 	curStoryMenuSelected = curWeek; 
 	Framerate.offset.y = 0; Framerate.debugMode = lastFrameRateMode;
 

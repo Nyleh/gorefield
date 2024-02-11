@@ -46,6 +46,20 @@ function new() {
     if (FlxG.save.data.particles == null) FlxG.save.data.particles = true;
     if (FlxG.save.data.flashing == null) FlxG.save.data.flashing = true;
 
+    //PROGRESSION
+    if (FlxG.save.data.weeksFinished == null) FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
+    if (FlxG.save.data.codesUnlocked == null) FlxG.save.data.codesUnlocked = false;
+    if (FlxG.save.data.weeksUnlocked == null) FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
+
+    if (FlxG.save.data.beatWeekG1 == null) FlxG.save.data.beatWeekG1 = false;
+    if (FlxG.save.data.beatWeekG2 == null) FlxG.save.data.beatWeekG2 = false;
+    if (FlxG.save.data.beatWeekG3 == null) FlxG.save.data.beatWeekG3 = false;
+    if (FlxG.save.data.beatWeekG4 == null) FlxG.save.data.beatWeekG4 = false;
+    if (FlxG.save.data.beatWeekG5 == null) FlxG.save.data.beatWeekG5 = false;
+    if (FlxG.save.data.beatWeekG6 == null) FlxG.save.data.beatWeekG6 = false;
+    if (FlxG.save.data.beatWeekG7 == null) FlxG.save.data.beatWeekG7 = false;
+    if (FlxG.save.data.beatWeekG8 == null) FlxG.save.data.beatWeekG8 = false;
+
     // CODES 
     if (FlxG.save.data.extrasSongs == null) FlxG.save.data.extrasSongs = [];
     if (FlxG.save.data.extrasSongsIcons == null) FlxG.save.data.extrasSongsIcons = [];
