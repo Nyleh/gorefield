@@ -19,8 +19,8 @@ function create()
     disclaimer.alignment = 'center';
     disclaimer.applyMarkup(
         FlxG.save.data.spanish ?
-        "Este engine todavía está en estado alfa. Eso significa que *la mayoría de las funciones* tienen *defectos* o *no están terminadas*. Si encuentra algún error, por favor reportelo a Codename Engine GitHub.\n\nPresione ENTER para continuar" :
-        "This engine is still in a alpha state. That means *majority of the features* are either *buggy* or *non finished*. If you find any bugs, please report them to the Codename Engine GitHub.\n\nPress ENTER to continue",
+        "Este engine todavía está en estado beta. Eso significa que *la mayoría de las funciones* tienen *defectos* o *no están terminadas*. Si encuentra algún error, por favor reportelo a Codename Engine GitHub.\n\nPresione ENTER para continuar" :
+        "This engine is still in a beta state. That means *majority of the features* are either *buggy* or *non finished*. If you find any bugs, please report them to the Codename Engine GitHub.\n\nPress ENTER to continue",
         [
             new FlxTextFormatMarkerPair(new FlxTextFormat(0xFFFF4444), "*")
         ]

@@ -84,7 +84,7 @@ function create() {
 	add(black);
 
 	if(PlayState.isStoryMode) {
-		//trace(PlayState.storyWeek);
+		/*trace(PlayState.storyWeek);
 		FlxG.save.data.gorePoint = {
 			storyWeek: JsonParser.parse(JsonPrinter.print(PlayState.storyWeek)),
 			storyPlaylist: JsonParser.parse(JsonPrinter.print(PlayState.storyPlaylist)),
@@ -96,7 +96,15 @@ function create() {
 			coopMode: PlayState.coopMode,
 			difficulty: PlayState.difficulty,
 		}
-		//trace(FlxG.save.data.gorePoint);
+		trace(FlxG.save.data.gorePoint);*/
+
+		if(weekProgress.get(PlayState.storyWeek.name) != null){
+			if (weekProgress.get(PlayState.storyWeek.name).song.toLowerCase() != PlayState.SONG.meta.name.toLowerCase()){
+				weekProgress.set(PlayState.storyWeek.name, {song: PlayState.SONG.meta.name.toLowerCase(), weekMisees: PlayState.campaignMisses, weekScore: PlayState.campaignScore});
+				trace("Saved Progress For " + PlayState.storyWeek.name + " in LoadingScreen");
+			}
+		}
+		FlxG.save.data.weekProgress = weekProgress;
 		FlxG.save.flush();
 	}
 

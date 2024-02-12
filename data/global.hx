@@ -13,6 +13,8 @@ static var seenMenuCutscene:Bool = false;
 
 static var windowTitleGOREFIELD:String = "Friday Night Funkin': Gorefield V2";
 
+public static var weekProgress:Map<String, {song:String, weekMisees:Int, weekScore:Int}> = [];
+
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",
     MainMenuState => "gorefield/MainMenuScreen",
@@ -60,6 +62,8 @@ function new() {
     if (FlxG.save.data.beatWeekG7 == null) FlxG.save.data.beatWeekG7 = false;
     if (FlxG.save.data.beatWeekG8 == null) FlxG.save.data.beatWeekG8 = false;
 
+    if(FlxG.save.data.weekProgress == null) FlxG.save.data.weekProgress = ["" => {}];
+    weekProgress = FlxG.save.data.weekProgress;
     // CODES 
     if (FlxG.save.data.extrasSongs == null) FlxG.save.data.extrasSongs = [];
     if (FlxG.save.data.extrasSongsIcons == null) FlxG.save.data.extrasSongsIcons = [];
@@ -70,6 +74,12 @@ function new() {
     // OTHER
     if (FlxG.save.data.spanish == null) FlxG.save.data.spanish = false;
     if (FlxG.save.data.dev == null) FlxG.save.data.dev = false;
+
+    Lib.application.onExit.add(function(i:Int) {
+        FlxG.save.data.weekProgress = weekProgress;
+        FlxG.save.flush();
+        trace("Saving Week Progress...");
+    });
 }
 
 function preStateSwitch() {

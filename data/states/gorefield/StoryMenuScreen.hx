@@ -214,6 +214,17 @@ var alphabet:String = "abcdefghijklmnopqrstuvwxyz ";
 var numbers:String = "1234567890";
 var symbols:String = "*[]^_.,'!?";
 
+//PROGRESSION PROMPT
+var boxSprite:FlxSprite;
+var isInProgPrompt:Bool = false;
+var yesText:Alphabet;
+var noText:Alphabet;
+var progInfoText:Alphabet;
+var onYes:Bool = true;
+
+public var finishedCallback:Void->Void;
+public var acceptedCallback:Void->Void;
+
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
@@ -239,11 +250,11 @@ function create() {
 
 	chromatic = new CustomShader("chromaticWarp");
     chromatic.distortion = 0; 
-    if (FlxG.save.data.warp) {camText.addShader(chromatic);}
+    if (FlxG.save.data.warp && (weeksUnlocked[5] && !weeksFinished[5])) {camText.addShader(chromatic);}
 
 	chromatic2 = new CustomShader("chromaticWarp");
     chromatic2.distortion = 0; 
-    if (FlxG.save.data.warp) {FlxG.camera.addShader(chromatic2); camBG.addShader(chromatic2);}
+    if (FlxG.save.data.warp && (weeksUnlocked[5] && !weeksFinished[5])) {FlxG.camera.addShader(chromatic2); camBG.addShader(chromatic2);}
 
 	bgSprite = new FlxBackdrop(Paths.image("menus/WEA_ATRAS"), 0x11, 0, 0);
 	bgSprite.cameras = [camBG]; bgSprite.colorTransform.color = 0xFFFFFFFF;
@@ -488,7 +499,46 @@ function create() {
 	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
 		hitbox.x -= 1000;
 
+	boxSprite = new FlxSprite(0,730).makeGraphic(930, 370, 0xff769246);
+	boxSprite.updateHitbox();
+	boxSprite.screenCenter(FlxAxes.X);
+	boxSprite.scrollFactor.set();
+	boxSprite.alpha = 0.95;
+	add(boxSprite);
+
+	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
+	yesText.scrollFactor.set();
+	add(yesText);
+
+	noText = new Alphabet(0, 0, FlxG.save.data.spanish ? "spanish text here" : "RESTART", true);
+	noText.scrollFactor.set();
+	add(noText);
+
+	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "spanish text here" : "Would You Like To Continue?", false);
+	progInfoText.scrollFactor.set();
+	add(progInfoText);
+
 	changeWeek(0);
+}
+
+function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted){
+	isInProgPrompt = entered;
+	FlxTween.cancelTweensOf(boxSprite);
+	FlxTween.tween(boxSprite,{y: entered ? 200 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+
+	finishedCallback = entered ? finishCallback : null;
+	acceptedCallback = entered ? accepted : null;
+}
+
+function handleProgressPrompt(){
+	var scales:Array<Float> = [0.75, 1];
+	var alphas:Array<Float> = [0.6, 1];
+	var confirmInt:Int = onYes ? 1 : 0;
+
+	yesText.alpha = alphas[confirmInt];
+	yesText.scale.set(scales[confirmInt], scales[confirmInt]);
+	noText.alpha = alphas[1 - confirmInt];
+	noText.scale.set(scales[1 - confirmInt], scales[1 - confirmInt]);
 }
 
 var __firstFrame = true;
@@ -577,6 +627,15 @@ function update(elapsed:Float) {
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
+	yesText.x = boxSprite.x * 1.7;
+	yesText.y = boxSprite.y + 290;
+
+	noText.x = boxSprite.x * 4;
+	noText.y = boxSprite.y + 290;
+
+	progInfoText.x = boxSprite.x * 1.15;
+	progInfoText.y = boxSprite.y + 100;
+
 	codesPanel.updateHitbox();
 	codesPanel.screenCenter(0x10);
 	codesPanel.y += 65 + (8*FlxMath.fastSin(__totalTime));
@@ -607,7 +666,7 @@ function update(elapsed:Float) {
 			if (FlxG.mouse.justReleased) 
 				turnTV(!isTVOn);
 		} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
-			if(!codesUnlocked) return;
+			if(!codesUnlocked || isInProgPrompt) return;
 
 			cursor = "button";
 			if (FlxG.mouse.justReleased) {
@@ -753,6 +812,25 @@ function handleMenu() {
 		return;
 	}
 
+	if(isInProgPrompt){
+		if (controls.BACK) {openProgressPrompt(false); selectingWeek = false;}
+		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
+		if (controls.ACCEPT) {
+			if(onYes){
+				if(acceptedCallback != null)
+					acceptedCallback();
+			}
+			else{
+				if(finishedCallback != null)
+					finishedCallback();
+			}
+			openProgressPrompt(false);
+			FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+		}
+		handleProgressPrompt();
+		return;
+	}
+
 	if (inFreeplayMenu) {
 		if (controls.DOWN_P) changeSong(1);
 		if (controls.UP_P) changeSong(-1);
@@ -836,7 +914,7 @@ function changeWeek(change:Int) {
 			flavourText.text = weekDescsSPANISH[curWeek];
 		}
 	} else {
-		flavourText.text = weeksUnlocked[curWeek] ? weekDescs[curWeek] : (codesUnlocked && curWeek == 8) ? "Find Hidden Secrets." : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "Can't Find Me?   Boo Hoo!                           Till a Breeze..." :"Progress through the weeks to unlock!"; //T ill A   B reeze (TAB)
+		flavourText.text = weeksUnlocked[curWeek] ? weekDescs[curWeek] : (codesUnlocked && curWeek == 8) ? "Find Hidden Codes." : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "Can't Find Me?   Boo Hoo!                           Till a Breeze..." :"Progress through the weeks to unlock!"; //T ill A   B reeze (TAB)
 
 		if(curWeek == 8 && codeWeekUnlocked){
 			flavourText.text = weekDescs[curWeek];
@@ -869,6 +947,29 @@ function changeWeek(change:Int) {
 	freeplayMenuText.y = scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
+function checkWeekProgress() {
+	if(weekProgress != null){
+		if (weekProgress.exists(weeks[curWeek].name)){
+			openProgressPrompt(true,function(){
+				isPlayingFromPreviousWeek = false;
+				playWeek();	
+			},function(){
+				isPlayingFromPreviousWeek = true;
+				playWeek();	
+			}
+			);
+		}
+		else{
+			isPlayingFromPreviousWeek = false;
+			playWeek();	
+		}
+	}
+	else{
+		isPlayingFromPreviousWeek = false;
+		playWeek();
+	}
+}
+
 function selectWeek() {
 	if(selectingWeek) return; 
 
@@ -893,15 +994,15 @@ function selectWeek() {
 	else if (!weeksUnlocked[curWeek]) { // ! LOCKED
 		FlxG.camera.stopFX();
 		FlxG.camera.shake(0.005, .5);
-		lerpColors[curWeek * 2 + 0].color = 0xFF6A0000;
-		lerpColors[curWeek * 2 + 1].color = 0xFF6A0000;
+		lerpColors[curWeek * 2 + 0].color = (curWeek == 5) ? 0xFF000000 : 0xFF6A0000;
+		lerpColors[curWeek * 2 + 1].color = (curWeek == 5) ? 0xFF000000 : 0xFF6A0000;
 		menuOptions[curWeek].color = menuLocks[curWeek].color = 0xFFFF0000;
 
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
 	}
 
-	if (!weeksFinished[curWeek]) {playWeek(); return;} // ! play week for first time
+	if (!weeksFinished[curWeek]) {checkWeekProgress(); return;} // ! play week for first time
 
 	if (subMenuOpen) return;
 	FlxG.sound.play(Paths.sound("menu/confirmMenu"));
@@ -909,7 +1010,9 @@ function selectWeek() {
 		{name:"STORY MODE", callback: function () {
 			selectingWeek = true; 
 			closeSubMenu(); FlxG.sound.play(Paths.sound("menu/confirmMenu"));
-			(new FlxTimer()).start(0.4, function () {playWeek();});
+			(new FlxTimer()).start(0.4, function () {
+				checkWeekProgress();
+			});
 		}},
 		{name:"FREEPLAY", callback: function () {closeSubMenu(); openFreePlayMenu(); FlxG.sound.play(Paths.sound("menu/confirmMenu"));}}
 	);
@@ -962,6 +1065,7 @@ function closeSubMenu() {
 	cannedTuna = (new FlxTimer()).start(0.8, function (t) {colorLerpSpeed = 1;});
 }
 
+var isPlayingFromPreviousWeek:Bool = false;
 function playWeek() { // animation
 	canMove = !(selectingWeek = true);
 	FlxG.sound.music.fadeOut(0.25);
@@ -1007,7 +1111,39 @@ function playWeek() { // animation
 	FlxTween.num(0, 6, 3, {ease: FlxEase.circInOut}, (val:Float) -> {warpShader.distortion = val;});
 
 	new FlxTimer().start(3, (tmr:FlxTimer) -> {
-		PlayState.loadWeek(__gen_week(), "hard");
+		if(isPlayingFromPreviousWeek){
+			if (weekProgress.exists(weeks[curWeek].name)){
+				trace("Loading the Previous Progress for " + weeks[curWeek].name);
+				var resumeInfo = weekProgress.get(weeks[curWeek].name);
+	
+				var songArrayNames:Array<String> = [for (song in weeks[curWeek].songs) song.toLowerCase()]; //grab the name list
+				songArrayNames = songArrayNames.slice(songArrayNames.indexOf(resumeInfo.song.toLowerCase()));
+	
+				var songArray:Array<WeekSong> = []; //convert to weeksong format
+				for (song in songArrayNames){
+					songArray.push({name: song, hide: false});
+				}
+				PlayState.loadWeek({
+						name: weeks[curWeek].name,
+						id: weeks[curWeek].name,
+						sprite: null,
+						chars: [null, null, null],
+						songs: songArray,
+						difficulties: ['hard']
+					}, "hard");
+				PlayState.campaignMisses = resumeInfo.weekMisees;
+				PlayState.campaignScore = resumeInfo.weekScore;
+
+				//trace(FlxG.save.data.weekProgress);
+				//trace(PlayState.storyPlaylist);
+			}	
+			else{
+				PlayState.loadWeek(__gen_week(), "hard");
+			}
+		}
+		else{
+			PlayState.loadWeek(__gen_week(), "hard");
+		}
 		FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 	});
 }
@@ -1184,6 +1320,9 @@ var previousOpen:Bool = false;
 function codesMenu(open:Bool, offset:Float) {
 	if (open == false) codesFocused = false;
 	codesOpened = open;
+
+	if(isInProgPrompt)
+		openProgressPrompt(false);
 
 	if (codesTween != null) codesTween.cancel();
 	codesTween = FlxTween.tween(codesPanel, {x: (codesOpened ? 0 : -415) + offset}, .25, {ease: FlxEase.circInOut});
@@ -1403,6 +1542,12 @@ var CodesFunctions:{} = {
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
 	resetAll: function() { //dev
+		if(!FlxG.save.data.dev){
+			codesMenu(false, 0);
+			canMove = true;
+			return;
+		}
+		
 		FlxG.save.data.canVisitArlene = false;
 		FlxG.save.data.extrasSongs = [];
 		FlxG.save.data.extrasSongsIcons = [];
@@ -1410,6 +1555,8 @@ var CodesFunctions:{} = {
 		FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
 		FlxG.save.data.codesUnlocked = false;
 		FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
+
+		FlxG.save.data.weekProgress = weekProgress = ["" => {}];
 		
 		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG7 = FlxG.save.data.beatWeekG8 = false;
 

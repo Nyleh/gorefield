@@ -148,7 +148,7 @@ EstoyAburridow */
 		case 10: createCoolText(FlxG.save.data.spanish ? ["Dathree estuvo aqui"] : ["Dathree was here"]);
 		case 12: addMoreText("'Dathree'");
 		case 13: deleteCoolText();
-		case 14: createCoolText([FlxG.save.data.spanish ? "I don't speak spanish" : "Yo no hablo inglés"]);
+		case 14: createCoolText([FlxG.save.data.spanish ? "I don't speak spanish" : "number one small arctic fox"]);
 		case 15: addMoreText("'Lean'");
 		case 16: deleteCoolText();
 		case 17: createCoolText([FlxG.save.data.spanish ? "Gorefield para ti BB" : "Gorefield for you BB"]);
