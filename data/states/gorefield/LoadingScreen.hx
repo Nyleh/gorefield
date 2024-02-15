@@ -108,7 +108,7 @@ function create() {
 		FlxG.save.flush();
 	}
 
-	FlxG.sound.play(Paths.sound("loadingsound"));
+	FlxG.sound.play(Paths.sound(PlayState.SONG.meta.name.toLowerCase() == "cataclysm" ? "godloadingsound" : "loadingsound"));
 
 	new FlxTimer().start(1.5, (tmr:FlxTimer) -> {
 		FlxTween.tween(black, {alpha: 0}, 0.5, {onComplete: (tween:FlxTween) -> {loadAssets();}});
