@@ -16,6 +16,7 @@ function create() {
 
     oldVolume = FlxG.sound.volume;
     FlxG.sound.changeVolume(2);
+    FlxG.sound.music.volume = 0;
 }
 
 function update(elapsed:Bool)
