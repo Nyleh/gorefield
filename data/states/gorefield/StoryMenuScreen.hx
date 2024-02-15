@@ -229,6 +229,8 @@ function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
 
+	PlayState.deathCounter = 0;
+
 	weeksFinished = FlxG.save.data.weeksFinished;
 	weeksUnlocked = FlxG.save.data.weeksUnlocked;
 	codesUnlocked = FlxG.save.data.dev ? true : FlxG.save.data.codesUnlocked;
@@ -1133,6 +1135,7 @@ function playWeek() { // animation
 					}, "hard");
 				PlayState.campaignMisses = resumeInfo.weekMisees;
 				PlayState.campaignScore = resumeInfo.weekScore;
+				PlayState.deathCounter = resumeInfo.deaths;
 
 				//trace(FlxG.save.data.weekProgress);
 				//trace(PlayState.storyPlaylist);

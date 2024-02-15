@@ -12,7 +12,7 @@ function create(){
 
 
 function setWeekProgress(song:String){ //PlayState.instance.SONG.meta.name
-	weekProgress.set(PlayState.storyWeek.name, {song: song.toLowerCase(), weekMisees: PlayState.campaignMisses, weekScore: PlayState.campaignScore});
+	weekProgress.set(PlayState.storyWeek.name, {song: song.toLowerCase(), weekMisees: PlayState.campaignMisses, weekScore: PlayState.campaignScore, deaths: PlayState.deathCounter});
     trace("Set Progress For " + PlayState.storyWeek.name + ", " + song);
 }
 

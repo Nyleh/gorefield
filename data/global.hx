@@ -13,7 +13,7 @@ static var seenMenuCutscene:Bool = false;
 
 static var windowTitleGOREFIELD:String = "Friday Night Funkin': Gorefield V2";
 
-public static var weekProgress:Map<String, {song:String, weekMisees:Int, weekScore:Int}> = [];
+public static var weekProgress:Map<String, {song:String, weekMisees:Int, weekScore:Int, deaths:Int}> = [];
 
 static var redirectStates:Map<FlxState, String> = [
     TitleState => "gorefield/TitleScreen",

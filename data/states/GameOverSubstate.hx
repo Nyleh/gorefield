@@ -14,6 +14,8 @@ function create()
 
     createNewCharacter = PlayState.instance.boyfriend.gameOverCharacter != characterName;
 
+    PlayState.deathCounter++;
+
     daCharacter = new Character(PlayState.instance.boyfriend.x, PlayState.instance.boyfriend.y, PlayState.instance.boyfriend.gameOverCharacter, true);
     if (createNewCharacter)
     {

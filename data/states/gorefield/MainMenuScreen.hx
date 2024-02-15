@@ -43,6 +43,8 @@ var glitchShader:CustomShader;
 var heatWaveShader:CustomShader;
 
 function create() {
+	PlayState.deathCounter = 0;
+
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 
