@@ -1262,8 +1262,19 @@ function goToSong() {
 	PlayState.isStoryMode = PlayState.chartingMode = false; // Just incase cause people see cutscenes for some reason
 
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
-}
 
+	if(freePlayMenuID == 8){ //is codes menu
+		PlayState.isStoryMode = true;
+		PlayState.storyWeek = {
+			name: weeks[8].name,
+			id: weeks[8].name,
+			sprite: null,
+			chars: [null, null, null],
+			songs: [],
+			difficulties: ['hard']
+		};
+	}
+}
 var channelTimer:FlxTimer = null;
 function turnTV(on:Bool) {
 	if (isTVOn == on)
@@ -1513,7 +1524,18 @@ var CodesFunctions:{} = {
 		FlxTween.tween(FlxG.camera, {zoom: 1.6}, 3.1, {ease: FlxEase.circInOut, 
 			onComplete: function () {
 				PlayState.loadSong(songName, "hard", false, false);
-				PlayState.isStoryMode = PlayState.chartingMode = false;
+				PlayState.chartingMode = false;
+				PlayState.isStoryMode = true;
+
+				PlayState.storyWeek = {
+					name: weeks[8].name,
+					id: weeks[8].name,
+					sprite: null,
+					chars: [null, null, null],
+					songs: [],
+					difficulties: ['hard']
+				};
+
 
 				if (!FlxG.save.data.extrasSongs.contains(songName)) {
 					FlxG.save.data.extrasSongs.push(songName);
