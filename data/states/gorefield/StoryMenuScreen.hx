@@ -513,11 +513,11 @@ function create() {
 	yesText.scrollFactor.set();
 	add(yesText);
 
-	noText = new Alphabet(0, 0, FlxG.save.data.spanish ? "spanish text here" : "RESTART", true);
+	noText = new Alphabet(0, 0, FlxG.save.data.spanish ? "REINICIAR" : "RESTART", true);
 	noText.scrollFactor.set();
 	add(noText);
 
-	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "spanish text here" : "Would You Like To Continue?", false);
+	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
 	progInfoText.scrollFactor.set();
 	add(progInfoText);
 
@@ -910,19 +910,7 @@ function changeWeek(change:Int) {
 
 	weekText.text = (curWeek == 8) ? codeWeekUnlocked ? weeks[curWeek].name : "?????" : weeksUnlocked[curWeek] ? weeks[curWeek].name : "?????";
 
-	if (FlxG.save.data.spanish) {
-		flavourText.text = weeksUnlocked[curWeek] ? weekDescsSPANISH[curWeek] : (codesUnlocked && curWeek == 8) ? "spanish code text here" : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "spanish clown text here" : "spanish progress text here";
-
-		if(curWeek == 8 && codeWeekUnlocked){
-			flavourText.text = weekDescsSPANISH[curWeek];
-		}
-	} else {
-		flavourText.text = weeksUnlocked[curWeek] ? weekDescs[curWeek] : (codesUnlocked && curWeek == 8) ? "Find Hidden Codes." : (codesUnlocked && curWeek == 6 && !FlxG.save.data.beatWeekG7) ? "Can't Find Me?   Boo Hoo!                           Till a Breeze..." :"Progress through the weeks to unlock!"; //T ill A   B reeze (TAB)
-
-		if(curWeek == 8 && codeWeekUnlocked){
-			flavourText.text = weekDescs[curWeek];
-		}
-	}
+	updateFlavourText();
 
 	textBG.scale.set(FlxG.width, flavourText.y + flavourText.height + 22);
 	textBG.updateHitbox();
@@ -948,6 +936,27 @@ function changeWeek(change:Int) {
 	textInfoBG.y = FlxG.height - textInfoBG.height;
 
 	freeplayMenuText.y = scoreText.y = FlxG.height - scoreText.height - 22;
+}
+
+function updateFlavourText() {
+	var descs:Array<String> = FlxG.save.data.spanish ? weekDescsSPANISH : weekDescs;
+
+	if (curWeek == 6 && !FlxG.save.data.beatWeekG7) { flavourText.applyMarkup(FlxG.save.data.spanish ?
+		"No Puedes Encontrarme?  ¡Bu! Hu!                           *T*ras *A*lcanzar *B*rillar..." : // Fue algo díficil traducir esto ._: -EstoyAburridow
+		"Can't Find Me?   Boo Hoo!                           *T*ill *A* *B*reeze...",
+		[new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF527F3A), "*")]);
+		return;
+	}
+	if (curWeek == 8 && !codeWeekUnlocked) { flavourText.text = FlxG.save.data.spanish ?
+		"Encuentra Los Codigos Escondidos." :
+		"Find Hidden Codes." ;
+		return; 
+	}
+	if (weeksUnlocked[curWeek]) { flavourText.text = descs[curWeek]; return; }
+
+	flavourText.text = FlxG.save.data.spanish ? 
+	"Avanza a través de las semanas para desbloquear!" : 
+	"Progress through the weeks to unlock!";
 }
 
 function checkWeekProgress() {
