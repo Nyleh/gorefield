@@ -100,7 +100,7 @@ function create() {
 
 		if(weekProgress.get(PlayState.storyWeek.name) != null){
 			if (weekProgress.get(PlayState.storyWeek.name).song.toLowerCase() != PlayState.SONG.meta.name.toLowerCase()){
-				weekProgress.set(PlayState.storyWeek.name, {song: PlayState.SONG.meta.name.toLowerCase(), weekMisees: PlayState.campaignMisses, weekScore: PlayState.campaignScore});
+				weekProgress.set(PlayState.storyWeek.name, {song: PlayState.SONG.meta.name.toLowerCase(), weekMisees: PlayState.campaignMisses, weekScore: PlayState.campaignScore, deaths: PlayState.deathCounter});
 				trace("Saved Progress For " + PlayState.storyWeek.name + " in LoadingScreen");
 			}
 		}
