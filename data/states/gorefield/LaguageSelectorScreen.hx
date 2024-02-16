@@ -1,6 +1,7 @@
 import flixel.util.FlxAxes;
 import openfl.ui.Mouse;
 import flixel.addons.display.FlxBackdrop;
+import funkin.backend.utils.DiscordUtil;
 import flixel.effects.FlxFlicker;
 
 var curSelected:Int = -1;
@@ -16,6 +17,7 @@ var camBG:FlxCamera;
 
 function create()
 {
+    DiscordUtil.changePresence('Selecting Language...', "");
     FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 
     options = new FlxTypedGroup();

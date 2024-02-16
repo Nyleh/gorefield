@@ -12,6 +12,7 @@ import Xml;
 import StringTools;
 import openfl.ui.Mouse;
 import openfl.geom.Rectangle;
+import funkin.backend.utils.DiscordUtil;
 import openfl.desktop.Clipboard;
 import hxvlc.flixel.FlxVideo;
 import hxvlc.flixel.FlxVideoSprite;
@@ -228,7 +229,7 @@ public var acceptedCallback:Void->Void;
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
-
+	DiscordUtil.changePresence('Scrolling Through Menus...', "Story Menu");
 	PlayState.deathCounter = 0;
 
 	weeksFinished = FlxG.save.data.weeksFinished;

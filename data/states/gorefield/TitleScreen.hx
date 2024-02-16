@@ -1,6 +1,7 @@
 import flixel.text.FlxTextBorderStyle;
 import funkin.backend.MusicBeatState;
 import flixel.util.FlxAxes;
+import funkin.backend.utils.DiscordUtil;
 
 static var skippedIntro:Bool = false;
 var transitioning:Bool = false;
@@ -15,6 +16,7 @@ var wiggleGorefield:FlxSprite;
 var vigentte:FlxSprite;
 
 function create() {
+	DiscordUtil.changePresence('Scrolling Through Menus...', "Title Screen");
 	if(!skippedIntro)
 		FlxG.sound.playMusic(Paths.music('gorefield-menuLOOP'),0);
 	

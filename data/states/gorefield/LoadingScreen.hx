@@ -4,6 +4,7 @@ import funkin.backend.utils.WindowUtils;
 import funkin.backend.MusicBeatState;
 import openfl.Lib;
 import haxe.format.JsonPrinter;
+import funkin.backend.utils.DiscordUtil;
 import haxe.format.JsonParser;
 
 var pizza:Character;
@@ -115,6 +116,8 @@ function create() {
 	});
 	window.title = windowTitleGOREFIELD + " - Loading";
 	MusicBeatState.skipTransOut = true;
+
+	DiscordUtil.changePresence('Loading...', "");
 }
 
 function update(elapsed:Float) {

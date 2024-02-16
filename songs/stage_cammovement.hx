@@ -1,4 +1,5 @@
 import funkin.backend.utils.WindowUtils;
+import funkin.backend.utils.DiscordUtil;
 import flixel.math.FlxBasePoint;
 import openfl.Lib;
 
@@ -7,7 +8,12 @@ static var camFollowChars:Bool = true;
 
 var movement = new FlxBasePoint();
 
-function create() {camFollowChars = true; camMoveOffset = 15;}
+function create() {
+    camFollowChars = true; camMoveOffset = 15;
+    updateDiscordPresence = function() {
+        DiscordUtil.changeSongPresence(PlayState.detailsText, (PlayState.instance.paused ? "Paused - " : "") + PlayState.SONG.meta.name, PlayState.instance.inst, getIconRPC());
+    };
+}
 
 function postCreate() {
     var cameraStart = strumLines.members[curCameraTarget].characters[0].getCameraPosition();
@@ -33,4 +39,8 @@ function onCameraMove(camMoveEvent) {
     } else camMoveEvent.cancel();
 }
 
-function destroy() {camFollowChars = true; camMoveOffset = 15;}
+function onSongEnd(){
+    updateDiscordPresence = function() {};
+}
+
+function destroy() {camFollowChars = true; camMoveOffset = 15; updateDiscordPresence = function() {};}

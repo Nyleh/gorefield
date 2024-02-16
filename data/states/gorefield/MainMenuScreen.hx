@@ -4,6 +4,7 @@ import flixel.text.FlxTextBorderStyle;
 import funkin.menus.ModSwitchMenu;
 import funkin.editors.EditorPicker;
 import hxvlc.flixel.FlxVideo;
+import funkin.backend.utils.DiscordUtil;
 import funkin.backend.MusicBeatState;
 
 var options:Array<String> = [
@@ -44,7 +45,7 @@ var heatWaveShader:CustomShader;
 
 function create() {
 	PlayState.deathCounter = 0;
-
+	DiscordUtil.changePresence('Scrolling Through Menus...', "Main Menu");
 	CoolUtil.playMenuSong();
 	FlxG.camera.bgColor = FlxColor.fromRGB(17,5,33);
 

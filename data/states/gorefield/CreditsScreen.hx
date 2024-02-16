@@ -2,6 +2,7 @@ import flixel.FlxObject;
 import flixel.text.FlxTextBorderStyle;
 import flixel.text.FlxTextFormat;
 import flixel.text.FlxTextFormatMarkerPair;
+import funkin.backend.utils.DiscordUtil;
 import funkin.backend.system.framerate.Framerate;
 
 var curSelected:Int = 0;
@@ -143,6 +144,7 @@ var iconYArray:Array<Float> = []; //intro stuff
 function create() 
 {
 	Framerate.instance.visible = false;
+	DiscordUtil.changePresence('Scrolling Through Menus...', "Credits");
 	var background:FlxSprite = new FlxSprite();
 	background.loadGraphic(Paths.image("menus/credits/BG_0"));
 	background.setGraphicSize(FlxG.width, FlxG.height);
