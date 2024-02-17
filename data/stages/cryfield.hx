@@ -6,7 +6,6 @@ import flixel.ui.FlxBarFillDirection;
 import flixel.ui.FlxBar;
 import flixel.text.FlxText.FlxTextFormat;
 
-
 var heatWaveShader:CustomShader;
 public var rain:FlxBackdrop;
 public var rain2:FlxBackdrop;
@@ -90,7 +89,9 @@ function create()
 	];
 
     scripts.getByName("ui_healthbar.hx").call("disableScript");
-
+    for (script in scripts.scripts) {
+        trace("(script: " + script.path);
+    }
 
     missSubtitleText = new FunkinText(0, 0, 0, missSubtitle, 70);
     missSubtitleText.addFormat(new FlxTextFormat(0xFFFFFFFF, false, false, 0));

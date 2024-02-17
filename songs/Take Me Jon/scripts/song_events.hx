@@ -1,4 +1,4 @@
-import hxvlc.flixel.FlxVideo;
+import hxvlc.flixel.FlxVideo; //* VideoHandler no es realmente necesario aquí porque es un video de Game Over -EstoyAburridow 
 import funkin.backend.MusicBeatState;
 
 var vhs:CustomShader;

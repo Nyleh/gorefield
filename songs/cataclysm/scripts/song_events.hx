@@ -1,39 +1,17 @@
-import hxvlc.flixel.FlxVideo;
 import funkin.game.PlayState;
 import flixel.addons.effects.FlxTrail;
+
+importScript("data/scripts/VideoHandler");
 
 var controlHealthAlpha:Bool = true;
 var curHealthAlpha:Float = 1;
 
-var videos:Array<FlxVideo> = [];
-
-function create() 
-{
-    for (path in ["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"])
-    {
-        video = new FlxVideo();
-        video.load(Assets.getPath(Paths.video(path)));
-        video.onEndReached.add(
-            function()
-            {
-                canPause = true;
-                startedCountdown = true;
-
-                if (startTimer == null)
-                    startTimer = new FlxTimer();
-    
-                videos[0].dispose();
-                videos.shift();   
-
-                FlxG.camera.flash(FlxColor.WHITE);
-            }
-        );
-        videos.push(video);
-    } 
-}
-
 function postCreate() {
     snapCam();
+
+    VideoHandler.load(["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"], false, function() {
+        FlxG.camera.flash(FlxColor.WHITE);
+    });
 }
 
 function onStartCountdown(event) {
@@ -41,11 +19,14 @@ function onStartCountdown(event) {
 
     new FlxTimer().start(0.001, function(_)
     {
-        videos[0].play();
-
-        canPause = false;
+        VideoHandler.playNext();
 
         startSong();
+        
+        //* Cuando cancelas el countdown, tienes que iniciar estas variables -EstoyAburridow
+        startedCountdown = true;
+        if (startTimer == null)
+            startTimer = new FlxTimer();
     });
 }
 
@@ -77,8 +58,7 @@ function stepHit(step:Int) {
         case 1070:
             FlxTween.tween(camHUD, {alpha: 1}, 0.5);
         case 1585:
-            videos[0].play();
-            canPause = false;
+            VideoHandler.playNext();
         case 1584:
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadIn});
         case 1632:
@@ -147,8 +127,7 @@ function stepHit(step:Int) {
             FlxTween.tween(stage.stageSprites["black"], {alpha: 1}, (Conductor.stepCrochet / 1000) * 21, {ease: FlxEase.quadIn});
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 24, {ease: FlxEase.quadIn});
         case 3533:
-            videos[0].play();
-            canPause = false;
+            VideoHandler.playNext();
         case 3850:
             camFollowChars = false; 
             camFollow.setPosition(-50, -320);

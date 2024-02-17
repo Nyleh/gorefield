@@ -1,25 +1,12 @@
-import hxvlc.flixel.FlxVideo;
 import funkin.game.PlayState;
 
-var video:FlxVideo;
+importScript("data/scripts/VideoHandler");
 
 var dodgeCat:Character;
 
 function postCreate() 
 {
-	video = new FlxVideo();
-	video.load(Assets.getPath(Paths.video("somethingisComming")));
-	video.onEndReached.add(
-		function()
-		{
-			canPause = true;
-			startedCountdown = true;
-
-			startTimer = new FlxTimer();
-
-			video.dispose();
-		}
-	); 
+	VideoHandler.load(["somethingisComming"], false);
 
 	tweenHUD(0,0.01);
 }
@@ -85,9 +72,7 @@ function stepHit(step:Int)
 			};
 			fadeShit(0);
 		case 1035:
-			video.play();
-
-			canPause = false;
+			VideoHandler.playNext();
 		case 1056:
 			dodgeCat.visible = dodgeCat.active = true;
 			dodgeCat.playAnim("enter", true);

@@ -1,34 +1,13 @@
-import hxvlc.flixel.FlxVideoSprite;
+importScript("data/scripts/VideoHandler");
 
-var video:FlxVideo;
-public var camVideos:FlxCamera;
 function create() 
 {
-    for (cam in [camGame, camHUD]) FlxG.cameras.remove(cam, false);
-    video = new FlxVideoSprite();
-    video.load(Assets.getPath(Paths.video("OH_NO_AGAIN")));
-    video.bitmap.onEndReached.add(
-        function()
-        {
-            canPause = true;
-            startedCountdown = true;
-
-            startTimer = new FlxTimer();
-
-            remove(video);
-
-            FlxG.camera.flash(0xffD4DE8F);
-        }
-    );
+    VideoHandler.load(["OH_NO_AGAIN"], true, function() {
+        FlxG.camera.flash(0xffD4DE8F);
+    });
 
     gf.scrollFactor.set(1, 1);
     gf.visible = false;
-
-    add(video);
-    camVideos = new FlxCamera(0, 0);
-    camVideos.bgColor = 0x00000000;
-    for (cam in [camGame, camVideos, camHUD]) {cam.bgColor = 0x00000000; FlxG.cameras.add(cam, cam == camGame);}
-    video.cameras = [camVideos];
 }
 
 var goingInsane:Bool = false;
@@ -39,8 +18,7 @@ function stepHit(step:Int)
         case 832:
             for (strumLine in strumLines) tweenStrum(strumLine, 0.5, (Conductor.stepCrochet / 1000) * 2);
             tweenHealthBar(0,(Conductor.stepCrochet / 1000) * 2);
-            video.play();
-            canPause = false;
+            VideoHandler.playNext();
         case 864:
             for (strumLine in strumLines) tweenStrum(strumLine, 1, (Conductor.stepCrochet / 1000) * 2);
             tweenHealthBar(1,(Conductor.stepCrochet / 1000) * 2);

@@ -24,6 +24,8 @@ function update() {
     } 
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 
+    if (scripts.contains("assets/data/scripts/VideoHandler.hx") && VideoHandler.curVideo != null) VideoHandler.curVideo.bitmap.rate = FlxG.timeScale;
+
     if (FlxG.keys.justPressed.SEVEN) { //i got tired of exiting the song ok - lean
         FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, true));
     }

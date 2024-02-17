@@ -3,7 +3,6 @@ import funkin.options.OptionsMenu;
 import flixel.text.FlxTextBorderStyle;
 import funkin.menus.ModSwitchMenu;
 import funkin.editors.EditorPicker;
-import hxvlc.flixel.FlxVideo;
 import funkin.backend.utils.DiscordUtil;
 import funkin.backend.MusicBeatState;
 
