@@ -126,7 +126,7 @@ Es un honor para mí dirigirme a ustedes en esta ocasión con el propósito de c
 sugerencia constructiva que podría aportar un valor considerable a nuestro trabajo conjunto.
 Me gustaría expresar mi firme convicción en la importancia de mantener los mensajes tal
 cual como están ahora en esta pantalla de introducción. Es crucial que, independientemente 
-del idioma utilizado, estos mensajes se mantengan igual, ya que proporcionen una experiencia 
+del idioma utilizado, estos mensajes se mantengan igual, ya que proporcionan una experiencia 
 fluida y armoniosa a nuestros usuarios.
 
 Esta sugerencia que ahora comparto con ustedes, a diferencia de la última acerca del 
@@ -150,7 +150,7 @@ EstoyAburridow */
 		case 10: createCoolText(FlxG.save.data.spanish ? ["Dathree estuvo aqui"] : ["Dathree was here"]);
 		case 12: addMoreText("'Dathree'");
 		case 13: deleteCoolText();
-		case 14: createCoolText([FlxG.save.data.spanish ? "I don't speak spanish" : "number one small arctic fox"]);
+		case 14: createCoolText([FlxG.save.data.spanish ? "I don't speak spanish" : "number one small arctic fox"]); // Why did you do this to me? What about "Yo no hablo ingles"? -EstoyAburridow
 		case 15: addMoreText("'Lean'");
 		case 16: deleteCoolText();
 		case 17: createCoolText([FlxG.save.data.spanish ? "Gorefield para ti BB" : "Gorefield for you BB"]);
@@ -170,7 +170,7 @@ EstoyAburridow */
 		case 31: deleteCoolText();
 		case 32: addMoreText("FNF'");
 		case 33: addMoreText('Vs Gorefield');
-		case 34: addMoreText(FlxG.save.data.spanish ? "Parte II" : 'Part II');
+		case 34: addMoreText(FlxG.save.data.spanish ? "Parte II" : 'Part II'); // Hawaii Part II reference? -EstoyAburridow
 		case 35:
 			if(!FlxG.random.bool(10)) return;
 			deleteCoolText();

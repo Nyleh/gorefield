@@ -3,7 +3,7 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.util.FlxAxes;
 import funkin.backend.utils.WindowUtils;
 
-var video:FlxVideo;
+var videos:Array<FlxVideo> = [];
 
 var dadBackdrop:FlxBackdrop;
 
@@ -11,21 +11,25 @@ function create()
 {
     devControlBotplay = !(player.cpu = false);
 
-    video = new FlxVideo();
-    video.load(Assets.getPath(Paths.video("BinkyLaugh")));
-    video.onEndReached.add(
-        function()
-        {
-            canPause = true;
-            startedCountdown = true;
+    for (path in ["inicio_payaso_god", "BinkyLaugh"])
+    {
+        video = new FlxVideo();
+        video.load(Assets.getPath(Paths.video(path)));
+        video.onEndReached.add(
+            function()
+            {
+                canPause = true;
+                startedCountdown = true;
 
-            startTimer = new FlxTimer();
-
-            video.dispose();
-
-            FlxG.camera.flash(0xff000000);
-        }
-    );
+                if (startTimer == null)
+                    startTimer = new FlxTimer();
+    
+                videos[0].dispose();
+                videos.shift();
+            }
+        );
+        videos.push(video);
+    } 
 
     dadBackdrop = new FlxBackdrop(null, FlxAxes.X);
     dadBackdrop.setPosition(dad.x, dad.y + 120);
@@ -57,6 +61,12 @@ function postCreate()
 
     camHUD.alpha = 0;
     cpuStrums.visible = false;
+}
+
+function onSongStart() {
+    videos[0].play();
+
+    canPause = false;
 }
 
 function stepHit(step:Int) 
@@ -91,7 +101,7 @@ function stepHit(step:Int)
             boyfriend.cameraOffset.y -= 120;
         case 752:
             devControlBotplay = !(player.cpu = true);
-            video.play();
+            videos[0].play();
             canPause = false;
         case 760:
             cpuStrums.visible = false;
