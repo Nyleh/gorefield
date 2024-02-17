@@ -1639,7 +1639,7 @@ var codes:Map<String, Void -> Void> = [
 	"RETURN" => function() CodesFunctions.meme("gorefield_code_video"),
 	"BUFFIELD" => function() CodesFunctions.image("SPOILER_queacabodehacer_20240130060334"),
 	// "MANIAS",
-	// "FREE DIAMOND"
+	"FREE DIAMOND" => function() CodesFunctions.meme("urisus_in_gorefield_brooo.mp4"),
 
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
