@@ -8,6 +8,7 @@ var replaceCamera:Bool = false;
 var daCharacter:Character;
 var fakeCamZoom:Float;
 var createNewCharacter:Bool = false;
+
 function create()
 {
     var position:Array<{x:Float,y:Float}> = [{x: 0, y: 0}];
@@ -19,6 +20,11 @@ function create()
     daCharacter = new Character(PlayState.instance.boyfriend.x, PlayState.instance.boyfriend.y, PlayState.instance.boyfriend.gameOverCharacter, true);
     if (createNewCharacter)
     {
+        switch(daCharacter.curCharacter){
+            case 'jesse-death':
+                trace("ye");
+                daCharacter.flipX = false;
+        }
         daCharacter.danceOnBeat = false;
         daCharacter.playAnim('firstDeath');
         add(daCharacter);
@@ -47,6 +53,10 @@ function create()
             position[0].x = coolX;
             position[0].y = coolY; 
             fakeCamZoom = 0.7;
+            snapCam();
+        case 'jesse-death':
+            position[0].x = 430 + daCharacter.x;
+            position[0].y = 600 + daCharacter.y;    
             snapCam();
         case 'bf-dead-bw':
             position[0].x = 330 + daCharacter.x;

@@ -5,6 +5,7 @@ static var strumLineGfZoom:Float = 0;
 static var lerpCam:Bool = true;
 static var zoomDisabled:Bool = false;
 static var hudBeatGame:Bool = false;
+static var canHudBeat:Bool = true;
 
 public var strumLineDadMult:Float = 1;
 public var strumLineGfMult:Float = 1;
@@ -15,7 +16,7 @@ public var forceDefaultCamZoom:Bool = false; //for songs that already have bf/da
 
 function create() {
     strumLineBfMult = strumLineDadMult = strumLineGfMult = camZoomMult = 1;
-    camZooming = false; lerpCam = true; zoomDisabled = false; hudBeatGame = false; forceDefaultCamZoom = false;
+    camZooming = false; lerpCam = true; zoomDisabled = false; hudBeatGame = false; canHudBeat = false; forceDefaultCamZoom = false;
     if (stage == null || stage.stageXML == null) return;
 
     strumLineDadZoom = stage.stageXML.exists("opponentZoom") ? Std.parseFloat(stage.stageXML.get("opponentZoom")) : -1;
@@ -44,7 +45,7 @@ function beatHit(beat:Int) {
     if (Options.camZoomOnBeat && lerpCam && FlxG.camera.zoom < maxCamZoom && beat % camZoomingInterval == 0)
     {
         FlxG.camera.zoom += 0.015 * camZoomingStrength;
-        camHUD.zoom += (hudBeatGame ? 0.015 : 0.03) * camZoomingStrength;
+        camHUD.zoom += (hudBeatGame ? 0.015 : canHudBeat ? 0.03 : 0) * camZoomingStrength;
     }
 }
 

@@ -9,6 +9,7 @@ var iconOffsets:Array<Array<Float>> = [];
 
 static var gorefieldhealthBarBG:FlxSprite;
 static var gorefieldhealthBar:FlxBar;
+public var healthBardisabled:Bool = false;
 
 static var gorefieldiconP1:FlxSprite;
 static var gorefieldiconP2:FlxSprite;
@@ -45,6 +46,11 @@ function update(elapsed:Float)
     updateIcons();
 
 static function updateIcons() {
+    if(healthBardisabled){
+        gorefieldiconP1.visible = false;
+        gorefieldiconP2.visible = false;
+        return;
+    }
     // Positions 
     gorefieldiconP1.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0)) - 20);
     gorefieldiconP2.x = gorefieldhealthBar.x + (gorefieldhealthBar.width * (FlxMath.remapToRange(gorefieldhealthBar.percent, 0, 100, 1, 0))) - (gorefieldiconP2.width - 20);
