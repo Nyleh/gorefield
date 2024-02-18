@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-stage>
-<stage zoom="1" name="breaking" folder="stages/breaking/" noteSkin="breaking">
+<stage zoom="1" name="breaking" folder="stages/breaking/" noteSkin="breaking" splashSkin="gorefield_green">
 	<sprite name="walterBG" x="80" y="140" sprite="BG_WALTER" antialiasing="true" scrollx="1" scrolly="1" scale="1">
 		<anim name="idle" anim="BG" loop="true" fps="24"/>
 	</sprite>
