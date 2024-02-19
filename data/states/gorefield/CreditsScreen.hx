@@ -130,6 +130,10 @@ var credits:Array<Array<Dynamic>> = [
 	["Cartoon Cat Team", 	
 		["Cartoon Cat Team", "Cartoon Cat Team"], 
 		["iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson and FRANDERMAN123", "iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson y FRANDERMAN123"]
+	],
+	["Jacadamia",
+		["Jon, Take with you Animation Creator", "spanish translation here"], 
+		["guys i don't think jon took him", "spanish translation here"]
 	]
 ];
 
@@ -161,11 +165,11 @@ function create()
 	add(iconGroup);
 
 	var sizeArray:Array<String> = 
-	["Lumpy Touch", "Jars Drawings", "Omega Black Art", "Aytanner"]; //need to size these portraits to match the others
+	["Lumpy Touch", "Jars Drawings", "Omega Black Art", "Aytanner", "Jacadamia"]; //need to size these portraits to match the others
 	for (i in 0...credits.length)
 	{
 		var icon:FlxSprite = new FlxSprite(i % 3 * 370 + 100, Std.int(i / 3) * 420);
-		icon.loadGraphic(Paths.image('menus/credits/' + credits[i][0]));
+		icon.loadGraphic(Paths.image((moustacheMode ? 'menus/credits/moustache/' : 'menus/credits/') + credits[i][0]));
 		icon.setGraphicSize(332);
 		icon.ID = i; icon.antialiasing = true;
 		icon.alpha = 0.5;
@@ -279,4 +283,4 @@ function changeSelection(change:Int)
 	descTextName.screenCenter(FlxAxes.X);
 }
 
-function destroy() Framerate.instance.visible = true;
+function destroy() {Framerate.instance.visible = true; moustacheMode = false;}
