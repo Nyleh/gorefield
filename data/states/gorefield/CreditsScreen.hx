@@ -132,7 +132,7 @@ var credits:Array<Array<Dynamic>> = [
 		["iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson and FRANDERMAN123", "iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson y FRANDERMAN123"]
 	],
 	["Jacadamia",
-		["Jon, Take with you Animation Creator", "spanish translation here"], 
+		["Jon, Take Me with you Animation Creator", "spanish translation here"], 
 		["guys i don't think jon took him", "spanish translation here"]
 	]
 ];
