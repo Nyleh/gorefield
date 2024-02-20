@@ -141,7 +141,7 @@ var freeplaySongLists = [
 	},
 	{
 		songs: ["The Complement", "R0ses and Quartzs"],
-		icons: ["ultra-gayfield", "ultra-gayfield"],
+		icons: ["ultra-gorefield-centipede", "ultra-gayfield"],
 		songMenuObjs: [],
 		iconMenuObjs: []
 	},
@@ -1615,7 +1615,7 @@ var codes:Map<String, Void -> Void> = [
 	// Songs codes
 	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon", "garfield-sad"), 
 	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman"), 
-	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "breaking-garfield"), 
+	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "walter-monster"), 
 
 	// Youtubers spanish codes
 	"TANUKI" => function() CodesFunctions.meme("irl"),
