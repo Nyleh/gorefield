@@ -14,6 +14,9 @@ public var particleShader:CustomShader;
 function create() {
     FlxG.camera.bgColor = 0xff000000;
 
+    gameOverSong = "gameOvers/godfield/gameover_godfield_loop";
+	retrySFX = "gameOvers/godfield/gameover_godfield_end";
+
     comboGroup.x += 300;
     comboGroup.y += 300;
 
@@ -33,7 +36,7 @@ function create() {
     insert(members.indexOf(stage.stageSprites["BG"])+1, particleSprite);
 
     particleShader = new CustomShader("particles");
-    particleShader.time = 0; particleShader.particlealpha = 1;
+    particleShader.time = 0; particleShader.particlealpha = 0.75;
 	particleShader.res = [particleSprite.width, particleSprite.height];
     particleShader.particleXY = [0, 0];
     particleShader.particleColor = [.7,.7,.7];

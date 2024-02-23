@@ -21,8 +21,7 @@ function create()
     if (createNewCharacter)
     {
         switch(daCharacter.curCharacter){
-            case 'jesse-death':
-                trace("ye");
+            case 'jesse-death' | 'godnermaldeath':
                 daCharacter.flipX = false;
         }
         daCharacter.danceOnBeat = false;
@@ -56,7 +55,12 @@ function create()
             snapCam();
         case 'jesse-death':
             position[0].x = 430 + daCharacter.x;
-            position[0].y = 600 + daCharacter.y;    
+            position[0].y = 300 + daCharacter.y;    
+            snapCam();
+        case 'godnermaldeath':
+            fakeCamZoom = 0.75;
+            position[0].x = 530 + daCharacter.x;
+            position[0].y = 900 + daCharacter.y;    
             snapCam();
         case 'bf-dead-bw':
             position[0].x = 330 + daCharacter.x;
@@ -126,7 +130,7 @@ function update(elapsed:Float)
         replaceCamera = false;
     }
 
-    if (!FlxG.save.data.baby && deathCounter == 3 && controls.ACCEPT && !isEnding)
+    if (!FlxG.save.data.baby && deathCounter == 3 && controls.ACCEPT && !isEnding && !FlxG.save.data.dev)
     {
         isEnding = true;
         deathCounter = 0;

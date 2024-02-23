@@ -62,6 +62,7 @@ function new() {
     if (FlxG.save.data.beatWeekG6 == null) FlxG.save.data.beatWeekG6 = false;
     if (FlxG.save.data.beatWeekG7 == null) FlxG.save.data.beatWeekG7 = false;
     if (FlxG.save.data.beatWeekG8 == null) FlxG.save.data.beatWeekG8 = false;
+    if (FlxG.save.data.firstTimeLanguage == null) FlxG.save.data.firstTimeLanguage = true;
 
     if(FlxG.save.data.weekProgress == null) FlxG.save.data.weekProgress = ["" => {}];
     weekProgress = FlxG.save.data.weekProgress;

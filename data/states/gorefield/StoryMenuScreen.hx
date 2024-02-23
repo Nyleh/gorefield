@@ -1584,6 +1584,7 @@ var CodesFunctions:{} = {
 		}
 		
 		FlxG.save.data.canVisitArlene = false;
+		FlxG.save.data.firstTimeLanguage = true;
 		FlxG.save.data.extrasSongs = [];
 		FlxG.save.data.extrasSongsIcons = [];
 

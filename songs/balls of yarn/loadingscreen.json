@@ -1,7 +1,7 @@
 {
-    "loadingbg": "loadingbg1",
-    "loadingimage": "rightloadingimage1",
-    "loadinganim": "BF 1",
-    "loadingpos": [561.46, -42.08],
-    "bgOffset": [10, 0]
+    "loadingbg": "pantalla_de_carga_cartoon",
+    "loadingimage": "CARTOON_CARGA",
+    "loadinganim": "CARTOON",
+    "loadingpos": [631, 120],
+    "bgOffset": [0, 40]
 }

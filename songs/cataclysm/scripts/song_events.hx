@@ -9,6 +9,15 @@ var curHealthAlpha:Float = 1;
 function postCreate() {
     snapCam();
 
+    for (strum in strumLines)
+		for (i=>strumLine in strumLines.members){
+			switch (i){
+				case 2 | 3 | 4 | 5:
+					for (char in strumLine.characters)
+						char.alpha = 0.0001;
+			}
+		}
+
     VideoHandler.load(["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"], false, function() {
         FlxG.camera.flash(FlxColor.WHITE);
     });
@@ -39,6 +48,68 @@ function update(elapsed:Float) {
 }
 
 function stepHit(step:Int) {
+    if (step >= 4369){
+        if(dad.animation.callback == null){
+            dad.animation.callback = function(name:String, frameNumber:Int, frameIndex:Int){
+                if(frameNumber == 0 && name != 'idle')
+                    FlxG.camera.shake(0.005, .15);
+                switch(name){
+                    case 'singUP':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -15);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -12);
+                            case 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -11);
+                        }
+                    case 'singDOWN':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -15);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -10);
+                            case 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -9);
+                        }
+                    case 'singLEFT':
+                        switch(frameNumber){
+                            case 0 | 1 | 2 | 3 | 4 | 5 | 6:
+                                boyfriend.setPosition(dad.x - 29,dad.y + 981 + 4);
+                        }
+                    case 'singRIGHT':
+                        switch(frameNumber){
+                            case 0 | 1:
+                                boyfriend.setPosition(dad.x - 21 + 2,dad.y + 977 + 4);
+                            case 2 | 3:
+                                boyfriend.setPosition(dad.x - 24 + 2,dad.y + 977 + 4);
+                            case 4:
+                                boyfriend.setPosition(dad.x - 25 + 2,dad.y + 977 + 4);
+                        }
+                    case 'idle':
+                        switch(frameNumber){
+                            case 0 | 1 | 2 | 3 | 25:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981);
+                            case 4 | 5:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
+                            case 6 | 7:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
+                            case 8 | 9:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 9);
+                            case 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 10);
+                            case 19 | 20:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
+                            case 21 | 22:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
+                            case 23 | 24:
+                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 2);
+                        }
+                }
+            };
+        }
+    }
+
     switch (step) {
         case 32:
             stage.stageSprites["black"].alpha = 0;
@@ -168,62 +239,83 @@ function stepHit(step:Int) {
 
             FlxG.camera.zoom = defaultCamZoom = 0.85;
             boyfriend.playAnim("idle", true, "DANCE");
-            dad.animation.callback = function(name:String, frameNumber:Int, frameIndex:Int){
-                if(frameNumber == 0 && name != 'idle')
-                    FlxG.camera.shake(0.005, .15);
-                switch(name){
-                    case 'singUP':
-                        switch(frameNumber){
-                            case 0 | 1:
-                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -15);
-                            case 2 | 3:
-                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -12);
-                            case 4 | 5 | 6:
-                                boyfriend.setPosition(dad.x - 15,dad.y + 971 + -11);
-                        }
-                    case 'singDOWN':
-                        switch(frameNumber){
-                            case 0 | 1:
-                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -15);
-                            case 2 | 3:
-                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -10);
-                            case 4 | 5 | 6:
-                                boyfriend.setPosition(dad.x - 27,dad.y + 977 + -9);
-                        }
-                    case 'singLEFT':
-                        switch(frameNumber){
-                            case 0 | 1 | 2 | 3 | 4 | 5 | 6:
-                                boyfriend.setPosition(dad.x - 29,dad.y + 981 + 4);
-                        }
-                    case 'singRIGHT':
-                        switch(frameNumber){
-                            case 0 | 1:
-                                boyfriend.setPosition(dad.x - 21 + 2,dad.y + 977 + 4);
-                            case 2 | 3:
-                                boyfriend.setPosition(dad.x - 24 + 2,dad.y + 977 + 4);
-                            case 4:
-                                boyfriend.setPosition(dad.x - 25 + 2,dad.y + 977 + 4);
-                        }
-                    case 'idle':
-                        switch(frameNumber){
-                            case 0 | 1 | 2 | 3 | 25:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981);
-                            case 4 | 5:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
-                            case 6 | 7:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
-                            case 8 | 9:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 9);
-                            case 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 10);
-                            case 19 | 20:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 7);
-                            case 21 | 22:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 4);
-                            case 23 | 24:
-                                boyfriend.setPosition(dad.x - 18,dad.y + 981 + 2);
-                        }
+        case 4868:
+            for (strum in strumLines)
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 4:
+                            for (char in strumLine.characters)
+                                char.alpha = 1;
+                    }
                 }
-            };
+        case 4872:
+            for (strum in strumLines)
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 5:
+                            for (char in strumLine.characters)
+                                char.alpha = 1;
+                    }
+                }
+        case 4876:
+            for (strum in strumLines)
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 3:
+                            for (char in strumLine.characters)
+                                char.alpha = 1;
+                    }
+                }
+        case 4880:
+            for (strum in strumLines){
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 0:
+                            for (strumNote in strumLine.members)
+                                FlxTween.tween(strumNote, {alpha: 0}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
+                        case 1:
+                            for (strumNote in strumLine.members)
+                                FlxTween.tween(strumNote, {x: strumNote.x - 320}, (Conductor.stepCrochet / 1000) * 12, {ease: FlxEase.quadInOut});
+                    }
+                } 
+            }
+            
+            camFollow.setPosition(-50, -100);
+            defaultCamZoom = 1.6;
+            for (strum in strumLines)
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 2:
+                            for (char in strumLine.characters)
+                                char.alpha = 1;
+                    }
+                }
+        case 5008:
+            camFollow.setPosition(-50, -320);
+            defaultCamZoom = 0.85;
+            for (strum in strumLines){
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 0:
+                            for (strumNote in strumLine.members)
+                                FlxTween.tween(strumNote, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8, {ease: FlxEase.quadOut});
+                        case 1:
+                            for (strumNote in strumLine.members)
+                                FlxTween.tween(strumNote, {x: strumNote.x + 320}, (Conductor.stepCrochet / 1000) * 12, {ease: FlxEase.quadInOut});
+                    }
+                } 
+            }
+            for (strum in strumLines)
+                for (i=>strumLine in strumLines.members){
+                    switch (i){
+                        case 3 | 2 | 4 | 5:
+                            for (char in strumLine.characters)
+                                FlxTween.tween(char, {y: char.y - 1000, x: char.x - ((i == 4 || i == 5) ? 300 : -300)}, (Conductor.stepCrochet / 1000) * 24, {ease: FlxEase.quadInOut, startDelay: 0.08 * i});
+                    }
+                } 
+        case 5070:
+            FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);  
+        case 5136:
+            camGame.visible = false;
     }
 }

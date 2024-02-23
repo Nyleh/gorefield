@@ -17,6 +17,15 @@ var camBG:FlxCamera;
 
 function create()
 {
+    if(!FlxG.save.data.firstTimeLanguage){
+        new FlxTimer().start(.1, function (tmr:FlxTimer) {
+            FlxG.switchState(new ModState("gorefield/AlphaWarningScreen"));
+        });
+        return;
+    }
+    else{
+        FlxG.save.data.firstTimeLanguage = false;
+    }
     DiscordUtil.changePresence('Selecting Language...', "");
     FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 
