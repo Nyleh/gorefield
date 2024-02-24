@@ -16,7 +16,7 @@ public var forceDefaultCamZoom:Bool = false; //for songs that already have bf/da
 
 function create() {
     strumLineBfMult = strumLineDadMult = strumLineGfMult = camZoomMult = 1;
-    camZooming = false; lerpCam = true; zoomDisabled = false; hudBeatGame = false; canHudBeat = false; forceDefaultCamZoom = false;
+    camZooming = false; lerpCam = true; zoomDisabled = false; hudBeatGame = false; canHudBeat = true; forceDefaultCamZoom = false;
     if (stage == null || stage.stageXML == null) return;
 
     strumLineDadZoom = stage.stageXML.exists("opponentZoom") ? Std.parseFloat(stage.stageXML.get("opponentZoom")) : -1;
