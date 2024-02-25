@@ -20,10 +20,6 @@ function create()
     daCharacter = new Character(PlayState.instance.boyfriend.x, PlayState.instance.boyfriend.y, PlayState.instance.boyfriend.gameOverCharacter, true);
     if (createNewCharacter)
     {
-        switch(daCharacter.curCharacter){
-            case 'jesse-death' | 'godnermaldeath':
-                daCharacter.flipX = false;
-        }
         daCharacter.danceOnBeat = false;
         daCharacter.playAnim('firstDeath');
         add(daCharacter);
@@ -54,8 +50,9 @@ function create()
             fakeCamZoom = 0.7;
             snapCam();
         case 'jesse-death':
+            fakeCamZoom = 0.7;
             position[0].x = 430 + daCharacter.x;
-            position[0].y = 300 + daCharacter.y;    
+            position[0].y = 600 + daCharacter.y;    
             snapCam();
         case 'godnermaldeath':
             fakeCamZoom = 0.75;
