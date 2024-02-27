@@ -1,7 +1,6 @@
 <!DOCTYPE codename-engine-stage>
 <stage zoom="0.48" name="cartoon-stage" folder="stages/cartoon-stage/" noteSkin="gorefield_green" splashSkin="gorefield_green" healthBarColor="green">
     <sprite name="sky" x="-300" y="-200" sprite="gbStage_sky" antialiasing="true" scrollx="0.5" scrolly="0.5" scale="1"/>
-    <sprite name="background" x="0" y="0" sprite="gbStage_background" antialiasing="true" scrollx="0.8" scrolly="0.8" scale="1"/>
     <sprite name="buildings" x="0" y="0" sprite="gbStage_buildings" antialiasing="true" scrollx="1" scrolly="0.9" scale="1"/>
     <sprite name="base" x="0" y="0" sprite="gbStage_base" antialiasing="true" scrollx="1" scrolly="1" scale="1"/>
     <player x="1100" y="700" camxoffset="-100" camyoffset="-300"/>

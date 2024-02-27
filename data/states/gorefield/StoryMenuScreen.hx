@@ -502,11 +502,11 @@ function create() {
 	for (hitbox in [videosHitbox, powerHitbox, pauseHitbox, speedHitbox, change1Hitbox, change2Hitbox])
 		hitbox.x -= 1000;
 
-	boxSprite = new FlxSprite(0,730).makeGraphic(930, 370, 0xff769246);
+	boxSprite = new FlxSprite(0,730).loadGraphic(Paths.image("menus/storymenu/TEXT_BOX"));
+	boxSprite.scale.set(1.1,1.1);
 	boxSprite.updateHitbox();
 	boxSprite.screenCenter(FlxAxes.X);
 	boxSprite.scrollFactor.set();
-	boxSprite.alpha = 0.95;
 	add(boxSprite);
 
 	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
@@ -527,7 +527,7 @@ function create() {
 function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted){
 	isInProgPrompt = entered;
 	FlxTween.cancelTweensOf(boxSprite);
-	FlxTween.tween(boxSprite,{y: entered ? 200 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+	FlxTween.tween(boxSprite,{y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
 
 	finishedCallback = entered ? finishCallback : null;
 	acceptedCallback = entered ? accepted : null;
@@ -630,14 +630,14 @@ function update(elapsed:Float) {
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
-	yesText.x = boxSprite.x * 1.7;
-	yesText.y = boxSprite.y + 290;
+	yesText.x = boxSprite.x * 4.2;
+	yesText.y = boxSprite.y + 360;
 
-	noText.x = boxSprite.x * 4;
-	noText.y = boxSprite.y + 290;
+	noText.x = boxSprite.x * 14.2;
+	noText.y = boxSprite.y + 360;
 
-	progInfoText.x = boxSprite.x * 1.15;
-	progInfoText.y = boxSprite.y + 100;
+	progInfoText.x = boxSprite.x * 3.6;
+	progInfoText.y = boxSprite.y + 140;
 
 	codesPanel.updateHitbox();
 	codesPanel.screenCenter(0x10);
@@ -816,7 +816,7 @@ function handleMenu() {
 	}
 
 	if(isInProgPrompt){
-		if (controls.BACK) {openProgressPrompt(false); selectingWeek = false;}
+		if (controls.BACK) {openProgressPrompt(false); selectingWeek = false; FlxG.sound.play(Paths.sound('menu/cancelMenu'));}
 		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
 		if (controls.ACCEPT) {
 			if(onYes){
