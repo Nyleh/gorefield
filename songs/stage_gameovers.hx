@@ -1,3 +1,22 @@
+function update(elapsed){
+    if(health >= 0){
+        switch(PlayState.instance.boyfriend.curCharacter){
+            case 'jon-player' | 'bf-apoc' | 'bf-ultra':
+                lossSFX = "gameOverSFX2";
+            case 'bf-bw':
+                lossSFX = "gameOverSFXhijon";
+            case 'nermal-cry' | 'nermal-cry-pov':
+                lossSFX = "gameOverSFXnermal";
+            case 'god-nermal':
+                lossSFX = "gameOverSFXgod";
+            case 'bf-sky' | 'bf-fall':
+                lossSFX = "gameOverSFXterror";
+            case 'bf-black' | 'bf-black2' | 'bf-sb':
+                lossSFX = "gameOverSFXsansfield";
+        }
+    }
+}
+
 function onGameOver(){
     for (camera in FlxG.cameras.list) 
         {camera.setFilters([]); camera.stopFX();}  

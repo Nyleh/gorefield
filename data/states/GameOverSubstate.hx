@@ -40,8 +40,9 @@ function create()
             position[0].x = 550 + daCharacter.x;
             position[0].y = 240 + daCharacter.y;  
         case 'bf-sky':
-            position[0].x = 70 + daCharacter.x;
-            position[0].y = 500 + daCharacter.y;  
+            fakeCamZoom = 1.5;
+            position[0].x = 60 + daCharacter.x;
+            position[0].y = 470 + daCharacter.y;  
         case 'bf-black' | 'bf-black2':
             var coolX = daCharacter.curCharacter == 'bf-black' ? 170 + daCharacter.x : 100 + daCharacter.x;
             var coolY = daCharacter.curCharacter == 'bf-black' ? 500 + daCharacter.y : 400 + daCharacter.y;
@@ -61,7 +62,8 @@ function create()
             snapCam();
         case 'bf-dead-bw':
             position[0].x = 330 + daCharacter.x;
-            position[0].y = 600 + daCharacter.y;     
+            position[0].y = 600 + daCharacter.y;    
+            snapCam(); 
         case 'jon-player':
             position[0].x = 210 + daCharacter.x;
             position[0].y = 550 + daCharacter.y;
@@ -70,6 +72,7 @@ function create()
             position[0].x = 820 + daCharacter.x;
             position[0].y = 425 + daCharacter.y;
             FlxG.camera.bgColor = 0xFF527f3a;
+            snapCam();
         case 'binky_game_over':
             position[0].x = 1030 + daCharacter.x;
             position[0].y = 1070 + daCharacter.y;

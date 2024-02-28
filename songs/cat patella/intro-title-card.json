@@ -1,4 +1,5 @@
 {
     "image": "CatPatella",
-    "offset": [0, 200]
+    "offset": [0, 200],
+    "slideUp": true
 }

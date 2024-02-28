@@ -4,7 +4,7 @@ public var curHealthAlpha:Float = 1;
 var bg:FlxSprite;
 function create() {
     controlHealthAlpha = boyfriend.forceIsOnScreen = true; boyfriend.zoomFactor = 0.8;
-    FlxG.camera.bgColor = 0xFFADABAB;
+    //FlxG.camera.bgColor = 0xFFADABAB;
 
     gameOverSong = "gameOvers/ultrafield/ultrafieldLOOP";
 	retrySFX = "gameOvers/ultrafield/ultrafieldEnd";

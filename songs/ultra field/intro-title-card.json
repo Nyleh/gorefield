@@ -1,4 +1,5 @@
 {
     "image": "Ultra-Field",
-    "startDelay": 23
+    "startDelay": 23,
+    "slideUp": true
 }
