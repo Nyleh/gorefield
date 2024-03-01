@@ -154,8 +154,8 @@ var credits:Array<Array<Dynamic>> = [
 		"https://twitter.com/CartoonCatFNF"
 	],
 	["Jacadamia",
-		["Jon, Take Me with you Animation Creator", "spanish translation here"], 
-		["guys i don't think jon took him", "spanish translation here"],
+		["Jon, Take Me with you Animation Creator", "Creador de la animacion Jon, Take Me with you"], 
+		["guys i don't think jon took him", "chicos, no creo que jon lo haya llevado"],
 		"https://twitter.com/jacadamiajack"
 	]
 ];
