@@ -13,127 +13,150 @@ var descText2:FlxText;
 var descTextName:FlxText;
 
 var credits:Array<Array<Dynamic>> = [
-	// Name's - Role[EN, ES] - Random Description[EN, ES]
+	// Name's - Role[EN, ES] - Random Description[EN, ES] - Social link
 	["Jloor",
 		["Director, Coder", "Director, Coder"], 
 		["Your favorite Jloor! (Zero, you should kill yourself, now! Peruvian chamaco), Please Ecuador qualify for the World Cup",
-		"Tu Jloor favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador clasifica al Mundial"]
+		"Tu Jloor favorito! (Matate Zero, Peruano chamaco), Porfavor Ecuador clasifica al Mundial"],
+		"https://twitter.com/GamerJloor"
 	],
 	["Zero Artist",
 		["Director, Artist and Pixel Artist", "Director, Artista y Artista Pixel"], 
 		["Because of him the mod was delayed 2 years (Didn't you hear the song?)", 
-		"Por su culpa el mod se retraso 2 años (No escuchaste la cancion?)"]
+		"Por su culpa el mod se retraso 2 años (No escuchaste la cancion?)"],
+		"https://twitter.com/zero_artist02"
 	],
 	["BitfoxOriginal", 		
 		["Co Director, Musician, SFX Designer, Voice Actor (Lasagna Boy and Gorefield), Pixel Artist and Charter",
 		"Co Director, Musico, Diseñador de SFX, Actor de Voz (Lasagna Boy y Gorefield), Artista Pixel y Charter"], 
 		["I sacrificed a lot of time of my life (Hope it was worth it)", 
-		"Sacrifique mucho tiempo de mi vida (Espera que valiera la pena)"]
+		"Sacrifique mucho tiempo de mi vida (Espera que valiera la pena)"],
+		"https://twitter.com/BitfoxOriginal"
 	],
 	["Dathree_O", 			
 		["Artist", "Artista"], 
 		["He entered and left several times (Like a Minecraft villager [Because he enters and leaves the house all the time])",
-		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"]
+		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"],
+		"https://twitter.com/Dathree_O"
 	],
 	["JoaDash",
 		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
-		["Tic tac, you almost didn't catch the train", "Tic tac, casi se te va el tren"]
+		["Tic tac, you almost didn't catch the train", "Tic tac, casi se te va el tren"],
+		"https://twitter.com/TotallyNotJoa"
 	],
 	["Ani Manny",
 		["Artist", "Artista"], 
-		["If some icons were animated, it is thanks to him", "Si algunos iconos estaban animados, es gracias a el"]
+		["If some icons were animated, it is thanks to him", "Si algunos iconos estaban animados, es gracias a el"],
+		"https://twitter.com/ani__manny"
 	],
 	["Uri4n",
 		["Artist", "Artista"], 
-		["Hello im colombian people, nice to meet you", "Los sueños se cumplen chabales, solo que el mio no se a cumplido"]
+		["Hello im colombian people, nice to meet you", "Los sueños se cumplen chabales, solo que el mio no se a cumplido"],
+		"https://twitter.com/Ur14n1"
 	],
 	["ZeuzMoons",
 		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
-		["I saved pixel art, this one goes for you Guiller", "Yo salve el pixel art, te la dedico Guilller"]
+		["I saved pixel art, this one goes for you Guiller", "Yo salve el pixel art, te la dedico Guilller"],
+		"https://twitter.com/ZeuzMoons"
 	],
 	["Lunar Cleint", 		
 		["Main Coder", "Coder Principal"], 
-		["hi guys its me lunar de Todos los Tiempos (Messi)", "hola chicos soy yo lunar of All Times (Messi)"]
+		["hi guys its me lunar de Todos los Tiempos (Messi)", "hola chicos soy yo lunar of All Times (Messi)"],
+		"https://twitter.com/lunarcleint"
 	],
 	["Lean",
 		["Coder, Musician", "Coder, Musico"], 
-		["ummmm yeah i coded a lot for the mod", "ummmm si yo codifique una banda para el mod"]
+		["ummmm yeah i coded a lot for the mod", "ummmm si yo codifique una banda para el mod"],
+		"https://twitter.com/NewLeandapper"
 	],
 	["EstoyAburridow", 		
 		["Coder", "Coder"], 
-		["Play Celeste", "Jueguen Celeste"]
+		["Play Celeste", "Jueguen Celeste"],
+		"https://twitter.com/EstoyAburridop"
 	],
 	["Ne_Eo", 				
 		["Coder", "Coder"], 
-		["Why is the menu not centered?", "¿Por que el menu no esta centrado?"]
+		["Why is the menu not centered?", "¿Por que el menu no esta centrado?"],
+		"https://twitter.com/Ne_Eo_Twitch"
 	],
-	[
-		"Nexus Moon", 			
+	["Nexus Moon", 			
 		["Musician", "Musico"], 
-		["Expert in megalovanias, licensed", "Experto en megalovanias, licenciado"]
+		["Expert in megalovanias, licensed", "Experto en megalovanias, licenciado"],
+		"https://twitter.com/Nexus_Moon7"
 	],
 	["AlexR",
 		["Musician", "Musico"], 
 		["The one who died (He never came back and I don't know what he's doing here)", 
-		"El que se murio (Nunca regreso y no se que hace aqui)"]
+		"El que se murio (Nunca regreso y no se que hace aqui)"],
+		"https://twitter.com/22Alexr"
 	],
-	[
-		"Awe",
+	["Awe",
 		["Musician", "Musico"], 
-		["Is a fan of Steven Universe? (Roses and Quartzs = Rose Quartz)", "Es fan de Steven Universe? (Roses and Quartzs = Rose Cuarzo)"]
+		["Is a fan of Steven Universe? (Roses and Quartzs = Rose Quartz)", "Es fan de Steven Universe? (Roses and Quartzs = Rose Cuarzo)"],
+		"https://www.youtube.com/@awe9037"
 	],
-	[
-		"Deadshot", 			
+	["Deadshot", 			
 		["Charter", "Charter"], 
 		["He was only going to chart one song and he charted most of the mod.", 
-		"Solo iba a chartear una cancion y charteo casi todo el mod"]
+		"Solo iba a chartear una cancion y charteo casi todo el mod"],
+		"https://twitter.com/d3adsh0ter"
 	],
-	[
-		"Tok",
+	["Tok",
 		["Charter", "Charter"], 
 		["If it wasn't for Bitfox redoing the songs 5 times, would had more work to do.", 
-		"Si no fuera porque Bitfox re hizo las canciones 5 veces, hubira tnido mas trabajo"]
+		"Si no fuera porque Bitfox re hizo las canciones 5 veces, hubira tnido mas trabajo"],
+		"https://twitter.com/ThatOne_Kid39"
 	],
 	["Trevent",
 		["Charter", "Charter"], 
-		["Arrived to save Deadshot from his deathbed", "Llego a salvar a Deadshot de su lecho de muerte"]
+		["Arrived to save Deadshot from his deathbed", "Llego a salvar a Deadshot de su lecho de muerte"],
+		"https://twitter.com/BoohTrevent"
 	],
 	["KingFox",
 		["Voice Actor (Godfield and Psychopathic Jon)", "Actor de Voz (Godfield y Jon Psicopata)"], 
 		["The guy who did almost all the voices in Inner Mirror (Play Inner Mirror)",
-		"El tipo que hizo casi todas las voces en Inner Mirror (Jueguen Inner Mirror)"]
+		"El tipo que hizo casi todas las voces en Inner Mirror (Jueguen Inner Mirror)"],
+		"https://twitter.com/VOKINGF0X"
 	],
 	["SpringXy",
 		["Voice Actor (Arlene and Liz)", "Actor de Voz (Arlene y Liz)"], 
-		["Goodbye To a World", "Adios Al Mundo"]
+		["Goodbye To a World", "Adios Al Mundo"],
+		"https://twitter.com/SpringXy_1YT"
 	],
 	["Lumpy Touch",
 		["Gorefield Animation Creator", "Creador de la Animacion de Gorefield"], 
-		["The Lumpiest of Touches", "The Lumpiest of Touches"]
+		["The Lumpiest of Touches", "The Lumpiest of Touches"],
+		"https://twitter.com/LumpyTouch"
 	],
 	["William Burke", 		
 		["Original Gorefield Designer", "Diseñador Original de Gorefield"], 
-		["The origin of Gorefield (I think)", "El origen de Gorefield (Creo)"]
+		["The origin of Gorefield (I think)", "El origen de Gorefield (Creo)"],
+		"https://www.instagram.com/goblin___warlock/"
 	],
 	["Jars Drawings",
 		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
-		["Sheesh", "Sheesh"]
+		["Sheesh", "Sheesh"],
+		"https://twitter.com/jars_drawings"
 	],
 	["Omega Black Art", 	
 		["Original Ultra Gorefield Designer", "Diseñador Original de Ultra Gorefield"], 
-		["Omega Art!!!!", "Omega Arte!!!!"]
+		["Omega Art!!!!", "Omega Arte!!!!"],
+		"https://www.instagram.com/omegablackart/?hl=es"
 	],
 	["Aytanner",
 		["Original Mondaylovania Musician", "Musico Original de Mondaylovania"], 
-		["The Undertale", "El Undertale"]
+		["The Undertale", "El Undertale"],
+		"https://on.soundcloud.com/PSZXo"
 	],
 	["Cartoon Cat Team", 	
 		["Cartoon Cat Team", "Cartoon Cat Team"], 
-		["iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson and FRANDERMAN123", "iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson y FRANDERMAN123"]
+		["iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson and FRANDERMAN123", "iTzDaniel456, Samuroarx2, KenethYT, Carlone Wenson y FRANDERMAN123"],
+		"https://twitter.com/CartoonCatFNF"
 	],
 	["Jacadamia",
 		["Jon, Take Me with you Animation Creator", "spanish translation here"], 
-		["guys i don't think jon took him", "spanish translation here"]
+		["guys i don't think jon took him", "spanish translation here"],
+		"https://twitter.com/jacadamiajack"
 	]
 ];
 
@@ -219,13 +242,11 @@ function create()
 var quitting:Bool = false;
 var intro:Bool = true;
 
-function update(elapsed:Float)
-{
+function update(elapsed:Float) {
 	var lerpVal:Float = Math.max(0, Math.min(1, elapsed * 7.5));
 	camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x+camFollowXOffset, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-	if (!quitting)
-	{
+	if (!quitting) {
 		if (controls.LEFT_P)
 			changeSelection(-1);
 		if (controls.RIGHT_P)
@@ -235,8 +256,10 @@ function update(elapsed:Float)
 		if (controls.DOWN_P)
 			changeSelection(3);
 
-		if (controls.BACK)
-		{
+		if (controls.ACCEPT)
+			CoolUtil.openURL(credits[curSelected][3]);
+
+		if (controls.BACK) {
 			var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
 			FlxG.switchState(new MainMenuState());
 		}
