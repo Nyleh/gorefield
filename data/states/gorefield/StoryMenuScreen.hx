@@ -96,7 +96,7 @@ var weekDescsSPANISH:Array<String> = [
 	"Un ronroneo de determinacion...",
 	"Un pequeno gran problema...",
 	"El solo quiere volver a casa...",
-	"spanish translation here",
+	"El Despertar Espera.",
 	"Honk Honk!",
 	"Una reunion Felina...",
 	"Contenido extra..."
