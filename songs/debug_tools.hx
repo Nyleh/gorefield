@@ -1,11 +1,26 @@
 import funkin.editors.charter.Charter;
 import funkin.game.PlayState;
+import flixel.text.FlxTextAlign;
+import flixel.text.FlxTextBorderStyle;
 
 public var curSpeed:Float = 1;
 static var curBotplay:Bool = false;
 static var devControlBotplay:Bool = true;
 
-function update() {
+public var botplayTxt:FlxText;
+function postCreate() {
+    botplayTxt = new FlxText(400, strumLines.members[0].members[0].y + 50, FlxG.width - 800, "BOTPLAY", 32);
+    botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+    botplayTxt.visible = curBotplay;
+    botplayTxt.borderSize = 1.25;
+    botplayTxt.camera = camHUD;
+    add(botplayTxt);
+}
+
+function update(elapsed:Float) {
+    if (FlxG.save.data.dev || catbotEnabled)
+        updateBotplay(elapsed);
+
     if (startingSong || !canPause || paused || health <= 0 || !FlxG.save.data.dev) return;
     
     if (FlxG.keys.justPressed.ONE && generatedMusic ) endSong();
@@ -14,14 +29,6 @@ function update() {
     if (FlxG.keys.justPressed.FOUR) curSpeed += 0.1;
     curSpeed = FlxMath.bound(curSpeed, 0.1, 2);
     
-    if (FlxG.keys.justPressed.SIX) curBotplay = !curBotplay;
-    if (devControlBotplay){
-        for(strumLine in strumLines) {
-            if(!strumLine.opponentSide){
-                strumLine.cpu = FlxG.keys.pressed.FIVE || curBotplay;
-            }
-        }
-    } 
     updateSpeed(FlxG.keys.pressed.FIVE ? 20 : curSpeed);
 
     if (scripts.contains("assets/data/scripts/VideoHandler.hx") && VideoHandler.curVideo != null) VideoHandler.curVideo.bitmap.rate = FlxG.timeScale;
@@ -29,6 +36,23 @@ function update() {
     if (FlxG.keys.justPressed.SEVEN) { //i got tired of exiting the song ok - lean
         FlxG.switchState(new Charter(PlayState.SONG.meta.name, PlayState.difficulty, true));
     }
+}
+
+public var botplaySine:Float = 0;
+function updateBotplay(elapsed:Float) {
+    if (!devControlBotplay) return;
+
+    if (FlxG.keys.justPressed.SIX) curBotplay = !curBotplay;
+    for(strumLine in strumLines)
+        if(!strumLine.opponentSide)
+            strumLine.cpu = FlxG.keys.pressed.FIVE || curBotplay;
+
+    botplayTxt.visible = curBotplay;
+    
+    if (!curBotplay) return;
+
+    botplaySine += 180 * elapsed;
+    botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 }
 
 function updateSpeed(speed:Float)

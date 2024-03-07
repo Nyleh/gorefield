@@ -223,6 +223,10 @@ var noText:Alphabet;
 var progInfoText:Alphabet;
 var onYes:Bool = true;
 
+// Too for progresion prompt but is basically cancer for me -EstoyAburridow
+var progInfoText2:Alphabet;
+var progInfoText3:Alphabet;
+
 public var finishedCallback:Void->Void;
 public var acceptedCallback:Void->Void;
 
@@ -507,30 +511,45 @@ function create() {
 	boxSprite.updateHitbox();
 	boxSprite.screenCenter(FlxAxes.X);
 	boxSprite.scrollFactor.set();
+	boxSprite.cameras = [camText];
 	add(boxSprite);
 
 	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
 	yesText.scrollFactor.set();
+	yesText.cameras = [camText];
 	add(yesText);
 
-	noText = new Alphabet(0, 0, FlxG.save.data.spanish ? "REINICIAR" : "RESTART", true);
+	noText = new Alphabet(0, 0, "NO", true);
 	noText.scrollFactor.set();
+	noText.cameras = [camText];
 	add(noText);
 
 	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
-	progInfoText.scrollFactor.set();
-	add(progInfoText);
+
+	// Por alguna razón, no fui capaz de usar \n, aunque leyendo un poco el código de Alphabet si deberias ser capaz
+	progInfoText2 = new Alphabet(0, 270, FlxG.save.data.spanish ? "Te gustaria activar botplay" : "*texto en ingles aquí*", false);
+	progInfoText3 = new Alphabet(0, 340, FlxG.save.data.spanish ? "al presionar 6 en una cancion?" : "*texto en ingles aquí*", false);
+
+	for (_progInfoText in [progInfoText, progInfoText2, progInfoText3]) {
+		_progInfoText.scrollFactor.set();
+		_progInfoText.cameras = [camText];
+		_progInfoText.screenCenter(FlxAxes.X);
+		add(_progInfoText);
+	}
 
 	changeWeek(0);
 }
 
-function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted){
+function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 	isInProgPrompt = entered;
 	FlxTween.cancelTweensOf(boxSprite);
-	FlxTween.tween(boxSprite,{y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+	FlxTween.tween(boxSprite, {y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
 
 	finishedCallback = entered ? finishCallback : null;
 	acceptedCallback = entered ? accepted : null;
+
+	if (entered || cancel == null) return;
+		cancel();
 }
 
 function handleProgressPrompt(){
@@ -552,6 +571,7 @@ var selectingWeek:Bool = false;
 var bloomSine:Bool = true;
 var dim:Float = 0; var size:Float = 0;
 var lerpMenuSpeed:Float = 1;
+var updateCodeMenu:Bool = true;
 var updateFreePlay:Bool = false;
 var songLargeName:String = "";
 var cursor:String = null;
@@ -630,151 +650,156 @@ function update(elapsed:Float) {
 	selectorCam.visible = subMenuSelector.visible;
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
+	// Lean, por qué no hiciste mejor un FlxTypedGroup o un FlxSpriteGroup :sob: -EstoyAburridow
 	yesText.x = boxSprite.x * 4.2;
 	yesText.y = boxSprite.y + 360;
 
-	noText.x = boxSprite.x * 14.2;
+	noText.x = boxSprite.x * 16.5;
 	noText.y = boxSprite.y + 360;
 
 	progInfoText.x = boxSprite.x * 3.6;
 	progInfoText.y = boxSprite.y + 140;
 
-	codesPanel.updateHitbox();
-	codesPanel.screenCenter(0x10);
-	codesPanel.y += 65 + (8*FlxMath.fastSin(__totalTime));
-
-	codeColorLerp.fpsLerpTo(0xFFFFFFFF, (1/75) * 2.25);
-	codesPanel.color = codeColorLerp.color;
-	
-	codesOpenHitbox.x = codesPanel.x + 415;
-	codesOpenHitbox.screenCenter(0x10);
-	codesOpenHitbox.y += 50;
-
-	codesTextHitbox.x = codesPanel.x + 24;
-	codesTextHitbox.y = codesPanel.y + 258;
-
-	codesText.x = codesPanel.x + 24 + 12;
-	codesText.y = codesTextHitbox.y + (codesTextHitbox.height/2) - (codesText.height/2);
-
-	codesButton.x = codesPanel.x + 103;
-	codesButton.y = codesPanel.y + 330;
-	codesButton.color = codesText.color = codesPanel.color;
+	progInfoText2.y = boxSprite.y + 120;
+	progInfoText3.y = boxSprite.y + 190;
 
 	cursor = null;
-	var lastOpened:Bool = codesOpened;
-	if (canMove) {
-		// Tal vez luego yo intente mejorar esto usando Typedefs -EstoyAburridow
-		if (FlxG.mouse.overlaps(powerHitbox)) {
-			cursor = "button";
-			if (FlxG.mouse.justReleased) 
-				turnTV(!isTVOn);
-		} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
-			if(!codesUnlocked || isInProgPrompt) return;
+	if (updateCodeMenu) {
+		codesPanel.updateHitbox();
+		codesPanel.screenCenter(0x10);
+		codesPanel.y += 65 + (8*FlxMath.fastSin(__totalTime));
 
-			cursor = "button";
-			if (FlxG.mouse.justReleased) {
-				codesMenu(!codesOpened, 0);
-				FlxG.sound.play(Paths.sound('menu/story/Open_and_Close_Secret_Menu'));
-			}
-		} else if (FlxG.mouse.overlaps(codesTextHitbox)) {
-			cursor = "ibeam";
-			if (FlxG.mouse.justReleased) 
-			{
-				if (codesText.alpha != 1)
+		codeColorLerp.fpsLerpTo(0xFFFFFFFF, (1/75) * 2.25);
+		codesPanel.color = codeColorLerp.color;
+		
+		codesOpenHitbox.x = codesPanel.x + 415;
+		codesOpenHitbox.screenCenter(0x10);
+		codesOpenHitbox.y += 50;
+
+		codesTextHitbox.x = codesPanel.x + 24;
+		codesTextHitbox.y = codesPanel.y + 258;
+
+		codesText.x = codesPanel.x + 24 + 12;
+		codesText.y = codesTextHitbox.y + (codesTextHitbox.height/2) - (codesText.height/2);
+
+		codesButton.x = codesPanel.x + 103;
+		codesButton.y = codesPanel.y + 330;
+		codesButton.color = codesText.color = codesPanel.color;
+
+		var lastOpened:Bool = codesOpened;
+		if (canMove) {
+			// Tal vez luego yo intente mejorar esto usando Typedefs -EstoyAburridow
+			if (FlxG.mouse.overlaps(powerHitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased) 
+					turnTV(!isTVOn);
+			} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
+				if(!codesUnlocked || isInProgPrompt) return;
+
+				cursor = "button";
+				if (FlxG.mouse.justReleased) {
+					codesMenu(!codesOpened, 0);
+					FlxG.sound.play(Paths.sound('menu/story/Open_and_Close_Secret_Menu'));
+				}
+			} else if (FlxG.mouse.overlaps(codesTextHitbox)) {
+				cursor = "ibeam";
+				if (FlxG.mouse.justReleased) 
 				{
-					codesText.text = "";
-					codesText.alpha = 1;
-				}
+					if (codesText.alpha != 1)
+					{
+						codesText.text = "";
+						codesText.alpha = 1;
+					}
 
-				codesFocused = true; carcetTime = 0;
-				codesPosition = codesText.text.length;
-	
-				// Position from mouse
-				cachePoint2.set(FlxG.mouse.screenX-codesText.x, FlxG.mouse.screenY-codesText.y);
-				if (cachePoint2.x < 0)
-					codesPosition = 0;
-				else {
-					var index = codesText.textField.getCharIndexAtPoint(cachePoint2.x, cachePoint2.y);
-					if (index > -1) codesPosition = index;
+					codesFocused = true; carcetTime = 0;
+					codesPosition = codesText.text.length;
+		
+					// Position from mouse
+					cachePoint2.set(FlxG.mouse.screenX-codesText.x, FlxG.mouse.screenY-codesText.y);
+					if (cachePoint2.x < 0)
+						codesPosition = 0;
+					else {
+						var index = codesText.textField.getCharIndexAtPoint(cachePoint2.x, cachePoint2.y);
+						if (index > -1) codesPosition = index;
+					}
 				}
-			}
-				
-		} else if (FlxG.mouse.overlaps(codesButton)) {
+					
+			} else if (FlxG.mouse.overlaps(codesButton)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased) {
+					codesButton.animation.play("press", true);
+					if (codes.exists(codesText.text))
+						selectCode();
+					else incorrectCode();
+				}
+			} else if (isTVOn) {
+				if (FlxG.mouse.overlaps(videosHitbox)) {
+					cursor = "button";
+					if (FlxG.mouse.justReleased)
+						fullscreenVideo(true);
+				} else if (FlxG.mouse.overlaps(pauseHitbox)) {
+					cursor = "button";
+					if (FlxG.mouse.justReleased)
+					{
+						videos[curVideo].togglePaused();
+						videoWasPaused = !videoWasPaused;
+						pauseIcon.visible = videoWasPaused;
+					}
+				} else if (FlxG.mouse.overlaps(speedHitbox)) {
+					cursor = "button";
+					if (FlxG.mouse.justReleased){
+						var thatBool = (videos[curVideo].bitmap.rate == 1);
+						videos[curVideo].bitmap.rate = thatBool ? 2 : 1;
+						fastForwardIcon.visible = thatBool ? true : false;
+					}
+				} else if (FlxG.mouse.overlaps(change1Hitbox)) {
+					cursor = "button";
+					if (FlxG.mouse.justReleased)
+						changeChannel(-1);
+				} else if (FlxG.mouse.overlaps(change2Hitbox)) {
+					cursor = "button";
+					if (FlxG.mouse.justReleased)
+						changeChannel(1);
+				}
+			} else if (FlxG.mouse.justReleased)
+				codesFocused = false;
+		} else if (blackBackground.visible) {
 			cursor = "button";
-			if (FlxG.mouse.justReleased) {
-				codesButton.animation.play("press", true);
-				if (codes.exists(codesText.text))
-					selectCode();
-				else incorrectCode();
-			}
-		} else if (isTVOn) {
-			if (FlxG.mouse.overlaps(videosHitbox)) {
-				cursor = "button";
-				if (FlxG.mouse.justReleased)
-					fullscreenVideo(true);
-			} else if (FlxG.mouse.overlaps(pauseHitbox)) {
-				cursor = "button";
-				if (FlxG.mouse.justReleased)
-				{
-					videos[curVideo].togglePaused();
-					videoWasPaused = !videoWasPaused;
-					pauseIcon.visible = videoWasPaused;
-				}
-			} else if (FlxG.mouse.overlaps(speedHitbox)) {
-				cursor = "button";
-				if (FlxG.mouse.justReleased){
-					var thatBool = (videos[curVideo].bitmap.rate == 1);
-					videos[curVideo].bitmap.rate = thatBool ? 2 : 1;
-					fastForwardIcon.visible = thatBool ? true : false;
-				}
-			} else if (FlxG.mouse.overlaps(change1Hitbox)) {
-				cursor = "button";
-				if (FlxG.mouse.justReleased)
-					changeChannel(-1);
-			} else if (FlxG.mouse.overlaps(change2Hitbox)) {
-				cursor = "button";
-				if (FlxG.mouse.justReleased)
-					changeChannel(1);
-			}
-		} else if (FlxG.mouse.justReleased)
-			codesFocused = false;
-	} else if (blackBackground.visible) {
-		cursor = "button";
 
-		if (FlxG.mouse.justReleased)
-			fullscreenVideo(false);
+			if (FlxG.mouse.justReleased)
+				fullscreenVideo(false);
+		}
+
+		if (codesButton.animation.name == "press" && codesButton.animation.finished)
+			codesButton.animation.play("idle", true);
+		if (codesButton.animation.name == "press") codesButton.x -= 5;
+
+		switch(codesPosition) {
+			default:
+				if (codesPosition >= codesText.text.length) {
+					codesText.textField.__getCharBoundaries(codesText.text.length-1, cacheRect);
+					cachePoint.set(cacheRect.x + cacheRect.width, cacheRect.y);
+				} else {
+					codesText.textField.__getCharBoundaries(codesPosition, cacheRect);
+					cachePoint.set(cacheRect.x, cacheRect.y);
+				}
+		};
+		carcetTime += elapsed;
+		caretSpr.alpha = Math.floor(((carcetTime+1.6)*2)%2);
+		caretSpr.visible = codesFocused;
+
+		caretSpr.x = codesText.x + (codesText.text.length == 0 ? 0 : cachePoint.x + 0);
+		caretSpr.y = codesText.y + cachePoint.y;
+
+		Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
+		
+		if (!lastOpened && codesOpened) lastFrameRateMode = Framerate.debugMode;
+		if (lastOpened && !codesOpened) Framerate.debugMode = lastFrameRateMode;
+		if (codesOpened) Framerate.debugMode = 0;
+
+		textInfoBG.y = CoolUtil.fpsLerp(textInfoBG.y, codesOpened ? FlxG.height : FlxG.height - textInfoBG.height, 0.25);
+		scoreText.y = CoolUtil.fpsLerp(scoreText.y, codesOpened ? FlxG.height : FlxG.height - scoreText.height - 22, 0.25);
 	}
-
-	if (codesButton.animation.name == "press" && codesButton.animation.finished)
-		codesButton.animation.play("idle", true);
-	if (codesButton.animation.name == "press") codesButton.x -= 5;
-
-	switch(codesPosition) {
-		default:
-			if (codesPosition >= codesText.text.length) {
-				codesText.textField.__getCharBoundaries(codesText.text.length-1, cacheRect);
-				cachePoint.set(cacheRect.x + cacheRect.width, cacheRect.y);
-			} else {
-				codesText.textField.__getCharBoundaries(codesPosition, cacheRect);
-				cachePoint.set(cacheRect.x, cacheRect.y);
-			}
-	};
-	carcetTime += elapsed;
-	caretSpr.alpha = Math.floor(((carcetTime+1.6)*2)%2);
-	caretSpr.visible = codesFocused;
-
-	caretSpr.x = codesText.x + (codesText.text.length == 0 ? 0 : cachePoint.x + 0);
-	caretSpr.y = codesText.y + cachePoint.y;
-
-	Framerate.offset.y = selectingWeek ? FlxMath.remapToRange(FlxMath.remapToRange(textBG.alpha, 0, 0.4, 0, 1), 0, 1, 0, textBG.height) : textBG.height;
-	
-	if (!lastOpened && codesOpened) lastFrameRateMode = Framerate.debugMode;
-	if (lastOpened && !codesOpened) Framerate.debugMode = lastFrameRateMode;
-	if (codesOpened) Framerate.debugMode = 0;
-
-	textInfoBG.y = CoolUtil.fpsLerp(textInfoBG.y, codesOpened ? FlxG.height : FlxG.height - textInfoBG.height, 0.25);
-	scoreText.y = CoolUtil.fpsLerp(scoreText.y, codesOpened ? FlxG.height : FlxG.height - scoreText.height - 22, 0.25);
-
 	Mouse.cursor = cursor ?? "arrow";
 
 	if (!updateFreePlay) return;
@@ -810,13 +835,8 @@ function focusGained()
 }
 
 function handleMenu() {
-	if (codesOpened) {
-		if (controls.BACK && !codesFocused) codesMenu(false, 0);
-		return;
-	}
-
 	if(isInProgPrompt){
-		if (controls.BACK) {openProgressPrompt(false); selectingWeek = false; FlxG.sound.play(Paths.sound('menu/cancelMenu'));}
+		if (controls.BACK) {openProgressPrompt(false); FlxG.sound.play(Paths.sound('menu/cancelMenu'));}
 		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
 		if (controls.ACCEPT) {
 			if(onYes){
@@ -831,6 +851,11 @@ function handleMenu() {
 			FlxG.sound.play(Paths.sound("menu/confirmMenu"));
 		}
 		handleProgressPrompt();
+		return;
+	}
+
+	if (codesOpened) {
+		if (controls.BACK && !codesFocused) codesMenu(false, 0);
 		return;
 	}
 
@@ -962,6 +987,8 @@ function updateFlavourText() {
 function checkWeekProgress() {
 	if(weekProgress != null){
 		if (weekProgress.exists(weeks[curWeek].name)){
+			progInfoText.visible = true;
+			progInfoText2.visible = progInfoText3.visible = false;
 			openProgressPrompt(true,function(){
 				isPlayingFromPreviousWeek = false;
 				playWeek();	
@@ -1609,6 +1636,26 @@ var CodesFunctions:{} = {
 		FlxG.save.flush();
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
+	},
+	catbot: function() {
+		progInfoText.visible = false;
+		progInfoText2.visible = progInfoText3.visible = true;
+
+		canMove = true;
+		codesFocused = false;
+		updateCodeMenu = false;
+
+		openProgressPrompt(true,
+			function() {
+				catbotEnabled = false;
+				updateCodeMenu = true;
+			},
+			function() {
+				catbotEnabled = true;
+				updateCodeMenu = true;
+			},
+			function() {updateCodeMenu = true;}
+		);
 	}
 }
 
@@ -1646,7 +1693,7 @@ var codes:Map<String, Void -> Void> = [
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
 	"RESET" => CodesFunctions.resetAll, //DEV
-	//"CATBOT",
+	"CATBOT" => CodesFunctions.catbot,
 
 	// Extras codes
 	"SPIDERS" => function() CodesFunctions.meme("cry")

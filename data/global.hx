@@ -9,6 +9,7 @@ import lime.graphics.Image;
 static var curMainMenuSelected:Int = 0;
 static var curStoryMenuSelected:Int = 0;
 static var moustacheMode:Bool = false;
+static var catbotEnabled:Bool = false;
 
 static var seenMenuCutscene:Bool = false;
 
