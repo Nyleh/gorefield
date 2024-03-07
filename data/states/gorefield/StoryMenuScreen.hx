@@ -526,9 +526,9 @@ function create() {
 
 	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
 
-	// Por alguna razón, no fui capaz de usar \n, aunque leyendo un poco el código de Alphabet si deberias ser capaz
-	progInfoText2 = new Alphabet(0, 270, FlxG.save.data.spanish ? "Te gustaria activar botplay" : "*texto en ingles aquí*", false);
-	progInfoText3 = new Alphabet(0, 340, FlxG.save.data.spanish ? "al presionar 6 en una cancion?" : "*texto en ingles aquí*", false);
+	// Por alguna razón, no fui capaz de usar \n, aunque leyendo un poco el código de Alphabet si deberias ser capaz     || its really annoying that \n doesnt work - lean
+	progInfoText2 = new Alphabet(0, 270, FlxG.save.data.spanish ? "Te gustaria activar botplay" : "Enable Activating Botplay", false);
+	progInfoText3 = new Alphabet(0, 340, FlxG.save.data.spanish ? "al presionar 6 en una cancion?" : "When Pressing 6 Mid Song?", false);
 
 	for (_progInfoText in [progInfoText, progInfoText2, progInfoText3]) {
 		_progInfoText.scrollFactor.set();
@@ -550,10 +550,6 @@ function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 	acceptedCallback = entered ? accepted : null;
 	if (cancel != null)
 		cancelCallback = cancel;
-
-	if (entered || cancelCallback == null) return;
-
-	cancelCallback();
 }
 
 function handleProgressPrompt(){
@@ -840,7 +836,14 @@ function focusGained()
 
 function handleMenu() {
 	if(isInProgPrompt){
-		if (controls.BACK) {openProgressPrompt(false); FlxG.sound.play(Paths.sound('menu/cancelMenu'));}
+		if (controls.BACK) {
+			openProgressPrompt(false); 
+			FlxG.sound.play(Paths.sound('menu/cancelMenu')); 
+			if (cancelCallback == null) return;
+
+			cancelCallback();
+			cancelCallback == null;
+		}
 		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
 		if (controls.ACCEPT) {
 			if(onYes){

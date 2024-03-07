@@ -42,6 +42,14 @@ var glowShader:CustomShader;
 var glitchShader:CustomShader;
 var heatWaveShader:CustomShader;
 
+//PROMPT
+var boxSprite:FlxSprite;
+var isInProgPrompt:Bool = false;
+var yesText:Alphabet;
+var noText:Alphabet;
+var progInfoText:Alphabet;
+var onYes:Bool = true;
+
 function create() {
 	PlayState.deathCounter = 0;
 	DiscordUtil.changePresence('Scrolling Through Menus...', "Main Menu");
@@ -152,10 +160,81 @@ function create() {
 
 	glitchShader = new CustomShader("glitch");
     glitchShader.glitchAmount = .4;
+
+	boxSprite = new FlxSprite(0,730).loadGraphic(Paths.image("menus/storymenu/TEXT_BOX"));
+	boxSprite.scale.set(1.1,1.1);
+	boxSprite.updateHitbox();
+	boxSprite.screenCenter(FlxAxes.X);
+	boxSprite.scrollFactor.set();
+	add(boxSprite);
+
+	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
+	yesText.scrollFactor.set();
+	add(yesText);
+
+	noText = new Alphabet(0, 0, "NO", true);
+	noText.scrollFactor.set();
+	add(noText);
+
+	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
+	for (_progInfoText in [progInfoText]) {
+		_progInfoText.scrollFactor.set();
+		_progInfoText.screenCenter(FlxAxes.X);
+		add(_progInfoText);
+	}
+}
+
+function checkWeekProgress() {
+	if(weekProgress != null){
+		if (weekProgress.exists("Principal Week...")){
+			progInfoText.visible = true;
+			openProgressPrompt(true,function(){
+				isPlayingFromPreviousWeek = false;
+				goToItem();
+			},function(){
+				isPlayingFromPreviousWeek = true;
+				goToItem();
+			},function() {selectedSomthin = false;}
+			);
+		}
+		else{
+			isPlayingFromPreviousWeek = false;
+			goToItem();
+		}
+	}
+	else{
+		isPlayingFromPreviousWeek = false;
+		goToItem();
+	}
+}
+
+public var finishedCallback:Void->Void;
+public var acceptedCallback:Void->Void;
+var cancelCallback:Void->Void;
+function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
+	isInProgPrompt = entered;
+	FlxTween.cancelTweensOf(boxSprite);
+	FlxTween.tween(boxSprite, {y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+
+	finishedCallback = entered ? finishCallback : null;
+	acceptedCallback = entered ? accepted : null;
+	if (cancel != null)
+		cancelCallback = cancel;
+}
+
+function handleProgressPrompt(){
+	var scales:Array<Float> = [0.75, 1];
+	var alphas:Array<Float> = [0.6, 1];
+	var confirmInt:Int = onYes ? 1 : 0;
+
+	yesText.alpha = alphas[confirmInt];
+	yesText.scale.set(scales[confirmInt], scales[confirmInt]);
+	noText.alpha = alphas[1 - confirmInt];
+	noText.scale.set(scales[1 - confirmInt], scales[1 - confirmInt]);
 }
 
 
-function loadCheckpoint(point) {
+/*function loadCheckpoint(point) {
 	if(point == null) {
 		FlxG.sound.play(Paths.sound("menu/story/locked"));
 		return;
@@ -182,7 +261,7 @@ function loadCheckpoint(point) {
 			FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 		});
 	});
-}
+}*/
 
 function changeItem(change:Int = 0) {
 	curSelected = FlxMath.wrap(curSelected + change, 0, menuItems.length-1);
@@ -208,6 +287,7 @@ function changeItem(change:Int = 0) {
 	}
 }
 
+var isPlayingFromPreviousWeek:Bool = false;
 function goToItem() {
 	selectedSomthin = true;
 
@@ -239,14 +319,51 @@ function goToItem() {
 			MusicBeatState.skipTransIn = MusicBeatState.skipTransOut = true;
 			(new FlxTimer()).start(2, function() {
 				FlxG.camera.fade(FlxColor.RED, 3.2, false, function() {
-					PlayState.loadWeek({
-						name: "Principal Week...",
-						id: "Principal Week...",
-						sprite: null,
-						chars: [null, null, null],
-						songs: [for (song in ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]) {name: song, hide: false}],
-						difficulties: ['hard']
-					}, "hard");
+					if(isPlayingFromPreviousWeek){
+						if (weekProgress.exists("Principal Week...")){
+							trace("Loading the Previous Progress for " + "Principal Week...");
+							var resumeInfo = weekProgress.get("Principal Week...");
+				
+							var songArrayNames:Array<String> = [for (song in ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]) song.toLowerCase()]; //grab the name list
+							songArrayNames = songArrayNames.slice(songArrayNames.indexOf(resumeInfo.song.toLowerCase()));
+				
+							var songArray:Array<WeekSong> = []; //convert to weeksong format
+							for (song in songArrayNames){
+								songArray.push({name: song, hide: false});
+							}
+							PlayState.loadWeek({
+									name: "Principal Week...",
+									id: "Principal Week...",
+									sprite: null,
+									chars: [null, null, null],
+									songs: songArray,
+									difficulties: ['hard']
+								}, "hard");
+							PlayState.campaignMisses = resumeInfo.weekMisees;
+							PlayState.campaignScore = resumeInfo.weekScore;
+							PlayState.deathCounter = resumeInfo.deaths;
+						}	
+						else{
+							PlayState.loadWeek({
+								name: "Principal Week...",
+								id: "Principal Week...",
+								sprite: null,
+								chars: [null, null, null],
+								songs: [for (song in ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]) {name: song, hide: false}],
+								difficulties: ['hard']
+							}, "hard");
+						}
+					}
+					else{						
+						PlayState.loadWeek({
+							name: "Principal Week...",
+							id: "Principal Week...",
+							sprite: null,
+							chars: [null, null, null],
+							songs: [for (song in ["The Great Punishment", "Curious Cat", "Metamorphosis", "Hi Jon", "Terror in the Heights", "BIGotes"]) {name: song, hide: false}],
+							difficulties: ['hard']
+						}, "hard");
+					}
 					FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 				});
 			});
@@ -272,7 +389,42 @@ function update(elapsed:Float) {
 	if (FlxG.sound.music != null)
 		Conductor.songPosition = FlxG.sound.music.time;
 
+	yesText.x = boxSprite.x * 4.2;
+	yesText.y = boxSprite.y + 360;
+
+	noText.x = boxSprite.x * 16.5;
+	noText.y = boxSprite.y + 360;
+
+	progInfoText.x = boxSprite.x * 3.6;
+	progInfoText.y = boxSprite.y + 140;
+
 	if (selectedSomthin) return;
+
+	if(isInProgPrompt){
+		if (controls.BACK) {
+			openProgressPrompt(false); 
+			FlxG.sound.play(Paths.sound('menu/cancelMenu')); 
+			if (cancelCallback == null) return;
+
+			cancelCallback();
+			cancelCallback == null;
+		}
+		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
+		if (controls.ACCEPT) {
+			if(onYes){
+				if(acceptedCallback != null)
+					acceptedCallback();
+			}
+			else{
+				if(finishedCallback != null)
+					finishedCallback();
+			}
+			openProgressPrompt(false);
+			FlxG.sound.play(Paths.sound("menu/confirmMenu"));
+		}
+		handleProgressPrompt();
+		return;
+	}
 
 	if (controls.BACK) {
 		var sound:FlxSound = new FlxSound().loadEmbedded(Paths.sound("menu/cancelMenu")); sound.volume = 1; sound.play();
@@ -280,7 +432,12 @@ function update(elapsed:Float) {
 	}
 	if (controls.DOWN_P) changeItem(1);
 	if (controls.UP_P) changeItem(-1);
-	if (controls.ACCEPT) goToItem();
+	if (controls.ACCEPT) {
+		if(options[curSelected] == "story_mode"){
+			checkWeekProgress();}
+		else{goToItem();}
+		
+	}
 
 
 	/*if(FlxG.keys.justPressed.SHIFT) {
