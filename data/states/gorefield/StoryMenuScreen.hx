@@ -540,6 +540,7 @@ function create() {
 	changeWeek(0);
 }
 
+var cancelCallback:Void->Void;
 function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 	isInProgPrompt = entered;
 	FlxTween.cancelTweensOf(boxSprite);
@@ -547,9 +548,12 @@ function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 
 	finishedCallback = entered ? finishCallback : null;
 	acceptedCallback = entered ? accepted : null;
+	if (cancel != null)
+		cancelCallback = cancel;
 
-	if (entered || cancel == null) return;
-		cancel();
+	if (entered || cancelCallback == null) return;
+
+	cancelCallback();
 }
 
 function handleProgressPrompt(){
@@ -995,7 +999,7 @@ function checkWeekProgress() {
 			},function(){
 				isPlayingFromPreviousWeek = true;
 				playWeek();	
-			}
+			},function() {selectingWeek = false;}
 			);
 		}
 		else{
