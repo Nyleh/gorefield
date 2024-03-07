@@ -527,8 +527,8 @@ function create() {
 	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
 
 	// Por alguna razón, no fui capaz de usar \n, aunque leyendo un poco el código de Alphabet si deberias ser capaz     || its really annoying that \n doesnt work - lean
-	progInfoText2 = new Alphabet(0, 270, FlxG.save.data.spanish ? "Te gustaria activar botplay" : "Enable Activating Botplay", false);
-	progInfoText3 = new Alphabet(0, 340, FlxG.save.data.spanish ? "al presionar 6 en una cancion?" : "When Pressing 6 Mid Song?", false);
+	progInfoText2 = new Alphabet(0, 270, "", false);
+	progInfoText3 = new Alphabet(0, 340, "", false);
 
 	for (_progInfoText in [progInfoText, progInfoText2, progInfoText3]) {
 		_progInfoText.scrollFactor.set();
@@ -1553,6 +1553,31 @@ var CodesFunctions:{} = {
 			pauseIcon.visible = videoWasPaused;
 		}
 	},
+	estoyCodeWarning: function() { // Por qué nadie me dijo que tenia copyright :sob:
+		progInfoText.visible = false;
+		progInfoText2.text = FlxG.save.data.spanish ? "Este Video Tiene Musica Con" : "Enable Activating Botplay";
+		progInfoText3.text = FlxG.save.data.spanish ? "Copyright Quieres Continuar?" : "When Pressing 6 Mid Song?";
+
+		new FlxTimer().start(0.01, function(_) {
+			progInfoText2.screenCenter(FlxAxes.X);
+			progInfoText3.screenCenter(FlxAxes.X);
+		});
+
+		canMove = true;
+		codesFocused = false;
+		updateCodeMenu = false;
+
+		openProgressPrompt(true,
+			function() {
+				updateCodeMenu = true;
+			},
+			function() {
+				CodesFunctions.meme("Test");
+				updateCodeMenu = true;
+			},
+			function() {updateCodeMenu = true;}
+		);
+	},
 	selectSong: function(songName:String, icon:String) {
 		if (videos[curVideo].bitmap.isPlaying){
 			videos[curVideo].togglePaused();
@@ -1648,6 +1673,14 @@ var CodesFunctions:{} = {
 		progInfoText.visible = false;
 		progInfoText2.visible = progInfoText3.visible = true;
 
+		progInfoText2.text =  FlxG.save.data.spanish ? "Te Gustaria Activar Botplay" : "Enable Activating Botplay";
+		progInfoText3.text =  FlxG.save.data.spanish ? "Al Presionar 6 En Una Cancion?" : "When Pressing 6 Mid Song?";
+
+		new FlxTimer().start(0.01, function(_) {
+			progInfoText2.screenCenter(FlxAxes.X);
+			progInfoText3.screenCenter(FlxAxes.X);
+		});
+
 		canMove = true;
 		codesFocused = false;
 		updateCodeMenu = false;
@@ -1687,7 +1720,7 @@ var codes:Map<String, Void -> Void> = [
 
 	// Dev codes
 	// "CASSETTE",
-	"ESTOY" => function() CodesFunctions.meme("Test"),
+	"ESTOY" => CodesFunctions.estoyCodeWarning,
 	"PIJURRO" => function() CodesFunctions.image("PIJURRO"),
 	"RECIPE" => function() CodesFunctions.meme("SDFSDF"),
 	"GOKU BLACK" => function() CodesFunctions.meme("GOKU_NEGRO"),
