@@ -34,7 +34,7 @@ var credits:Array<Array<Dynamic>> = [
 		"https://twitter.com/BitfoxOriginal"
 	],
 	["Dathree_O", 			
-		["Artist", "Artista"], 
+		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
 		["He entered and left several times (Like a Minecraft villager [Because he enters and leaves the house all the time])",
 		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"],
 		"https://twitter.com/Dathree_O"
@@ -65,7 +65,7 @@ var credits:Array<Array<Dynamic>> = [
 		"https://twitter.com/lunarcleint"
 	],
 	["Lean",
-		["Coder, Musician", "Coder, Musico"], 
+		["Coder, Musician, SFX Designer", "Coder, Musico, Diseñador de SFX"], 
 		["ummmm yeah i coded a lot for the mod", "ummmm si yo codifique una banda para el mod"],
 		"https://twitter.com/NewLeandapper"
 	],
