@@ -398,6 +398,21 @@ function update(elapsed:Float) {
 	progInfoText.x = boxSprite.x * 3.6;
 	progInfoText.y = boxSprite.y + 140;
 
+	#if debug
+	if (FlxG.keys.justPressed.EIGHT)
+		FlxG.switchState(new ModState("gorefield/MovieCreditsScreen"));
+	#end
+
+	if (FlxG.keys.justPressed.SEVEN) {
+		persistentUpdate = !(persistentDraw = true);
+		openSubState(new EditorPicker());
+	}
+
+	if (controls.SWITCHMOD) {
+		openSubState(new ModSwitchMenu());
+		persistentUpdate = !(persistentDraw = true);
+	}
+
 	if (selectedSomthin) return;
 
 	if(isInProgPrompt){
@@ -443,16 +458,6 @@ function update(elapsed:Float) {
 	/*if(FlxG.keys.justPressed.SHIFT) {
 		loadCheckpoint(FlxG.save.data.gorePoint);
 	}*/
-
-	if (FlxG.keys.justPressed.SEVEN) {
-		persistentUpdate = !(persistentDraw = true);
-		openSubState(new EditorPicker());
-	}
-
-	if (controls.SWITCHMOD) {
-		openSubState(new ModSwitchMenu());
-		persistentUpdate = !(persistentDraw = true);
-	}
 }
 
 var bgTween:FlxTween;

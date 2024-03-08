@@ -35,8 +35,8 @@ var credits:Array<Array<Dynamic>> = [
 	],
 	["Dathree_O", 			
 		["Artist and Pixel Artist", "Artista y Artista Pixel"], 
-		["He entered and left several times (Like a Minecraft villager [Because he enters and leaves the house all the time])",
-		"Entro y salio varias veces (Ya parece aldeano de minecraft [Porque entra y sale de la casa todo el tiempo])"],
+		["Mi guen seh0 mod reference",
+		"Yo cuando C3jo mod referencia"],
 		"https://twitter.com/Dathree_O"
 	],
 	["JoaDash",
