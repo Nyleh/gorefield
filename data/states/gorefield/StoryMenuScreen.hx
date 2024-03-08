@@ -1555,8 +1555,9 @@ var CodesFunctions:{} = {
 	},
 	estoyCodeWarning: function() { // Por qué nadie me dijo que tenia copyright :sob:
 		progInfoText.visible = false;
-		progInfoText2.text = FlxG.save.data.spanish ? "Este Video Tiene Musica Con" : "Enable Activating Botplay";
-		progInfoText3.text = FlxG.save.data.spanish ? "Copyright Quieres Continuar?" : "When Pressing 6 Mid Song?";
+		progInfoText2.visible = progInfoText3.visible = true;
+		progInfoText2.text = FlxG.save.data.spanish ? "Este Video Tiene Musica Con" : "The Music in This Video is";
+		progInfoText3.text = FlxG.save.data.spanish ? "Copyright Quieres Continuar?" : "Copyrighted. Continue?";
 
 		new FlxTimer().start(0.01, function(_) {
 			progInfoText2.screenCenter(FlxAxes.X);
