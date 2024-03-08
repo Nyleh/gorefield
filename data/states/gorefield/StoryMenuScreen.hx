@@ -1701,7 +1701,8 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
-	resetAll: function() { //dev
+	#if debug
+	resetAll: function() {
 		if(!FlxG.save.data.dev){
 			codesMenu(false, 0);
 			canMove = true;
@@ -1736,6 +1737,7 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
+	#end
 	catbot: function() {
 		progInfoText.visible = false;
 		progInfoText2.visible = progInfoText3.visible = true;
@@ -1800,7 +1802,9 @@ var codes:Map<String, Void -> Void> = [
 
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
-	"RESET" => CodesFunctions.resetAll, //DEV
+	#if debug
+	"RESET" => CodesFunctions.resetAll,
+	#end
 	"CATBOT" => CodesFunctions.catbot,
 
 	// Extras codes
@@ -1810,8 +1814,7 @@ var codes:Map<String, Void -> Void> = [
 	"JLOOR" => function() CodesFunctions.meme("JLOOR")
 	"FNF" => function() CodesFunctions.meme("FNF")
 	"TOP 5" => function() CodesFunctions.meme("top 5")
-	// "PUEBLO MARRON" => function() CodesFunctions.meme("Pueblo_Marron")
-	"YO SOY LUIGI" => function() CodesFunctions.meme("yo soy luigi")
+	"PUEBLO MARRON" => function() CodesFunctions.meme("Pueblo_Marron")
 	"PERUFIELD" => function() CodesFunctions.image("cuy"),
 ];
 
