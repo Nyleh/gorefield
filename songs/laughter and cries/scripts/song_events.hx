@@ -102,6 +102,11 @@ function stepHit(step:Int)
             FlxTween.tween(dadBackdrop, {alpha: 1}, (Conductor.stepCrochet / 1000) * 16);
         case 1152:
             FlxTween.tween(dadBackdrop, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+            FlxTween.tween(boyfriend, {alpha: 0}, (Conductor.stepCrochet / 1000) * 16);
+        case 1197:
+            boyfriend.alpha = 0;
+        case 1208:
+            FlxTween.tween(boyfriend, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
         case 1270:
             devControlBotplay = !(player.cpu = true);
             FlxTween.tween(camHUD, {alpha: 0}, (Conductor.stepCrochet / 1000) * 4);

@@ -153,7 +153,7 @@ var freeplaySongLists = [
 	},
 	{
 		songs: ["Cataclysm"],
-		icons: ["garfield"],
+		icons: ["god-ultragodfield"],
 		songMenuObjs: [],
 		iconMenuObjs: []
 	},
