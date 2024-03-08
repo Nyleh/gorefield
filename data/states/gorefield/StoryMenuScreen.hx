@@ -230,6 +230,13 @@ var progInfoText3:Alphabet;
 public var finishedCallback:Void->Void;
 public var acceptedCallback:Void->Void;
 
+
+//CODES LIST
+var codesList:FlxSprite;
+var gottenCodes:Array<String> = [];
+var gottenCodeText:FlxTypedGroup<FunkinText> = [];
+var codeListOpenHitbox:FlxObject;
+
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
@@ -240,6 +247,7 @@ function create() {
 	weeksUnlocked = FlxG.save.data.weeksUnlocked;
 	codesUnlocked = FlxG.save.data.dev ? true : FlxG.save.data.codesUnlocked;
 	codeWeekUnlocked = FlxG.save.data.extrasSongs.length != 0;
+	gottenCodes = FlxG.save.data.codesList;
 
 	camBG = new FlxCamera(0, 0);
 	selectorCam = new FlxCamera(0,0);
@@ -537,7 +545,50 @@ function create() {
 		add(_progInfoText);
 	}
 
+	codesList = new FlxSprite(800,870).loadGraphic(Paths.image("menus/storymenu/papel"));
+	codesList.scrollFactor.set();
+	add(codesList);
+
+	codeListOpenHitbox = new FlxObject(codesList.x, 2000, 455, 50);
+	add(codeListOpenHitbox);
+
+	gottenCodeText = new FlxTypedGroup();
+	add(gottenCodeText);
+
 	changeWeek(0);
+}
+
+function updateCodesList(){
+	for (sprite in gottenCodeText.members)
+		sprite.destroy();
+
+	for (i=>code in gottenCodes){
+		var codeText:FunkinText;
+
+		codeText = new FunkinText(0, 2000, 0, code, 40);
+		codeText.setFormat("fonts/pixelart.ttf", 40, 0xFFFBF5F5, "center", FlxTextBorderStyle.OUTLINE, i % 3==0 ? 0xFF2B5325 : i % 3==2 ? 0xFF172556  : 0xFF3D2F23);
+		codeText.borderSize = 7;
+		codeText.scale.set(0.35,0.35);
+		codeText.updateHitbox();
+		codeText.ID = i;
+		add(codeText);
+
+		gottenCodeText.add(codeText);
+	}
+}
+
+var codesListOpen:Bool = false;
+function openCodesList(entered:Bool, ?exit:Bool = false, ?forced:Bool = false){
+	if(codesListOpen == entered && !forced) return;
+
+	FlxTween.cancelTweensOf(codesList);
+	FlxTween.tween(codesList, {y: entered ? 150 : (exit ? 870 : 670)}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+	codesListOpen = entered;
+
+	if(entered){
+		updateCodesList();
+		FlxG.sound.play(Paths.sound('showPaper'));
+	}else{FlxG.sound.play(Paths.sound('hidePaper'));}
 }
 
 var cancelCallback:Void->Void;
@@ -663,6 +714,11 @@ function update(elapsed:Float) {
 	progInfoText2.y = boxSprite.y + 120;
 	progInfoText3.y = boxSprite.y + 190;
 
+	codeListOpenHitbox.setPosition(codesList.x,codesList.y);
+
+	for (sprite in gottenCodeText.members)
+		sprite.setPosition(codesList.x + (sprite.ID % 2 == 1 ? 240 : 67),codesList.y + (15 * sprite.ID) + (sprite.ID%2 == 1 ? 35 : 54));
+
 	cursor = null;
 	if (updateCodeMenu) {
 		codesPanel.updateHitbox();
@@ -693,6 +749,13 @@ function update(elapsed:Float) {
 				cursor = "button";
 				if (FlxG.mouse.justReleased) 
 					turnTV(!isTVOn);
+			}
+			if (FlxG.mouse.overlaps(codeListOpenHitbox)) {
+				cursor = "button";
+				if (FlxG.mouse.justReleased) {
+					openCodesList(codesListOpen == false ? true : false);
+				}
+
 			} else if (FlxG.mouse.overlaps(codesOpenHitbox)) {
 				if(!codesUnlocked || isInProgPrompt) return;
 
@@ -1332,6 +1395,7 @@ function turnTV(on:Bool) {
 		videos[curVideo].play();
 
 		channelTimer = (new FlxTimer()).start(4, function (t) {channelBar.visible = false;});
+		openCodesList(false);
 	}
 	else {
 		FlxG.sound.music.fadeIn(0.5, 0.7);
@@ -1396,6 +1460,7 @@ function codesMenu(open:Bool, offset:Float) {
 	if (!codesOpened){
 		turnTV(false);
 	}
+	openCodesList(false,codesOpened ? false : true,true);
 	previousOpen = open;
 }
 
@@ -1651,6 +1716,7 @@ var CodesFunctions:{} = {
 		FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
 		FlxG.save.data.codesUnlocked = false;
 		FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
+		FlxG.save.data.codesList = [];
 
 		FlxG.save.data.weekProgress = weekProgress = ["" => {}];
 		
@@ -1752,6 +1818,14 @@ var codes:Map<String, Void -> Void> = [
 function selectCode():Void {
 	canMove = codesFocused = false;
 	FlxG.sound.play(Paths.sound("menu/story/Enter_Code_Sound"));
+	openCodesList(false);
+
+	if (!gottenCodes.contains(codesText.text) && codesText.text != "RESET"){
+		gottenCodes.push(codesText.text);
+
+		FlxG.save.data.codesList = gottenCodes;
+		FlxG.save.flush();
+	}
 
 	codes[codesText.text]();
 }
