@@ -566,7 +566,7 @@ function updateCodesList(){
 		var codeText:FunkinText;
 
 		codeText = new FunkinText(0, 2000, 0, code, 40);
-		codeText.setFormat("fonts/pixelart.ttf", 40, 0xFFFBF5F5, "center", FlxTextBorderStyle.OUTLINE, i % 3==0 ? 0xFF2B5325 : i % 3==2 ? 0xFF172556  : 0xFF3D2F23);
+		codeText.setFormat("fonts/papercuts-2.ttf", 40, i % 3==0 ? 0xFF2B5325 : i % 3==2 ? 0xFF172556 : 0xFF3D2F23, "center", FlxTextBorderStyle.OUTLINE, 0xFFFBF5F5);
 		codeText.borderSize = 7;
 		codeText.scale.set(0.35,0.35);
 		codeText.updateHitbox();
