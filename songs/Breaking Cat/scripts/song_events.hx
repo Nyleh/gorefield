@@ -15,12 +15,11 @@ function stepHit(step:Int){
 }
 
 var totalTime:Float = 0;
-function update(elapsed) 
-{
+function update(elapsed) {
     totalTime += elapsed;
 
-    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2])
-    {
+    for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2]) {
+        if (spr == null) continue;
         spr.alpha = 0;
     }
 }
