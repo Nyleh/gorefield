@@ -1712,7 +1712,7 @@ var codes:Map<String, Void -> Void> = [
 	"CANDEL" => function() CodesFunctions.meme("idk what call this one"),
 	"MAGO" => function() CodesFunctions.meme("Pepe_el_Magin_Video"),
 	"SOY NOCHE" => function() CodesFunctions.meme("IM_NIGHT_Video"),
-	"PEDAZO " => function() CodesFunctions.meme("Dasito_Code"),
+	"DASITO" => function() CodesFunctions.meme("Dasito_Code"),
 	"PEDAZO" => function() CodesFunctions.meme("pedazo gato tremendo")
 
 	// Youtubers english codes
