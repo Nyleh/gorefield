@@ -807,6 +807,9 @@ function update(elapsed:Float) {
 						videos[curVideo].togglePaused();
 						videoWasPaused = !videoWasPaused;
 						pauseIcon.visible = videoWasPaused;
+
+						if(!videoWasPaused)
+							openCodesList(false);
 					}
 				} else if (FlxG.mouse.overlaps(speedHitbox)) {
 					cursor = "button";
