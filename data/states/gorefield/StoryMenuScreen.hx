@@ -1460,7 +1460,7 @@ function codesMenu(open:Bool, offset:Float) {
 	if (!codesOpened){
 		turnTV(false);
 	}
-	openCodesList(false,codesOpened ? false : true,true);
+	openCodesList(false,codesOpened ? false : true, previousOpen != open ? true : false);
 	previousOpen = open;
 }
 
