@@ -1,0 +1,7 @@
+{
+    "haxe.buildCompletionCache": false,
+    "haxe.enableCompilationServer": false,
+    "haxe.enableCompletionCacheWarning": false,
+    "haxe.enableDiagnostics": false,
+    "haxe.enableSignatureHelpDocumentation": false
+}

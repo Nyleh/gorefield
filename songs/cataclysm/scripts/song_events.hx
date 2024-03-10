@@ -39,6 +39,9 @@ function onStartCountdown(event) {
     });
 }
 
+function onSongEnd()
+    if (PlayState.isStoryMode) redirectStates.set(StoryMenuState, "gorefield/MovieCreditsScreen");
+
 var targetAlpha1 = 0.25;
 var targetAlpha2 = 1; 
 
