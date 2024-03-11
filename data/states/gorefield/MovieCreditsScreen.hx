@@ -220,8 +220,8 @@ function changeSelection(selection:Int) {
 	}
 	else if (selection == 0){
 		for (i => sprite in [thanksText, logoBl])
-			FlxTween.tween(sprite, {y: sprite.y + 700},0.5, {startDelay: i * 0.05, ease: FlxEase.cubeInOut});
-		new FlxTimer().start(0.7, function(tmr){
+			FlxTween.tween(sprite, {y: sprite.y + 700},0.9, {startDelay: i * 0.05, ease: FlxEase.cubeInOut});
+		new FlxTimer().start(0.9 * 1.05, function(tmr){
 			switchOut();
 		});
 	}
