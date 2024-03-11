@@ -160,6 +160,7 @@ function alphaTween(object:FlxSprite, delay:Float, duration:Float) {
 
 function changeSelection(selection:Int) {
 	if (selection >= credits.length) return;
+	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
 	if (selection == 0) {
 		logoBl.active = logoBl.visible = false;
@@ -172,27 +173,44 @@ function changeSelection(selection:Int) {
 	
 	if (iconAppearTween != null && iconAppearTween.active)
 		iconAppearTween.cancel();
+
+	function switchOut(){
+		icon.y = FlxG.height;
+		iconAppearTween = FlxTween.tween(icon, {y: calcIconPosition()}, 0.8, {ease: FlxEase.cubeOut});
 	
-	icon.y = FlxG.height;
-	iconAppearTween = FlxTween.tween(icon, {y: calcIconPosition()}, 0.8, {ease: FlxEase.cubeOut});
-
-	role.text = data.role;
-	description.text = data.description;
-	description.y = role.y + role.height + 31;
-
-	role.alpha = description.alpha = 0;
-	// El FlxTween del alpha no se cancela como quiero así que haré como ese gif de Lean que dice: "Fine, I'll do it myself" -EstoyAburridow
-	alpha_tweens = [];
-	for (i => sprite in [role, description])
-		alphaTween(sprite, 0.4 + i * 0.1, 0.3);
-
-	if (selection % 2 == 0) {
-		icon.x = 100;
-		role.x = description.x = description.x = 824 - description.width / 2;
-	} else { 
-		icon.x = 812;
-		role.x = description.x = description.x = 456 - description.width / 2;
+		role.y = 220;
+		role.text = data.role;
+		description.text = data.description;
+		description.y = role.y + role.height + 31;
+	
+		role.alpha = description.alpha = 0;
+		// El FlxTween del alpha no se cancela como quiero así que haré como ese gif de Lean que dice: "Fine, I'll do it myself" -EstoyAburridow
+		alpha_tweens = [];
+		for (i => sprite in [role, description])
+			alphaTween(sprite, 0.4 + i * 0.1, 0.3);
+	
+		if (selection % 2 == 0) {
+			icon.x = 100;
+			role.x = description.x = description.x = 824 - description.width / 2;
+		} else { 
+			icon.x = 812;
+			role.x = description.x = description.x = 456 - description.width / 2;
+		}
+	
+		icon.loadGraphic(Paths.image("menus/credits/" + data.name));
 	}
 
-	icon.loadGraphic(Paths.image("menus/credits/" + data.name));
+	if (selection >= 1){
+		for (i => sprite in [role, description]){
+			for (tween in alpha_tweens){
+				if (tween.object == sprite)
+					alpha_tweens.remove(tween);
+			}
+			FlxTween.tween(sprite, {alpha: 0, y: sprite.y + 70},0.3, {startDelay: i * 0.05, ease: FlxEase.cubeOut});
+		}
+		iconAppearTween = FlxTween.tween(icon, {y: -440}, 0.8, {ease: FlxEase.cubeOut, onComplete: function(twn){
+			switchOut();
+		}});
+	}
+	else{switchOut();}
 }
