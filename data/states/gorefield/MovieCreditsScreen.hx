@@ -125,9 +125,11 @@ function updateTweens(elapsed:Float) {
 }
 
 var iconAppearTween:FlxTween;
+
+var changing:Bool = false;
 function update(elapsed:Float) {
 	if (controls.BACK) FlxG.switchState(new MainMenuState());
-	if (controls.ACCEPT) changeSelection(curSelected++);
+	if (controls.ACCEPT && !changing) changeSelection(curSelected++);
 
 	updateTweens(elapsed);
 
@@ -162,12 +164,7 @@ function changeSelection(selection:Int) {
 	if (selection >= credits.length) return;
 	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
-	if (selection == 0) {
-		logoBl.active = logoBl.visible = false;
-		thanksText.active = thanksText.visible = false;
-
-		icon.active = icon.visible = true;
-	}
+	changing = true;
 
 	var data = credits[selection];
 	
@@ -175,6 +172,13 @@ function changeSelection(selection:Int) {
 		iconAppearTween.cancel();
 
 	function switchOut(){
+		if (selection == 0) {
+			logoBl.active = logoBl.visible = false;
+			thanksText.active = thanksText.visible = false;
+	
+			icon.active = icon.visible = true;
+		}
+
 		icon.y = FlxG.height;
 		iconAppearTween = FlxTween.tween(icon, {y: calcIconPosition()}, 0.8, {ease: FlxEase.cubeOut});
 	
@@ -184,7 +188,7 @@ function changeSelection(selection:Int) {
 		description.y = role.y + role.height + 31;
 	
 		role.alpha = description.alpha = 0;
-		// El FlxTween del alpha no se cancela como quiero así que haré como ese gif de Lean que dice: "Fine, I'll do it myself" -EstoyAburridow
+		// El FlxTween del alpha no se cancela como quiero así que haré como ese gif de Lean que dice: "Fine, I'll do it myself" -EstoyAburridow   XD - Lean
 		alpha_tweens = [];
 		for (i => sprite in [role, description])
 			alphaTween(sprite, 0.4 + i * 0.1, 0.3);
@@ -198,6 +202,8 @@ function changeSelection(selection:Int) {
 		}
 	
 		icon.loadGraphic(Paths.image("menus/credits/" + data.name));
+
+		changing = false;
 	}
 
 	if (selection >= 1){
@@ -211,6 +217,13 @@ function changeSelection(selection:Int) {
 		iconAppearTween = FlxTween.tween(icon, {y: -440}, 0.8, {ease: FlxEase.cubeOut, onComplete: function(twn){
 			switchOut();
 		}});
+	}
+	else if (selection == 0){
+		for (i => sprite in [thanksText, logoBl])
+			FlxTween.tween(sprite, {y: sprite.y + 700},0.5, {startDelay: i * 0.05, ease: FlxEase.cubeInOut});
+		new FlxTimer().start(0.7, function(tmr){
+			switchOut();
+		});
 	}
 	else{switchOut();}
 }
