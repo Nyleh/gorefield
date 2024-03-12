@@ -192,6 +192,9 @@ function update(elapsed) {
 
 function onGameOver(event){
     event.cancel(true);
+
+    FlxTween.globalManager.clear();
+
     persistentUpdate = false;
     persistentDraw = false;
     paused = true;
