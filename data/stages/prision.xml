@@ -1,0 +1,5 @@
+<!DOCTYPE codename-engine-stage>
+<stage zoom="0.8" name="prision" folder="stages/prision/" opponentZoom="0.85" playerZoom="0.7">
+	<opponent x="340" y="200" camxoffset="200" camyoffset="-20"/>
+	<player x="1100" y="400" camxoffset="-150" camyoffset="-95"/>
+</stage>
