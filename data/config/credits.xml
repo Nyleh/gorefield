@@ -136,8 +136,9 @@
 		rol_en="Voice Actor (Arlene and Liz)"
 		rol_es="Actor de Voz (Arlene y Liz)"
 		desc_en="Pilgrim Funk Off, based"
-		desc_es="Pilgrim saltandole al Funk, basado"
+		desc_es="Pilgrim saltandole al Funk, basado" 
 		social_link="https://twitter.com/SpringXy_1YT"/>
+		<!-- De hecho, se llama "Pilgrim da el funk -EstoyAburridow" -->
 
 	<member name="Lumpy Touch"
 		rol_en="Gorefield Animation Creator"

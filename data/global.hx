@@ -74,6 +74,9 @@ function new() {
 
     // EASTER EGG
     if (FlxG.save.data.canVisitArlene == null) FlxG.save.data.canVisitArlene = false;
+    
+    // CREDITS
+    if (FlxG.save.data.alreadySeenCredits == null) FlxG.save.data.alreadySeenCredits = false;
 
     // OTHER
     if (FlxG.save.data.spanish == null) FlxG.save.data.spanish = false;

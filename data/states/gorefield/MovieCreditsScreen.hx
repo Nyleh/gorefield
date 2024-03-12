@@ -1,8 +1,11 @@
 import flixel.addons.display.FlxBackdrop;
 import flixel.text.FlxTextBorderStyle;
 import std.Xml;
+import funkin.backend.scripting.GlobalScript;
 
-var curSelected:Int = 0;
+static var _fromMovieCredits:Bool = false;
+
+var curSelected:Int = #if debug 26 #else 0 #end;
 var credits:Array<{name:String,role:String,description:String,social_link:String}> = [];
 
 var colowTwn:FlxTween;
@@ -138,7 +141,6 @@ function update(elapsed:Float) {
 
 		icon.y = calcIconPosition();
 
-		
 		/* Enable this too for make the icon moves like the DVD logo
 		if (icon.y + icon.height >= FlxG.height && icon.velocity.y > 0)
 			icon.velocity.y *= -1;
@@ -161,7 +163,14 @@ function alphaTween(object:FlxSprite, delay:Float, duration:Float) {
 }
 
 function changeSelection(selection:Int) {
-	if (selection >= credits.length) return;
+	if (selection >= credits.length) {
+		if (!FlxG.save.data.alreadySeenCredits) {
+			FlxG.save.data.alreadySeenCredits = _fromMovieCredits = true;
+			FlxG.save.flush();
+		}
+		FlxG.switchState(new StoryMenuState());
+		return;
+	}
 	FlxG.sound.play(Paths.sound("menu/scrollMenu"));
 
 	changing = true;

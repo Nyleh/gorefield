@@ -17,6 +17,7 @@ import openfl.desktop.Clipboard;
 import hxvlc.flixel.FlxVideo;
 import hxvlc.flixel.FlxVideoSprite;
 import funkin.backend.MusicBeatState;
+import funkin.backend.scripting.GlobalScript;
 
 var canMove:Bool = true;
 
@@ -73,7 +74,7 @@ var codesUnlocked:Bool = false;
 var codeWeekUnlocked:Bool = false;
 var weekDescs:Array<String> = [
 	"Lasagna smells delicious...",
-	"Midnight meal???\n(yum)",
+	"Midnight meal??? (yum)",
 	"Purring Determination...",
 	"A Big Little Problem.",
 	"He Just Wants To Go Home...",
@@ -92,7 +93,7 @@ public var chromatic2:CustomShader;
 // Buenos dias -EstoyAburridow
 var weekDescsSPANISH:Array<String> = [
 	"La Lasaña huele deliciosa...",
-	"Comida de medianoche???\n(yum)",
+	"Comida de medianoche??? (yum)",
 	"Un ronroneo de determinacion...",
 	"Un pequeno gran problema...",
 	"El solo quiere volver a casa...",
@@ -218,14 +219,11 @@ var symbols:String = "*[]^_.,'!?";
 //PROGRESSION PROMPT
 var boxSprite:FlxSprite;
 var isInProgPrompt:Bool = false;
-var yesText:Alphabet;
-var noText:Alphabet;
-var progInfoText:Alphabet;
+var yesText:FlxText;
+var noText:FlxText;
+var okText:FlxText;
+var progInfoText:FlxText;
 var onYes:Bool = true;
-
-// Too for progresion prompt but is basically cancer for me -EstoyAburridow
-var progInfoText2:Alphabet;
-var progInfoText3:Alphabet;
 
 public var finishedCallback:Void->Void;
 public var acceptedCallback:Void->Void;
@@ -237,6 +235,7 @@ var gottenCodes:Array<String> = [];
 var gottenCodeText:FlxTypedGroup<FunkinText> = [];
 var codeListOpenHitbox:FlxObject;
 
+var fromMovieCredits:Bool = false;
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
@@ -377,7 +376,7 @@ function create() {
 	weekText.cameras = [camText];
 
 	flavourText = new FunkinText(weekText.x, weekText.y + weekText.height + 10, FlxG.width, "Current Story Menu Description\nAnd Larger...", 18, true);
-	flavourText.setFormat("fonts/pixelart.ttf", 18, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	flavourText.setFormat(Paths.font("Harbinger_Caps.otf"), 18, FlxColor.WHITE, "left", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	flavourText.borderSize = 2;
 	flavourText.scrollFactor.set();
 	flavourText.cameras = [camText];
@@ -522,28 +521,21 @@ function create() {
 	boxSprite.cameras = [camText];
 	add(boxSprite);
 
-	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
-	yesText.scrollFactor.set();
-	yesText.cameras = [camText];
-	add(yesText);
+	yesText = new FlxText(0, 0, 0, FlxG.save.data.spanish ? "SI" : "YES");
+	noText = new FlxText(0, 0, 0, "NO");
+	okText = new FlxText(0, 0, 0, "OK");
 
-	noText = new Alphabet(0, 0, "NO", true);
-	noText.scrollFactor.set();
-	noText.cameras = [camText];
-	add(noText);
-
-	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
-
-	// Por alguna razón, no fui capaz de usar \n, aunque leyendo un poco el código de Alphabet si deberias ser capaz     || its really annoying that \n doesnt work - lean
-	progInfoText2 = new Alphabet(0, 270, "", false);
-	progInfoText3 = new Alphabet(0, 340, "", false);
-
-	for (_progInfoText in [progInfoText, progInfoText2, progInfoText3]) {
-		_progInfoText.scrollFactor.set();
-		_progInfoText.cameras = [camText];
-		_progInfoText.screenCenter(FlxAxes.X);
-		add(_progInfoText);
+	progInfoText = new FlxText(0, 0, 900, "");
+	
+	for (text in [yesText, noText, okText, progInfoText]) {
+		text.setFormat(Paths.font("Harbinger_Caps.otf"), 50, 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, 0xFF000000);
+		text.borderSize = 4;
+		text.scrollFactor.set();
+		text.cameras = [camText];
+		add(text);
 	}
+	okText.screenCenter(FlxAxes.X);
+	progInfoText.screenCenter(FlxAxes.X);
 
 	codesList = new FlxSprite(800,870).loadGraphic(Paths.image("menus/storymenu/papel"));
 	codesList.scrollFactor.set();
@@ -556,6 +548,15 @@ function create() {
 	add(gottenCodeText);
 
 	changeWeek(0);
+
+	if (_fromMovieCredits) {
+		fromMovieCredits = _fromMovieCredits;
+		openProgressPrompt(true,function(){},
+			function(){fromMovieCredits = _fromMovieCredits = false;},
+		function(){});
+		progInfoText.text = FlxG.save.data.spanish ? "Post Game desbloqueado" : "Post Game unlocked";
+		yesText.visible = noText.visible = false;
+	}
 }
 
 function updateCodesList(){
@@ -566,7 +567,7 @@ function updateCodesList(){
 		var codeText:FunkinText;
 
 		codeText = new FunkinText(0, 2000, 0, code, 40);
-		codeText.setFormat("fonts/papercuts-2.ttf", 40, i % 3==0 ? 0xFF2B5325 : i % 3==2 ? 0xFF172556 : 0xFF3D2F23, "center", FlxTextBorderStyle.OUTLINE, 0xFFFBF5F5);
+		codeText.setFormat("fonts/papercuts-2.ttf", 70, i % 3==0 ? 0xFF2B5325 : i % 3==2 ? 0xFF172556 : 0xFF3D2F23, "center", FlxTextBorderStyle.OUTLINE, 0xFFFBF5F5);
 		codeText.borderSize = 7;
 		codeText.scale.set(0.35,0.35);
 		codeText.updateHitbox();
@@ -596,6 +597,8 @@ function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 	isInProgPrompt = entered;
 	FlxTween.cancelTweensOf(boxSprite);
 	FlxTween.tween(boxSprite, {y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
+
+	yesText.visible = noText.visible = true;
 
 	finishedCallback = entered ? finishCallback : null;
 	acceptedCallback = entered ? accepted : null;
@@ -702,17 +705,15 @@ function update(elapsed:Float) {
 	//selectorBloom.size = 4 + (1 * FlxMath.fastSin(__totalTime));
 
 	// Lean, por qué no hiciste mejor un FlxTypedGroup o un FlxSpriteGroup :sob: -EstoyAburridow
-	yesText.x = boxSprite.x * 4.2;
-	yesText.y = boxSprite.y + 360;
+	yesText.x = boxSprite.x * 4.8;
+	yesText.y = boxSprite.y + 380;
 
 	noText.x = boxSprite.x * 16.5;
-	noText.y = boxSprite.y + 360;
+	noText.y = boxSprite.y + 380;
 
-	progInfoText.x = boxSprite.x * 3.6;
-	progInfoText.y = boxSprite.y + 140;
+	okText.y = boxSprite.y + 340;
 
-	progInfoText2.y = boxSprite.y + 120;
-	progInfoText3.y = boxSprite.y + 190;
+	progInfoText.y = boxSprite.y + 190;
 
 	codeListOpenHitbox.setPosition(codesList.x,codesList.y);
 
@@ -902,7 +903,7 @@ function focusGained()
 
 function handleMenu() {
 	if(isInProgPrompt){
-		if (controls.BACK) {
+		if (!fromMovieCredits && controls.BACK) {
 			openProgressPrompt(false); 
 			FlxG.sound.play(Paths.sound('menu/cancelMenu')); 
 			if (cancelCallback == null) return;
@@ -910,7 +911,7 @@ function handleMenu() {
 			cancelCallback();
 			cancelCallback == null;
 		}
-		if (controls.LEFT_P || controls.RIGHT_P) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
+		if (!fromMovieCredits && (controls.LEFT_P || controls.RIGHT_P)) {FlxG.sound.play(Paths.sound("menu/scrollMenu")); onYes = !onYes;}
 		if (controls.ACCEPT) {
 			if(onYes){
 				if(acceptedCallback != null)
@@ -1060,8 +1061,8 @@ function updateFlavourText() {
 function checkWeekProgress() {
 	if(weekProgress != null){
 		if (weekProgress.exists(weeks[curWeek].name)){
-			progInfoText.visible = true;
-			progInfoText2.visible = progInfoText3.visible = false;
+			progInfoText = FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?";
+
 			openProgressPrompt(true,function(){
 				isPlayingFromPreviousWeek = false;
 				playWeek();	
@@ -1622,15 +1623,9 @@ var CodesFunctions:{} = {
 		}
 	},
 	estoyCodeWarning: function() { // Por qué nadie me dijo que tenia copyright :sob:
-		progInfoText.visible = false;
-		progInfoText2.visible = progInfoText3.visible = true;
-		progInfoText2.text = FlxG.save.data.spanish ? "Este Video Tiene Musica Con" : "The Music in This Video is";
-		progInfoText3.text = FlxG.save.data.spanish ? "Copyright Quieres Continuar?" : "Copyrighted. Continue?";
-
-		new FlxTimer().start(0.01, function(_) {
-			progInfoText2.screenCenter(FlxAxes.X);
-			progInfoText3.screenCenter(FlxAxes.X);
-		});
+		progInfoText.text = FlxG.save.data.spanish ? 
+		"Este Video Tiene Musica Con Copyright Quieres Continuar?" : 
+		"The Music in This Video is Copyrighted. Continue?";
 
 		canMove = true;
 		codesFocused = false;
@@ -1742,16 +1737,9 @@ var CodesFunctions:{} = {
 	},
 	#end
 	catbot: function() {
-		progInfoText.visible = false;
-		progInfoText2.visible = progInfoText3.visible = true;
-
-		progInfoText2.text =  FlxG.save.data.spanish ? "Te Gustaria Activar Botplay" : "Enable Activating Botplay";
-		progInfoText3.text =  FlxG.save.data.spanish ? "Al Presionar 6 En Una Cancion?" : "When Pressing 6 Mid Song?";
-
-		new FlxTimer().start(0.01, function(_) {
-			progInfoText2.screenCenter(FlxAxes.X);
-			progInfoText3.screenCenter(FlxAxes.X);
-		});
+		progInfoText.text = FlxG.save.data.spanish ? 
+		"Te Gustaria Activar Botplay Al Presionar 6 En Una Cancion?" : 
+		"Enable Activating Botplay When Pressing 6 Mid Song?";
 
 		canMove = true;
 		codesFocused = false;
