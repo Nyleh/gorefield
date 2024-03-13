@@ -29,8 +29,8 @@ function create() {
             }
         },
         {
-            message_en: "I'm sorry...,&&&  I'm Sorry. &&&\nI didn't mean it that way.", 
-            message_es: "Lo siento...,&&&  Lo siento. &&&\nNo quise decir eso.", 
+            message_en: "%I'm sorry...,&&&  I'm Sorry. &&&\nI didn't mean it that way.", 
+            message_es: "%Lo siento...,&&&  Lo siento. &&&\nNo quise decir eso.", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int)
