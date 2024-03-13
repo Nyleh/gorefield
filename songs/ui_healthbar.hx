@@ -21,7 +21,7 @@ function postCreate() {
     add(gorefieldhealthBarBG);
 
     gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 804, 18, PlayState.instance, "health", 0, maxHealth);
-    gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left"));
+    gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left")); if (PlayState.SONG.meta.name.toLowerCase() == "captive") gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/Captive_life_bar_empty"), Paths.image("game/healthbar/Captive_life_bar_full"));
     gorefieldhealthBar.antialiasing = true;
 
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar]) {

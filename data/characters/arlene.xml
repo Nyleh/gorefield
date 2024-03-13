@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-200" icon="Bf_Blue_Icon" y="380" isGF="false" scale="2.2" color="#5A50D3" flipX="true" isPlayer="true" antialiasing="false" gameOverChar="binky_game_over" sprite="Arlene">
+<character x="-200" icon="Arlene_Icon" y="380" isGF="false" scale="2.2" color="#5A50D3" flipX="true" isPlayer="true" antialiasing="false" gameOverChar="binky_game_over" sprite="Arlene">
 	<anim x="0" loop="false" y="0" fps="12" anim="Arlene Idle" name="idle"/>
 	<anim x="63" loop="false" y="6" fps="12" anim="Arlene Left" name="singLEFT"/>
 	<anim x="36" loop="false" y="-16" fps="12" anim="Arlene Down" name="singDOWN"/>
