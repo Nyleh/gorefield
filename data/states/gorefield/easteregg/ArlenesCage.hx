@@ -404,4 +404,4 @@ function switchPortrait(time:Float, newOne:String) {
 	(val:Float) -> {cloudPortraits.get(newOne).visible = true; cloudPortraits.get(newOne).alpha = (Math.floor((val*100)/8)*8)/100;});
 }
 
-function destroy() {Framerate.instance.visible = true; script.destroy();}
+function destroy() {Framerate.instance.visible = true; script.destroy(); FlxG.sound.music.volume = 1;}

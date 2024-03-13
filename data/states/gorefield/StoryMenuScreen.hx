@@ -234,6 +234,7 @@ var codesList:FlxSprite;
 var gottenCodes:Array<String> = [];
 var gottenCodeText:FlxTypedGroup<FunkinText> = [];
 var codeListOpenHitbox:FlxObject;
+var tabSprite:FlxSprite;
 
 var fromMovieCredits:Bool = false;
 function create() {
@@ -547,9 +548,10 @@ function create() {
 	gottenCodeText = new FlxTypedGroup();
 	add(gottenCodeText);
 
-	var tabSprite:FlxSprite = new FlxSprite(0, 611);
+	tabSprite = new FlxSprite(0, 611);
 	tabSprite.loadGraphic(Paths.image("menus/storymenu/TAB"));
 	tabSprite.camera = camText;
+	tabSprite.visible = FlxG.save.data.canVisitArlene;
 	add(tabSprite);
 
 	changeWeek(0);
@@ -641,7 +643,25 @@ var carcetTime:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
-	if (FlxG.keys.justPressed.TAB) FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
+	if (FlxG.keys.justPressed.TAB && !codesOpened && FlxG.save.data.canVisitArlene){
+		canMove = false;
+		codesMenu(false, -100);
+
+		FlxTween.tween(selector, {angle: 45, alpha: 0}, .8, {ease: FlxEase.circOut});
+		FlxTween.tween(textInfoBG, {alpha: 0}, 0.8, {ease: FlxEase.circOut});
+
+		FlxG.sound.music.fadeOut(0.5);
+		FlxG.sound.play(Paths.sound("menu/story/arleneSFX"));
+
+		FlxTween.cancelTweensOf(tabSprite);
+		tabSprite.x -= 80;
+		FlxTween.tween(tabSprite, {x: 0}, 1, {ease: FlxEase.cubeOut});
+
+
+		new FlxTimer().start(3.5, function(tmr){
+			FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
+		});
+	}
 	
 	if (curVideoMeme != null && controls.ACCEPT)
 		curVideoMeme.onEndReached.dispatch();
@@ -1472,6 +1492,12 @@ function codesMenu(open:Bool, offset:Float) {
 		turnTV(false);
 	}
 	openCodesList(false,codesOpened ? false : true, previousOpen != open ? true : false);
+
+	if(previousOpen != open){
+		FlxTween.cancelTweensOf(tabSprite);
+		FlxTween.tween(tabSprite, {x: open ? -300 : 0}, 0.5, {ease: FlxEase.circInOut});
+	}
+
 	previousOpen = open;
 }
 
