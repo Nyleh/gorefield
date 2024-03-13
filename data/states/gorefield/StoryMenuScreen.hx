@@ -547,6 +547,11 @@ function create() {
 	gottenCodeText = new FlxTypedGroup();
 	add(gottenCodeText);
 
+	var tabSprite:FlxSprite = new FlxSprite(0, 611);
+	tabSprite.loadGraphic(Paths.image("menus/storymenu/TAB"));
+	tabSprite.camera = camText;
+	add(tabSprite);
+
 	changeWeek(0);
 
 	if (_fromMovieCredits) {
@@ -636,6 +641,8 @@ var carcetTime:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
+	if (FlxG.keys.justPressed.TAB) FlxG.switchState(new ModState("gorefield/easteregg/ArlenesCage"));
+	
 	if (curVideoMeme != null && controls.ACCEPT)
 		curVideoMeme.onEndReached.dispatch();
 

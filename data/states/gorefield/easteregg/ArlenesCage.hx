@@ -37,7 +37,7 @@ var __randSounds:Array<String> = ["easteregg/snd_text", "easteregg/snd_text_2"];
 var dialogueList:Array<{message_en:String, message_es:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [];
 var endingCallback:Void->Void = function () {
 	dialoguetext.alpha = 1;
-	dialoguetext.text = "END DIALOGUE\n(ESC to go back to title)";
+	dialoguetext.text = "END DIALOGUE\n(ESC to go back to freeplay)";
 };
 var curDialogue:Int = -1;
 
@@ -321,7 +321,7 @@ function update(elapsed:Float) {
 	if (tottalTime >= (fastFirstFade ? 2 : 4)) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-(fastFirstFade ? 4 : 6))/2) * 8) / 8), 0, 1);
 
 	if (controls.ACCEPT && __canAccept) progressDialogue();
-	if (controls.BACK) FlxG.switchState(new TitleState());
+	if (controls.BACK) FlxG.switchState(new StoryMenuState());
 
 	firstFrame = false;
 	script.call("postUpdate", [elapsed]);
