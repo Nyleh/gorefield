@@ -9,6 +9,7 @@ import flixel.text.FlxTextBorderStyle;
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.scripting.Script;
 import hscript.TemplateClass;
+import StringTools;
 
 var box:FlxSprite;
 var prompt:FlxSprite;
@@ -351,7 +352,7 @@ function __typeDialogue(time:Float = 0) {
 	box.alpha = dialoguetext.alpha = 1;
 	(new FlxTimer()).start(Math.max(0, time + FlxG.random.float(-0.005, 0.015)), function () {
 		if (__skippedText) {
-			__skippedText = false; dialoguetext.text = __finishedMessage;
+			__skippedText = false; dialoguetext.text = StringTools.replace(StringTools.replace(__finishedMessage, "%", ""), "&", "");
 			while (__curTxTIndx < __finishedMessage.length) {
 				__curTxTIndx++; 
 				if (dialogueList[curDialogue].event != null && __finishedMessage.charAt(__curTxTIndx) == "%") 

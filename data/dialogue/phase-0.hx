@@ -173,13 +173,14 @@ function create() {
             }
         },
         {
-            message_en: "%That clown is crazy...&&\n%So crazy that he hides his jokes???", 
-            message_es: "%Ese payaso está loco...&&\n%Tan loco que escondia sus bromas???", 
+            message_en: "%That clown is crazy...&&\n%So crazy that he hides %his jokes???", 
+            message_es: "%Ese payaso está loco...&&\n%Tan loco que escondia %sus bromas???", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) switch (count) {
                 case 0: dialscript.eyes.animation.play("normal", true);
                 case 1: dialscript.eyes.animation.play("confused", true);
+                case 2: dialscript.switchPortrait(.8, "Note"); // Este es el primer tercer evento :scream: -EsoyAburridow
             }
         },
         {
@@ -193,13 +194,14 @@ function create() {
             }
         },
         {
-            message_en: "%He said he hid it behind a very particular painting...&&&&\n%I still don't know where,&& he wasn't very specific.", 
-            message_es: "%Dijo que la escondió detrás de una pintura particular...&&&&\n%Sigo sin saber donde,&& no fue muy específico.", 
+            message_en: "%He said he hid it behind a %very particular painting...&&&&\n%I still don't know where,&& he wasn't very specific.", 
+            message_es: "%Dijo que la escondió detrás de %una pintura particular...&&&&\n%Sigo sin saber donde,&& no fue muy específico.", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) switch (count) {
                 case 0: dialscript.eyes.animation.play("normal", true);
-                case 1: dialscript.eyes.animation.play("confused", true);
+                case 1: dialscript.switchPortrait(.8, "chart");
+                case 2: dialscript.eyes.animation.play("confused", true);
             }
         },
         {
