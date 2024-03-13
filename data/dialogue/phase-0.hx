@@ -3,6 +3,7 @@
 function create() {
     dialscript.menuMusic = FlxG.sound.load(Paths.music('easteregg/areline_theme'), 1.0, true);
     dialscript.clownTheme = FlxG.sound.load(Paths.music('easteregg/menu_clown'), 1.0, true);
+    FlxG.save.data.hasVisitedPhase = false;
 
     // for future refernce, set this to the first portiat you want, THEN use switch portriat -lunar
     dialscript.cloudPortaitName = "Clown";
@@ -251,7 +252,7 @@ function create() {
         dialscript.menuMusic.stop(); dialscript.introSound.volume = 0.3;
         dialscript.eyes.animation.play("normal", true);
         (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
-        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState());});
+        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState()); FlxG.save.data.hasVisitedPhase = true;});
     };
 }
 
