@@ -34,7 +34,7 @@ var __skippedText:Bool = false;
 var __canAccept:Bool = false;
 
 var __randSounds:Array<String> = ["easteregg/snd_text", "easteregg/snd_text_2"];
-var dialogueList:Array<{message:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [];
+var dialogueList:Array<{message_en:String, message_es:String, expression:String, typingSpeed:Float, startDelay:Float, event:Int->Void}> = [];
 var endingCallback:Void->Void = function () {
 	dialoguetext.alpha = 1;
 	dialoguetext.text = "END DIALOGUE\n(ESC to go back to title)";
@@ -200,7 +200,7 @@ var scl = 44/48;
 	*/
 
 	dialoguetext = new FlxText(box.x + 80, box.y + 70, box.width - 160, "", 24);
-	dialoguetext.setFormat("fonts/pixelart.ttf", 44, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
+	dialoguetext.setFormat("fonts/GrapeSoda.ttf", 44, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
 	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
 	add(dialoguetext); dialoguetext.scrollFactor.set();
 
@@ -333,11 +333,11 @@ function progressDialogue() {
 	if (curDialogue++ >= dialogueList.length-1) {box.alpha = dialoguetext.alpha = prompt.alpha = 0; endingCallback(); __canAccept = false; endDialogue(); return;}
 	var dialogueData = dialogueList[curDialogue]; endDialogue();
 
-	__curTxTIndx = 0; __canAccept = true;
+	eventCount = __curTxTIndx = 0; __canAccept = true;
 	dialoguetext.text = __finishedMessage = "";
 
 	(new FlxTimer()).start(dialogueData.startDelay == null ? 0 : dialogueData.startDelay, function () {
-		__finishedMessage = dialogueData.message + "&&&"; // add empty space just cause it feels better
+		__finishedMessage = (FlxG.save.data.spanish ? dialogueData.message_es : dialogueData.message_en) + "&&&"; // add empty space just cause it feels better
 		__typeDialogue(dialogueData.typingSpeed);
 	});
 }
@@ -346,22 +346,26 @@ function endDialogue() {
 	if (curDialogue-1 >= 0 && dialogueList[curDialogue-1].onEnd != null) dialogueList[curDialogue-1].onEnd();
 }
 
+var eventCount:Int = 0;
 function __typeDialogue(time:Float = 0) {
 	box.alpha = dialoguetext.alpha = 1;
 	(new FlxTimer()).start(Math.max(0, time + FlxG.random.float(-0.005, 0.015)), function () {
 		if (__skippedText) {
 			__skippedText = false; dialoguetext.text = __finishedMessage;
 			while (__curTxTIndx < __finishedMessage.length) {
-				__curTxTIndx++; if (dialogueList[curDialogue].event != null) dialogueList[curDialogue].event(__curTxTIndx);
+				__curTxTIndx++; 
+				if (dialogueList[curDialogue].event != null && __finishedMessage.charAt(__curTxTIndx) == "%") 
+					dialogueList[curDialogue].event(eventCount++);
 			}
 			__curTxTIndx--; return;
 		}
 
-		if (__finishedMessage.charAt(__curTxTIndx) != "&") {
+		if (__finishedMessage.charAt(__curTxTIndx) != "&" && __finishedMessage.charAt(__curTxTIndx) != "%") {
 			FlxG.sound.play(Paths.sound(__randSounds[FlxG.random.int(0, __randSounds.length-1)]), 0.4 + FlxG.random.float(-0.1, 0.1));
+			dialoguetext.text += __finishedMessage.charAt(__curTxTIndx);
 		}
-		dialoguetext.text += __finishedMessage.charAt(__curTxTIndx);
-		if (dialogueList[curDialogue].event != null) dialogueList[curDialogue].event(__curTxTIndx);
+		if (dialogueList[curDialogue].event != null && __finishedMessage.charAt(__curTxTIndx) == "%") 
+			dialogueList[curDialogue].event(eventCount++);
 		__curTxTIndx++; if (__curTxTIndx < __finishedMessage.length) {
 			if (__finishedMessage.charAt(__curTxTIndx) != "&") __typeDialogue(time);
 			else {(new FlxTimer()).start(0.15, function() __typeDialogue(time));}
