@@ -73,8 +73,9 @@ function create()
 	 */
 	FlxG.save.data.arlenePhase = 0;
 	FlxG.save.data.canVisitArlene = true;
+	FlxG.save.data.hasVisitedPhase = false;
 
-	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase));
+	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + Std.string(FlxG.save.data.hasVisitedPhase ? "-post" : ""));
 	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
 	if (Assets.exists(scriptPath)) {
 		script = Script.create(scriptPath);

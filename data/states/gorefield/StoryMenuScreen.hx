@@ -1740,7 +1740,10 @@ var CodesFunctions:{} = {
 			return;
 		}
 		
+		FlxG.save.data.arlenePhase = 0;
 		FlxG.save.data.canVisitArlene = false;
+		FlxG.save.data.hasVisitedPhase = false;
+		
 		FlxG.save.data.firstTimeLanguage = true;
 		FlxG.save.data.extrasSongs = [];
 		FlxG.save.data.extrasSongsIcons = [];
