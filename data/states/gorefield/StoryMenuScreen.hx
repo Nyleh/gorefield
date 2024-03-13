@@ -1336,6 +1336,8 @@ function preloadFreeplayMenus() {
 
 function openFreePlayMenu() {
 	codesMenu(false, -100);
+	FlxTween.cancelTweensOf(tabSprite);
+	FlxTween.tween(tabSprite, {x: -300}, 0.5, {ease: FlxEase.circInOut});
 
 	__firstFreePlayFrame = inFreeplayMenu = updateFreePlay = true;
 	freePlayMenuID = curWeek; changeSong(0);
@@ -1350,6 +1352,8 @@ var lerpTimer:FlxTimer = null;
 var updateTimer:FlxTimer = null;
 function closeFreePlayMenu() {
 	codesMenu(false, 0);
+	FlxTween.cancelTweensOf(tabSprite);
+	FlxTween.tween(tabSprite, {x: 0}, 0.5, {ease: FlxEase.circInOut});
 
 	__firstFreePlayFrame = inFreeplayMenu = false;
 	freePlayMenuID = -1; changeWeek(0);
