@@ -71,7 +71,7 @@ function create()
 	 * 6 third note
 	 * 7 third note after found
 	 */
-	FlxG.save.data.arlenePhase = 0;
+	FlxG.save.data.arlenePhase = 2;
 	FlxG.save.data.canVisitArlene = true;
 	FlxG.save.data.hasVisitedPhase = false;
 
@@ -204,6 +204,7 @@ var scl = 44/48;
 	dialoguetext = new FlxText(box.x + 80, box.y + 70, box.width - 160, "", 24);
 	dialoguetext.setFormat("fonts/GrapeSoda.ttf", 44, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
 	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
+	dialoguetext.textField.antiAliasType = 0/*ADVANCED*/; dialoguetext.textField.sharpness = 400/*MAX ON OPENFL*/;
 	add(dialoguetext); dialoguetext.scrollFactor.set();
 
 	prompt = new FlxSprite().loadGraphic(Paths.image("easteregg/arrow"));
