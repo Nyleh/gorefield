@@ -5,4 +5,5 @@ function create()
 
 	FlxG.camera.bgColor = 0xff000000;
     gf.visible = false;
+    gf.scrollFactor.set(1, 1);
 }
