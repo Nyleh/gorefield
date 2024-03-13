@@ -643,7 +643,7 @@ var carcetTime:Float = 0;
 function update(elapsed:Float) {
 	__totalTime += elapsed;
 
-	if (FlxG.keys.justPressed.TAB && !codesOpened && FlxG.save.data.canVisitArlene){
+	if (canMove && FlxG.keys.justPressed.TAB && !codesOpened && FlxG.save.data.canVisitArlene){
 		canMove = false;
 		codesMenu(false, -100);
 
