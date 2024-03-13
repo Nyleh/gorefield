@@ -251,7 +251,7 @@ function create() {
         dialscript.menuMusic.stop(); dialscript.introSound.volume = 0.3;
         dialscript.eyes.animation.play("normal", true);
         (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
-        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new TitleState());});
+        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState());});
     };
 }
 
@@ -263,5 +263,5 @@ function postCreate() {
 	(new FlxTimer()).start(6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(8, dialscript.progressDialogue);
 
-    trace("ARELINE DIALOGUE PHASE 1 LOADED");
+    trace("ARLENE DIALOGUE PHASE 1 LOADED");
 }
