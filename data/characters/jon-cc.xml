@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="bf-final" camx="-160" y="350" isGF="false" camy="-120" color="#999999" flipX="true" isPlayer="true" gameOverChar="bf-ultra" sprite="jon-cc">
+<character x="0" icon="John_icons" animatedIcon="true" camx="-160" y="350" isGF="false" camy="-120" color="#999999" flipX="true" isPlayer="true" gameOverChar="jon-cc-dead" sprite="jon-cc">
 	<anim x="-5" loop="false" y="0" fps="24" anim="idle poses" name="idle"/>
 	<anim x="33" loop="false" y="-35" fps="24" anim="left poses" name="singLEFT"/>
 	<anim x="-4" loop="false" y="-96" fps="24" anim="down poses" name="singDOWN"/>
