@@ -41,6 +41,7 @@ function onPlayerMiss(event)
     if (event.noteType == "Orange Note") 
     {
         health -= FlxG.save.data.orange_hard ? 2/3 : 0.25;
+        FlxG.sound.play(Paths.sound('mechanics/Arrow_Sansfield_Sound'));
 
         event.note.strumLine.deleteNote(event.note);
         event.cancel(true);

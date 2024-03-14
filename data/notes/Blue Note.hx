@@ -35,4 +35,5 @@ function onPlayerHit(event)
     if (event.noteType == "Blue Note") {
         event.countAsCombo = event.showRating = event.showSplash = false; 
         event.strumGlowCancelled = true; health -= FlxG.save.data.blue_hard ? 2/3 : 0.25;
+        FlxG.sound.play(Paths.sound('mechanics/Arrow_Sansfield_Sound'));
     }
