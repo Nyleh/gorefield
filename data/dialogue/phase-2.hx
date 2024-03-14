@@ -58,7 +58,7 @@ function create() {
             }
         },
         {
-            message_en: "%'BLUE HAIRED BOY,&& BLUE HAIRED BOY!&& \nYour gonna be SLEIGHED out of your seat when you hear this joke!!!'",
+            message_en: "%'Blue haired boy,&& BLUE HAIRED BOY!&&\nYour gonna be &SLEIGHED!& out of your seat when you hear this joke!!!'",
             message_es: "spanish text here",
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
@@ -80,14 +80,21 @@ function create() {
             event: function (count:Int){}
         },
         {
-            message_en: "'HAHAHAHAHAHA!!!!& I am the best joke writer in the world!!!'", 
+            message_en: "'HEE HEE!!& I'm even cheering my self up today!!'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
         },
         {
-            message_en: "'Not only that!& I am the most uplifting person in the world!!!'", 
+            message_en: "'I love to CHEER!!& Cheering is what makes a clown A CLOWN!!!'", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){}
+        },
+        {
+            message_en: "'What's the purpose of a clown,& if not to CHEER everyone up??'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
@@ -112,7 +119,7 @@ function create() {
             event: function (count:Int){}
         },
         {
-            message_en: "%'SO I LEFT THEM A JOKE TO CHEER THEM UP!!!!'", 
+            message_en: "%'SO I LEFT THEM A JOKE TO BRIGHTEN THEM UP!!!!'", 
             message_es: "spanish text here", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {},
