@@ -71,6 +71,7 @@ function create()
 	 * 6 third note
 	 * 7 third note after found
 	 */
+	FlxG.save.data.arlenePhase = 3;
 	FlxG.save.data.canVisitArlene = true;
 	FlxG.save.data.hasVisitedPhase = false;
 
