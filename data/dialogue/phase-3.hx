@@ -23,7 +23,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "Anyway,& let me see the clown's note to the gray cat...\n&&this better be good...", 
+            message_en: "Anyway,& let me see the clown's note to the gray cat...\n&&%this better be good...", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
@@ -33,7 +33,11 @@ function create() {
                 dialscript.wind.fadeOut(0.8);
                 dialscript.showCloud(true);
             },
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("left", true);
+                }
+            }
         },
         {
             message_en: "%'Poor& poor &little thing...'", 
@@ -79,7 +83,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "'And I noticed your friend was crying alot,& so tell him this joke:'", 
+            message_en: "'And I noticed your friend was crying alot,& so I made a joke for him:'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
@@ -131,7 +135,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "%Okay...&& there's no way the clown put his phone number on the back of this.", 
+            message_en: "%Okay...&& %there's no way the clown put his phone number on the back of this.", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {},
@@ -140,22 +144,33 @@ function create() {
                     case 0: 
                         dialscript.clownTheme.stop();
                         dialscript.__randSounds = ["easteregg/snd_text", "easteregg/snd_text_2"];
+                    case 1: dialscript.eyes.animation.play("smug", true);
                 }
             }
         },
         {
-            message_en: "Yeah& the back of this note doesn't mention anything about a phone number at all...", 
+            message_en: "%Yeah& %the back of this note doesn't mention anything about a phone number at all...", 
             message_es: "spanish text here", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                    case 1: dialscript.eyes.animation.play("left", true);
+                }
+            }
         },
         {
-            message_en: "It only has another one of those explantions,& and another clue...", 
+            message_en: "%It only has another one of those explantions,& %and another clue...", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                    case 1: dialscript.eyes.animation.play("smug", true);
+                }
+            }
         },
         {
             message_en: "I'm not gonna bother reading you the explantion,& it's really straight forward.", 
@@ -165,20 +180,26 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "But the clue...&& It's so strange..?", 
+            message_en: "%But the clue...&& %It's so strange..?", 
             message_es: "spanish text here", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                    case 1: dialscript.eyes.animation.play("confused", true);
+                }
+            }
         },
         {
-            message_en: "It says:&\n%'Little dwarf,&& Little dwarf...&& you are very lucky to posscess this knowledge...'", 
+            message_en: "%It says:&\n%'Little dwarf,&& Little dwarf...&& you are very lucky to posscess this knowledge...'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
                 switch(count) {
-                    case 0: dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                    case 1: dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
                 }
             }
         },
@@ -213,18 +234,26 @@ function create() {
             }
         },
         {
-            message_en: "Like what do songs have to do with this...& and what is a loading screen..?", 
+            message_en: "%Like what do songs have to do with this...& and what is a loading screen..?", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("confused", true);
+                }
+            }
         },
         {
-            message_en: "At this point I think I'm never gonna be free...", 
+            message_en: "%At this point I think I'm never gonna be free...", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                }
+            }
         },
         {
             message_en: "But the clown said you know the answer,& so I'll put faith in you...", 
@@ -246,22 +275,29 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "He said he hid the joke in a pile of rubble,& somewhere near a expolision..?", 
+            message_en: "He said he hid the joke in a pile of rubble,& %somewhere near a expolision..?", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: .5,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("confused", true);
+                }
+            }
         },
         {
-            message_en: "Keep on going little dwarf...&& See you soon.", 
+            message_en: "%Keep on going little dwarf,& the next note is in your hands...&&\nSee you soon.", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: .0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                }
+            }
         },
     ];
 
-    /*
     dialscript.endingCallback = function () {
         dialscript.fadeOut = dialscript.fastFirstFade = true; dialscript.blackTime = 0;
         dialscript.menuMusic.fadeOut(2); dialscript.introSound.volume = 0.3;
@@ -269,7 +305,6 @@ function create() {
         (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
         (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState());});
     };
-    */
 }
 
 function postCreate() {
