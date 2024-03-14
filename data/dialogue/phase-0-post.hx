@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "%Oh,&& it's you.&&& I see you don't have the note with you yet,&&& %but that's alright.", 
-            message_es: "spanish text here", 
+            message_es: "%Oh,&& eres tú.&&& Veo que aún no tienes la nota,&&& %pero está bien.", 
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
@@ -29,7 +29,7 @@ function create() {
         },
         {
             message_en: "%While you were away,&& I heard the other day that,& a cat kidnapped a dog.&&& %Seem's pretty interesting to think about.", 
-            message_es: "spanish text here", 
+            message_es: "%Mientras no estabas,&& escuché el otro día que,& un gato secuestró a un perro.&&& %Es bastante interesante pensar en eso.", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -46,7 +46,7 @@ function create() {
         },
         {
             message_en: "%Well, thats all I have to share with you for now.& %Continue looking for that note!", 
-            message_es: "spanish text here", 
+            message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Sigue buscando esa nota!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },

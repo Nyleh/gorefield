@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "%Oh,&& it's you.&&& I see you don't have the note with you yet,&&& %Which is perfectly fine,& %No Rush...", 
-            message_es: "spanish text here", 
+            message_es: "%Oh,&& eres tú.&&& Veo que aún no tienes la nota contigo,&&& %lo que está completamente bien,& %sin prisas...", 
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
@@ -31,7 +31,7 @@ function create() {
         },
         {
             message_en: "%While you were gone,&& I heard a postman say that an arctic fox tried to steal a package labled 'Exotic Hats'.&&  Which I thought was a bit funny,& %no clue what the little fella would need them for though.", 
-            message_es: "spanish text here", 
+            message_es: "%Mientras no estabas,&& escuché a un cartero decir que un zorro ártico intentó robar un paquete nombrado 'Sombreros Exóticos'.&&  Pensé que era un poco gracioso,& %aunque no entiendo para que los necesitaria el amiguito.", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -48,7 +48,7 @@ function create() {
         },
         {
             message_en: "%Well, thats all I have to share with you for now.& %Continue looking for the note!", 
-            message_es: "spanish text here", 
+            message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Continua buscando la nota!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },
