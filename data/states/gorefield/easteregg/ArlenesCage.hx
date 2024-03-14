@@ -73,7 +73,7 @@ function create()
 	 */
 	FlxG.save.data.arlenePhase = 3;
 	FlxG.save.data.canVisitArlene = true;
-	FlxG.save.data.hasVisitedPhase = false;
+	FlxG.save.data.hasVisitedPhase = true;
 
 	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + Std.string(FlxG.save.data.hasVisitedPhase ? "-post" : ""));
 	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
