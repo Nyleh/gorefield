@@ -18,10 +18,16 @@ function postCreate() {
     healthBar.visible = healthBarBG.visible = iconP1.visible = iconP2.visible = false;
 
     gorefieldhealthBarBG = createBGBar((stage != null && stage.stageXML != null && stage.stageXML.exists("healthBarColor")) ? stage.stageXML.get("healthBarColor") : "orange");
-    add(gorefieldhealthBarBG);
 
-    gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 804, 18, PlayState.instance, "health", 0, maxHealth);
-    gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left")); if (PlayState.SONG.meta.name.toLowerCase() == "captive") gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/Captive_life_bar_empty"), Paths.image("game/healthbar/Captive_life_bar_full"));
+    if (PlayState.SONG.meta.name.toLowerCase() == "captive") 
+    {
+        gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 910, 300, PlayState.instance, "health", 0, maxHealth);
+        gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/Captive_life_bar_empty"), Paths.image("game/healthbar/Captive_life_bar_full"));
+    }
+    else{
+        gorefieldhealthBar = new FlxBar(0, 0, FlxBarFillDirection.RIGHT_TO_LEFT, 804, 18, PlayState.instance, "health", 0, maxHealth);
+        gorefieldhealthBar.createImageBar(Paths.image("game/healthbar/filler_right"), Paths.image("game/healthbar/filler_left")); 
+    }
     gorefieldhealthBar.antialiasing = true;
 
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar]) {
@@ -29,7 +35,7 @@ function postCreate() {
     }
 
     health -= 0.02; // ZERO WHY DO YOU DO THIS TO ME >:((
-    gorefieldhealthBar.y = (gorefieldhealthBarBG.y = FlxG.height * 0.83) + 34;
+    gorefieldhealthBar.y = (gorefieldhealthBarBG.y = FlxG.height * 0.83) + (PlayState.SONG.meta.name.toLowerCase() == "captive" ? 0 : 34);
 
     for (newIcon in 0...2) {
         var icon = createIcon(newIcon == 1 ? boyfriend : dad);
