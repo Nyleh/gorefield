@@ -112,6 +112,7 @@ function stepHit(step:Int)
         case 1282:
             stage.stageSprites["RedOverlay"].visible = false;
             stage.stageSprites["Warning"].alpha = 1;
+            stage.stageSprites["Rayo"].alpha = 1;
 
             camFollowChars = false;
             camFollow.setPosition(850, 550);
