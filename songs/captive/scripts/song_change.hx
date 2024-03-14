@@ -9,8 +9,8 @@ function create()
 {
     missText = new FlxText(0, 0, 0, 
         FlxG.save.data.spanish ?
-        "NO FALLES!, TIENES POCA VIDA!!" :
-        "DON'T FAIL!, YOU HAVE LITTLE HEALTH!!");
+        "NO FALLES! TIENES POCA VIDA!!" :
+        "DON'T FAIL! YOU HAVE LITTLE HEALTH!!");
     missText.setFormat("fonts/pixelart.ttf", 65, 0xFFFF0000, "center");
     missText.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 8, 50);
     missText.screenCenter();
