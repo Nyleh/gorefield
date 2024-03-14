@@ -1824,7 +1824,7 @@ var codes:Map<String, Void -> Void> = [
 	"NIFFIRG" => function() CodesFunctions.meme("niffirgflumbo"),
 
 	// Dev codes
-	// "CASSETTE",
+	"CASSETTE" => function() CodesFunctions.meme("RAP_PARA_POBRES"),
 	"ESTOY" => CodesFunctions.estoyCodeWarning,
 	"PIJURRO" => function() CodesFunctions.image("PIJURRO"),
 	"RECIPE" => function() CodesFunctions.meme("SDFSDF"),
