@@ -15,7 +15,7 @@ function create() {
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
-                __canAccept = false;
+                dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
             },
             event: function (count:Int){
@@ -33,7 +33,7 @@ function create() {
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
-                dialscript.showCloud(true); __canAccept = false;
+                dialscript.showCloud(true); dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
                 dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
             },
@@ -242,7 +242,7 @@ function create() {
             onEnd: function () {
                 dialscript.showCloud(false); 
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0; 
-                __canAccept = false;
+                dialscript.__canAccept = false;
             },
             event: function (count:Int){
                 switch(count){

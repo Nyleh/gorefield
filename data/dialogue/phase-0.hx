@@ -62,7 +62,7 @@ function create() {
             message_es: "%Mi nombre es Arlene,&&&\ny soy la novia de Garfield.", 
             typingSpeed: 0.052, startDelay: 0,
             onEnd: function () {
-                (new FlxTimer()).start(.9, function () dialscript.eyes.animation.play("confused", true)); __canAccept = false;
+                (new FlxTimer()).start(.9, function () dialscript.eyes.animation.play("confused", true)); dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
             },
             event: function (count:Int) {
@@ -83,7 +83,7 @@ function create() {
             message_es: "%Para ser honesta no tengo idea....&&&&&&\n%Una noche fui a cama y cuando desperté estaba aquí...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
-                dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0; dialscript.eyes.animation.play("normal", true); __canAccept = false;
+                dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0; dialscript.eyes.animation.play("normal", true); dialscript.__canAccept = false;
                 (new FlxTimer()).start(.6, function () dialscript.eyes.animation.play("left", true));
             },
             event: function (count:Int) switch (count) {
@@ -106,7 +106,7 @@ function create() {
             message_es: "%He estado tratando de encontrarlos por mucho tiempo...&&&&\n%Pero nunca parecen darse cuenta por alguna razón.&", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
-                dialscript.eyes.animation.play("normal", true); __canAccept = false;
+                dialscript.eyes.animation.play("normal", true); dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
             },
             event: function (count:Int) switch (count) {
@@ -147,7 +147,7 @@ function create() {
             message_es: "%Me recuerda a que el otro día...&&&&\n%Me parece que escuché la voz de un payaso...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
-                dialscript.showCloud(true); __canAccept = false;
+                dialscript.showCloud(true); dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
             },
             event: function (count:Int) switch (count) {
@@ -209,7 +209,7 @@ function create() {
             message_en: "%Find the joke for me,&&\nand I will reward you with an adventure&&.&.&.&&&&&% Of finding more jokes...", 
             message_es: "%Encuentra la broma por mi,&&\ny te compensaré con una aventura&&.&.&.&&&&&% De encontrar más bromas...", 
             typingSpeed: 0.045, startDelay: 0,
-            onEnd: function () {dialscript.showCloud(false); dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0; __canAccept = false;},
+            onEnd: function () {dialscript.showCloud(false); dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0; dialscript.__canAccept = false;},
             event: function (count:Int) switch (count) {
                 case 0: dialscript.eyes.animation.play("normal", true);
                 case 1: dialscript.eyes.animation.play("smug", true);

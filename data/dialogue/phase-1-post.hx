@@ -14,7 +14,7 @@ function create() {
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
-                __canAccept = false;
+                dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
             },
             event: function (count:Int){
