@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "Welcome back little dwarf...", 
-            message_es: "spanish text here", 
+            message_en: "Bienvenido devuelta pequeño enano...", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
