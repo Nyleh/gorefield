@@ -19,6 +19,8 @@ import hxvlc.flixel.FlxVideoSprite;
 import funkin.backend.MusicBeatState;
 import funkin.backend.scripting.GlobalScript;
 
+importScript("data/scripts/menuVars");
+
 var canMove:Bool = true;
 
 var menuOptions:Array<FlxSprite> = [];
@@ -236,7 +238,6 @@ var gottenCodeText:FlxTypedGroup<FunkinText> = [];
 var codeListOpenHitbox:FlxObject;
 var tabSprite:FlxSprite;
 
-var fromMovieCredits:Bool = false;
 function create() {
 	FlxG.mouse.visible = FlxG.mouse.useSystemCursor = true;
 	FlxG.cameras.remove(FlxG.camera, false);
@@ -556,13 +557,13 @@ function create() {
 
 	changeWeek(0);
 
-	if (_fromMovieCredits) {
-		fromMovieCredits = _fromMovieCredits;
+	if (fromMovieCredits) {
 		openProgressPrompt(true,function(){},
-			function(){fromMovieCredits = _fromMovieCredits = false;},
+			function(){fromMovieCredits = false;},
 		function(){});
 		progInfoText.text = FlxG.save.data.spanish ? "Post Game desbloqueado" : "Post Game unlocked";
 		yesText.visible = noText.visible = false;
+		okText.visible = true;
 	}
 }
 
@@ -605,7 +606,8 @@ function openProgressPrompt(entered:Bool, ?finishCallback, ?accepted, ?cancel){
 	FlxTween.cancelTweensOf(boxSprite);
 	FlxTween.tween(boxSprite, {y: entered ? 150 : 730}, entered ? 0.7 : 0.4, {ease: FlxEase.cubeOut});
 
-	yesText.visible = noText.visible = true;
+	yesText.visible = noText.visible = progInfoText.visible = true;
+	okText.visible = false;
 
 	finishedCallback = entered ? finishCallback : null;
 	acceptedCallback = entered ? accepted : null;
@@ -1067,13 +1069,13 @@ function changeWeek(change:Int) {
 function updateFlavourText() {
 	var descs:Array<String> = FlxG.save.data.spanish ? weekDescsSPANISH : weekDescs;
 
-	if (curWeek == 6 && !FlxG.save.data.beatWeekG7) { flavourText.applyMarkup(FlxG.save.data.spanish ?
+	if (curWeek == 6 && FlxG.save.data.beatWeekG6) { flavourText.applyMarkup(FlxG.save.data.spanish ?
 		"No Puedes Encontrarme?  ¡Bu! Hu!                           *T*ras *A*lcanzar *B*rillar..." : // Fue algo díficil traducir esto ._: -EstoyAburridow
 		"Can't Find Me?   Boo Hoo!                           *T*ill *A* *B*reeze...",
 		[new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF527F3A), "*")]);
 		return;
 	}
-	if (curWeek == 8 && !codeWeekUnlocked) { flavourText.text = FlxG.save.data.spanish ?
+	if (curWeek == 8 && FlxG.save.data.beatWeekG6 && !codeWeekUnlocked) { flavourText.text = FlxG.save.data.spanish ?
 		"Encuentra Los Codigos Escondidos." :
 		"Find Hidden Codes." ;
 		return; 
@@ -1088,7 +1090,7 @@ function updateFlavourText() {
 function checkWeekProgress() {
 	if(weekProgress != null){
 		if (weekProgress.exists(weeks[curWeek].name)){
-			progInfoText = FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?";
+			progInfoText.text = FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?";
 
 			openProgressPrompt(true,function(){
 				isPlayingFromPreviousWeek = false;
@@ -1747,7 +1749,9 @@ var CodesFunctions:{} = {
 		FlxG.save.data.arlenePhase = 0;
 		FlxG.save.data.canVisitArlene = false;
 		FlxG.save.data.hasVisitedPhase = false;
-		
+		FlxG.save.data.paintPosition = -1;
+
+		FlxG.save.data.alreadySeenCredits = false;
 		FlxG.save.data.firstTimeLanguage = true;
 		FlxG.save.data.extrasSongs = [];
 		FlxG.save.data.extrasSongsIcons = [];

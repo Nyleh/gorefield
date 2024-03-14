@@ -17,13 +17,13 @@ function postCreate() {
     note_sprite.screenCenter();
     add(note_sprite);
 
-    var foundNoteText:FlxText = new FlxText(0, 520, 0, FlxG.save.data.spanish ? "NOTA ENCONTRADA" : "english text here");
+    var foundNoteText:FlxText = new FlxText(0, 520, 0, FlxG.save.data.spanish ? "NOTA ENCONTRADA" : "NOTE FOUND");
     foundNoteText.setFormat(Paths.font("pixelart.ttf"), 55, 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     foundNoteText.borderSize = 4;
     foundNoteText.screenCenter(FlxAxes.X);
     add(foundNoteText);
 
-    var arleneText:FlxText = new FlxText(0, 600, 0, FlxG.save.data.spanish ? "Visita a Arlene" : "english text here");
+    var arleneText:FlxText = new FlxText(0, 600, 0, FlxG.save.data.spanish ? "Visita a Arlene" : "Go Visit Arlene.");
     arleneText.setFormat(Paths.font("Harbinger_Caps.otf"), 40, 0xFFFFFFFF, "center", FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
     arleneText.borderSize = 4;
     arleneText.screenCenter(FlxAxes.X);
@@ -46,5 +46,8 @@ function destroy() {
     if(FlxG.cameras.list.contains(daCamera))
         FlxG.cameras.remove(daCamera, true);
 
-    for (camera in FlxG.cameras.list) camera.active = false;
+    for (camera in FlxG.cameras.list) camera.active = true;
+
+    FlxG.save.data.paintPosition = -1;
+    FlxG.save.data.hasVisitedPhase = false;
 }
