@@ -11,6 +11,10 @@
 	<sprite name="Entrada" x="0" y="0" sprite="entrada">
 		<property name="alpha" type="float" value="0.0001" />
 	</sprite>
+	<sprite name="Rayo" x="600" y="-20" sprite="trueno" antialiasing="true" scale="1.5">
+		<anim name="idle" anim="truenito" loop="true"/>
+		<property name="alpha" type="float" value="0.0001" />
+	</sprite>
 	<player x="1000" y="250" camxoffset="-150" camyoffset="-95"/>
 	<gf x="1350" y="150" camxoffset="-450" camyoffset="100"/>
 	<sprite name="Barriles" x="0" y="860" sprite="Barril" scale="1.1" scrollx="1.1">

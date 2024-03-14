@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="-110" icon="face" y="-850" isGF="false" color="#999999" flipX="true" isPlayer="true" gameOverChar="godnermaldeath" sprite="nermal-messiah-player">
+<character x="-110" icon="NERMAL_GODFIELD" animatedIcon="true" iconoffsetx="30" iconoffsety="-10" y="-850" isGF="false" color="#999999" flipX="true" isPlayer="true" gameOverChar="godnermaldeath" sprite="nermal-messiah-player">
 	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS DOWN" name="singDOWNmiss"/>
 	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS LEFT" name="singLEFTmiss"/>
 	<anim x="0" loop="false" y="0" fps="24" anim="CRUZ MISS RIGHT" name="singRIGHTmiss"/>

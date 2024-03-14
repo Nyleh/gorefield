@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="garfield" camx="-70" y="0" isGF="false" color="#D44D29" isPlayer="false" holdTime="3" sprite="CARTOONFIELD">
+<character x="0" icon="CARTOON_GOREFIELD" animatedIcon="true" camx="-70" y="0" isGF="false" color="#D44D29" isPlayer="false" holdTime="3" sprite="CARTOONFIELD">
 	<anim x="0" loop="false" y="0" fps="24" anim="CARTOONFIELD IDLE" name="idle"/>
 	<anim x="44" loop="false" y="12" fps="24" anim="CARTOONFIELD LEFT" name="singLEFT"/>
 	<anim x="-1" loop="false" y="-19" fps="24" anim="CARTOONFIELD DOWN" name="singDOWN"/>

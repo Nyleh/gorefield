@@ -1,4 +1,4 @@
-static var healthDrain:Float = 3;
+static var healthDrain:Float = 0.65;
 static var quitaVida:Bool = false;
 
 function create() {
@@ -10,6 +10,6 @@ function onDadHit(event)
     if (quitaVida)
     {
         if(healthDrain > 0 && health > healthDrain / 10 + 0.1)
-            health -= healthDrain / 5;
+            health -= healthDrain / 10;
     }
 }

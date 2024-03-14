@@ -45,6 +45,7 @@ function postCreate() {
         });
     }
     for (txt in [scoreTxt, missesTxt, accuracyTxt]) {members.remove(txt); add(txt);}
+
     updateIcons();
 }
 

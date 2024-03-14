@@ -7,6 +7,7 @@ var fakeCamFollow:FlxSprite;
 var replaceCamera:Bool = false;
 var daCharacter:Character;
 var fakeCamZoom:Float;
+
 var createNewCharacter:Bool = false;
 
 function create()
@@ -79,6 +80,11 @@ function create()
         case 'bf-dead-art':
             position[0].x = 200 + daCharacter.x;
             position[0].y = 500 + daCharacter.y;
+        case "luna-dead-angry":
+            position[0].x = 400 + daCharacter.x;
+            position[0].y = 200 + daCharacter.y;
+            fakeCamZoom = 0.8;
+            snapCam();
         default:
             var camPos = daCharacter.getCameraPosition();
             position[0].x = camPos.x + daCharacter.x;
