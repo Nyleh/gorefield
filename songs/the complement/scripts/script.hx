@@ -1,4 +1,5 @@
 import funkin.backend.shaders.CustomShader;
+var blackScreen:FlxSprite;
 
 public var particleShader:CustomShader; // yes it is a shader
 
@@ -15,10 +16,14 @@ function create() {
     if (FlxG.save.data.particles) FlxG.camera.addShader(particleShader);
     stage.stageSprites["BG1"].zoomFactor = 0.7;
 
-    stage.stageSprites["black"].alpha = 1;
+    blackScreen = new FlxSprite().makeSolid(FlxG.width + 100, FlxG.height + 100, FlxColor.BLACK);
+    blackScreen.alpha = 1;
+    blackScreen.cameras = [camHUD];
+    add(blackScreen);
 }
 
-function postCreate() {
+function postCreate()
+{
     for (i=>strumLine in strumLines.members){
         switch (i){
             case 0:
@@ -26,22 +31,27 @@ function postCreate() {
         }
     }
 
-    camHUD.alpha = 0;
     lerpCam = false;
     FlxG.camera.zoom = 2;
 }
 
-function stepHit(step:Int) {
-    switch(step){
+function stepHit(step:Int)
+{
+    switch(step)
+    {
         case 0:
             camZoomingStrength = 2;
-            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 256);
+            FlxTween.tween(blackScreen, {alpha: 0}, (Conductor.stepCrochet / 1000) * 256);
             FlxTween.num(0, 3, (Conductor.stepCrochet / 1000) * 92, {}, (val:Float) -> {particleShader.particlealpha = val;});
             FlxTween.tween(FlxG.camera, {zoom: 0.6}, (Conductor.stepCrochet / 1000) * 256, {ease: FlxEase.quadInOut, onComplete: function (tween:FlxTween) {
                 lerpCam = true; FlxG.camera.zoom += 0.25;
                 FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * 4);
             }});
-        }
+        case 768:
+            FlxTween.tween(blackScreen, {alpha: 1}, (Conductor.stepCrochet / 1000) * 8);
+        case 832:
+            blackScreen.alpha = 0;
+    }
 }
 
 function update(elapsed:Float) {
