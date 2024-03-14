@@ -2,6 +2,8 @@
 import flixel.addons.display.FlxBackdrop;
 import funkin.game.ComboRating;
 
+importScript("data/scripts/easteregg/paintings");
+
 var clouds:FlxBackdrop;
 var oldClouds:FlxSprite;
 

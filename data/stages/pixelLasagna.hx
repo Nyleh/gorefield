@@ -1,4 +1,5 @@
 importScript("data/scripts/pixel-gorefield");
+importScript("data/scripts/easteregg/paintings");
 
 function create() 
 {

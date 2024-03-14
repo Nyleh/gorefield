@@ -1,5 +1,7 @@
 import funkin.game.ComboRating;
 
+importScript("data/scripts/easteregg/paintings");
+
 function create() {
     comboRatings = [
 		new ComboRating(0, "F", 0xFF941616),

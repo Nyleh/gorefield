@@ -1,6 +1,8 @@
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.shaders.CustomShader;
 
+importScript("data/scripts/easteregg/paintings");
+
 public var jonTrail:FlxTrail;
 public var jonFlying:Bool = true;
 

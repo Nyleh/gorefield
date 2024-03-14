@@ -28,6 +28,9 @@ function create() {
 
     blackandwhite = new CustomShader("bw");
 
+    remove(note_sprite);
+	insert(members.indexOf(stage.stageSprites["black"]), note_sprite);
+
     stage.stageSprites["black"].active = stage.stageSprites["black"].visible = true;
     stage.stageSprites["black_overlay"].active = stage.stageSprites["black_overlay"].visible = true;
 
@@ -179,6 +182,8 @@ function stepHit(step:Int) {
             stage.stageSprites["black_overlay"].alpha = 1;
             remove(stage.stageSprites["black_overlay"]);
             add(stage.stageSprites["black_overlay"]);
+
+            if (note_sprite != null) note_sprite.visible = note_sprite.active = false;
 
             for (name => sprite in stage.stageSprites) 
                 sprite.active = sprite.visible = (name == "bgFinal" || name ==  "lightFinal" || name == "cloudsFinal" || name ==  "frontFinal");

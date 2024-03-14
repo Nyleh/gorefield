@@ -264,5 +264,16 @@ function postCreate() {
 	(new FlxTimer()).start(6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(8, dialscript.progressDialogue);
 
+    // Paintings
+    //  Punishment: 0, 1
+    //  Stage | Hijon: 2
+    //  Lasagna Pixel: 3, 4
+    //  New Lasagna Pixel: 5, 6
+    //  God: 7, 8, 9, 10
+    if (FlxG.save.data.paintPosition == -1) {
+        FlxG.save.data.paintPosition = FlxG.random.int(0, 10);
+        FlxG.save.flush();
+    }
+
     trace("ARLENE DIALOGUE PHASE 1 LOADED");
 }

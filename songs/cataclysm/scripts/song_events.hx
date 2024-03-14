@@ -21,6 +21,8 @@ function postCreate() {
     VideoHandler.load(["GODFIELD_INTRO", "CINEMATIC_LAYER", "GODFIELD_CINEMATIC_2"], false, function() {
         FlxG.camera.flash(FlxColor.WHITE);
     });
+
+    if (note_sprite != null) note_sprite.visible = note_sprite.active = false;
 }
 
 function onStartCountdown(event) {
@@ -201,6 +203,9 @@ function stepHit(step:Int) {
             stage.stageSprites["BG"].visible = stage.stageSprites["BG2"].visible = stage.stageSprites["ALO"].visible = stage.stageSprites["ALO2"].visible = false;
             stage.stageSprites["PUNISH_BG1"].alpha = stage.stageSprites["PUNISH_TV"].alpha = 1;
 
+            if (note_sprite != null && (FlxG.save.data.paintPosition == 8 || FlxG.save.data.paintPosition == 8))
+                note_sprite.active = note_sprite.visible = true;
+
             snapCam();
 
             FlxTween.num(6, 0.2, (Conductor.stepCrochet / 1000) * 8, {}, (val:Float) -> {chromatic.distortion = val;});
@@ -223,6 +228,11 @@ function stepHit(step:Int) {
             strumLineBfZoom = -1;
             strumLineDadZoom = -1;
             defaultCamZoom = 0.7;
+
+            if (note_sprite != null && (FlxG.save.data.paintPosition == 7 || FlxG.save.data.paintPosition == 8))
+                note_sprite.active = note_sprite.visible = false;
+            if (note_sprite != null && (FlxG.save.data.paintPosition == 9 || FlxG.save.data.paintPosition == 10))
+                note_sprite.active = note_sprite.visible = true;
             
             snapCam();
 
@@ -243,6 +253,9 @@ function stepHit(step:Int) {
             stage.stageSprites["LASAGNA_BG"].alpha = 0;
             stage.stageSprites["MARCO_BG"].alpha = stage.stageSprites["BONES_SANS"].alpha = 1;
             defaultCamZoom = 0.6;
+
+            if (note_sprite != null && (FlxG.save.data.paintPosition == 9 || FlxG.save.data.paintPosition == 10))
+                note_sprite.active = note_sprite.visible = false;
 
             snapCam();
 

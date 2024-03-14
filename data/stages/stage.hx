@@ -1,5 +1,7 @@
 import funkin.game.ComboRating;
 
+importScript("data/scripts/easteregg/paintings");
+
 function create() {
     comboGroup.x += 300;
     comboGroup.y += 300;

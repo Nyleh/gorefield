@@ -44,6 +44,8 @@ function create()
 	
 	for (name => sprite in stage.stageSprites)
 		if (name != "black_overlay") sprite.color = 0xFF2B2B2B;
+
+	if (note_sprite != null) note_sprite.color = 0xFF2B2B2B;
 }
 
 var totalTime:Float = 0;
@@ -86,6 +88,8 @@ function stepHit(step:Int)
 				}
 			for (name => sprite in stage.stageSprites)
 				sprite.color = 0xFFFFFFFF;
+
+			if (note_sprite != null) note_sprite.color = 0xFFFFFFFF;
 		case 656:
 			tweenHUD(0, (Conductor.stepCrochet / 1000) * 16);
 
