@@ -271,7 +271,7 @@ function postCreate() {
     //  New Lasagna Pixel: 5, 6
     //  God: 7, 8, 9, 10
     if (FlxG.save.data.paintPosition == -1) {
-        FlxG.save.data.paintPosition = FlxG.random.int(0, 10);
+        FlxG.save.data.paintPosition = FlxG.random.int(0, 1);
         FlxG.save.flush();
     }
 

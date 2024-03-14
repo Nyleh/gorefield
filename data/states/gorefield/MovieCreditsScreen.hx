@@ -3,7 +3,7 @@ import flixel.text.FlxTextBorderStyle;
 import std.Xml;
 import funkin.backend.scripting.GlobalScript;
 
-static var _fromMovieCredits:Bool = false;
+importScript("data/scripts/menuVars");
 
 var curSelected:Int = #if debug 26 #else 0 #end;
 var credits:Array<{name:String,role:String,description:String,social_link:String}> = [];
@@ -165,7 +165,7 @@ function alphaTween(object:FlxSprite, delay:Float, duration:Float) {
 function changeSelection(selection:Int) {
 	if (selection >= credits.length) {
 		if (!FlxG.save.data.alreadySeenCredits) {
-			FlxG.save.data.alreadySeenCredits = _fromMovieCredits = true;
+			FlxG.save.data.alreadySeenCredits = fromMovieCredits = true;
 			FlxG.save.flush();
 		}
 		FlxG.switchState(new StoryMenuState());

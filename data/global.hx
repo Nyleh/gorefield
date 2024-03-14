@@ -75,6 +75,8 @@ function new() {
     // EASTER EGG
     if (FlxG.save.data.canVisitArlene == null) FlxG.save.data.canVisitArlene = false;
     if (FlxG.save.data.hasVisitedPhase == null) FlxG.save.data.hasVisitedPhase = false;
+    if (FlxG.save.data.paintPosition == null) FlxG.save.data.paintPosition = -1;
+    if (FlxG.save.data.arlenePhase == null) FlxG.save.data.arlenePhase = 0;
     
     // CREDITS
     if (FlxG.save.data.alreadySeenCredits == null) FlxG.save.data.alreadySeenCredits = false;

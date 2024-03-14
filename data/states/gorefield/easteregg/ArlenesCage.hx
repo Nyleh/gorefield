@@ -71,8 +71,8 @@ function create()
 	 * 6 third note
 	 * 7 third note after found
 	 */
-	FlxG.save.data.canVisitArlene = true;
-	FlxG.save.data.hasVisitedPhase = false;
+	//FlxG.save.data.canVisitArlene = true;
+	//FlxG.save.data.hasVisitedPhase = false;
 
 	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + Std.string(FlxG.save.data.hasVisitedPhase ? "-post" : ""));
 	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
