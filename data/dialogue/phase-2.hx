@@ -94,11 +94,15 @@ function create() {
             event: function (count:Int){}
         },
         {
-            message_en: "'Like this one time,& I saw this poor gray cat in a alley way...&&\nIN THE MIDDLE OF A THUNDERSTORM!'", 
+            message_en: "'Like this one time,& %I saw this poor gray cat in a alley way...&&\nIN THE MIDDLE OF A THUNDERSTORM!'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int){}
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.switchPortrait(.0001, "cryfieldSecret");
+                }
+            }
         },
         {
             message_en: "'and the cats poor friend...&& they looked like they were crying for hours...'", 
@@ -108,11 +112,15 @@ function create() {
             event: function (count:Int){}
         },
         {
-            message_en: "'SO I LEFT THEM A JOKE TO CHEER THEM UP!!!!'", 
+            message_en: "%'SO I LEFT THEM A JOKE TO CHEER THEM UP!!!!'", 
             message_es: "spanish text here", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int){}
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.switchPortrait(.0001, "Clown");
+                }
+            }
         },
         {
             message_en: "'Anyway,& that's all little blue haired boy.&& \nI left your clue on the back...'", 
