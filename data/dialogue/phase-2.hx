@@ -187,6 +187,27 @@ function create() {
             message_en: "Ok,& that one kinda made me chuckle...", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {}
+        },
+        {
+            message_en: "Also it mentions the next clue for the code!", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {}
+        },
+        {
+            message_en: "Apparently, &the second number of the code is the most repeated digit of your highscore??", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {}
+        },
+        {
+            message_en: "What's a high score???&& The clown just makes up his own things sometimes...", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
                 dialscript.box.alpha = dialscript.dialoguetext.alpha = dialscript.prompt.alpha = 0;
@@ -196,7 +217,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "I have a gut feeling that those two cats are too dumb to find that note...", 
+            message_en: "Anyway,& I have a gut feeling that those two cats are too dumb to find that note...", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},

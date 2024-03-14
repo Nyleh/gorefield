@@ -9,11 +9,66 @@ function create() {
 
     dialscript.dialogueList = [
         {
-            message_en: "Back so soon??&& You didn't even find the joke!", 
+            message_en: "Back so soon??&& %I'm starting to think you just didn't even look...", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.055, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("smug", true);
+                }
+            }
+        },
+        {
+            message_en: "%While you were gone,& I think I finally found out what the clown meant by highscore!", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.055, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                }
+            }
+        },
+        {
+            message_en: "%Highscore is something inside video games...&&\nLike Garfield Kart!!!! &&(Yeah,& my boyfriend is famous)", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.055, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {
+                switch (count) {
+                    case 0: dialscript.wind.stop(); dialscript.menuMusic.play();
+                }
+            }
+        },
+        {
+            message_en: "Remember,& the second number of the code is the most repeated digit of your highscore...", 
             message_es: "spanish text here", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
+        },
+        {
+            message_en: "I don't know where your gonna find a highscore,&&\n%Life isn't a game...", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("smug", true);
+                }
+            }
+        },
+        {
+            message_en: "%Also...&& You didn't even find the joke!!", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.055, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                }
+            }
         },
         {
             message_en: "%How am I meant to read you a joke if you didn't even find it?!", 
