@@ -33,10 +33,16 @@ function stepHit(step:Int)
             FlxTween.tween(blackScreen, {alpha: 0.35}, 1);
         case 704:
             FlxTween.tween(blackScreen, {alpha: 1}, 0.5);
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                FlxTween.tween(spr, {alpha: 0}, 0.5);
         case 576 | 771 | 1283:
             blackScreen.alpha = 0;
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                spr.alpha = 1;
         case 1155:
             FlxTween.tween(blackScreen, {alpha: 1}, 0.5);
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                FlxTween.tween(spr, {alpha: 0}, 0.5);
         case 770:
             stage.stageSprites["BG1"].alpha = 0;
             stage.stageSprites["Entrada"].alpha = 1;
@@ -79,14 +85,19 @@ function stepHit(step:Int)
             boogie = false;
         case 1412:
             boogie = true;
+        case 1283:
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                spr.alpha = 0;
         case 1284:
             boogie = true;
-        case 1542:
+            for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt])
+                spr.alpha = 0;
+        case 1538:
             boogie = false;
-            stage.stageSprites["Warning"].visible = false;
+        case 1539:
             FlxTween.tween(blackScreen, {alpha: 1}, 0.5);
-            FlxTween.tween(FlxG.camera, {zoom: 1.2}, 1, {ease: FlxEase.quadInOut});
-            FlxTween.num(0, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
+            FlxTween.tween(FlxG.camera, {zoom: 2}, 1, {ease: FlxEase.quadOut});
+            FlxTween.num(1, 0, (Conductor.stepCrochet / 1000) * 4, {}, (val:Float) -> {distortionShader.distortion = val;});
     }
 
     if (boogie && step % 4 == 0) 
