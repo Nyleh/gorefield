@@ -212,7 +212,7 @@ function create() {
         },
         {
             message_en: "'OK,& THAT'S THE CLUE!!&&\nI can't wait to meet you soon,& Good Luck!!!'", 
-            message_es: "¡¡OK, y ESA ES LA PISTA!! &&\ ¡¡¡No puedo esperar a conocerte pronto y buena suerte!!!", 
+            message_es: "OK, y ESA ES LA PISTA!! &&\ ¡¡¡No puedo esperar a conocerte pronto y buena suerte!!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
