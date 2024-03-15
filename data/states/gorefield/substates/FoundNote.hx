@@ -36,8 +36,9 @@ function postCreate() {
     cameras = [daCamera];
 
     new FlxTimer().start(5, function() {
-        FlxG.save.data.arlenePhase = 1;
+        FlxG.save.data.arlenePhase += 1;
         FlxG.save.flush();
+        trace("PHASE IS NOW: " + FlxG.save.data.arlenePhase);
         close();
     });
 }

@@ -23,13 +23,19 @@ var positionMap:Map<String, Map<Int, {sprite:String, x:Int, y:Int, scale:Float}>
         9 => {sprite: "note2", x: 0, y: -220, scale: 0.6}
         10 => {sprite: "note2", x: 520, y: -70, scale: 1}
     ]
+    "patella" => [
+        11 => {sprite: "note2", x: 1650, y: 880, scale: 0.5}
+    ]
+    "cryfield" => [
+        12 => {sprite: "note1", x: 800, y: 200, scale: 0.4}
+    ]
 ];
 
 public var note_sprite:FlxSprite;
 public var note_data;
 
 function create() {
-    if (FlxG.save.data.arlenePhase != 0) {disableScript(); return;}
+    if (FlxG.save.data.arlenePhase < 0) {disableScript(); return;}
     if (FlxG.save.data.paintPosition == -1) {disableScript(); return;}
     if (!positionMap.exists(PlayState.SONG.stage)) {disableScript(); return;}
     var stagePositionMap = positionMap.get(PlayState.SONG.stage);
@@ -44,6 +50,8 @@ function create() {
         note_sprite.antialiasing = false;
     }
     insert(members.indexOf(dad), note_sprite);
+
+    trace("Paintings Loaded");
 }
 
 function update(elapsed:Float) {

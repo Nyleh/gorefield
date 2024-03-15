@@ -275,7 +275,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "He said he hid the joke in a pile of rubble,& %somewhere near a expolision..?", 
+            message_en: "He said he hid the joke in a pile of rubble,& %somewhere near a explosion..?", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: .5,
             onEnd: function () {},
@@ -314,6 +314,11 @@ function postCreate() {
 	if (FlxG.save.data.arlenePhase == -1 || !FlxG.save.data.canVisitArlene) return;
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
+
+    if (FlxG.save.data.paintPosition == -1) {
+        FlxG.save.data.paintPosition = 2;
+        FlxG.save.flush();
+    }
 
     trace("ARLENE DIALOGUE PHASE 3 LOADED");
 }

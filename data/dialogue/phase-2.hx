@@ -256,5 +256,10 @@ function postCreate() {
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
 
+    if (FlxG.save.data.paintPosition == -1) {
+        FlxG.save.data.paintPosition = 12;
+        FlxG.save.flush();
+    }
+
     trace("ARLENE DIALOGUE PHASE 2 LOADED");
 }

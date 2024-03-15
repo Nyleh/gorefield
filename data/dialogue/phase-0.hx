@@ -270,10 +270,12 @@ function postCreate() {
     //  Lasagna Pixel: 3, 4
     //  New Lasagna Pixel: 5, 6
     //  God: 7, 8, 9, 10
+    //  Patella: 11
+    //  Cryfield: 12
     if (FlxG.save.data.paintPosition == -1) {
         FlxG.save.data.paintPosition = FlxG.random.int(0, 1);
         FlxG.save.flush();
     }
 
-    trace("ARLENE DIALOGUE PHASE 1 LOADED");
+    trace("ARLENE DIALOGUE PHASE 0 LOADED");
 }

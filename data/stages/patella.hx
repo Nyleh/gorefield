@@ -1,5 +1,7 @@
 import funkin.game.ComboRating;
 
+importScript("data/scripts/easteregg/paintings");
+
 function create() {
     stage.stageSprites["snowStorm"].cameras = [camHUD];
 
