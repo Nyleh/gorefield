@@ -5,7 +5,7 @@ import funkin.backend.scripting.GlobalScript;
 
 importScript("data/scripts/menuVars");
 
-var curSelected:Int = #if debug 26 #else 0 #end;
+var curSelected:Int = 0;
 var credits:Array<{name:String,role:String,description:String,social_link:String}> = [];
 
 var colowTwn:FlxTween;
