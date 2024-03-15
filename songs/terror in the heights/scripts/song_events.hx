@@ -11,8 +11,15 @@ function create(){
 var cooShit:Bool = false;
 function stepHit(step:Int) {
     switch (step) {
-        case 0: FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * (124));
+        case 0: 
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * (124));
+            camFollowChars = false;
+            camFollow.setPosition(960, 0);
+            snapCam();
+            FlxTween.tween(camFollow, {y: -400}, (Conductor.stepCrochet / 1000) * 50, {startDelay: (Conductor.stepCrochet / 1000) * 30});
+        case 60:
         case 124:
+            camFollowChars = true;
             FlxTween.tween(camHUD, {alpha: 1}, (Conductor.stepCrochet / 1000) * (4));
         case 128: coolSineX = true; camZoomMult *= .97; glitchShader.glitchAmount = .6;
         case 512: camZoomMult *= .8; coolSineY = true; cloudSpeed = 1.6; coolSineMulti = 1.8; coolShit = true; glitchShader.glitchAmount = .8; 
