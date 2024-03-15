@@ -6,7 +6,8 @@ function create() {
 
     dialscript.dialogueList = [
         {
-            message: "ANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1", 
+            message_en: "ANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1", 
+            message_es: "PRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1", 
             typingSpeed: 0.04, startDelay: 2,
             onEnd: function () {dialscript.switchPortrait(.8, "Clown");},
             event: function (char:Int) {
@@ -14,43 +15,50 @@ function create() {
             }
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "Emote");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "cryfieldSecret");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "Furniture");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "Explosion");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "chart");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "Note");},
             event: function (char:Int) {}
         },
         {
-            message: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_en: "ANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST \nANIMATION TEST ", 
+            message_es: "PRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN \nPRUEBA DE ANIMACIÓN ", 
             typingSpeed: 0.04, startDelay: 1,
             onEnd: function () {dialscript.switchPortrait(.8, "Note_Green");},
             event: function (char:Int) {}
