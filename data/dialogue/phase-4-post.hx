@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "HI LEAN", 
-            message_es: "spanish text here", 
+            message_es: "HOLA LEAN", // Hola -EstoyAburridow 
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
@@ -34,5 +34,5 @@ function postCreate() {
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
 
-    trace("ARLENE DIALOGUE PHASE 2 LOADED");
+    trace("ARLENE DIALOGUE PHASE 4 POST");
 }

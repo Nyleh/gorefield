@@ -1069,7 +1069,7 @@ function changeWeek(change:Int) {
 function updateFlavourText() {
 	var descs:Array<String> = FlxG.save.data.spanish ? weekDescsSPANISH : weekDescs;
 
-	if (curWeek == 6 && FlxG.save.data.beatWeekG6) { flavourText.applyMarkup(FlxG.save.data.spanish ?
+	if (curWeek == 6 && FlxG.save.data.beatWeekG6 && !FlxG.save.data.beatWeekG7) { flavourText.applyMarkup(FlxG.save.data.spanish ?
 		"No Puedes Encontrarme?  ¡Bu! Hu!                           *T*ras *A*lcanzar *B*rillar..." : // Fue algo díficil traducir esto ._: -EstoyAburridow
 		"Can't Find Me?   Boo Hoo!                           *T*ill *A* *B*reeze...",
 		[new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF527F3A), "*")]);
@@ -1406,7 +1406,7 @@ function goToSong() {
 
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 
-	if(freePlayMenuID == 8){ //is codes menu
+	/*if(freePlayMenuID == 8){ //is codes menu
 		PlayState.isStoryMode = true;
 		PlayState.storyWeek = {
 			name: weeks[8].name,
@@ -1416,7 +1416,7 @@ function goToSong() {
 			songs: [],
 			difficulties: ['hard']
 		};
-	}
+	}*/
 }
 var channelTimer:FlxTimer = null;
 function turnTV(on:Bool) {
@@ -1738,7 +1738,6 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
-	#if debug
 	resetAll: function() {
 		if(!FlxG.save.data.dev){
 			codesMenu(false, 0);
@@ -1779,7 +1778,6 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
-	#end
 	catbot: function() {
 		progInfoText.text = FlxG.save.data.spanish ? 
 		"Te Gustaria Activar Botplay Al Presionar 6 En Una Cancion?" : 
@@ -1806,7 +1804,7 @@ var CodesFunctions:{} = {
 var codes:Map<String, Void -> Void> = [
 	// Songs codes
 	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon", "garfield-sad"), 
-	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman"), 
+	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman-prision"), 
 	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "walter-monster"), 
 
 	// Youtubers spanish codes
@@ -1832,14 +1830,13 @@ var codes:Map<String, Void -> Void> = [
 	"CHART" => function() CodesFunctions.meme("Gorefield_lore"),
 	"RETURN" => function() CodesFunctions.meme("gorefield_code_video"),
 	"BUFFIELD" => function() CodesFunctions.image("SPOILER_queacabodehacer_20240130060334"),
+	"HUMUNGOSAURIO" => function() CodesFunctions.image("Dibujo_humungosaurio"),
 	"MANIAS" => function() CodesFunctions.meme("Manias"),
 	"FREE DIAMOND" => function() CodesFunctions.meme("urisus_in_gorefield_brooo.mp4"),
 
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
-	#if debug
 	"RESET" => CodesFunctions.resetAll,
-	#end
 	"CATBOT" => CodesFunctions.catbot,
 
 	// Extras codes

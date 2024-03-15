@@ -117,12 +117,11 @@ function stepHit(step:Int){
     switch (step){
         case 0:
             FlxG.camera.shake(0.004, 999999);
-	        FlxG.camera.addShader(staticShader);
             tweenHUD(0,0.0001);
             camHUD.alpha = 1; psBar.alpha = tottalTime = 0;
 
-            FlxTween.tween(stage.stageSprites["black_overlay"], {alpha: .8}, (Conductor.stepCrochet / 1000) * 136);
-            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 78, {startDelay: (Conductor.stepCrochet / 1000) * (136-78)});
+            FlxTween.tween(stage.stageSprites["black_overlay"], {alpha: .8}, (Conductor.stepCrochet / 1000) * 97);
+            FlxTween.tween(stage.stageSprites["black"], {alpha: 0}, (Conductor.stepCrochet / 1000) * 78, {startDelay: (Conductor.stepCrochet / 1000) * 20});
             FlxTween.tween(FlxG.camera, {zoom: 0.8}, (Conductor.stepCrochet / 1000) * 124, {onComplete: function (tween:FlxTween) {
                 defaultCamZoom = 0.8; 
                 lerpCam = true;

@@ -9,6 +9,8 @@ function update(elapsed){
                 lossSFX = "gameOverSFXnermal";
             case 'god-nermal':
                 lossSFX = "gameOverSFXgod";
+            case 'garfield-prision' | 'garfield-prision2' | 'garfield-prision3':
+                lossSFX = "gameOverSFXcaptive";
             case 'bf-sky' | 'bf-fall':
                 lossSFX = "gameOverSFXterror";
             case 'bf-black' | 'bf-black2' | 'bf-sb':

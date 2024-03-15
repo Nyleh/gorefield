@@ -6,6 +6,8 @@ import flixel.ui.FlxBarFillDirection;
 import flixel.ui.FlxBar;
 import flixel.text.FlxText.FlxTextFormat;
 
+importScript("data/scripts/easteregg/paintings");
+
 var heatWaveShader:CustomShader;
 public var rain:FlxBackdrop;
 public var rain2:FlxBackdrop;

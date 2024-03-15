@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "%Back again buddy?&&\n%What's with you and just not listening?&&%\nI'm starting to lose all my hope in you...", 
-            message_es: "spanish text here", 
+            message_es: "%Otra vez aquí colega?&&\n%Qué hay cerca de tí y no escuchar?&&%\nEstoy empezando a perder todas las esperanzas en tí...", 
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
@@ -31,7 +31,7 @@ function create() {
         },
         {
             message_en: "%You know,& I'm still trying to figure out what the clown meant by 'songs'?", 
-            message_es: "spanish text here", 
+            message_es: "%Sabes,& sigo intentando entender lo que el payaso decia acerca de las 'canciones'?", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -46,8 +46,8 @@ function create() {
             }    
         },
         {
-            message_en: "%He said something about:&&\n%'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'%", 
-            message_es: "spanish text here", 
+            message_en: "%He said something about:&&\n%'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'", 
+            message_es: "%El dijo algo así como:&&\n%'El número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {
             },
@@ -64,14 +64,14 @@ function create() {
         },
         {
             message_en: "I still find that clown so strage...&& Like why did he choose to hide the note under rubble?", 
-            message_es: "spanish text here", 
+            message_es: "Aún encuentro a ese payaso muy raro...&& O por qué él esconderia la nota debajo de unos escombros?", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
-            message_en: "And near a explsion of all places!!\n&&He was just getting at nermal for being in a alley...", 
-            message_es: "spanish text here", 
+            message_en: "And near a explosion of all places!!\n&&He was just getting at nermal for being in a alley...", 
+            message_es: "Y cerca de una explosión de todos los lugares!!!\n&&Solo estaba criticando a Nermal por estar en un callejón...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -83,7 +83,7 @@ function create() {
         },
         {
             message_en: "%Either way,&& come back with a note or I'm just gonna repeat the same thing over and over...", 
-            message_es: "spanish text here", 
+            message_es: "%De cualquier manera,&& vuelve con la nota o solo voy a repetir lo mismo una y otra vez...", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -96,7 +96,7 @@ function create() {
         },
         {
             message_en: "Bye darling!", 
-            message_es: "spanish text here", 
+            message_es: "Adios querido!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
@@ -120,5 +120,5 @@ function postCreate() {
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
 
-    trace("ARLENE DIALOGUE PHASE 2 LOADED");
+    trace("ARLENE DIALOGUE PHASE 3 POST");
 }

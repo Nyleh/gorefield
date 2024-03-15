@@ -21,7 +21,7 @@ function create() {
         },
         {
             message_en: "I mean you don't look trapped... &&&%You look funny... &&&&&\n%Are you from that stupid clown???", 
-            message_es: "Quiero decir que no pareces atrapado... &&&%Te ves gracioso... &&&&&\n%Vienes de ese ________ payaso???", 
+            message_es: "Quiero decir que no pareces atrapado... &&&%Te ves gracioso... &&&&&\n%Vienes de ese estupido payaso???", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) switch (count) {
@@ -270,10 +270,12 @@ function postCreate() {
     //  Lasagna Pixel: 3, 4
     //  New Lasagna Pixel: 5, 6
     //  God: 7, 8, 9, 10
+    //  Patella: 11
+    //  Cryfield: 12
     if (FlxG.save.data.paintPosition == -1) {
         FlxG.save.data.paintPosition = FlxG.random.int(0, 1);
         FlxG.save.flush();
     }
 
-    trace("ARLENE DIALOGUE PHASE 1 LOADED");
+    trace("ARLENE DIALOGUE PHASE 0 LOADED");
 }

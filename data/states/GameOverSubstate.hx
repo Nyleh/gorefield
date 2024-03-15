@@ -85,6 +85,11 @@ function create()
             position[0].y = 200 + daCharacter.y;
             fakeCamZoom = 0.8;
             snapCam();
+        case 'garfield-dead':
+            position[0].x = 600 + daCharacter.x;
+            position[0].y = 500 + daCharacter.y;
+            fakeCamZoom = 0.8;
+            snapCam();
         default:
             var camPos = daCharacter.getCameraPosition();
             position[0].x = camPos.x + daCharacter.x;
