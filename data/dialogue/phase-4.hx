@@ -10,7 +10,7 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "Welcome back again...&&\nI think this is finally the last note!", 
-            message_es: "spanish text here", 
+            message_es: "Bienvenido de vuelta...&&\nCreo que esta es finalmente la última nota!", 
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {
                 dialscript.wind.fadeOut(0.8);
@@ -21,7 +21,7 @@ function create() {
         },
         {
             message_en: "You know the drill...&&\n%Let's read some more HILARIOUS jokes... ", 
-            message_es: "spanish text here", 
+            message_es: "Ya sabes que hacer...&&\n%Leamos algunos chistes HILARANTES... ", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -37,7 +37,7 @@ function create() {
         },
         {
             message_en: "%'Blue balled boy,&& BLUE BALLED BOY!&&\nThis joke will have you &CRACKING!& UP!!!&& BHAHAAHAHA!!!'", 
-            message_es: "spanish text here", 
+            message_es: "%'Blue balled boy,&& BLUE BALLED BOY!&&\nEste chiste te hará &CRACKING!& UP!!!&& BJAJAAJAJA!!!'", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -50,21 +50,21 @@ function create() {
         },
         {
             message_en: "'What did the match &say to the firecraker?&& BOOM!!!!!&&& BAHHAHAHHAHAA!!!!!!!'", 
-            message_es: "spanish text here", 
+            message_en: "'Qué le dijo el partido &al petardo??&& BOOM!!!!!&&& BAJJAJAJJAJAA!!!!!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
         },
         {
             message_en: "'Also,& SORRY!!!!&& NO EXPLANATION THIS TIME!!!&&\nYour friend got a little &too annoying...'", 
-            message_es: "spanish text here", 
+            message_es: "'Además,& LO SIENTO!!!!&& NO HAY EXPLICACIONES ESTA VEZ!!!&&\nTu amigo se puso un poco &muy molesto...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
         },
         {
             message_en: "'Turn the paper around for your clue,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
-            message_es: "spanish text here", 
+            message_en: "'Dale la vuelta al papel para encontrar tu pista,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -74,22 +74,22 @@ function create() {
             }    
         },
         {
-            message_en: "Okay...&& He's acuttaly getting better the more he writes us jokes.", 
-            message_es: "spanish text here", 
+            message_en: "Okay...&& He's actually getting better the more he writes us jokes.", 
+            message_es: "De acuerdo...&& Él se está haciendo mejor escribiendo sus chistes.", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
             message_en: "But still...&& These hints keep on getting more and more confusing...", 
-            message_es: "spanish text here", 
+            message_es: "Pero...&& Estas pistas se están haciendo aún más y más confusas...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
         },
         {
             message_en: "This time it reads:&& ITS LUNAR THIS ISNT DONE!!!!&& BYE!!!!", 
-            message_es: "spanish text here", 
+            message_es: "Esta vez dice:&& ES LUNAR ESTA PARTE AÚN NO ESTÁ HECHA!!!!&& ADIOS!!!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -101,7 +101,7 @@ function create() {
         },
         {
             message_en: "%Either way,&& come back with a note or I'm just gonna repeat the same thing over and over...", 
-            message_es: "spanish text here", 
+            message_es: "%De cualquier manera,&& vuelve con una nota o bla bla bla, este diálogo aún no está listo -EstoyAburridow...", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -114,7 +114,7 @@ function create() {
         },
         {
             message_en: "Bye darling!", 
-            message_es: "spanish text here", 
+            message_es: "Texto en español aquí", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
