@@ -154,7 +154,7 @@ EstoyAburridow */
 		case 15: addMoreText("'Lean'");
 		case 16: deleteCoolText();
 		case 17: createCoolText([FlxG.save.data.spanish ? "Gorefield para ti BB" : "Gorefield for you BB"]);
-		case 18: addMoreText("'Nexus'");
+		case 18: addMoreText("'Nex_s'");
 		case 19: deleteCoolText();
 		case 20: createCoolText([FlxG.save.data.spanish ? "Jon requiero enchiladas" : "Jon I require enchiladas"]);
 		case 21: addMoreText("'Bitfox'");
