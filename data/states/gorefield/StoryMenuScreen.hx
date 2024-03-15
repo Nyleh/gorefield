@@ -18,6 +18,10 @@ import hxvlc.flixel.FlxVideo;
 import hxvlc.flixel.FlxVideoSprite;
 import funkin.backend.MusicBeatState;
 import funkin.backend.scripting.GlobalScript;
+import funkin.menus.FreeplaySonglist;
+import funkin.savedata.HighscoreEntry;
+import Type;
+import Date;
 
 importScript("data/scripts/menuVars");
 
@@ -565,6 +569,9 @@ function create() {
 		yesText.visible = noText.visible = false;
 		okText.visible = true;
 	}
+
+	generateSECRET();
+	codes.set(secretCode, function() CodesFunctions.selectSong("Laughter and Cries", "Binky_icon"));
 }
 
 function updateCodesList(){
@@ -1890,4 +1897,39 @@ function destroy() {
 
 	FlxG.stage.window.onKeyDown.remove(onKeyDown);
 	FlxG.stage.window.onTextInput.remove(onTextInput);
+}
+
+var secretCode:String = "";
+
+function generateSECRET() {
+	var songsList:Array<String> = [for (song in Paths.getFolderDirectories('songs', false, false)) song.toLowerCase()];
+	var highScores:Array<{name:String, score:Float}> = [];
+	
+	for (song => highscore in FunkinSave.highscores) {
+		var enumParams:Array<Dynamic> = Type.enumParameters(song);
+		if (enumParams.length > 2 && songsList.contains((enumParams[0]))) 
+			highScores.push({name: enumParams[0], score: highscore.score});
+	}
+
+	highScores.sort((a, b) -> {return Std.int(b.score-a.score);});
+	var precent:Float = FunkinSave.getSongHighscore(highScores[0].name, "hard").accuracy * 100;
+
+	// CODE GENERATION!!!
+	var date:Date = Date.now();
+	var firstMinute:Int = date.getMinutes();
+
+	while (firstMinute >= 10) firstMinute /= 10;
+
+	var codes:Array<Float> = [
+		date.getDate() % 10, // Last digit of day in month (like 4/17/24, would be 7) 
+		Math.floor(precent) % 10, // Second digit of precentage of highest highscore (94% would be 4)
+		3, // Number of songs that start with C + Number of songs that start with M (i counted, its 3)
+		1 + (10*(firstMinute%1)) // Songs you face off a god (1) + First digit of minutes (like 3:29PM would be 2)
+	];
+	codes.sort((a, b) -> {return Std.int(b - a);});
+	secretCode = codes.join("");
+
+	#if debug
+	trace(secretCode);
+	#end
 }
