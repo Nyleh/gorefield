@@ -10,21 +10,21 @@ function create() {
     dialscript.dialogueList = [
         {
             message_en: "If it's not my favorite short warrior...&&\nback with another note!", 
-            message_es: "spanish text here", 
+            message_es: "No será mi pequeño guerrero favorito...&&\nde vuelta con otra nota!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "Thank you blue haired boy...&&\nA few more of these notes and I might get to be free!", 
-            message_es: "spanish text here", 
+            message_es: "Gracias chico del cabello azul...&&\nUnas cuantas notas más de estas y podré ser libre!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "Anyway,& let me see the clown's note to the gray cat...\n&&%this better be good...", 
-            message_es: "spanish text here", 
+            message_es: "De cualquier manera,& Dejame ver la nota del payaso que le dio al gato gris...\n&&%será mejor que esto sea bueno...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -41,7 +41,7 @@ function create() {
         },
         {
             message_en: "%'Poor& poor &little thing...'", 
-            message_es: "spanish text here", 
+            message_en: "%'Pobre& pobre &cosita fea...'", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int) {
@@ -56,70 +56,70 @@ function create() {
         },
         {
             message_en: "'Don't you know it's harmful to be outside,&\nESPICALLY WHILE IT'S STORMING?!!!'", 
-            message_es: "spanish text here", 
+            message_en: "'No sabes que es peligroso estar afuera,&\nESPECIALMENTE CUANDO HAY TORMENTA?!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'Not only that,& but you got into the diriest of places:& a DISGUSTING Alleyway!!'", 
-            message_es: "spanish text here", 
+            message_es: "'No solo eso,& pero te metiste en un uno de los lugares más sucios:& un DESAGRADABLE callejón!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'HEE HEE!&& Do you know what happens in alleyways& little cat?'", 
-            message_es: "spanish text here", 
+            message_es: "'HEE HEE!&& Sabes que es lo que pasa en los callejones& pequeño gato?'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'Clowns like me wonder...&& SEARCHING FOR PEOPLE TO TELL THE FUNNIEST OF JOKES TO!!'", 
-            message_es: "spanish text here", 
+            message_es: "'Los payasos como yo...&& BUSCAN GENTE A LA QUE CONTARLE LOS CHISTES MÁS GRACIOSOS!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'And I noticed your friend was crying alot,& so I made a joke for him:'", 
-            message_es: "spanish text here", 
+            message_es: "'Y me di cuenta de que tu amigo estaba llorando mucho,& así que le hice un chiste:'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'Do you know why rain makes people wet?\n&&BECAUSE A SHOWER WASNT ENOUGH!!!!'", 
-            message_es: "spanish text here", 
+            message_es: "'Sabes por qué la lluvia hace que la gente se moje?\n&&PORQUE UNA DUCHA NO FUE SUFICIENTE!!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'BHAHHAAHAHA!!!&&\nThat will surely cheer him up!'", 
-            message_es: "spanish text here", 
+            message_es: "'BJAJJAAJAJA!!!&&\nEso seguramente lo animará!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'One more thing...'", 
-            message_es: "spanish text here", 
+            message_es: "'Una cosa más...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'If you see any blue haired dwarf wandering around...\n&&Don't be afraid to call me,& it's the least you owe from that FUNNY joke!!'", 
-            message_es: "spanish text here", 
+            message_es: "'Si ves que un enano de pelo azul buscando algo por acá...\n&&No tengas miedo de llamarme,& es lo último que deberias hacer después de que te haya dado ese chiste GRACIOSO!!'", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'-PS:& My phone number is on the back of this note.'", 
-            message_es: "spanish text here", 
+            message_es: "'-PS:& Mi número de teléfono está a la vuelta de esta nota.'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -136,7 +136,7 @@ function create() {
         },
         {
             message_en: "%Okay...&& %there's no way the clown put his phone number on the back of this.", 
-            message_es: "spanish text here", 
+            message_es: "%De acuerdo...&& %no hay manera de que el payaso haya puesto su número a la vuelta de esto.", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {},
             event: function (count:Int) {
@@ -150,7 +150,7 @@ function create() {
         },
         {
             message_en: "%Yeah& %the back of this note doesn't mention anything about a phone number at all...", 
-            message_es: "spanish text here", 
+            message_es: "%Si& %la parte de atras de esta nota no menciona nada acerca de un número de teléfono del todo...", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -162,7 +162,7 @@ function create() {
         },
         {
             message_en: "%It only has another one of those explantions,& %and another clue...", 
-            message_es: "spanish text here", 
+            message_es: "%Solo tiene otra de esas explicaciones,& %y otra pista...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -174,14 +174,14 @@ function create() {
         },
         {
             message_en: "I'm not gonna bother reading you the explantion,& it's really straight forward.", 
-            message_es: "spanish text here", 
+            message_es: "No te voy a molestar leyendo la explicación,& it's really straight forward.", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "%But the clue...&& %It's so strange..?", 
-            message_es: "spanish text here", 
+            message_es: "%Pero la pista...&& %Es algo extraña..?", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -193,7 +193,7 @@ function create() {
         },
         {
             message_en: "%It says:&\n%'Little dwarf,&& Little dwarf...&& you are very lucky to posscess this knowledge...'", 
-            message_es: "spanish text here", 
+            message_es: "%Dice:&\n%'Pequeño enano,&& pequeño enano...&& tienes mucha suerte de poseer estos conocimientos...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -205,14 +205,14 @@ function create() {
         },
         {
             message_en: "'The third number of the code is:& the number of songs that start with C,& PLUS!,& the number of songs that start with M.'", 
-            message_es: "spanish text here", 
+            message_es: "'El tercer número del código es:& el número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "'BUT,& MINUS!,& the number of loading screens that with a heart...&&\nI can't wait to meet you soon,& Good Luck!!!'", 
-            message_es: "spanish text here", 
+            message_es: "'PERO,& MENOS!,& el número de pantallas de cargas con un corazón...&&\nNo puedo esperar para encontrarnos otra vez,& Buena suerte!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -224,7 +224,7 @@ function create() {
         },
         {
             message_en: "%This clowns notes are getting more and more confusing everytime...", 
-            message_es: "spanish text here", 
+            message_es: "%Estas notas del payaso se están haciendo más y más confusas cada vez...", 
             typingSpeed: 0.05, startDelay: .5,
             onEnd: function () {},
             event: function (count:Int) {
@@ -235,7 +235,7 @@ function create() {
         },
         {
             message_en: "%Like what do songs have to do with this...& and what is a loading screen..?", 
-            message_es: "spanish text here", 
+            message_es: "%O sea, que tienen que ver las canciones con esto...& y que es una pantalla de carga..?", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -246,7 +246,7 @@ function create() {
         },
         {
             message_en: "%At this point I think I'm never gonna be free...", 
-            message_es: "spanish text here", 
+            message_es: "%A este punto pienso que nunca voy a ser libre...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -257,14 +257,14 @@ function create() {
         },
         {
             message_en: "But the clown said you know the answer,& so I'll put faith in you...", 
-            message_es: "spanish text here", 
+            message_es: "Pero el payaso dijo que tu sabias la respuesta,& así que confiaré en ti...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
         },
         {
             message_en: "Also,& while you were gone the other day...&&\nThe clown mentioned where the next note was!", 
-            message_es: "spanish text here", 
+            message_es: "Además,& el otro día mientras no estabas...&&\nEl payaso mencionó donde estaba la otra nota!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -276,7 +276,7 @@ function create() {
         },
         {
             message_en: "He said he hid the joke in a pile of rubble,& %somewhere near a explosion..?", 
-            message_es: "spanish text here", 
+            message_es: "El dijo que escondió la nota en una pila de escombros ,& %en algún lugar cerca de una explosión..?", 
             typingSpeed: 0.05, startDelay: .5,
             onEnd: function () {},
             event: function (count:Int) {
@@ -287,7 +287,7 @@ function create() {
         },
         {
             message_en: "%Keep on going little dwarf,& the next note is in your hands...&&\nSee you soon.", 
-            message_es: "spanish text here", 
+            message_es: "%Sigue como vas pequeño enano,& La siguiente nota está en tus manos...&&\nTe veo pronto.", 
             typingSpeed: 0.05, startDelay: .0,
             onEnd: function () {},
             event: function (count:Int) {
