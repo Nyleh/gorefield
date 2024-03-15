@@ -46,26 +46,19 @@ function create() {
             }    
         },
         {
-            message_en: "%He said something about:&&\n%'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'", 
+            message_en: "%He said something about:&&\n%'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'%", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {
             },
             event: function (count:Int){
                 switch(count){
-                    case 0: dialscript.eyes.animation.play("normal", true);
-                    case 1: dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
-                }
-            }    
-        },
-        {
-            message_en: "'BUT!,& MINUS!,& the number of loading screens with a heart on them!!'%", 
-            message_es: "spanish text here", 
-            typingSpeed: 0.05, startDelay: 0,
-            onEnd: function () {},
-            event: function (count:Int){
-                switch(count){
-                    case 0: dialscript.__randSounds = ["easteregg/snd_text", "easteregg/snd_text_2"];
+                    case 0: 
+                        dialscript.eyes.animation.play("normal", true);
+                        dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
+                    case 1: 
+                        dialscript.__randSounds = ["easteregg/snd_text", "easteregg/snd_text_2"];
+                        
                 }
             }    
         },

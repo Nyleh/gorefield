@@ -211,7 +211,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "'BUT,& MINUS!,& the number of loading screens that with a heart...&&\nI can't wait to meet you soon,& Good Luck!!!'", 
+            message_en: "'OK,& THAT'S THE CLUE!!&&\nI can't wait to meet you soon,& Good Luck!!!'", 
             message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
