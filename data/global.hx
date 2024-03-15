@@ -70,7 +70,7 @@ function new() {
     // CODES 
     if (FlxG.save.data.extrasSongs == null) FlxG.save.data.extrasSongs = [];
     if (FlxG.save.data.extrasSongsIcons == null) FlxG.save.data.extrasSongsIcons = [];
-    if (FlxG.save.data.codesList == null) FlxG.save.data.codesList = [];
+    if (FlxG.save.data.codesList == null) FlxG.save.data.codesList = ["HUMUNGOSAURIO", "PUEBLO MARRON"];
 
     // EASTER EGG
     if (FlxG.save.data.canVisitArlene == null) FlxG.save.data.canVisitArlene = false;

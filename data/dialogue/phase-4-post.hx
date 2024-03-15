@@ -9,8 +9,8 @@ function create() {
 
     dialscript.dialogueList = [
         {
-            message_en: "HI LEAN", 
-            message_es: "HOLA LEAN", // Hola -EstoyAburridow 
+            message_en: "HI LEAN",  // HI - Lean
+            message_es: "HOLA LEAN", // Hola -EstoyAburridow
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  

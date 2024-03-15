@@ -251,7 +251,7 @@ function create() {
 	weeksFinished = FlxG.save.data.weeksFinished;
 	weeksUnlocked = FlxG.save.data.weeksUnlocked;
 	codesUnlocked = FlxG.save.data.dev ? true : FlxG.save.data.codesUnlocked;
-	codeWeekUnlocked = FlxG.save.data.extrasSongs.length != 0;
+	codeWeekUnlocked = FlxG.save.data.extrasSongs.length != 0; 
 	gottenCodes = FlxG.save.data.codesList;
 
 	camBG = new FlxCamera(0, 0);
@@ -1073,7 +1073,8 @@ function changeWeek(change:Int) {
 	freeplayMenuText.y = scoreText.y = FlxG.height - scoreText.height - 22;
 }
 
-function updateFlavourText() {
+function updateFlavourText()
+{
 	var descs:Array<String> = FlxG.save.data.spanish ? weekDescsSPANISH : weekDescs;
 
 	if (curWeek == 6 && FlxG.save.data.beatWeekG6 && !FlxG.save.data.beatWeekG7) { flavourText.applyMarkup(FlxG.save.data.spanish ?
@@ -1087,11 +1088,19 @@ function updateFlavourText() {
 		"Find Hidden Codes." ;
 		return; 
 	}
+
+	if (curWeek == 8 && FlxG.save.data.extrasSongs.length != 3)	{ flavourText.text = FlxG.save.data.spanish ? 
+		"Avanza a través de las semanas para desbloquear!" : 
+		"Progress through the weeks to unlock!";
+		return;
+	}
+
 	if (weeksUnlocked[curWeek]) { flavourText.text = descs[curWeek]; return; }
 
-	flavourText.text = FlxG.save.data.spanish ? 
-	"Avanza a través de las semanas para desbloquear!" : 
-	"Progress through the weeks to unlock!";
+	if (curWeek == 8 && FlxG.save.data.extrasSongs.length == 3)
+	{
+		flavourText.text = descs[8]; return;
+	}
 }
 
 function checkWeekProgress() {
@@ -1765,7 +1774,7 @@ var CodesFunctions:{} = {
 		FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
 		FlxG.save.data.codesUnlocked = false;
 		FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
-		FlxG.save.data.codesList = [];
+		FlxG.save.data.codesList = ["HUMUNGOSAURIO", "PUEBLO MARRON"];
 
 		FlxG.save.data.weekProgress = weekProgress = ["" => {}];
 		

@@ -178,8 +178,8 @@ public function showPopUp(intro:Bool, ?misses:Int)
     FlxTween.cancelTweensOf(missesLeftText);
     FlxTween.cancelTweensOf(missSubtitleText);
 
-    FlxTween.tween(missesLeftText, {alpha: 1}, 0.4, {startDelay: 3.5});
-    FlxTween.tween(missSubtitleText, {alpha: 1}, 0.4, {startDelay: 3.5});
+    FlxTween.tween(missesLeftText, {alpha: 1}, 0.4, {startDelay: intro ? 3.5 : 0});
+    FlxTween.tween(missSubtitleText, {alpha: 1}, 0.4, {startDelay: intro ? 3.5 : 0});
     (new FlxTimer()).start(intro ? 7.3 : 1.5, function () {
         FlxTween.tween(missesLeftText, {alpha: 0}, 0.4);
         FlxTween.tween(missSubtitleText, {alpha: 0}, 0.4);

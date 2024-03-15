@@ -89,6 +89,7 @@ function stepHit(step:Int) {
             boyfriend.visible = psBar.visible = isLymanFlying = jonTrail.visible = jonTrail.active = false;
             tweenHUD(1, (Conductor.stepCrochet / 1000) * 1);
         case 1712:
+            devControlBotplay = !(player.cpu = true);
             FlxTween.cancelTweensOf(stage.stageSprites["black"]);
             stage.stageSprites["black"].active = stage.stageSprites["black"].visible = false;
             stage.stageSprites["black"].alpha = 0;
@@ -106,6 +107,8 @@ function stepHit(step:Int) {
 
             for (name => sprite in stage.stageSprites)
                 FlxTween.color(sprite, (Conductor.stepCrochet / 1000) * 112-16, 0xFFFFFFFF, 0xFF654974, {ease: FlxEase.linear});
+        case 1724:
+            devControlBotplay = !(player.cpu = false);
         case 1824:
             lerpCam = false;
             controlHealthAlpha = false;
