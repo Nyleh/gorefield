@@ -35,6 +35,8 @@ function postCreate() {
     FlxG.cameras.add(daCamera, false);
     cameras = [daCamera];
 
+    FlxG.sound.play(Paths.sound('easteregg/noteFound'));
+
     new FlxTimer().start(5, function() {
         FlxG.save.data.arlenePhase += 1;
         FlxG.save.flush();
