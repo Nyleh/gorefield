@@ -38,7 +38,6 @@ function create()
     blackScreen = new FlxSprite().makeSolid(FlxG.width + 100, FlxG.height + 100, FlxColor.BLACK);
     blackScreen.alpha = 1;
     blackScreen.cameras = [camHUD];
-    add(blackScreen);
 
     stage.stageSprites["RedOverlay"].active = stage.stageSprites["RedOverlay"].visible = true;
     stage.stageSprites["RedOverlay"].alpha = 0;
@@ -59,6 +58,8 @@ function postCreate()
 
     for (spr in [gorefieldhealthBarBG, gorefieldhealthBar])
         spr.y += 10;
+
+    add(blackScreen);
 }
 
 var boogie:Bool = false;
