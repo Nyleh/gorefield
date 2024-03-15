@@ -30,8 +30,8 @@ function create() {
             }    
         },
         {
-            message_en: "%While you were gone,&& I heard a postman say that an arctic fox tried to steal a package labled 'Exotic Hats'.&&  Which I thought was a bit funny,& %no clue what the little fella would need them for though.", 
-            message_es: "%Mientras no estabas,&& escuché a un cartero decir que un zorro ártico intentó robar un paquete nombrado 'Sombreros Exóticos'.&&  Pensé que era un poco gracioso,& %aunque no entiendo para que los necesitaria el amiguito.", 
+            message_en: "%Seems like you need another reminder.& %Again.&& Note in Snowy Biome.&& In some pine tree, is what the clown said I think...", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -42,13 +42,13 @@ function create() {
                         dialscript.menuMusic.play();
                         dialscript.eyes.animation.play("normal", true);
                     case 1:
-                        dialscript.eyes.animation.play("confused", true);
+                        dialscript.eyes.animation.play("smug", true);
                 }
             }    
         },
         {
-            message_en: "%Well, thats all I have to share with you for now.& %Continue looking for the note!", 
-            message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Continua buscando la nota!", 
+            message_en: "%Well, thats all I have to share with you for now.& %Continue looking for the note.", 
+            message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Continua buscando la nota.", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },
@@ -80,5 +80,5 @@ function postCreate() {
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
 
-    trace("ARLENE DIALOGUE PHASE 2 LOADED");
+    trace("ARLENE DIALOGUE PHASE 1 POST");
 }

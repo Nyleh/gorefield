@@ -28,8 +28,8 @@ function create() {
             }    
         },
         {
-            message_en: "%While you were away,&& I heard the other day that,& a cat kidnapped a dog.&&& %Seem's pretty interesting to think about.", 
-            message_es: "%Mientras no estabas,&& escuché el otro día que,& un gato secuestró a un perro.&&& %Es bastante interesante pensar en eso.", 
+            message_en: "%If you really need a reminder, The note should be under a painting somewhere. %If I remember that correctly.", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -45,8 +45,8 @@ function create() {
             }    
         },
         {
-            message_en: "%Well, thats all I have to share with you for now.& %Continue looking for that note!", 
-            message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Sigue buscando esa nota!", 
+            message_en: "%Well, thats all I have to say.& %Continue looking for that note!", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },
@@ -78,5 +78,5 @@ function postCreate() {
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);
 
-    trace("ARLENE DIALOGUE PHASE 2 LOADED");
+    trace("ARLENE DIALOGUE PHASE 0 POST");
 }
