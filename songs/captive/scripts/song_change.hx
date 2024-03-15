@@ -27,7 +27,7 @@ function create()
     scareMeter.scrollFactor.set();
     scareMeter.cameras = [camHUD];
 
-    VideoHandler.load(["CUTSCENE_1"], true, function() {
+    VideoHandler.load(["CUTSCENE_1", "CAPTIVE_CINEMATIC_2"], false, function() {
         FlxG.camera.flash(0xff000000);
     });
 
@@ -77,12 +77,14 @@ function stepHit(step:Int)
                 FlxTween.tween(spr, {alpha: 0}, 0.5);
         case 732:
             FlxTween.tween(blackScreen, {alpha: 1}, 1);
+        case 1159:
+            VideoHandler.playNext();
         case 576 | 771 | 1283:
             blackScreen.alpha = 0;
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt, scareMeter])
                 spr.alpha = 1;
         case 1155:
-            FlxTween.tween(blackScreen, {alpha: 1}, 0.5);
+            FlxTween.tween(camHUD, {alpha: 0}, 0.5);
             for (spr in [gorefieldhealthBarBG, gorefieldhealthBar, gorefieldiconP1, gorefieldiconP2, scoreTxt, missesTxt, accuracyTxt, scareMeter])
                 FlxTween.tween(spr, {alpha: 0}, 0.5);
         case 770:
@@ -110,6 +112,7 @@ function stepHit(step:Int)
             boyfriend.cameraOffset.x += 450;
             boyfriend.cameraOffset.y += 150;
         case 1282:
+            FlxTween.tween(camHUD, {alpha: 1}, 0.5);
             stage.stageSprites["RedOverlay"].visible = false;
             stage.stageSprites["Warning"].alpha = 1;
             stage.stageSprites["Rayo"].alpha = 1;

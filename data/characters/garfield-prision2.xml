@@ -1,5 +1,5 @@
 <!DOCTYPE codename-engine-character>
-<character x="0" icon="face" y="350" isGF="false" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="" sprite="garfield2">
+<character x="0" icon="face" y="350" isGF="false" color="#5A50D3" flipX="true" isPlayer="true" gameOverChar="garfield-dead" sprite="garfield2">
 	<anim x="0" loop="false" y="0" fps="24" anim="g idle" name="idle"/>
 	<anim x="148" loop="false" y="23" fps="24" anim="g left0" name="singLEFT"/>
 	<anim x="1" loop="false" y="-105" fps="24" anim="g down0" name="singDOWN"/>

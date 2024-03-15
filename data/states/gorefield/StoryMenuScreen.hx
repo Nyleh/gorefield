@@ -1738,7 +1738,6 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
-	#if debug
 	resetAll: function() {
 		if(!FlxG.save.data.dev){
 			codesMenu(false, 0);
@@ -1779,7 +1778,6 @@ var CodesFunctions:{} = {
 
 		FlxG.switchState(new ModState("gorefield/StoryMenuScreen"));
 	},
-	#end
 	catbot: function() {
 		progInfoText.text = FlxG.save.data.spanish ? 
 		"Te Gustaria Activar Botplay Al Presionar 6 En Una Cancion?" : 
@@ -1806,7 +1804,7 @@ var CodesFunctions:{} = {
 var codes:Map<String, Void -> Void> = [
 	// Songs codes
 	"TAKE ME" => function() CodesFunctions.selectSong("Take Me Jon", "garfield-sad"), 
-	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman"), 
+	"LYMAN" => function() CodesFunctions.selectSong("Captive", "lyman-prision"), 
 	"CATNIP" => function() CodesFunctions.selectSong("Breaking Cat", "walter-monster"), 
 
 	// Youtubers spanish codes
@@ -1832,14 +1830,13 @@ var codes:Map<String, Void -> Void> = [
 	"CHART" => function() CodesFunctions.meme("Gorefield_lore"),
 	"RETURN" => function() CodesFunctions.meme("gorefield_code_video"),
 	"BUFFIELD" => function() CodesFunctions.image("SPOILER_queacabodehacer_20240130060334"),
+	"HUMUNGOSAURIO" => function() CodesFunctions.image("Dibujo_humungosaurio"),
 	"MANIAS" => function() CodesFunctions.meme("Manias"),
 	"FREE DIAMOND" => function() CodesFunctions.meme("urisus_in_gorefield_brooo.mp4"),
 
 	// Cheat codes
 	"FULLCAT" => CodesFunctions.unlockAll,
-	#if debug
 	"RESET" => CodesFunctions.resetAll,
-	#end
 	"CATBOT" => CodesFunctions.catbot,
 
 	// Extras codes
