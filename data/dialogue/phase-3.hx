@@ -303,7 +303,7 @@ function create() {
         dialscript.menuMusic.fadeOut(2); dialscript.introSound.volume = 0.3;
         dialscript.eyes.animation.play("normal", true);
         (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
-        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState());});
+        (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState()); FlxG.save.data.hasVisitedPhase = true;});
     };
 }
 
