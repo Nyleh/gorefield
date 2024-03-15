@@ -1758,7 +1758,7 @@ var CodesFunctions:{} = {
 		FlxG.save.data.weeksFinished = [false, false, false, false, false, false];
 		FlxG.save.data.codesUnlocked = false;
 		FlxG.save.data.weeksUnlocked = [true, false, false, false, false, false, false, false];
-		FlxG.save.data.codesList = [];
+		FlxG.save.data.codesList = ["HUMUNGOSAURIO", "PUEBLO MARRON"];
 
 		FlxG.save.data.weekProgress = weekProgress = ["" => {}];
 		
