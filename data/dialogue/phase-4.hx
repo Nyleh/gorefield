@@ -37,7 +37,7 @@ function create() {
         },
         {
             message_en: "%'Blue balled boy,&& BLUE BALLED BOY!&&\nThis joke will have you &CRACKING!& UP!!!&& BHAHAAHAHA!!!'", 
-            message_es: "%'Blue balled boy,&& BLUE BALLED BOY!&&\nEste chiste te hará &CRACKING!& UP!!!&& BJAJAAJAJA!!!'", 
+            message_es: "%'Pequeño enano azul,&& PEQUEÑO ENANO AZUL!&&\nEste chiste te hará &PARTIR DE RISA& VAMOS!!!&& BJAJAAJAJA!!!'", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -64,7 +64,7 @@ function create() {
         },
         {
             message_en: "'Turn the paper around for your clue,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
-            message_en: "'Dale la vuelta al papel para encontrar tu pista,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
+            message_en: "'Dale la vuelta al papel para encontrar tu pista,&&\nPEQUEÑO ENANO AZUL!!& HEE HEE!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {

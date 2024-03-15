@@ -21,7 +21,7 @@ function create() {
         },
         {
             message_en: "I mean you don't look trapped... &&&%You look funny... &&&&&\n%Are you from that stupid clown???", 
-            message_es: "Quiero decir que no pareces atrapado... &&&%Te ves gracioso... &&&&&\n%Vienes de ese ________ payaso???", 
+            message_es: "Quiero decir que no pareces atrapado... &&&%Te ves gracioso... &&&&&\n%Vienes de ese estupido payaso???", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) switch (count) {
