@@ -6,6 +6,7 @@ public var breakingPS:Int = 4;
 
 function create(){
 	scripts.getByName("ui_healthbar.hx").call("disableScript");
+	camHUD.downscroll = false; //doesnt work with downscroll sorry downscroll players :sob: - lean
 }
 
 function postCreate() {
