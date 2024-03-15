@@ -1406,7 +1406,7 @@ function goToSong() {
 
     FlxG.switchState(new ModState("gorefield/LoadingScreen"));
 
-	if(freePlayMenuID == 8){ //is codes menu
+	/*if(freePlayMenuID == 8){ //is codes menu
 		PlayState.isStoryMode = true;
 		PlayState.storyWeek = {
 			name: weeks[8].name,
@@ -1416,7 +1416,7 @@ function goToSong() {
 			songs: [],
 			difficulties: ['hard']
 		};
-	}
+	}*/
 }
 var channelTimer:FlxTimer = null;
 function turnTV(on:Bool) {
