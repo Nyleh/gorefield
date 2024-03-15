@@ -89,7 +89,7 @@ function create() {
         },
         {
             message_en: "This time it reads:&& ITS LUNAR THIS ISNT DONE!!!!&& BYE!!!!", 
-            message_es: "Esta vez dice:&& ES LUNAR ESTA PARTE AÚN NO ESTÁ HECHA!!!!&& ADIOS!!!!", 
+            message_es: "Esta vez dice:&& ES JLOOR ESTA PARTE AÚN NO ESTÁ HECHA!!!!&& ADIOS!!!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -101,7 +101,7 @@ function create() {
         },
         {
             message_en: "%Either way,&& come back with a note or I'm just gonna repeat the same thing over and over...", 
-            message_es: "%De cualquier manera,&& vuelve con una nota o bla bla bla, este diálogo aún no está listo -EstoyAburridow...", 
+            message_es: "%De cualquier manera,&& vuelve con una nota o voy a repetir lo mismo una y otra vez...",
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -114,7 +114,7 @@ function create() {
         },
         {
             message_en: "Bye darling!", 
-            message_es: "Texto en español aquí", 
+            message_es: "Adiós cariño!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
