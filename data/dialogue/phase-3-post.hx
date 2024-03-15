@@ -102,8 +102,8 @@ function create() {
             }  
         },
         {
-            message_en: "Adios querido!", 
-            message_es: "spanish text here", 
+            message_en: "Bye darling!", 
+            message_es: "Adios querido!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  

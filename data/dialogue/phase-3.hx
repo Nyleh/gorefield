@@ -41,7 +41,7 @@ function create() {
         },
         {
             message_en: "%'Poor& poor &little thing...'", 
-            message_en: "%'Pobre& pobre &cosita fea...'", 
+            message_es: "%'Pobre& pobre &cosita fea...'", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int) {
@@ -56,7 +56,7 @@ function create() {
         },
         {
             message_en: "'Don't you know it's harmful to be outside,&\nESPICALLY WHILE IT'S STORMING?!!!'", 
-            message_en: "'No sabes que es peligroso estar afuera,&\nESPECIALMENTE CUANDO HAY TORMENTA?!!!'", 
+            message_es: "'No sabes que es peligroso estar afuera,&\nESPECIALMENTE CUANDO HAY TORMENTA?!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
