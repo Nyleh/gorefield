@@ -21,7 +21,7 @@ function create()
     missText.alpha = 0;
     add(missText);
 
-    scareMeter = new FlxText(0, 618, 0,"S        c        a        r        e       -       O       -       M        e        t        e        r");
+    scareMeter = new FlxText(0, camHUD.downscroll ? 612 : 618, 0,"S        c        a        r        e       -       O       -       M        e        t        e        r");
     scareMeter.setFormat("fonts/Harbinger_Caps.otf", 30, 0xFF8F0000, "center");
     scareMeter.screenCenter(FlxAxes.X);
     scareMeter.scrollFactor.set();
