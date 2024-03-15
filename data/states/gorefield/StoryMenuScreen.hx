@@ -1069,7 +1069,7 @@ function changeWeek(change:Int) {
 function updateFlavourText() {
 	var descs:Array<String> = FlxG.save.data.spanish ? weekDescsSPANISH : weekDescs;
 
-	if (curWeek == 6 && FlxG.save.data.beatWeekG6) { flavourText.applyMarkup(FlxG.save.data.spanish ?
+	if (curWeek == 6 && FlxG.save.data.beatWeekG6 && !FlxG.save.data.beatWeekG7) { flavourText.applyMarkup(FlxG.save.data.spanish ?
 		"No Puedes Encontrarme?  ¡Bu! Hu!                           *T*ras *A*lcanzar *B*rillar..." : // Fue algo díficil traducir esto ._: -EstoyAburridow
 		"Can't Find Me?   Boo Hoo!                           *T*ill *A* *B*reeze...",
 		[new FlxTextFormatMarkerPair(new FlxTextFormat(0xFF527F3A), "*")]);
