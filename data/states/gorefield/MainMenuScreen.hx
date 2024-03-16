@@ -403,15 +403,17 @@ function update(elapsed:Float) {
 		FlxG.switchState(new ModState("gorefield/MovieCreditsScreen"));
 	#end
 
-	if (FlxG.keys.justPressed.SEVEN) {
+	if (FlxG.keys.justPressed.SEVEN && FlxG.save.data.dev) {
 		persistentUpdate = !(persistentDraw = true);
 		openSubState(new EditorPicker());
 	}
 
+	#if !GOREFIELD_CUSTOM_BUILD
 	if (controls.SWITCHMOD) {
 		openSubState(new ModSwitchMenu());
 		persistentUpdate = !(persistentDraw = true);
 	}
+	#end
 
 	if (selectedSomthin) return;
 

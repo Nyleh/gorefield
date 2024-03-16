@@ -95,7 +95,9 @@ function new() {
 function preStateSwitch() {
     WindowUtils.resetTitle();
     window.title = windowTitleGOREFIELD;
+    #if !GOREFIELD_CUSTOM_BUILD
     window.setIcon(Image.fromBytes(Assets.getBytes(Paths.image('iconOG'))));
+    #end
     FlxG.camera.bgColor = 0xFF000000;
 
     if (Std.isOfType(FlxG.state, PlayState) && (FlxG.state.subState == null ? true : !Std.isOfType(FlxG.state.subState, GameOverSubstate) && !Std.isOfType(FlxG.state.subState, PauseSubState)) // ! CHECK IN GAME/NOT IN GAME OVER
