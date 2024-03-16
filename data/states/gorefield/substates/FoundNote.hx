@@ -43,6 +43,12 @@ function postCreate() {
         trace("PHASE IS NOW: " + FlxG.save.data.arlenePhase);
         close();
     });
+
+    for (i=>sprite in [note_sprite, foundNoteText, arleneText]){
+        sprite.y += 600;
+        sprite.alpha = 0.3;
+        FlxTween.tween(sprite, {alpha: 1, y: sprite.y - 600},0.7, {startDelay: i * 0.05, ease: FlxEase.cubeOut});
+    }
 }
 
 function destroy() {

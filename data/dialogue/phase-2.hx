@@ -95,7 +95,7 @@ function create() {
         },
         {
             message_en: "'What's the purpose of a clown,& if not to CHEER everyone up??'", 
-            message_en: "'Cuál es el propósito de ser un payaso,& si no es para ANIMAR a todos??'", 
+            message_es: "'Cuál es el propósito de ser un payaso,& si no es para ANIMAR a todos??'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
@@ -113,7 +113,7 @@ function create() {
         },
         {
             message_en: "'and the cats poor friend...&& they looked like they were crying for hours...'", 
-            message_eS: "'y el pobre amigo del gato...&& se veia como si estuvieron llorando por horas...'", 
+            message_es: "'y el pobre amigo del gato...&& se veia como si estuvieron llorando por horas...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}

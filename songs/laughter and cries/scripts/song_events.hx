@@ -42,6 +42,11 @@ function postCreate()
 
     camHUD.alpha = 0;
     cpuStrums.visible = false;
+
+    FlxG.save.data.canVisitArlene = false;
+    FlxG.save.data.arlenePhase = 0;
+    FlxG.save.data.beatWeekG7 = true;
+    FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, true, true];
 }
 
 function onSongStart() {

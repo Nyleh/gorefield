@@ -27,7 +27,7 @@ var positionMap:Map<String, Map<Int, {sprite:String, x:Int, y:Int, scale:Float}>
         11 => {sprite: "note2", x: 1650, y: 880, scale: 0.5}
     ]
     "cryfield" => [
-        12 => {sprite: "note1", x: 800, y: 200, scale: 0.4}
+        12 => {sprite: "note4", x: 800, y: 200, scale: 0.4}
     ]
 ];
 
