@@ -47,6 +47,21 @@ function create() {
             }    
         },
         {
+            message_en: "%Another Reminder,&& the first number is the last digit of today's day.&&& %If you forgot to write that down...", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 1,
+            onEnd: function () {
+            },
+            event: function (count:Int){
+                switch(count){
+                    case 0:
+                        dialscript.eyes.animation.play("normal", true);
+                    case 1:
+                        dialscript.eyes.animation.play("smug", true);
+                }
+            }    
+        },
+        {
             message_en: "%Well, thats all I have to share with you for now.& %Continue looking for the note.", 
             message_es: "%Bueno, eso es todo lo que tengo para compartir contigo por ahora.& %Continua buscando la nota.", 
             typingSpeed: 0.05, startDelay: 0,

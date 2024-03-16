@@ -46,8 +46,8 @@ function create() {
             }    
         },
         {
-            message_en: "%He said something about:&&\n%'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'", 
-            message_es: "%El dijo algo así como:&&\n%'El número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'", 
+            message_en: "He said something about:&&%\n'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'%", 
+            message_es: "El dijo algo así como:&&%\n'El número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'%", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {
             },
@@ -63,7 +63,7 @@ function create() {
             }    
         },
         {
-            message_en: "I still find that clown so strage...&& Like why did he choose to hide the note under rubble?", 
+            message_en: "I still find that clown so strange...&& Like why did he choose to hide the note under rubble?", 
             message_es: "Aún encuentro a ese payaso muy raro...&& O por qué él esconderia la nota debajo de unos escombros?", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},

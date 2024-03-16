@@ -117,7 +117,7 @@ function create() {
         },
         {
             message_en: "'OKAY!!&& The last digit of the code is...'", 
-            message_en: "'DE ACUERDO!!&& El último dígito del código es...'", 
+            message_es: "'DE ACUERDO!!&& El último dígito del código es...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
