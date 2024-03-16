@@ -240,16 +240,16 @@ function create() {
             }
         },
         {
-            message_en: "'Look through your highscores little dwarf,& find the highest one...'", 
-            message_es: "'Mira entre tus mejores puntuaciones pequeño enano,& busca por la más alta...'", 
+            message_en: "$'Look through your highscores little dwarf,& find the highest one...'$", 
+            message_es: "$'Mira entre tus mejores puntuaciones pequeño enano,& busca por la más alta...'$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
             }
         },
         {
-            message_en: "'THEN!& Find your accuracy on THAT song,& the second number of the code is the SECOND digit of your accuracy!!'", 
-            message_es: "'ENTONCES!& Busca tu presición en ESA canción,& el segundo número del código es el SEGUNDO dígito de tu precisión!!'", 
+            message_en: "'THEN!&$ Find your accuracy on THAT song,& the second number of the code is the SECOND digit of your accuracy!!'$", 
+            message_es: "'ENTONCES!&$ Busca tu presición en ESA canción,& el segundo número del código es el SEGUNDO dígito de tu precisión!!'$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
