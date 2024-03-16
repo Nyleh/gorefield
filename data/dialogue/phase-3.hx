@@ -212,7 +212,7 @@ function create() {
         },
         {
             message_en: "'OK,& THAT'S THE CLUE!!&&\nI can't wait to meet you soon,& Good Luck!!!'", 
-            message_es: "OK, y ESA ES LA PISTA!! &&\ ¡¡¡No puedo esperar a conocerte pronto y buena suerte!!!", 
+            message_es: "OK, y ESA ES LA PISTA!! && ¡¡¡No puedo esperar a conocerte pronto y buena suerte!!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -234,8 +234,8 @@ function create() {
             }
         },
         {
-            message_en: "%Like what do songs have to do with this...& and what is a loading screen..?", 
-            message_es: "%O sea, que tienen que ver las canciones con esto...& y que es una pantalla de carga..?", 
+            message_en: "%Like what do songs have to do with this...& I know a lot of songs on the top of my head already!!!", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {

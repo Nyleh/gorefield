@@ -570,8 +570,10 @@ function create() {
 		okText.visible = true;
 	}
 
-	generateSECRET();
-	codes.set(secretCode, function() CodesFunctions.selectSong("Laughter and Cries", "Binky_icon"));
+	if(FlxG.save.data.arlenePhase >= 4 && FlxG.save.data.canVisitArlene){
+		generateSECRET();
+		codes.set(secretCode, function() CodesFunctions.selectSong("Laughter and Cries", "Binky_icon"));
+	}
 }
 
 function updateCodesList(){
@@ -1096,6 +1098,12 @@ function updateFlavourText()
 	}
 
 	if (weeksUnlocked[curWeek]) { flavourText.text = descs[curWeek]; return; }
+	else{
+		flavourText.text = FlxG.save.data.spanish ? 
+		"Avanza a través de las semanas para desbloquear!" : 
+		"Progress through the weeks to unlock!";
+		return; 
+	}
 
 	if (curWeek == 8 && FlxG.save.data.extrasSongs.length == 3)
 	{
@@ -1745,10 +1753,10 @@ var CodesFunctions:{} = {
 		//FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "walter"];
 
 		FlxG.save.data.weeksFinished = [true, true, true, true, true, true];
-		FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, true, true];
+		FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, false, true];
 		FlxG.save.data.codesUnlocked = true;
 		
-		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG7 = FlxG.save.data.beatWeekG8 = true;
+		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG8 = true;
 
 		FlxG.save.flush();
 
@@ -1762,7 +1770,7 @@ var CodesFunctions:{} = {
 		}
 		
 		FlxG.save.data.arlenePhase = 0;
-		FlxG.save.data.canVisitArlene = false;
+		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.hasVisitedPhase = false;
 		FlxG.save.data.paintPosition = -1;
 
@@ -1871,7 +1879,7 @@ function selectCode():Void {
 	FlxG.sound.play(Paths.sound("menu/story/Enter_Code_Sound"));
 	openCodesList(false);
 
-	if (!gottenCodes.contains(codesText.text) && codesText.text != "RESET"){
+	if (!gottenCodes.contains(codesText.text) && codesText.text != "RESET" && codesText.text != secretCode){
 		gottenCodes.push(codesText.text);
 
 		FlxG.save.data.codesList = gottenCodes;

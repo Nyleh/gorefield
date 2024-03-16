@@ -50,7 +50,7 @@ function create() {
         },
         {
             message_en: "'What did the match &say to the firecraker?&& BOOM!!!!!&&& BAHHAHAHHAHAA!!!!!!!'", 
-            message_en: "'Qué le dijo el partido &al petardo??&& BOOM!!!!!&&& BAJJAJAJJAJAA!!!!!!!'", 
+            message_es: "'Qué le dijo el partido &al petardo??&& BOOM!!!!!&&& BAJJAJAJJAJAA!!!!!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
@@ -64,7 +64,7 @@ function create() {
         },
         {
             message_en: "'Turn the paper around for your clue,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
-            message_en: "'Dale la vuelta al papel para encontrar tu pista,&&\nPEQUEÑO ENANO AZUL!!& HEE HEE!'%", 
+            message_es: "'Dale la vuelta al papel para encontrar tu pista,&&\nPEQUEÑO ENANO AZUL!!& HEE HEE!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
