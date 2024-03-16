@@ -1770,7 +1770,7 @@ var CodesFunctions:{} = {
 		}
 		
 		FlxG.save.data.arlenePhase = 0;
-		FlxG.save.data.canVisitArlene = true;
+		FlxG.save.data.canVisitArlene = false;
 		FlxG.save.data.hasVisitedPhase = false;
 		FlxG.save.data.paintPosition = -1;
 
