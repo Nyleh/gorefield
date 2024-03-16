@@ -1769,7 +1769,7 @@ var CodesFunctions:{} = {
 			return;
 		}
 		
-		FlxG.save.data.arlenePhase = 4;
+		FlxG.save.data.arlenePhase = 0;
 		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.hasVisitedPhase = false;
 		FlxG.save.data.paintPosition = -1;
