@@ -1941,7 +1941,7 @@ function generateSECRET() {
 		date.getDate() % 10, // Last digit of day in month (like 4/17/24, would be 7) 
 		Math.floor(precent) % 10, // Second digit of precentage of highest highscore (94% would be 4)
 		3, // Number of songs that start with C + Number of songs that start with M (i counted, its 3)
-		1 + (10*(firstMinute%1)) // Songs you face off a god (1) + First digit of minutes (like 3:29PM would be 2)
+		1 + Math.floor(firstMinute) // Songs you face off a god (1) + First digit of minutes (like 3:29PM would be 2)
 	];
 	// codes.sort((a, b) -> {return Std.int(b - a);}); // scrapped -lunar
 	secretCode = codes.join("");
