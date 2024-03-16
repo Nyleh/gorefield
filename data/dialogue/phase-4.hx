@@ -57,7 +57,7 @@ function create() {
         },
         {
             message_en: "'Also,& SORRY!!!!&& NO EXPLANATION THIS TIME!!!&&\nYour friend got a little, &too annoying...'", 
-            message_es: "spanish text here", 
+            message_es: "'Además,& LO SIENTO!!!!&& NO HAY EXPLICACIONES ESTA VEZ!!!&&\ntu amigo se hizo un poco, &muy molesto...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
@@ -75,7 +75,7 @@ function create() {
         },
         {
             message_en: "%Okay...&& H%e's actually getting better the more he writes us jokes.", 
-            message_es: "De acuerdo...&& Él se está haciendo mejor escribiendo sus chistes.", 
+            message_es: "De acuerdo...&& É%l se está haciendo mejor escribiendo sus chistes.", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){
@@ -86,8 +86,8 @@ function create() {
             }  
         },
         {
-            message_en: "%But still...&& %These hints keep on getting more and more confusing...", 
-            message_es: "Pero...&& Estas pistas se están haciendo aún más y más confusas...", 
+            message_en: "%But still...&& These hints keep on getting more and more confusing...", 
+            message_es: "%Pero...&& Estas pistas se están haciendo aún más y más confusas...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){
@@ -98,7 +98,7 @@ function create() {
         },
         {
             message_en: "%Either way,& this time it reads:& %'LAST NUMBER OF THE CODE,& BLUE HAIRED BOY!!'", 
-            message_es: "spanish text here", 
+            message_es: "%De cualquier manera,& esta vez dice:& %'ÚLTIMO NÚMERO DEL CÓDIGO,& CHICO DEL CABELLO AZUL!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){
@@ -110,28 +110,28 @@ function create() {
         },
         {
             message_en: "'Kinda sad acuttaly,& I was just starting to get to my GOOD jokes...'", 
-            message_es: "spanish text here", 
+            message_es: "'Algo triste de hecho,& estaban empezando a hacerse BUENOS chistes...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
             message_en: "'OKAY!!&& The last digit of the code is...'", 
-            message_es: "spanish text here", 
+            message_es: "'DE ACUERDO!!&& El último dígito del código es...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
             message_en: "'The number of songs you face of with a GOD,& PLUS!,& the first digit of the minutes.&&\n(HINT:& THE :39 &in 4:39PM!!!)'", 
-            message_es: "spanish text here", 
+            message_es: "'El número de canciones en las que te enfrentas a un DIOS,& MÁS!,& el primer dígito de los minutos.&&\n(PISTA:& EL :39 &en 4:39PM!!!)'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
             message_en: "'That's all little dwarf,& I can't WAIT TO MEET YOU!!!&& HEE HEE!'%", 
-            message_es: "spanish text here", 
+            message_es: "'Eso es todo enano,& no puedo ESPERAR A CONOCERTE!!!&& HEE HEE!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -148,7 +148,7 @@ function create() {
         },
         {
             message_en: "%I can feel it!!& Freedom is close!!!", 
-            message_es: "spanish text here",
+            message_es: "%Puedo sentirlo!!& La libertad está cerca!!!", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -160,15 +160,15 @@ function create() {
             }  
         },
         {
-            message_en: "All you have to do is combine all the hints you got earlier to form the code!!", 
-            message_es: "spanish text here", 
+            message_en: "All you have to do is combine all the hints you got earlier to from the code!!", 
+            message_es: "Todo lo que debes hacer es combinar todas las pistas que obtuviste del código!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
             message_en: "Thank you so much for doing all this scavenging for me!\n&&See you soon...", 
-            message_es: "spanish text here", 
+            message_es: "Muchas gracias por hacer toda esta busquedo por mi!\n&&Te veo pronto...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  

@@ -62,8 +62,12 @@ function create()
 {
 	FlxG.sound.music.volume = 0;
 
-	// var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + (FlxG.save.data.hasVisitedPhase ? "-post" : ""));
-	var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
+	//FlxG.save.data.arlenePhase = 4; 
+	//FlxG.save.data.canVisitArlene = true;
+	//FlxG.save.data.hasVisitedPhase = false;
+
+	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + (FlxG.save.data.hasVisitedPhase ? "-post" : ""));
+	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
 	if (Assets.exists(scriptPath)) {
 		script = Script.create(scriptPath);
 

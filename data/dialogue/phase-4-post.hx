@@ -8,13 +8,44 @@ function create() {
     dialscript.cloudPortaitName = "Clown";
 
     dialscript.dialogueList = [
-        {
+        /*{
             message_en: "HI LEAN",  // HI - Lean
             message_es: "HOLA LEAN", // Hola -EstoyAburridow
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
+        },*/
+        {
+            message_en: "%You forgot already??&&& %Ok,&& I can't even be mad at you anymore.&& %I JUST WAN'T TO BE FREED!",
+            message_es: "%Ya lo olvidaste??&&& %Ok,&& ni siquiera puedo molestarme contigo.&& %YO SOLO QUIERO SER LIBERADA!",
+            typingSpeed: 0.06, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch(count){
+                    case 0:
+                        dialscript.eyes.animation.play("normal", true);
+                    case 1:
+                        dialscript.eyes.animation.play("smug", true);
+                    case 2:
+                        dialscript.eyes.animation.play("normal", true);
+                }
+            }  
         },
+        {
+            message_en: "%Combine all the hints to form the code,&& and release me from this CAGE!", 
+            message_es: "%Combina todas las pistas para formar el código,&& y libérame de esta JAULA!", 
+            typingSpeed: 0.03, startDelay: 0,
+            onEnd: function () {
+            },
+            event: function (count:Int){
+                switch(count){
+                    case 0:
+                        dialscript.eyes.animation.play("left", true);
+                    case 1:
+                        dialscript.eyes.animation.play("normal", true);
+                }
+            }    
+        }
     ];
 
     dialscript.endingCallback = function () {
