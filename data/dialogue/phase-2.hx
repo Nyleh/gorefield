@@ -222,7 +222,7 @@ function create() {
         },
         {
             message_en: "%'YOUR FAVORITE CLOWN HERE!!&& Guess what I got for you little dwarf??'", 
-            message_es: "spanish translation", 
+            message_es: "%'TU PAYASO FAVORITO AQUÍ!!&& Adivina que tengo para ti, pequeño enano??'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -233,7 +233,7 @@ function create() {
         },
         {
             message_en: "'If you thought it was another joke...&& YOUR WRONG!! && But a hint,& it is hee hee...'", 
-            message_es: "spanish translation", 
+            message_es: "'Si pensaste que seria otro chiste...&& ESTABAS EQUIVOCADO!! && Pero una pista,& es hee hee...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -241,7 +241,7 @@ function create() {
         },
         {
             message_en: "'Look through your highscores little dwarf,& find the highest one...'", 
-            message_es: "spanish translation", 
+            message_es: "'Mira entre tus mejores puntuaciones pequeño enano,& busca por la más alta...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -249,7 +249,7 @@ function create() {
         },
         {
             message_en: "'THEN!& Find your accuracy on THAT song,& the second number of the code is the SECOND digit of your accuracy!!'", 
-            message_es: "spanish translation", 
+            message_es: "'ENTONCES!& Busca tu presición en ESA canción,& el segundo número del código es el SEGUNDO dígito de tu precisión!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -257,7 +257,7 @@ function create() {
         },
         {
             message_en: "'That's all for this note little dwarf, hope you enjoyed the explaination!!!'%", 
-            message_es: "spanish translation", 
+            message_es: "'Eso es todo por esta nota pequeño enano, espero que hayas disfrutado la explicación!!!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -268,7 +268,7 @@ function create() {
         },
         {
             message_en: "What's a high score???&& The clown just makes up his own things sometimes...", 
-            message_es: "Cuál mejor puntuación???&& El payaso sólo inventa sus propias cosas a veces...", 
+            message_es: "Qué es una mejor puntuación???&& El payaso sólo inventa sus propias cosas a veces...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -294,7 +294,7 @@ function create() {
         },
         {
             message_en: "Find it& and bring it here so I can read it.&&\nPlease come back soon...", 
-            message_es: "Encuentrala& y tráela acá entonces podré leerla.&&\nPor favor vuelve pronto...", 
+            message_es: "Encuéntrala& y tráela acá entonces podré leerla.&&\nPor favor vuelve pronto...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}

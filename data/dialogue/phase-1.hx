@@ -194,7 +194,7 @@ function create() {
         },
         {
             message_en: "%It says that $the first number is the last digit of today's day.$&&&& If I were you,& %I'd probably write this down somewhere.", 
-            message_es: "%Dice que $el primer número es el último digito de este día.$&&&& Si yo fuera tú,& %yo escribiría esto en algún lugar.", 
+            message_es: "%Dice que $el primer número es el último dígito de este día.$&&&& Si yo fuera tú,& %yo escribiría esto en algún lugar.", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {
             },
