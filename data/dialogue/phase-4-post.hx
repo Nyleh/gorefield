@@ -17,7 +17,7 @@ function create() {
         },*/
         {
             message_en: "%You forgot already??&&& %Ok,&& I can't even be mad at you anymore.&& %I JUST WAN'T TO BE FREED!",
-            message_es: "spanish text here",
+            message_es: "%Ya lo olvidaste??&&& %Ok,&& ni siquiera puedo molestarme contigo.&& %YO SOLO QUIERO SER LIBERADA!",
             typingSpeed: 0.06, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){
@@ -33,7 +33,7 @@ function create() {
         },
         {
             message_en: "%Combine all the hints to form the code,&& and release me from this CAGE!", 
-            message_es: "spanish text here", 
+            message_es: "%Combina todas las pistas para formar el código,&& y libérame de esta JAULA!", 
             typingSpeed: 0.03, startDelay: 0,
             onEnd: function () {
             },
