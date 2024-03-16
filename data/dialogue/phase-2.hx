@@ -58,6 +58,29 @@ function create() {
             }
         },
         {
+            /* Yo, "blue haired boy"? Eso me hace recordar a una canción:
+            So, I saw blue haired boy
+            Crossing the road the other day
+            I didn't say much of anything
+            He said he liked my hair bleached but slightly green
+            I replayed the whole thing over and over and over and
+            Over and over and over and
+            Each time remembered it differently
+            Had I made a whole conversation up in my head?
+            
+            About the thing I could've done or I could've said
+            Guess it makes sense when a poet, doesn't know it in the moment
+            But writes a banger down in paper
+            See I know what to say just not in the moment
+
+            Hey blue haired boy, please come back to my way
+            I finally know what to say to, yooouuuu
+            I like you boots but your laces are coming loose
+            Hope you didn't trip since i didn't warn yooouuu
+            You've probably already forgotten about me, my hair that's blonde and bleached but slightly green
+            You've probably already forgotten about meeeeee, my hair that's blonde and bleached but slightly green
+            
+            -EstoyAburridow */
             message_en: "%'Blue haired boy,&& BLUE HAIRED BOY!&&\nYour gonna be &SLEIGHED!& out of your seat when you hear this joke!!!'",
             message_es: "%'Chico del pelo azul,&& CHICO DEL PELO AZUL!&&\nTe van a &TRINEO!& Levántate de tu asiento cuando escuches este chiste!!!'",
             typingSpeed: 0.05, startDelay: 2,
