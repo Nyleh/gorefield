@@ -50,21 +50,21 @@ function create() {
         },
         {
             message_en: "'What did the match &say to the firecraker?&& BOOM!!!!!&&& BAHHAHAHHAHAA!!!!!!!'", 
-            message_en: "'Qué le dijo el partido &al petardo??&& BOOM!!!!!&&& BAJJAJAJJAJAA!!!!!!!'", 
+            message_es: "'Qué le dijo el partido &al petardo??&& BOOM!!!!!&&& BAJJAJAJJAJAA!!!!!!!'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
         },
         {
-            message_en: "'Also,& SORRY!!!!&& NO EXPLANATION THIS TIME!!!&&\nYour friend got a little &too annoying...'", 
-            message_es: "'Además,& LO SIENTO!!!!&& NO HAY EXPLICACIONES ESTA VEZ!!!&&\nTu amigo se puso un poco &muy molesto...'", 
+            message_en: "'Also,& SORRY!!!!&& NO EXPLANATION THIS TIME!!!&&\nYour friend got a little, &too annoying...'", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    
         },
         {
             message_en: "'Turn the paper around for your clue,&&\nBLUE BALLED BOY!!& HEE HEE!'%", 
-            message_en: "'Dale la vuelta al papel para encontrar tu pista,&&\nPEQUEÑO ENANO AZUL!!& HEE HEE!'%", 
+            message_es: "'Dale la vuelta al papel para encontrar tu pista,&&\nPEQUEÑO ENANO AZUL!!& HEE HEE!'%", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -74,22 +74,64 @@ function create() {
             }    
         },
         {
-            message_en: "Okay...&& He's actually getting better the more he writes us jokes.", 
+            message_en: "%Okay...&& H%e's actually getting better the more he writes us jokes.", 
             message_es: "De acuerdo...&& Él se está haciendo mejor escribiendo sus chistes.", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("smug", true);
+                    case 1: dialscript.eyes.animation.play("left", true);
+                }
+            }  
+        },
+        {
+            message_en: "%But still...&& %These hints keep on getting more and more confusing...", 
+            message_es: "Pero...&& Estas pistas se están haciendo aún más y más confusas...", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("confused", true);
+                }
+            }    
+        },
+        {
+            message_en: "%Either way,& this time it reads:& %'LAST NUMBER OF THE CODE,& BLUE HAIRED BOY!!'", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.eyes.animation.play("normal", true);
+                    case 1: dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
+                }
+            }  
+        },
+        {
+            message_en: "'Kinda sad acuttaly,& I was just starting to get to my GOOD jokes...'", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
         },
         {
-            message_en: "But still...&& These hints keep on getting more and more confusing...", 
-            message_es: "Pero...&& Estas pistas se están haciendo aún más y más confusas...", 
+            message_en: "'OKAY!!&& The last digit of the code is...'", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int){}    
+            event: function (count:Int){}  
         },
         {
-            message_en: "This time it reads:&& ITS LUNAR THIS ISNT DONE!!!!&& BYE!!!!", 
-            message_es: "Esta vez dice:&& ES JLOOR ESTA PARTE AÚN NO ESTÁ HECHA!!!!&& ADIOS!!!!", 
+            message_en: "'The number of songs you face of with a GOD,& PLUS!,& the first digit of the minutes.&&\n(HINT:& THE :39 &in 4:39PM!!!)'", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){}  
+        },
+        {
+            message_en: "'That's all little dwarf,& I can't WAIT TO MEET YOU!!!&& HEE HEE!'%", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
                 dialscript.__canAccept = false;
@@ -97,11 +139,16 @@ function create() {
                 
                 dialscript.showCloud(false);
             },
-            event: function (count:Int){}  
+            event: function (count:Int){
+                switch (count) {
+                    case 0: dialscript.__randSounds = ["easteregg/snd_text", "easteregg/snd_text_2"];
+
+                }
+            }  
         },
         {
-            message_en: "%Either way,&& come back with a note or I'm just gonna repeat the same thing over and over...", 
-            message_es: "%De cualquier manera,&& vuelve con una nota o voy a repetir lo mismo una y otra vez...",
+            message_en: "%I can feel it!!& Freedom is close!!!", 
+            message_es: "spanish text here",
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {},
             event: function (count:Int){
@@ -113,8 +160,15 @@ function create() {
             }  
         },
         {
-            message_en: "Bye darling!", 
-            message_es: "Adiós cariño!", 
+            message_en: "All you have to do is combine all the hints you got earlier to form the code!!", 
+            message_es: "spanish text here", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int){}  
+        },
+        {
+            message_en: "Thank you so much for doing all this scavenging for me!\n&&See you soon...", 
+            message_es: "spanish text here", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
@@ -125,7 +179,7 @@ function create() {
         dialscript.fadeOut = dialscript.fastFirstFade = true; dialscript.blackTime = 0;
         dialscript.menuMusic.fadeOut(2); dialscript.introSound.volume = 0.3;
         dialscript.eyes.animation.play("normal", true);
-        (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
+        (new FlxTimer()).start(2/8, function () dialscript.introSound.play(true), 8);
         (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState()); FlxG.save.data.hasVisitedPhase = true;});
     };
 }
@@ -133,7 +187,7 @@ function create() {
 function postCreate() {
     dialscript.fastFirstFade = true; 
     dialscript.introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
-	(new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
+	(new FlxTimer()).start(2/8, function () dialscript.introSound.play(true), 8);
 	if (FlxG.save.data.arlenePhase == -1 || !FlxG.save.data.canVisitArlene) return;
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);

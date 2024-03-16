@@ -1935,7 +1935,7 @@ function generateSECRET() {
 		3, // Number of songs that start with C + Number of songs that start with M (i counted, its 3)
 		1 + (10*(firstMinute%1)) // Songs you face off a god (1) + First digit of minutes (like 3:29PM would be 2)
 	];
-	codes.sort((a, b) -> {return Std.int(b - a);});
+	// codes.sort((a, b) -> {return Std.int(b - a);}); // scrapped -lunar
 	secretCode = codes.join("");
 
 	#if debug

@@ -67,7 +67,7 @@ function create() {
         dialscript.fadeOut = dialscript.fastFirstFade = true; dialscript.blackTime = 0;
         dialscript.menuMusic.fadeOut(2); dialscript.introSound.volume = 0.3;
         dialscript.eyes.animation.play("normal", true);
-        (new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
+        (new FlxTimer()).start(2/8, function () dialscript.introSound.play(true), 8);
         (new FlxTimer()).start(2.2, function () {FlxG.switchState(new StoryMenuState());});
     };
 }
@@ -75,7 +75,7 @@ function create() {
 function postCreate() {
     dialscript.fastFirstFade = true; 
     dialscript.introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
-	(new FlxTimer()).start(2/8, function () dialscript.introSound.play(), 8);
+	(new FlxTimer()).start(2/8, function () dialscript.introSound.play(true), 8);
 	if (FlxG.save.data.arlenePhase == -1 || !FlxG.save.data.canVisitArlene) return;
 	(new FlxTimer()).start(4.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
 	(new FlxTimer()).start(6, dialscript.progressDialogue);

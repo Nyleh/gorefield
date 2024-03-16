@@ -72,9 +72,9 @@ function create()
 	 * 7 third note after found
 	 */
 
-	//FlxG.save.data.arlenePhase = 1; 
-	//FlxG.save.data.canVisitArlene = true;
-	//FlxG.save.data.hasVisitedPhase = true;
+	FlxG.save.data.arlenePhase = 4; 
+	FlxG.save.data.canVisitArlene = true;
+	FlxG.save.data.hasVisitedPhase = false;
 
 	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + (FlxG.save.data.hasVisitedPhase ? "-post" : ""));
 	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
@@ -322,7 +322,7 @@ function update(elapsed:Float) {
 		}
 	}
 
-	if (tottalTime >= (fastFirstFade ? 2 : 4)) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-(fastFirstFade ? 4 : 6))/2) * 8) / 8), 0, 1);
+	if (tottalTime >= (fastFirstFade ? 2 : 4)) eyes.alpha = FlxMath.bound((Math.floor(((tottalTime-(fastFirstFade ? 4 : 6))/1) * 8) / 8), 0, 1);
 
 	if (controls.ACCEPT && __canAccept) progressDialogue();
 	if (controls.BACK) FlxG.switchState(new StoryMenuState());
