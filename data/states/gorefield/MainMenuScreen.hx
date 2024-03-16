@@ -87,7 +87,7 @@ function create() {
 	menuInfomation.setFormat("fonts/pixelart.ttf", 28, FlxColor.WHITE, "center");
 	menuInfomation.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 5, 50);
 	menuInfomation.borderSize = 2;
-	insert(1,menuInfomation);
+	insert(2,menuInfomation);
 
 	menuItems = new FlxTypedGroup();
 	insert(1,menuItems);
@@ -129,6 +129,8 @@ function create() {
 				switch(mem){
 					case fire:
 						insert(0,mem);
+					case menuInfomation:
+						insert(2,mem);
 					case boxSprite | yesText | noText | progInfoText:
 						insert(99999,mem);
 					default:
