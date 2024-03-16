@@ -221,11 +221,50 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "Apparently, &$the second number of the code is the most repeated digit of your highscore??$", 
-            message_es: "Aparentemente, &$el segundo número del código es el digito más repetido de tu mejor puntuación??$", 
+            message_en: "%'YOUR FAVORITE CLOWN HERE!!&& Guess what I got for you little dwarf??'", 
+            message_es: "spanish translation", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
-            event: function (count:Int) {}
+            event: function (count:Int) {
+                switch(count){
+                    case 0: dialscript.__randSounds = ["easteregg/snd_binky", "easteregg/snd_binky_2", "easteregg/snd_binky_3"];
+                }
+            }
+        },
+        {
+            message_en: "'If you thought it was another joke...&& YOUR WRONG!! && But a hint,& it is hee hee...'", 
+            message_es: "spanish translation", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {
+            }
+        },
+        {
+            message_en: "'Look through your highscores little dwarf,& find the highest one...'", 
+            message_es: "spanish translation", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {
+            }
+        },
+        {
+            message_en: "'THEN!& Find your accuracy on THAT song,& the second number of the code is the SECOND digit of your accuracy!!'", 
+            message_es: "spanish translation", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {
+            }
+        },
+        {
+            message_en: "'That's all for this note little dwarf, hope you enjoyed the explaination!!!'%", 
+            message_es: "spanish translation", 
+            typingSpeed: 0.05, startDelay: 0,
+            onEnd: function () {},
+            event: function (count:Int) {
+                switch(count){
+                    case 0: dialscript.__randSounds = ["easteregg/snd_text", "easteregg/snd_text_2"];
+                }
+            }
         },
         {
             message_en: "What's a high score???&& The clown just makes up his own things sometimes...", 

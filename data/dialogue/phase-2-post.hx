@@ -42,8 +42,8 @@ function create() {
             }
         },
         {
-            message_en: "Remember,& $the second number of the code is the most repeated digit of your highscor$e...", 
-            message_es: "Recuerda,& $el segundo número del código es el digito más repetido de tu mejor puntuació$n...", 
+            message_en: "Remember,&$ the second number of the code is the second digit of your accuracy in your highest highscore.$", 
+            message_es: "spanish text here", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}

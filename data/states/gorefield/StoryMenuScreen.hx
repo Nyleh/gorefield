@@ -1753,10 +1753,10 @@ var CodesFunctions:{} = {
 		//FlxG.save.data.extrasSongsIcons = ["icon-garsad", "lyman", "walter"];
 
 		FlxG.save.data.weeksFinished = [true, true, true, true, true, true];
-		FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, false, true];
+		FlxG.save.data.weeksUnlocked = [true, true, true, true, true, true, true, true];
 		FlxG.save.data.codesUnlocked = true;
 		
-		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG8 = true;
+		FlxG.save.data.beatWeekG1 = FlxG.save.data.beatWeekG2 = FlxG.save.data.beatWeekG3 = FlxG.save.data.beatWeekG4 = FlxG.save.data.beatWeekG5 = FlxG.save.data.beatWeekG6 = FlxG.save.data.beatWeekG7 = FlxG.save.data.beatWeekG8 = true;
 
 		FlxG.save.flush();
 
@@ -1940,7 +1940,7 @@ function generateSECRET() {
 	var codes:Array<Float> = [
 		date.getDate() % 10, // Last digit of day in month (like 4/17/24, would be 7) 
 		Math.floor(precent) % 10, // Second digit of precentage of highest highscore (94% would be 4)
-		3, // Number of songs that start with C + Number of songs that start with M (i counted, its 3)
+		3, // Number of songs that start with C - Number of songs that start with M (i counted, its 3)
 		1 + Math.floor(firstMinute) // Songs you face off a god (1) + First digit of minutes (like 3:29PM would be 2)
 	];
 	// codes.sort((a, b) -> {return Std.int(b - a);}); // scrapped -lunar

@@ -313,7 +313,7 @@ function progressDialogue() {
 	});
 }
 
-var yellowFormat:FlxTextFormat = new FlxTextFormat(0xFFFFFFFF, false, false, 0xFF19203F, false);
+var yellowFormat:FlxTextFormat = new FlxTextFormat(0xFFFFFF00, false, false, 0xFF19203F, false);
 function buildHighlights() {
 	var removedChars:Int = 0;
 
