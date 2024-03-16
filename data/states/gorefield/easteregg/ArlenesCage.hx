@@ -8,6 +8,8 @@ import funkin.backend.system.framerate.Framerate;
 import flixel.text.FlxTextBorderStyle;
 import flixel.addons.effects.FlxTrail;
 import funkin.backend.scripting.Script;
+import flixel.text.FlxText.FlxTextFormat;
+import flixel.text.FlxText.FlxTextFormatRange;
 import hscript.TemplateClass;
 import StringTools;
 
@@ -59,25 +61,9 @@ var script:Script;
 function create()
 {
 	FlxG.sound.music.volume = 0;
-	/**
-	 * Idea for this:
-	 * -1 cant visit (not there)
-	 * 0 first visit
-	 * 1 first dialogue after visit
-	 * 2 first note first found
-	 * 3 first note after found
-	 * 4 second note
-	 * 5 second note after found
-	 * 6 third note
-	 * 7 third note after found
-	 */
 
-	FlxG.save.data.arlenePhase = 4; 
-	FlxG.save.data.canVisitArlene = true;
-	FlxG.save.data.hasVisitedPhase = false;
-
-	var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + (FlxG.save.data.hasVisitedPhase ? "-post" : ""));
-	// var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
+	// var scriptPath:String = Paths.script("data/dialogue/phase-" + Std.string(FlxG.save.data.arlenePhase) + (FlxG.save.data.hasVisitedPhase ? "-post" : ""));
+	var scriptPath:String =  Paths.script("data/dialogue/phase-anim-testing");
 	if (Assets.exists(scriptPath)) {
 		script = Script.create(scriptPath);
 
@@ -189,19 +175,6 @@ function create()
 	box.updateHitbox(); box.screenCenter(FlxAxes.X);
 	add(box);
 	
-
-	/*
-	// pixel perfect
-var scl = 44/48;
-
-	dialoguetext = new FlxText(box.x + 80, box.y + 70, (box.width - 160), "", 24);
-	dialoguetext.setFormat("fonts/pixelart.ttf", 48, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
-	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
-	dialoguetext.scale.set(scl, scl);
-	add(dialoguetext); dialoguetext.scrollFactor.set();
-
-	*/
-
 	dialoguetext = new FlxText(box.x + 80, box.y + 70, box.width - 160, "", 24);
 	dialoguetext.setFormat("fonts/GrapeSoda.ttf", 44, 0xff8f93b7, "left", FlxTextBorderStyle.SHADOW, 0xFF19203F);
 	dialoguetext.borderSize = 2; dialoguetext.shadowOffset.x += 1; dialoguetext.shadowOffset.y += 1; dialoguetext.wordWrap = true;
@@ -226,17 +199,6 @@ var scl = 44/48;
 	for (name => spr in cloudPortraits) spr.visible = false;
 
 	script.call("postCreate");
-
-	// ! leaving og here just in case -lunar
-	// ! remake this in each one of your scripts
-	/*
-	fastFirstFade = FlxG.save.data.arlenePhase >= 1;
-	introSound = FlxG.sound.load(Paths.sound('easteregg/snd_test'), 0.4);
-	(new FlxTimer()).start((FlxG.save.data.arlenePhase >= 1 ? 2 : 4)/8, function () introSound.play(), 8);
-	if (FlxG.save.data.arlenePhase == -1 && FlxG.save.data.canVisitArlene) return;
-	(new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 4.2 : 6.2, function () FlxG.sound.play(Paths.sound('easteregg/mus_sfx_cinematiccut'), 0.1));
-	(new FlxTimer()).start(FlxG.save.data.arlenePhase >= 1 ? 6 : 8, progressDialogue);
-	*/
 }
 
 var fastFirstFade:Bool = false;
@@ -342,8 +304,38 @@ function progressDialogue() {
 
 	(new FlxTimer()).start(dialogueData.startDelay == null ? 0 : dialogueData.startDelay, function () {
 		__finishedMessage = (FlxG.save.data.spanish ? dialogueData.message_es : dialogueData.message_en) + "&&&"; // add empty space just cause it feels better
+		buildHighlights();
 		__typeDialogue(dialogueData.typingSpeed);
 	});
+}
+
+var yellowFormat:FlxTextFormat = new FlxTextFormat(0xFFFFFFFF, false, false, 0xFF19203F, false);
+function buildHighlights() {
+	var removedChars:Int = 0;
+
+	var ranges:Array<Dynamic> = [];
+	var lastRange:Dynamic = null;
+	for (i in 0...__finishedMessage.length) {
+		var char = __finishedMessage.charAt(i);
+		if (char != "$") continue; removedChars++;
+		if (lastRange != null) {
+			lastRange.end = i-removedChars;
+			ranges.push(lastRange);
+			lastRange = null;
+		} else {lastRange = {start: i-removedChars, end: i-removedChars};}
+	}
+
+	// unclosed one
+	if (lastRange != null) {
+		lastRange.end = __finishedMessage.length-1;
+		ranges.push(lastRange);
+	}
+
+	__finishedMessage = StringTools.replace(__finishedMessage, "$", "");
+	dialoguetext._formatRanges = [
+		for (range in ranges) new FlxTextFormatRange(yellowFormat, range.start, range.end+1)
+	];
+
 }
 
 function endDialogue() {

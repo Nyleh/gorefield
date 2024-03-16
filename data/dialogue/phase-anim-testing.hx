@@ -6,7 +6,7 @@ function create() {
 
     dialscript.dialogueList = [
         {
-            message_en: "ANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1\nANIMATION TEST 1", 
+            message_en: "I $LOVE$ HIGHLIGHTS, MI$D WO$RD ONES, AND EVEN $INCOMPLETE ONES!", 
             message_es: "PRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1\nPRUEBA DE ANIMACIÓN 1", 
             typingSpeed: 0.04, startDelay: 2,
             onEnd: function () {dialscript.switchPortrait(.8, "Clown");},
