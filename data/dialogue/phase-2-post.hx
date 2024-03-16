@@ -1,4 +1,4 @@
-//
+Encuentrala//
 
 function create() {
     dialscript.menuMusic = FlxG.sound.load(Paths.music('easteregg/areline_theme'), 1.0, true);
@@ -43,7 +43,7 @@ function create() {
         },
         {
             message_en: "Remember,&$ the second number of the code is the second digit of your accuracy in your highest highscore.$", 
-            message_es: "spanish text here", 
+            message_es: "Recuerda,&$ el segundo número del código es el segundo dígito de tu presición en tu mejor puntuación.$", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
