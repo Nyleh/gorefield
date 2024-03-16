@@ -1091,11 +1091,16 @@ function updateFlavourText()
 		return; 
 	}
 
-	if (curWeek == 8 && FlxG.save.data.extrasSongs.length != 3)	{ flavourText.text = FlxG.save.data.spanish ? 
+	if (curWeek == 8 && FlxG.save.data.extrasSongs.length != 0 && !codeWeekUnlocked)	{ flavourText.text = FlxG.save.data.spanish ? 
 		"Avanza a través de las semanas para desbloquear!" : 
 		"Progress through the weeks to unlock!";
 		return;
 	}
+
+	if (curWeek == 8 && FlxG.save.data.extrasSongs.length != 0 && codeWeekUnlocked)
+		{
+			flavourText.text = descs[8]; return;
+		}
 
 	if (weeksUnlocked[curWeek]) { flavourText.text = descs[curWeek]; return; }
 	else{
@@ -1103,11 +1108,6 @@ function updateFlavourText()
 		"Avanza a través de las semanas para desbloquear!" : 
 		"Progress through the weeks to unlock!";
 		return; 
-	}
-
-	if (curWeek == 8 && FlxG.save.data.extrasSongs.length == 3)
-	{
-		flavourText.text = descs[8]; return;
 	}
 }
 
@@ -1732,7 +1732,7 @@ var CodesFunctions:{} = {
 				};
 
 
-				if (!FlxG.save.data.extrasSongs.contains(songName)) {
+				if (!FlxG.save.data.extrasSongs.contains(songName) && songName.toLowerCase() != 'laughter and cries') {
 					FlxG.save.data.extrasSongs.push(songName);
 					FlxG.save.data.extrasSongsIcons.push(icon);
 					FlxG.save.flush();
@@ -1769,7 +1769,7 @@ var CodesFunctions:{} = {
 			return;
 		}
 		
-		FlxG.save.data.arlenePhase = 0;
+		FlxG.save.data.arlenePhase = 4;
 		FlxG.save.data.canVisitArlene = true;
 		FlxG.save.data.hasVisitedPhase = false;
 		FlxG.save.data.paintPosition = -1;
