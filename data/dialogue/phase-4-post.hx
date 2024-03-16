@@ -33,7 +33,7 @@ function create() {
         },
         {
             message_en: "%Combine all the hints to form the code,&& and release me from this CAGE!", 
-            message_en: "%Combina todas las pistas para formar el código,&& y libérame de esta JAULA!", 
+            message_es: "%Combina todas las pistas para formar el código,&& y libérame de esta JAULA!", 
             typingSpeed: 0.03, startDelay: 0,
             onEnd: function () {
             },

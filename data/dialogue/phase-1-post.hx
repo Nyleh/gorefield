@@ -48,7 +48,7 @@ function create() {
         },
         {
             message_en: "%Another Reminder,&& the first number is the last digit of today's day.&&& %If you forgot to write that down...", 
-            message_en: "%Otro recordatorio,&& el primer número es el último dígito del número de hoy.&&& %Si te olvidaste escribir eso...", 
+            message_es: "%Otro recordatorio,&& el primer número es el último dígito del número de hoy.&&& %Si te olvidaste escribir eso...", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
