@@ -60,7 +60,7 @@ function create() {
 	fire.frames = Paths.getSparrowAtlas('stages/skyFire/fire_f4');
 	fire.animation.addByPrefix("fire", "FIRE", 24, true);
 	fire.animation.play("fire");
-	add(fire); fire.visible = false;
+	insert(0,fire); fire.visible = false;
 
 	gorefield = new FlxSprite();
 	gorefield.frames = Paths.getSparrowAtlas('menus/mainmenu/gorefield_menu');
@@ -71,7 +71,7 @@ function create() {
 	gorefield.updateHitbox();
 	gorefield.x = 586; gorefield.y = 40;
 	gorefield.antialiasing = true;
-	add(gorefield);
+	insert(1,gorefield);
 
 	logoBl = new FlxSprite();
 	logoBl.frames = Paths.getSparrowAtlas('menus/logoMod');
@@ -81,16 +81,16 @@ function create() {
 	logoBl.updateHitbox();
 	logoBl.x = 80;
 	logoBl.antialiasing = true;
-	add(logoBl);
+	insert(1,logoBl);
 
 	menuInfomation = new FlxText(0, 675, FlxG.width, "Please select a option.", 28);
 	menuInfomation.setFormat("fonts/pixelart.ttf", 28, FlxColor.WHITE, "center");
 	menuInfomation.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 5, 50);
 	menuInfomation.borderSize = 2;
-	add(menuInfomation);
+	insert(1,menuInfomation);
 
 	menuItems = new FlxTypedGroup();
-	add(menuItems);
+	insert(1,menuItems);
 
 	for (i=>option in options)
 	{
@@ -125,7 +125,16 @@ function create() {
 		});
 		cutscene.animation.finishCallback = function () {
 			changeItem(0);
-			for (mem in oldMembers) add(mem);
+			for (mem in oldMembers) {
+				switch(mem){
+					case fire:
+						insert(0,mem);
+					case boxSprite | yesText | noText | progInfoText:
+						insert(99999,mem);
+					default:
+						insert(1,mem);
+				}
+			}
 			remove(cutscene);
 
 			menuInfomation.y += 100;
@@ -166,22 +175,20 @@ function create() {
 	boxSprite.updateHitbox();
 	boxSprite.screenCenter(FlxAxes.X);
 	boxSprite.scrollFactor.set();
-	add(boxSprite);
+	insert(99998,boxSprite);
 
 	yesText = new Alphabet(0, 0, FlxG.save.data.spanish ? "SI" : "YES", true);
 	yesText.scrollFactor.set();
-	add(yesText);
+	insert(99999,yesText);
 
 	noText = new Alphabet(0, 0, "NO", true);
 	noText.scrollFactor.set();
-	add(noText);
+	insert(99999,noText);
 
 	progInfoText = new Alphabet(0, 0, FlxG.save.data.spanish ? "Te Gustaria Continuar?" : "Would You Like To Continue?", false);
-	for (_progInfoText in [progInfoText]) {
-		_progInfoText.scrollFactor.set();
-		_progInfoText.screenCenter(FlxAxes.X);
-		add(_progInfoText);
-	}
+	progInfoText.scrollFactor.set();
+	progInfoText.screenCenter(FlxAxes.X);
+	insert(99999,progInfoText);
 }
 
 function checkWeekProgress() {
