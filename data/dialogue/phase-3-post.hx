@@ -46,8 +46,8 @@ function create() {
             }    
         },
         {
-            message_en: "He said something about:$&&%\n'The number of songs that start with C,& PLUS!,& the number of songs that start with M.'%$", 
-            message_es: "El dijo algo así como:$&&%\n'El número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'%$", 
+            message_en: "He said something about:$&&%\n'The number of songs that start with C,& MINUS!,& the number of songs that start with M.'%$", 
+            message_es: "El dijo algo así como:$&&%\n'El número de canciones que empiezan con C,& MENOS!,& el número de canciones que empiezan con M.'%$", 
             typingSpeed: 0.05, startDelay: 2,
             onEnd: function () {
             },
