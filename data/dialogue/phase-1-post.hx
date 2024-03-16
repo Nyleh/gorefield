@@ -30,8 +30,8 @@ function create() {
             }    
         },
         {
-            message_en: "%Seems like you need another reminder.& %Again.&& Note in Snowy Biome.&& In some pine tree, is what the clown said I think...", 
-            message_es: "%Parece que necesitas otro recordatorio.& %De nuevo.&& Nota en un lugar nevado.&& En algún pino, es lo que dijo el payaso supongo...", 
+            message_en: "%Seems like you need another reminder.& %Again$.&& Note in Snowy Bi$ome.&& In some pine tree, is what the clown said I think...", 
+            message_es: "%Parece que necesitas otro recordatorio.& %De nuevo$.&& Nota en un lugar nev$ado.&& En algún pino, es lo que dijo el payaso supongo...", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -47,8 +47,8 @@ function create() {
             }    
         },
         {
-            message_en: "%Another Reminder,&& the first number is the last digit of today's day.&&& %If you forgot to write that down...", 
-            message_es: "%Otro recordatorio,&& el primer número es el último dígito del número de hoy.&&& %Si te olvidaste escribir eso...", 
+            message_en: "%Another Reminder,$&& the first number is the last digit of today's da$y.&&& %If you forgot to write that down...", 
+            message_es: "%Otro recordatorio,$&& el primer número es el último dígito del número de ho$y.&&& %Si te olvidaste escribir eso...", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },

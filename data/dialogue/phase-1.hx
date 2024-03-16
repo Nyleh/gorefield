@@ -164,8 +164,8 @@ function create() {
             }    
         },
         {
-            message_en: "%It also mentions that you'll need to know 4 numbers in order to free me,&& and that you have just earned the first one through this note.", 
-            message_es: "%También menciona que debes encontrar 4 números en orden para poder liberarme,&& y que te acabas de ganar el primero a través de esta nota.", 
+            message_en: "%It also mentions that $you'll need to know 4 numbers in order to free me,$&& and that you have just earned the first one through this note.", 
+            message_es: "%También menciona que $debes encontrar 4 números en orden para poder liberarme,$&& y que te acabas de ganar el primero a través de esta nota.", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {
             },
@@ -193,8 +193,8 @@ function create() {
             }    
         },
         {
-            message_en: "%It says that the first number is the last digit of today's day.&&&& If I were you,& %I'd probably write this down somewhere.", 
-            message_es: "%Dice que el primer número es el último digito de este día.&&&& Si yo fuera tú,& %yo escribiría esto en algún lugar.", 
+            message_en: "%It says that $the first number is the last digit of today's day.$&&&& If I were you,& %I'd probably write this down somewhere.", 
+            message_es: "%Dice que $el primer número es el último digito de este día.$&&&& Si yo fuera tú,& %yo escribiría esto en algún lugar.", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {
             },
@@ -222,8 +222,8 @@ function create() {
             }    
         },
         {
-            message_en: "%Which he didn't specify much, besides the fact that the area was in a snowy biome.", 
-            message_es: "%No especificó mucho, además del hecho de que fue en un lugar nevado.", 
+            message_en: "%Which he didn't specify much, besides the fact that $the area was in a snowy biome.$", 
+            message_es: "%No especificó mucho, además del hecho de $que fue en un lugar nevado.$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },

@@ -195,8 +195,8 @@ function create() {
             }
         },
         {
-            message_en: "%He said he hid it behind a %very particular painting...&&&&\n%I still don't know where,&& he wasn't very specific.", 
-            message_es: "%Dijo que la escondió detrás de %una pintura particular...&&&&\n%Sigo sin saber donde,&& no fue muy específico.", 
+            message_en: "%He said he $hid it behind a %very particular painting$...&&&&\n%I still don't know where,&& he wasn't very specific.", 
+            message_es: "%Dijo que la $escondió detrás de %una pintura particular$...&&&&\n%Sigo sin saber donde,&& no fue muy específico.", 
             typingSpeed: 0.045, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) switch (count) {

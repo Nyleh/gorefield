@@ -204,8 +204,8 @@ function create() {
             }
         },
         {
-            message_en: "'The third number of the code is:& the number of songs that start with C,& PLUS!,& the number of songs that start with M.'", 
-            message_es: "'El tercer número del código es:& el número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'", 
+            message_en: "$'The third number of the code is:& the number of songs that start with C,& PLUS!,& the number of songs that start with M.'$", 
+            message_es: "$'El tercer número del código es:& el número de canciones que empiezan con C,& MÁS!,& el número de canciones que empiezan con M.'$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
@@ -275,7 +275,7 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "He said he hid the joke in a pile of rubble,& %somewhere near a explosion..?", 
+            message_en: "He said $he hid the joke in a pile of rubble,& %somewhere near a explosion..?$", 
             message_es: "El dijo que escondió la nota en una pila de escombros ,& %en algún lugar cerca de una explosión..?", 
             typingSpeed: 0.05, startDelay: .5,
             onEnd: function () {},

@@ -221,8 +221,8 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "Apparently, &the second number of the code is the most repeated digit of your highscore??", 
-            message_es: "Aparentemente, &el segundo número del código es el digito más repetido de tu mejor puntuación??", 
+            message_en: "Apparently, &$the second number of the code is the most repeated digit of your highscore??$", 
+            message_es: "Aparentemente, &$el segundo número del código es el digito más repetido de tu mejor puntuación??$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}
@@ -247,8 +247,8 @@ function create() {
             event: function (count:Int) {}
         },
         {
-            message_en: "So your probably gonna have to find the note inside a rainy alleyway.", 
-            message_es: "Así que posiblemente tengas que buscar la nota en un callejón lluvioso.", 
+            message_en: "So your probably gonna have to $find the note inside a rainy alleyway.$", 
+            message_es: "Así que posiblemente tengas que $buscar la nota en un callejón lluvioso.$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {}

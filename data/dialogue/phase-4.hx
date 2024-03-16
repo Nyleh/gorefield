@@ -123,8 +123,8 @@ function create() {
             event: function (count:Int){}  
         },
         {
-            message_en: "'The number of songs you face of with a GOD,& PLUS!,& the first digit of the minutes.&&\n(HINT:& THE :39 &in 4:39PM!!!)'", 
-            message_es: "'El número de canciones en las que te enfrentas a un DIOS,& MÁS!,& el primer dígito de los minutos.&&\n(PISTA:& EL :39 &en 4:39PM!!!)'", 
+            message_en: "$'The number of songs you face of with a GOD,& PLUS!,& the first digit of the minutes.&&\n(HINT:& THE :39 &in 4:39PM!!!)'$", 
+            message_es: "$'El número de canciones en las que te enfrentas a un DIOS,& MÁS!,& el primer dígito de los minutos.&&\n(PISTA:& EL :39 &en 4:39PM!!!)'$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  
@@ -160,8 +160,8 @@ function create() {
             }  
         },
         {
-            message_en: "All you have to do is combine all the hints you got earlier to from the code!!", 
-            message_es: "Todo lo que debes hacer es combinar todas las pistas que obtuviste del código!!", 
+            message_en: "All you have to do is $combine all the hints you got earlier to form the code!!$", 
+            message_es: "Todo lo que debes hacer es $combinar todas las pistas que obtuviste del código!!$", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}  

@@ -28,8 +28,8 @@ function create() {
             }    
         },
         {
-            message_en: "%If you really need a reminder, The note should be under a painting somewhere. %If I remember that correctly.", 
-            message_es: "%Si realmente necesitas un recordatorio, la nota deberia estar debajo de algún cuadro en algún lugar. %Si recuerdo correctamente.", 
+            message_en: "%If you really need a reminder, $The note should be under a painting somewhere.$ %If I remember that correctly.", 
+            message_es: "%Si realmente necesitas un recordatorio, $la nota deberia estar debajo de algún cuadro en algún lugar.$ %Si recuerdo correctamente.", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },

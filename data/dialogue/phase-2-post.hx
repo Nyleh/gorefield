@@ -42,8 +42,8 @@ function create() {
             }
         },
         {
-            message_en: "Remember,& the second number of the code is the most repeated digit of your highscore...", 
-            message_es: "Recuerda,& el segundo número del código es el digito más repetido de tu mejor puntuación...", 
+            message_en: "Remember,& $the second number of the code is the most repeated digit of your highscor$e...", 
+            message_es: "Recuerda,& $el segundo número del código es el digito más repetido de tu mejor puntuació$n...", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}
@@ -105,8 +105,8 @@ function create() {
             }
         },
         {
-            message_en: "%Either way...&\nReminder,& the note is in a rain alleyway.&&\nThe clown left it for a crying cat.", 
-            message_es: "%De cualquier manera...&\nRecuerda,& la nota está en un callejón lluvioso.&&\nEl payaso se lo dejó a un gato llorón.", 
+            message_en: "%Either way...&\nReminder$,& the note is in a rain alleywa$y.&&\nThe clown left it for a crying cat.", 
+            message_es: "%De cualquier manera...&\nRecuerda$,& la nota está en un callejón lluvios$o.&&\nEl payaso se lo dejó a un gato llorón.", 
             typingSpeed: 0.055, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
