@@ -1933,9 +1933,10 @@ function generateSECRET() {
 
 	// CODE GENERATION!!!
 	var date:Date = Date.now();
-	var firstMinute:Int = date.getMinutes();
+    var stringminutes:String = Std.string(date.getMinutes());
+    if (stringminutes.length == 1) stringminutes = "0" + stringminutes;
 
-	while (firstMinute >= 10) firstMinute /= 10;
+    var firstMinute:Int = Math.floor(Std.parseFloat(stringminutes.charAt(0)));
 
 	var codes:Array<Float> = [
 		date.getDate() % 10, // Last digit of day in month (like 4/17/24, would be 7) 
