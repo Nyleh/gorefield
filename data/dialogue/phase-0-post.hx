@@ -29,7 +29,7 @@ function create() {
         },
         {
             message_en: "%If you really need a reminder, The note should be under a painting somewhere. %If I remember that correctly.", 
-            message_es: "spanish text here", 
+            message_es: "%Si realmente necesitas un recordatorio, la nota deberia estar debajo de algún cuadro en algún lugar. %Si recuerdo correctamente.", 
             typingSpeed: 0.05, startDelay: 1,
             onEnd: function () {
             },
@@ -46,7 +46,7 @@ function create() {
         },
         {
             message_en: "%Well, thats all I have to say.& %Continue looking for that note!", 
-            message_es: "spanish text here", 
+            message_es: "%Bueno, eso es lo todo lo que tengo que decir.& %Continua buscando esa nota!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {
             },

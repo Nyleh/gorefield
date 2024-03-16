@@ -57,7 +57,7 @@ function create() {
         },
         {
             message_en: "'Also,& SORRY!!!!&& NO EXPLANATION THIS TIME!!!&&\nYour friend got a little, &too annoying...'", 
-            message_es: "spanish text here", 
+            message_en: "'Además,& LO SIENTO!!!!&& NO HAY EXPLICACIONES ESTA VEZ!!!&&\ntu amigo se hizo un poco, &muy molesto...'", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int){}    

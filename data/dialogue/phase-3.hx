@@ -235,7 +235,7 @@ function create() {
         },
         {
             message_en: "%Like what do songs have to do with this...& I know a lot of songs on the top of my head already!!!", 
-            message_es: "spanish text here", 
+            message_es: "%O sea, que tienn que ver las canciones con esto...& Ya tengo varias canciones en mente!!!", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
@@ -246,7 +246,7 @@ function create() {
         },
         {
             message_en: "%At this point I think I'm never gonna be free...", 
-            message_es: "%A este punto pienso que nunca voy a ser libre...", 
+            message_es: "%A este punto no creo que vaya a ser libre...", 
             typingSpeed: 0.05, startDelay: 0,
             onEnd: function () {},
             event: function (count:Int) {
