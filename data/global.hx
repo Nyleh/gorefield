@@ -6,6 +6,8 @@ import funkin.backend.utils.WindowUtils;
 import openfl.Lib;
 import lime.graphics.Image;
 
+import hxvlc.util.Handle;
+
 static var curMainMenuSelected:Int = 0;
 static var curStoryMenuSelected:Int = 0;
 static var moustacheMode:Bool = false;
@@ -26,6 +28,8 @@ static var redirectStates:Map<FlxState, String> = [
 ];
 
 function new() {
+    Handle.init([]);
+
     // MECHANICS
     if (FlxG.save.data.baby == null) FlxG.save.data.baby = false;
     if (FlxG.save.data.ps_hard == null) FlxG.save.data.ps_hard = false;
