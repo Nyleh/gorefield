@@ -18,8 +18,9 @@ DOWNLOADS:
 - And easter eggs??
 
 # ENGINE???
-This mod is made on a extensible modding framework for fnf: Codename engine.
-This source code folder can be placed in the mods folder to be played in codename!
+This mod is made on a extensible modding framework for fnf: Codename engine. This source code folder can be placed in the mods folder to be played in codename!
+
+![codename logo](cne.png)
 
 Download Codename:
 - Windows: [https://tinyurl.com/cne-download-windows](https://tinyurl.com/cne-download-windows)
